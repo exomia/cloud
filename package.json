@@ -1,0 +1,24 @@
+{
+  "name": "cloud",
+  "version": "1.0.0",
+  "description": "A Nuxt.js Cloud",
+  "author": "exomia",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "express": "^4.15.3",
+    "nuxt": "^1.4.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "node-sass": "^4.8.3",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^6.0.7"
+  }
+}
