@@ -2,7 +2,7 @@
     <div class="page">
         <div class="center-container" style="padding: 150px 15px 15px">
             <img src="~/assets/img/cloud-logo.svg" alt="Logo" class="logo">
-            <form id="login-form" class="form-container" method="post">
+            <form class="form-container" method="post">
                 <input placeholder="Name/E-Mail" class="text-input" type="text" name="username"
                        v-model="name" required>
                 <input placeholder="Passwort" class="text-input" type="password" name="password" v-model="password"
@@ -10,13 +10,13 @@
                 <!-- text-input-invalid -->
                 <div class="login-action-container">
                     <input
-                            class="login-checkbox"
-                            type="checkbox"
-                            name="stayLoggedIn"
-                            v-model="checked">
+                      class="login-checkbox"
+                      type="checkbox"
+                      name="stayLoggedIn"
+                      v-model="checked">
                     <span class="login-checkbox-label" @click="checked = !checked">Angemeldet bleiben</span>
                 </div>
-                <input id="login-button" class="confirm-button" style="width: 100%;margin-top: 10px"
+                <input class="confirm-button" style="width: 100%;margin-top: 10px"
                        :value="loginBtnValue"
                        type="button"
                        @click="tryLogin">

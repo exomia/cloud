@@ -1,6 +1,8 @@
 export const UserState = {
   user: {
-    maxVolume: 0,
-    usedVolume: 0
+    maxVolume: 1000000000,
+    usedVolume: 50000000,
+    token: '',
+    refreshToken: ''
   }
 }
