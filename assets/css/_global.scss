@@ -637,10 +637,17 @@ form.form-container {
     font-size: 20px;
     align-items: center;
     font-weight: 400;
-    img.header-icon {
+    i {
       opacity: 0.75;
-      height: 16px;
+      height: 18px;
+      width: 24px;
       margin-left: 8px;
+    }
+    i.public {
+      background: url('~/assets/img/icon/contacts.svg') no-repeat center;
+    }
+    i.private {
+      background: url('~/assets/img/icon/lock.svg') no-repeat center;
     }
   }
 

@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar">
         <div>
-            <sidebar-item iconClass="directory" href="overview" text="Alle Dateien"></sidebar-item>
+            <sidebar-item iconClass="directory" routeName="overview" text="Alle Dateien"></sidebar-item>
         </div>
         <div>
             <a class="sidebar-item no-hover">
@@ -13,8 +13,8 @@
                     </div>
                 </div>
             </a>
-            <sidebar-item iconClass="trash" href="trash" text="Papierkorb"></sidebar-item>
-            <sidebar-item iconClass="settings" href="settings" text="Einstellungen"></sidebar-item>
+            <sidebar-item iconClass="trash" routeName="trash" text="Papierkorb"></sidebar-item>
+            <sidebar-item iconClass="settings" routeName="settings-profile" text="Einstellungen"></sidebar-item>
         </div>
     </div>
 </template>

@@ -21,8 +21,7 @@ export default {
     OverviewSidebar,
     OverviewPath,
     OverviewListHeader,
-    OverviewList,
-    OverviewListSummary
+    OverviewList
   }
 }
 </script>

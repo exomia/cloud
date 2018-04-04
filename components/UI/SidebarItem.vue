@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="{ name: href }" tag="a" class="sidebar-item">
+    <nuxt-link :to="{ name: routeName }" tag="a" class="sidebar-item">
         <i v-if="iconClass" :class="[iconClass, hover ? 'no-hover' : '']"></i>
         <span>{{text}}</span>
     </nuxt-link>
@@ -15,7 +15,7 @@ export default {
       type: String,
       required: true
     },
-    href: {
+    routeName: {
       type: String,
       required: true
     },
