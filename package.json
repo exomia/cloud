@@ -6,20 +6,40 @@
   "license": "MIT",
   "scripts": {
     "dev":
-      "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+      "cross-env NODE_ENV=development nodemon server/index.js --watch server --exec babel-node",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js",
     "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "body-parser": "^1.18.2",
     "express": "^4.15.3",
-    "nuxt": "^1.4.0"
+    "jsonwebtoken": "^8.2.0",
+    "nodemailer": "^4.6.4",
+    "nuxt": "^1.4.0",
+    "pg": "^7.4.1"
   },
   "devDependencies": {
     "cross-env": "^5.0.1",
     "node-sass": "^4.8.3",
     "nodemon": "^1.11.0",
     "sass-loader": "^6.0.7"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
   }
 }

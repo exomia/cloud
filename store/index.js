@@ -11,6 +11,7 @@ import { DirectoryGetters } from '~/store/getters/directory'
 // Mutations
 
 // Actions
+import { TestActions } from '~/store/actions/test'
 
 const Store = () => {
   return new Vuex.Store({
@@ -21,7 +22,7 @@ const Store = () => {
     // Mutations
     mutations: {},
     // Actions
-    actions: {}
+    actions: { ...TestActions }
   })
 }
 
