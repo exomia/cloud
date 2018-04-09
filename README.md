@@ -1,6 +1,6 @@
 # cloud
 
-> A Nuxt.js Cloud
+> A simple cloud where we use features known from other clouds to build our own meaning of a cloud - still in progress
 
 ## Build Setup
 
