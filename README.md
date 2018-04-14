@@ -1,6 +1,6 @@
-# cloud
+# nuxt-cloud
 
-> A Nuxt.js Cloud
+> My scrumtrulescent Nuxt.js project
 
 ## Build Setup
 
