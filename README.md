@@ -1,10 +1,10 @@
 # nuxt-cloud
 
-> My scrumtrulescent Nuxt.js project
+> A simple cloud where we use features known from other clouds to build our own meaning of a cloud - still in progress
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
