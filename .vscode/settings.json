@@ -4,5 +4,5 @@
     "prettier.singleQuote": true,
     "prettier.disableLanguages": [],
     "prettier.semi": false,
-    "prettier.printWidth": 200
+    "prettier.printWidth": 120
 }

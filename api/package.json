@@ -12,7 +12,9 @@
   "nodemonConfig": {
     "ignore": [],
     "delay": "50",
-    "watch": ["*.*"],
+    "watch": [
+      "*.*"
+    ],
     "ext": "js html json"
   },
   "dependencies": {
