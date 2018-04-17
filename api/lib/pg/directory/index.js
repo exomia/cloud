@@ -68,7 +68,7 @@ export async function listAllDirectories(nameOrEmail, parent_directory_uuid) {
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")
           LEFT JOIN private."file" f ON (d."uuid" = f."directory_uuid")
         WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
-              AND d."parent_directory_uuid" ${parent_directory_uuid ? m`= ${parent_directory_uuid}` : e`IS NULL`}
+              AND d."parent_directory_uuid" ${parent_directory_uuid ? lb`= ${parent_directory_uuid}` : e`IS NULL`}
         AND D."delete_timestamp" IS NULL
         GROUP BY D."uuid";`
     if (result && result.rowCount > 0) {

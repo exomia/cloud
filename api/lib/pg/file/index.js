@@ -48,7 +48,7 @@ export async function listAllFiles(nameOrEmail, directory_uuid) {
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
         WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
-              AND f."directory_uuid" ${directory_uuid ? m`= ${directory_uuid}` : e`IS NULL`}
+              AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
         AND f."delete_timestamp" IS NULL;`
     if (result && result.rowCount > 0) {
         return result.rows
