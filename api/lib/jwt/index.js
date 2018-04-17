@@ -3,7 +3,6 @@ import { getUserPassword } from '../pg/user/auth.js'
 import config from '../../.config/.jwt.config.json'
 
 export const jwt_init = async (req, res, next) => {
-    console.log('FUCK')
     function sign(payload, stayLoggedIn, crypted_password) {
         res.cookie(
             config.COOKIE,
