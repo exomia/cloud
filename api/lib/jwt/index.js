@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { getUserPassword } from '../pg/user/auth.js'
 import config from '../../.config/.jwt.config.json'
 
-export const jwt_init = async (req, res, next) => {
+export async function jwt_init(req, res, next) {
     function sign(payload, stayLoggedIn, crypted_password) {
         res.cookie(
             config.COOKIE,
@@ -16,9 +16,7 @@ export const jwt_init = async (req, res, next) => {
             ),
             {
                 httpOnly: true,
-                expires: stayLoggedIn
-                    ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-                    : 0
+                expires: stayLoggedIn ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) : 0
             }
         )
     }
@@ -40,11 +38,7 @@ export const jwt_init = async (req, res, next) => {
             const crypted_password = await getUserPassword(payload.custom.email)
             if (crypted_password) {
                 try {
-                    payload = jwt.verify(
-                        token,
-                        config.SECRET + crypted_password,
-                        config.jwt_verify_options
-                    )
+                    payload = jwt.verify(token, config.SECRET + crypted_password, config.jwt_verify_options)
                     valid = true
                 } catch (err) {
                     if (err.name === 'TokenExpiredError') {
@@ -54,11 +48,7 @@ export const jwt_init = async (req, res, next) => {
 
                 //refresh the token if its valid or if its expired and the user wanted to stayLoggedIn
                 if (valid || (expired && !!payload.stayLoggedIn)) {
-                    sign(
-                        payload.custom,
-                        !!payload.stayLoggedIn,
-                        crypted_password
-                    )
+                    sign(payload.custom, !!payload.stayLoggedIn, crypted_password)
                     valid = true
                 }
             }
