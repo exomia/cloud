@@ -11,7 +11,7 @@
             </nuxt-link>
         </template>
 
-        <div style="position: relative">
+        <div>
             <a class="option-button" @click="optionsShown = !optionsShown">
                 <i class="option-button-icon"/>
             </a>
@@ -43,3 +43,5 @@ export default {
     }
 }
 </script>
+
+<style src="~/assets/css/components/partials/OverviewPath.scss" lang="scss" scoped />
