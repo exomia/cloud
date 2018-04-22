@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div id="page">
         <overview-sidebar></overview-sidebar>
         <!-- ondragover="allowDrop(event)" -->
         <div class="overview" dropzone="copy">
