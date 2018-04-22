@@ -1,5 +1,6 @@
 <template>
     <div id="page">
+        <h1>{{ data }}</h1>
         <img src="~/assets/img/cloud-logo.svg" alt="Logo" class="logo">
         <form>
             <input placeholder="Name/E-Mail" class="text-input" :class="{ 'input-error': $v.name.$invalid && name.length }" type="text" v-model="name" maxlength="64">
@@ -20,8 +21,14 @@
 
 <script>
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+import call from '~/plugins/call'
 
 export default {
+    async asyncData ({ params }) {
+        let data = await call.get('/api/v1/auth')
+
+        return { data }
+    },
     layout: 'landing',
     data() {
         return {
@@ -56,6 +63,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style src="~/assets/css/pages/index.scss" lang="scss" scoped />

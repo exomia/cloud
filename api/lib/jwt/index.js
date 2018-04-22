@@ -42,7 +42,6 @@ export async function jwt_init(req, res, next) {
             return res.json(JE1002)
         }
     }
-
     const rt =
         req.headers['x-refresh-token'] ||
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGF5TG9nZ2VkSW4iOmZhbHNlLCJpYXQiOjE1MjQ0MzAzNzMsImV4cCI6MTUyNTAzNTE3M30._Tzj4Z4ewcPH3ALJBRMsq0_cXg9_J4vrDALTqfmq5E8'
@@ -55,9 +54,8 @@ export async function jwt_init(req, res, next) {
     try {
         jwt.verify(rt, password + config.SECRET_RT, config.jwt_verify_options)
         req.jwt = payload
-
         res.setHeader('Access-Control-Expose-Headers', 'x-token')
-        res.setHeader('x-token', jwt.sign({ email }, config.SECRET_T + password, config.jwt_options_t))
+        res.setHeader('x-token', jwt.sign({ email: payload.email }, config.SECRET_T + password, config.jwt_options_t))
 
         return next()
     } catch (err) {
@@ -74,7 +72,7 @@ export async function jwt_init(req, res, next) {
     }
 
     res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-token')
-    res.setHeader('x-token', jwt.sign({ email }, config.SECRET_T + password, config.jwt_options_t))
+    res.setHeader('x-token', jwt.sign({ email: payload.email }, config.SECRET_T + password, config.jwt_options_t))
     res.setHeader(
         'x-refresh-token',
         jwt.sign({ stayLoggedIn: true }, password + config.SECRET_RT, config.jwt_options_rt)

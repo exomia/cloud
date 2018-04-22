@@ -49,11 +49,7 @@ module.exports = {
     /*
   ** Plugins to load before mounting the App
   */
-    plugins: [
-        '~/plugins/file-size.js',
-        '~/plugins/date.js',
-        '~/plugins/vuelidate'
-    ],
+    plugins: ['~/plugins/file-size.js', '~/plugins/date.js', '~/plugins/vuelidate'],
 
     /*
   ** Nuxt.js modules
