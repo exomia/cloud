@@ -1,6 +1,6 @@
 <template>
     <div class="spacer-container">
-        <h2 class="form-header">{{label}}<i :class="iconClass"></i></h2>
+        <h2 class="form-header">{{label}}<i :class="iconClass"/></h2>
         <div style="display:flex">
             <input 
                 class="text-input" 
@@ -18,36 +18,36 @@
                 v-bind="$attrs"
                 v-on="$listeners">
         </div>
-        <span class="disclaimer" v-html="disclaimer"></span>
+        <span class="disclaimer" v-html="disclaimer"/>
     </div>
 </template>
 
 <script>
 export default {
-  props: {
-    label: {
-      type: String,
-      required: true
-    },
-    value: {
-      type: String,
-      default: ''
-    },
-    inputPlaceholder: {
-      type: String,
-      default: ''
-    },
-    buttonPlaceholder: {
-      type: String,
-      default: ''
-    },
-    disclaimer: {
-      type: String,
-      required: true
-    },
-    iconClass: {
-      type: String
+    props: {
+        label: {
+            type: String,
+            required: true
+        },
+        value: {
+            type: String,
+            default: ''
+        },
+        inputPlaceholder: {
+            type: String,
+            default: ''
+        },
+        buttonPlaceholder: {
+            type: String,
+            default: ''
+        },
+        disclaimer: {
+            type: String,
+            required: true
+        },
+        iconClass: {
+            type: String
+        }
     }
-  }
 }
 </script>

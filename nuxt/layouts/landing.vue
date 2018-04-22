@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <the-header></the-header>
+  <div class="page">
+    <the-header/>
     <nuxt/>
-    <the-footer></the-footer>
+    <the-footer/>
   </div>
 </template>
 
@@ -11,9 +11,9 @@ import TheHeader from '~/components/navigation/TheHeader'
 import TheFooter from '~/components/navigation/TheFooter'
 
 export default {
-  components: {
-    TheHeader,
-    TheFooter
-  }
+    components: {
+        TheHeader,
+        TheFooter
+    }
 }
 </script>

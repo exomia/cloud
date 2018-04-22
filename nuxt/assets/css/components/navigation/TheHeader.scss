@@ -1,0 +1,58 @@
+@import '../../_variables.scss';
+
+#header {
+    display: flex;
+    width: 100%;
+    background-color: $primary-color;
+    align-items: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        h1.header-title {
+            font-size: 22px;
+            padding: 0.8rem;
+            color: white;
+            cursor: pointer;
+        }
+        img.logo {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+    a.button {
+        width: 3rem;
+        height: 3rem;
+    }
+    a.logout-button {
+        display: flex;
+        justify-content: space-around;
+        width: 6.5rem;
+        border: 1px solid #fff;
+        padding: 0.25rem;
+        box-sizing: border-box;
+        border-radius: 2px;
+        transition: 0.2s;
+        &:hover {
+            background-color: #fff;
+            i.logout {
+                filter: invert(1);
+            }
+            span {
+                color: #000;
+            }
+        }
+        span {
+            color: white;
+        }
+        i.logout {
+            width: 1.35rem;
+            height: 1.35rem;
+            background: url('~/assets/img/icon/logout.svg') no-repeat center;
+            background-size: 1.35rem;
+        }
+    }
+}

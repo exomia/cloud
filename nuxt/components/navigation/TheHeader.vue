@@ -5,7 +5,7 @@
                 <img class="logo" src="~/assets/img/cloud-logo.svg" alt="Trident Cloud">
             </nuxt-link>
             <nuxt-link :to="{ name: 'index' }" tag="a" class="logout-button">
-                <i class="logout"></i>
+                <i class="logout"/>
                 <span>Logout</span>
             </nuxt-link>
         </div>
@@ -19,16 +19,18 @@
 
 <script>
 export default {
-  data() {
-    return {
-      title: process.env.projectTitle
+    data() {
+        return {
+            title: process.env.projectTitle
+        }
+    },
+    props: {
+        isAuthenticated: {
+            type: Boolean,
+            default: false
+        }
     }
-  },
-  props: {
-    isAuthenticated: {
-      type: Boolean,
-      default: false
-    }
-  }
 }
 </script>
+
+<style src="~/assets/css/components/navigation/TheHeader.scss" lang="scss" scoped />

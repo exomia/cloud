@@ -1,7 +1,7 @@
 <template>
-  <div class="page">
+  <div>
     <settings-sidebar></settings-sidebar>
-    <div class="content">
+    <div class="overview">
         
     </div>
   </div>
@@ -11,8 +11,8 @@
 import SettingsSidebar from '~/components/navigation/sidebar/SettingsSidebar'
 
 export default {
-  components: {
-    SettingsSidebar
-  }
+    components: {
+        SettingsSidebar
+    }
 }
 </script>

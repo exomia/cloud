@@ -1,0 +1,29 @@
+#page {
+    justify-content: center;
+    padding: 10rem 1rem 1rem;
+    img.logo {
+        width: 12rem;
+        height: 12rem;
+        margin-right: 3rem;
+    }
+    form {
+        input[type='text'],
+        input[type='password'] {
+            margin-bottom: 0.5rem;
+        }
+        div {
+            display: flex;
+            margin-bottom: 0.5rem;
+            input[type='checkbox'] {
+                width: 0.85rem;
+                height: 0.85rem;
+                border: 1px solid black;
+                margin: 0 0.5rem 0 0;
+            }
+            span {
+                font-size: 14px;
+                cursor: pointer;
+            }
+        }
+    }
+}

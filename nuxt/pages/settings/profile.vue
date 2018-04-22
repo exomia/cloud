@@ -1,7 +1,7 @@
 <template>
-  <div class="page">
+  <div>
       <settings-sidebar></settings-sidebar>
-      <div class="content">
+      <div class="overview">
           <div class="center-container" style="align-items: center;height: 100%">
             <form class="form-container" method="post">
 
@@ -46,20 +46,20 @@ import SettingsSidebar from '~/components/navigation/sidebar/SettingsSidebar'
 import SettingsDataChangeForm from '~/components/UI/SettingsDataChangeForm'
 
 export default {
-  data() {
-    return {
-      changeName: '',
-      changeNameSubmit: false,
-      changeEmail: '',
-      changeEmailSubmit: false,
-      password: '',
-      newPassword: '',
-      changePasswordSubmit: false
+    data() {
+        return {
+            changeName: '',
+            changeNameSubmit: false,
+            changeEmail: '',
+            changeEmailSubmit: false,
+            password: '',
+            newPassword: '',
+            changePasswordSubmit: false
+        }
+    },
+    components: {
+        SettingsSidebar,
+        SettingsDataChangeForm
     }
-  },
-  components: {
-    SettingsSidebar,
-    SettingsDataChangeForm
-  }
 }
 </script>

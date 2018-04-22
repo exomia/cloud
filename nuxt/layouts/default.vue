@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <the-header isAuthenticated></the-header>
+  <div class="page">
+    <the-header isAuthenticated/>
     <nuxt/>
-    <the-footer></the-footer>
+    <the-footer/>
   </div>
 </template>
 
@@ -11,9 +11,9 @@ import TheHeader from '~/components/navigation/TheHeader'
 import TheFooter from '~/components/navigation/TheFooter'
 
 export default {
-  components: {
-    TheHeader,
-    TheFooter
-  }
+    components: {
+        TheHeader,
+        TheFooter
+    }
 }
 </script>

@@ -3,7 +3,6 @@ import { getUserPassword } from '../pg/user/auth.js'
 import config from '../../.config/.jwt.config.json'
 
 export const jwt_init = async (req, res, next) => {
-    console.log('FUCK')
     function sign(payload, stayLoggedIn, crypted_password) {
         res.cookie(
             config.COOKIE,
@@ -36,7 +35,6 @@ export const jwt_init = async (req, res, next) => {
 
     const token = req.cookies[config.COOKIE]
     if (token) {
-        console.log('FUCK')
         payload = jwt.decode(token) || {}
         if (!!payload.custom && !!payload.custom.email) {
             const crypted_password = await getUserPassword(payload.custom.email)

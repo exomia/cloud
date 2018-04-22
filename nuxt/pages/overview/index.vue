@@ -1,8 +1,8 @@
 <template>
-    <div class="page">
+    <div class="content">
         <overview-sidebar></overview-sidebar>
         <!-- ondragover="allowDrop(event)" -->
-        <div class="content" dropzone="copy">
+        <div class="overview" dropzone="copy">
           <overview-path></overview-path>
           <overview-list-header></overview-list-header>
           <overview-list></overview-list>
@@ -17,11 +17,11 @@ import OverviewListHeader from '~/components/partials/OverviewListHeader'
 import OverviewList from '~/components/partials/OverviewList'
 
 export default {
-  components: {
-    OverviewSidebar,
-    OverviewPath,
-    OverviewListHeader,
-    OverviewList
-  }
+    components: {
+        OverviewSidebar,
+        OverviewPath,
+        OverviewListHeader,
+        OverviewList
+    }
 }
 </script>
