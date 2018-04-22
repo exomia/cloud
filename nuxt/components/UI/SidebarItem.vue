@@ -26,5 +26,3 @@ export default {
     }
 }
 </script>
-
-<style src="~/assets/css/components/UI/SidebarItem.scss" lang="scss" scoped />
