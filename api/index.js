@@ -1,9 +1,9 @@
 import express from 'express'
 import { endpoints } from './routes'
 import { jwt_init } from './lib/jwt'
-import { JE500, JE1002, JE1001 } from './lib/error'
+import { JE404, JE500, JE1001, JE1002 } from './lib/error'
 import bodyParser from 'body-parser'
-import cookieParser from 'cookie-parser'
+//import cookieParser from 'cookie-parser'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -19,18 +19,12 @@ function bindep(index) {
 ;(async function start() {
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
-    app.use(cookieParser())
+    //app.use(cookieParser())
 
     // Bind api endpoints security 0 (public)
     bindep(0)
 
     app.use(jwt_init)
-    app.use((req, res, next) => {
-        if (!req.jwt.valid) {
-            return res.json(JE1002)
-        }
-        next()
-    })
 
     // Bind api endpoints security 1 (auth required)
     bindep(1)

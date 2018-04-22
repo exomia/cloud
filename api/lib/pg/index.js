@@ -8,7 +8,7 @@ pool.on('error', (err, client) => {
 })
 
 export async function shutdown() {
-    await pool.end() 
+    await pool.end()
 }
 
 class _LB {
@@ -30,7 +30,7 @@ class _E {
  * @param {*} values
  * @returns {_LB} new _LB
  */
-export function lb(p, ...values) {
+export function lb(qp, ...values) {
     return new _LB(qp, ...values)
 }
 
@@ -41,7 +41,7 @@ export function lb(p, ...values) {
  * @returns {_E} new _E
  */
 
-export function e(p, ...values) {
+export function e(qp, ...values) {
     let res = ''
     for (let i = 0; i < qp.length - 1; ++i) {
         res += qp[i] + values[i].toString()
@@ -49,7 +49,7 @@ export function e(p, ...values) {
     return new _E(res + qp[qp.length - 1])
 }
 
-export function query(p, ...values) {
+export async function query(qp, ...values) {
     let query = ''
     let index = 1
     for (let i = 0; i < qp.length - 1; ++i) {
@@ -99,11 +99,7 @@ export function lbjoin(...args) {
             values.push(...args[i].values)
         }
     }
-    if (
-        args.length > 0 &&
-        args[args.length - 1] &&
-        args[args.length - 1] instanceof _LB
-    ) {
+    if (args.length > 0 && args[args.length - 1] && args[args.length - 1] instanceof _LB) {
         qp[qp.length - 1] += args[args.length - 1].qp[0]
         for (let k = 1; k < args[args.length - 1].qp.length; ++k) {
             qp.push(args[args.length - 1].qp[k])

@@ -1,74 +1,85 @@
 import jwt from 'jsonwebtoken'
-import { getUserPassword } from '../pg/user/auth.js'
 import config from '../../.config/.jwt.config.json'
+import { getUserPassword } from '../pg/user/auth'
+import { JE1002 } from '../error'
 
+export async function sign(res, { email, password }, stayLoggedIn) {
+    res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-token')
+    res.setHeader('x-token', jwt.sign(payload, config.SECRET_T + password, config.jwt_options_t))
+    res.setHeader(
+        'x-refresh-token',
+        jwt.sign({ stayLoggedIn: !!stayLoggedIn }, password + config.SECRET_RT, config.jwt_options_rt)
+    )
+}
 export async function jwt_init(req, res, next) {
-    function sign(payload, stayLoggedIn, crypted_password) {
-        res.cookie(
-            config.COOKIE,
-            jwt.sign(
-                {
-                    custom: payload,
-                    stayLoggedIn
-                },
-                config.SECRET + crypted_password,
-                config.jwt_options
-            ),
-            {
-                httpOnly: true,
-                expires: stayLoggedIn ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) : 0
-            }
-        )
+    const t =
+        req.headers['x-token'] ||
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwic3RheUxvZ2dlZEluIjpmYWxzZSwiaWF0IjoxNTI0NDMwMzczLCJleHAiOjE1MjQ0MzEyNzN9.NtXZ6G4YMnEhtMjXa8UwHfQamDbYi7lU9TgJvrEVAcg'
+
+    if (!t) {
+        res.status(200)
+        return res.json(JE1002)
     }
 
-    let payload = {}
-    let valid = false
-    let expired = false
-
-    req.jwt = {
-        clear: () => res.clearCookie(config.COOKIE),
-        sign,
-        valid
+    let payload = jwt.decode(t)
+    if (!payload || !payload.email) {
+        res.status(200)
+        return res.json(JE1002)
     }
 
-    const token = req.cookies[config.COOKIE]
-    if (token) {
-        payload = jwt.decode(token) || {}
-        if (!!payload.custom && !!payload.custom.email) {
-            const crypted_password = await getUserPassword(payload.custom.email)
-            if (crypted_password) {
-                try {
-                    payload = jwt.verify(token, config.SECRET + crypted_password, config.jwt_verify_options)
-                    valid = true
-                } catch (err) {
-                    if (err.name === 'TokenExpiredError') {
-                        expired = true
-                    }
-                }
+    const password = await getUserPassword(payload.email)
+    if (!password) {
+        res.status(200)
+        return res.json(JE1002)
+    }
 
-                //refresh the token if its valid or if its expired and the user wanted to stayLoggedIn
-                if (valid || (expired && !!payload.stayLoggedIn)) {
-                    sign(payload.custom, !!payload.stayLoggedIn, crypted_password)
-                    valid = true
-                }
-            }
-            req.jwt.valid = valid
-            req.jwt.payload = payload.custom
+    try {
+        req.jwt = jwt.verify(t, config.SECRET_T + password, config.jwt_verify_options)
+        return next()
+    } catch (err) {
+        if (err.name !== 'TokenExpiredError') {
+            res.status(200)
+            return res.json(JE1002)
         }
     }
 
-    req.jwt.editAndSign = async (nameOrEmail, { new_name, new_email }) => {
-        const crypted_password = await getUserPassword(nameOrEmail)
-        if (!crypted_password) {
-            return false
-        }
-        if (new_name !== undefined) {
-            payload.custom.name = new_name
-        }
-        if (new_email !== undefined) {
-            payload.custom.email = new_email
-        }
-        sign(payload.custom, !!payload.stayLoggedIn, crypted_password)
+    const rt =
+        req.headers['x-refresh-token'] ||
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGF5TG9nZ2VkSW4iOmZhbHNlLCJpYXQiOjE1MjQ0MzAzNzMsImV4cCI6MTUyNTAzNTE3M30._Tzj4Z4ewcPH3ALJBRMsq0_cXg9_J4vrDALTqfmq5E8'
+
+    if (!rt) {
+        res.status(200)
+        return res.json(JE1002)
     }
-    next()
+
+    try {
+        jwt.verify(rt, password + config.SECRET_RT, config.jwt_verify_options)
+        req.jwt = payload
+
+        res.setHeader('Access-Control-Expose-Headers', 'x-token')
+        res.setHeader('x-token', jwt.sign({ email }, config.SECRET_T + password, config.jwt_options_t))
+
+        return next()
+    } catch (err) {
+        if (err.name !== 'TokenExpiredError') {
+            res.status(200)
+            return res.json(JE1002)
+        }
+    }
+
+    let payload_rt = jwt.decode(rt)
+    if (!payload_rt || !payload_rt.stayLoggedIn) {
+        res.status(200)
+        return res.json(JE1002)
+    }
+
+    res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-token')
+    res.setHeader('x-token', jwt.sign({ email }, config.SECRET_T + password, config.jwt_options_t))
+    res.setHeader(
+        'x-refresh-token',
+        jwt.sign({ stayLoggedIn: true }, password + config.SECRET_RT, config.jwt_options_rt)
+    )
+
+    req.jwt = payload
+    return next()
 }
