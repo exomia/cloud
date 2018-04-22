@@ -7,6 +7,10 @@ pool.on('error', (err, client) => {
     console.error('idle client error', err, client)
 })
 
+export async function shutdown() {
+    await pool.end() 
+}
+
 class _LB {
     constructor(qp, ...values) {
         this.qp = qp
@@ -26,7 +30,7 @@ class _E {
  * @param {*} values
  * @returns {_LB} new _LB
  */
-export const lb = (qp, ...values) => {
+export function lb(p, ...values) {
     return new _LB(qp, ...values)
 }
 
@@ -36,7 +40,8 @@ export const lb = (qp, ...values) => {
  * @param {*} values
  * @returns {_E} new _E
  */
-export const e = (qp, ...values) => {
+
+export function e(p, ...values) {
     let res = ''
     for (let i = 0; i < qp.length - 1; ++i) {
         res += qp[i] + values[i].toString()
@@ -44,7 +49,7 @@ export const e = (qp, ...values) => {
     return new _E(res + qp[qp.length - 1])
 }
 
-export const query = async (qp, ...values) => {
+export function query(p, ...values) {
     let query = ''
     let index = 1
     for (let i = 0; i < qp.length - 1; ++i) {
@@ -80,7 +85,7 @@ export const query = async (qp, ...values) => {
  * @param {*} args
  * @returns {_LB} new _LB
  */
-export const lbjoin = (...args) => {
+export function lbjoin(...args) {
     const qp = ['']
     const values = []
 
