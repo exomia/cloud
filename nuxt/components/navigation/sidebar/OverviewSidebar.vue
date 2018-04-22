@@ -32,3 +32,5 @@ export default {
     }
 }
 </script>
+
+<style src="~/assets/css/components/navigation/sidebar/sidebar.scss" lang="scss" />

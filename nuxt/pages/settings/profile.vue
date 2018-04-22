@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="page">
       <settings-sidebar></settings-sidebar>
       <div class="overview">
           <div class="center-container" style="align-items: center;height: 100%">

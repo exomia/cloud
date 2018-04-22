@@ -1,0 +1,53 @@
+@import '../../_variables.scss';
+
+a.sidebar-item-active {
+    box-shadow: inset 2px 0 $primary-color;
+}
+
+a.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+        box-shadow: inset 2px 0 $primary-color;
+        span,
+        i {
+            opacity: 1;
+        }
+    }
+    span {
+        display: inline-block;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        opacity: 0.75;
+        color: black;
+        line-height: normal;
+        padding: 0 0.5rem;
+    }
+    i {
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.25rem;
+        opacity: 0.75;
+        background-size: 1.25rem 1.25rem;
+    }
+    i.directory {
+        background: url('~/assets/img/icon/directory.svg') no-repeat center;
+    }
+    i.trash {
+        background: url('~/assets/img/icon/trash.svg') no-repeat center;
+    }
+    i.settings {
+        background: url('~/assets/img/icon/settings.svg') no-repeat center;
+    }
+    i.profile {
+        background: url('~/assets/img/icon/profile.svg') no-repeat center;
+    }
+    i.rights {
+        background: url('~/assets/img/icon/lock.svg') no-repeat center;
+    }
+}
