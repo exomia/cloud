@@ -5,7 +5,7 @@ import { JE1002 } from '../error'
 
 export async function sign(res, { email, password }, stayLoggedIn) {
     res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-token')
-    res.setHeader('x-token', jwt.sign(payload, config.SECRET_T + password, config.jwt_options_t))
+    res.setHeader('x-token', jwt.sign({ email }, config.SECRET_T + password, config.jwt_options_t))
     res.setHeader(
         'x-refresh-token',
         jwt.sign({ stayLoggedIn: !!stayLoggedIn }, password + config.SECRET_RT, config.jwt_options_rt)

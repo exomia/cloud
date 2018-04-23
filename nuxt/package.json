@@ -20,6 +20,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "nuxt": "^1.0.0",
+    "vue-localstorage": "^0.6.2",
     "vuelidate": "^0.6.2"
   },
   "devDependencies": {

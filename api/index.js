@@ -21,6 +21,14 @@ function bindep(index) {
     app.use(bodyParser.json())
     //app.use(cookieParser())
 
+    app.use((req, res, next) => {
+        //CORS HEADER
+        res.setHeader('Access-Control-Allow-Origin', '*')
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+
+        next()
+    })
+
     // Bind api endpoints security 0 (public)
     bindep(0)
 

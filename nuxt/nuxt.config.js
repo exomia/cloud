@@ -49,7 +49,12 @@ module.exports = {
     /*
   ** Plugins to load before mounting the App
   */
-    plugins: ['~/plugins/file-size.js', '~/plugins/date.js', '~/plugins/vuelidate'],
+    plugins: [
+        '~/plugins/file-size.js',
+        '~/plugins/date.js',
+        '~/plugins/vuelidate',
+        { src: '~/plugins/axios-extend', ssr: false }
+    ],
 
     /*
   ** Nuxt.js modules
@@ -63,8 +68,12 @@ module.exports = {
   ** Axios module configuration
   */
     axios: {
-        baseURL: process.env.BASE_URL || 'http://127.0.0.1:3001/api/v1',
-        credentials: false
+        baseURL: process.env.BASE_URL || 'http://127.0.0.1:3001',
+        credentials: false,
+        retry: { retries: 3 },
+        responseType: 'json',
+        timeout: 1000 * 5, //5sec
+        debug: process.env.NODE_ENV != 'production'
     },
 
     /*
