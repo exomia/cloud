@@ -25,3 +25,5 @@ export default {
     }
 }
 </script>
+
+<style src="~/assets/css/pages/overview/index.scss" lang="scss" scoped />

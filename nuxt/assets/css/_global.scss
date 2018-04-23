@@ -75,7 +75,6 @@ input.text-input-invalid {
     line-height: 1.5;
     font-size: 18px;
     width: 100%;
-    box-sizing: border-box;
     outline: none;
 }
 
@@ -105,7 +104,6 @@ input.confirm-button {
     line-height: 1.5;
     font-size: 18px;
     color: white;
-    box-sizing: border-box;
     cursor: pointer;
     background-color: #007e33;
     width: 100%;

@@ -8,4 +8,5 @@
     </div>
 </template>
 
-<style src="~/assets/css/components/navigation/TheFooter.scss" lang="scss" scoped />
+<style src="~/assets/css/components/navigation/TheFooter.scss" lang="scss" scoped>
+</style>

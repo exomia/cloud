@@ -1,0 +1,119 @@
+@import '../../_variables.scss';
+
+div.list-summary {
+    opacity: 0.35;
+}
+
+div.list-row-hover {
+    cursor: pointer;
+    &:hover {
+        background-color: #eee;
+        input.checkbox {
+            opacity: 1 !important;
+        }
+    }
+}
+
+div.list-row:not(:last-of-type) {
+    border-bottom: 1px solid $contour-color;
+}
+
+div.list-row,
+div.list-summary {
+    display: flex;
+    align-items: center;
+    background-color: $background-color;
+    transition: 0.25s;
+    text-decoration: none;
+    height: 3.5rem;
+    div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+        padding: 0 0.5rem;
+        white-space: nowrap;
+        i.file-icon,
+        i.folder-icon {
+            margin: 0 auto;
+            display: inline-block;
+            width: 2.25rem;
+            height: 2.25rem;
+            background-size: 1.5rem;
+        }
+        i.file-icon {
+            background: url('~/assets/img/icon/list/file.svg') no-repeat right;
+        }
+        i.folder-icon {
+            background: url('~/assets/img/icon/list/directory.svg') no-repeat right;
+        }
+        i.status-icon-accepted,
+        i.status-icon-attention,
+        i.status-icon-progress {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-size: 1.5rem 1.5rem;
+        }
+        i.status-icon-accepted {
+            background: url('~/assets/img/icon/accepted.svg') no-repeat center;
+        }
+        i.status-icon-attention {
+            background: url('~/assets/img/icon/attention.svg') no-repeat center;
+        }
+        i.status-icon-progress {
+            background: url('~/assets/img/icon/progress.svg') no-repeat center;
+        }
+        i.dropdown-icon {
+            width: 0.75rem;
+            height: 0.75rem;
+            transform: rotate(90deg);
+            background: url('~/assets/img/icon/dropdown-arrow.svg') no-repeat center;
+            background-size: 0.75rem 0.75rem;
+        }
+        input.volume-input {
+            margin: 0 0.25rem;
+            max-width: 50%;
+            font-weight: 300;
+            font-size: 16px;
+            padding: 0;
+            background-color: $background-color;
+            outline: 0;
+            border: 1px solid $contour-color;
+        }
+        span {
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            user-select: none;
+            line-height: 1.5;
+        }
+        span.volume-label {
+            top: 1px;
+            position: relative;
+        }
+        a.list-button {
+            display: flex;
+            width: 50%;
+            height: 100%;
+            align-items: center;
+            cursor: pointer;
+            justify-content: center;
+            &:hover > i {
+                opacity: 1 !important;
+            }
+            i.extended-menu-icon,
+            i.remove-icon {
+                width: 18px;
+                height: 18px;
+                display: inline-block;
+            }
+            i.extended-menu-icon {
+                background: url('~/assets/img/icon/extended-menu.svg') no-repeat center;
+                opacity: 0.25;
+            }
+            i.remove-icon {
+                background: url('~/assets/img/icon/trash.svg') no-repeat center;
+                opacity: 0.75;
+            }
+        }
+    }
+}
