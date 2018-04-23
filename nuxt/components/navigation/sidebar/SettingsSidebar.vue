@@ -14,9 +14,10 @@
 import SidebarItem from '~/components/UI/SidebarItem'
 export default {
     components: {
-        'sidebar-item': SidebarItem
+        SidebarItem
     }
 }
 </script>
 
-<style src="~/assets/css/components/navigation/sidebar/sidebar.scss" lang="scss" scoped />
+<style src="~/assets/css/components/navigation/sidebar/sidebar.scss" lang="scss">
+</style>

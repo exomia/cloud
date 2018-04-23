@@ -1,0 +1,14 @@
+@import '../../_variables.scss';
+
+div.list-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $contour-color;
+    width: 100%;
+    margin-top: 1rem;
+    div {
+        padding: 0.5rem;
+        white-space: nowrap;
+        font-weight: 400;
+    }
+}

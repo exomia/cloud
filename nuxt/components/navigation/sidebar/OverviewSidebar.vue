@@ -25,7 +25,7 @@ import SidebarItem from '~/components/UI/SidebarItem'
 
 export default {
     components: {
-        'sidebar-item': SidebarItem
+        SidebarItem
     },
     computed: {
         ...mapGetters(['maxVolume', 'usedVolume'])
@@ -33,4 +33,5 @@ export default {
 }
 </script>
 
-<style src="~/assets/css/components/navigation/sidebar/sidebar.scss" lang="scss" />
+<style src="~/assets/css/components/navigation/sidebar/sidebar.scss" lang="scss">
+</style>

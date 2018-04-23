@@ -1,54 +1,40 @@
 <template>
-  <div class="list-container" style="height: calc(100% - 98px)">
-
-      <list-row 
-        v-for="(entry, idx) in dirItems" 
-        :key="idx"
-        :name="entry.name"
-        :type="entry.type"
-        :size="entry.size"
-        :date="entry.date"/>
-
-      <div class="list-summary menu-list-height">
-        <div style="width: 100px" class="list-item"/>
-        <div style="width: calc(100% - 535px)" class="list-item">
-            <span>{{followingDirectorys}} Ordner, {{followingFilesDisplay}}</span>
-        </div>
-        <div style="width: 185px" class="list-item"/>
-        <div style="width: 100px" class="list-item">
-            <span>{{sizeSum | toUnit}}</span>
-        </div>
-        <div style="width: 150px" class="list-item"/>
+    <div class="list-container" style="height: calc(100% - 98px)">
+        <list-row 
+            v-for="(entry, idx) in dirItems" 
+            :key="idx"
+            :name="entry.name"
+            :type="entry.type"
+            :size="entry.size"
+            :date="entry.date"/>
+        <list-summary
+            :followingDirectorys="followingDirectorys"
+            :followingFilesDisplay="followingFilesDisplay"
+            :sizeSum="sizeSum"/>
     </div>
-
-  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import ListRow from '~/components/UI/ListRow'
+import ListSummary from '~/components/UI/ListSummary'
 
 export default {
     data() {
         return {}
     },
     components: {
-        ListRow
+        ListRow,
+        ListSummary
     },
     computed: {
-        ...mapGetters([
-            'dirItems',
-            'followingDirectorys',
-            'followingFiles',
-            'sizeSum'
-        ]),
+        ...mapGetters(['dirItems', 'followingDirectorys', 'followingFiles', 'sizeSum']),
         followingFilesDisplay() {
-            return `${this.followingFiles} ${
-                this.followingFiles > 1 || this.followingFiles == 0
-                    ? 'Dateien'
-                    : 'Datei'
-            }`
+            return `${this.followingFiles} ${this.followingFiles > 1 || this.followingFiles == 0 ? 'Dateien' : 'Datei'}`
         }
     }
 }
 </script>
+
+<style src="~/assets/css/components/partials/OverviewList.scss" lang="scss" scoped>
+</style>

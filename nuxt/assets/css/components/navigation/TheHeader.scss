@@ -6,7 +6,6 @@
     background-color: $primary-color;
     align-items: center;
     padding: 0 1rem;
-    box-sizing: border-box;
     a {
         display: flex;
         justify-content: center;
@@ -33,7 +32,6 @@
         width: 6.5rem;
         border: 1px solid #fff;
         padding: 0.25rem;
-        box-sizing: border-box;
         border-radius: 2px;
         transition: 0.2s;
         &:hover {

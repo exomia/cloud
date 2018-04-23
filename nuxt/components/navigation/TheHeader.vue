@@ -33,4 +33,5 @@ export default {
 }
 </script>
 
-<style src="~/assets/css/components/navigation/TheHeader.scss" lang="scss" scoped />
+<style src="~/assets/css/components/navigation/TheHeader.scss" lang="scss" scoped>
+</style>

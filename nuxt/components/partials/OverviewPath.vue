@@ -11,7 +11,7 @@
             </nuxt-link>
         </template>
 
-        <div>
+        <div class="options">
             <a class="option-button" @click="optionsShown = !optionsShown">
                 <i class="option-button-icon"/>
             </a>
@@ -44,4 +44,8 @@ export default {
 }
 </script>
 
-<style src="~/assets/css/components/partials/OverviewPath.scss" lang="scss" scoped />
+<style src="~/assets/css/components/partials/OverviewPath.scss" lang="scss" scoped>
+</style>
+
+<style src="~/assets/css/components/extras/FloatingMenu.scss" lang="scss" scoped>
+</style>
