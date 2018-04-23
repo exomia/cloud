@@ -22,13 +22,18 @@ export default {
             type: Number,
             required: true
         },
-        followingFilesDisplay: {
+        followingFiles: {
             type: Number,
             required: true
         },
         sizeSum: {
             type: Number,
             required: true
+        }
+    },
+    computed: {
+        followingFilesDisplay() {
+            return `${this.followingFiles} ${this.followingFiles > 1 || this.followingFiles == 0 ? 'Dateien' : 'Datei'}`
         }
     }
 }

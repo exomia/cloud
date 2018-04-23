@@ -9,7 +9,7 @@
             :date="entry.date"/>
         <list-summary
             :followingDirectorys="followingDirectorys"
-            :followingFilesDisplay="followingFilesDisplay"
+            :followingFiles="followingFiles"
             :sizeSum="sizeSum"/>
     </div>
 </template>
@@ -28,10 +28,7 @@ export default {
         ListSummary
     },
     computed: {
-        ...mapGetters(['dirItems', 'followingDirectorys', 'followingFiles', 'sizeSum']),
-        followingFilesDisplay() {
-            return `${this.followingFiles} ${this.followingFiles > 1 || this.followingFiles == 0 ? 'Dateien' : 'Datei'}`
-        }
+        ...mapGetters(['dirItems', 'followingDirectorys', 'followingFiles', 'sizeSum'])
     }
 }
 </script>
