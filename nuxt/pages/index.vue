@@ -34,8 +34,11 @@ export default {
     methods: {
         async tryLogin() {
             this.loginBtnValue = 'Login...'
-            let {data} = await this.$axios.get('/api/v1/auth')
-            console.log('fin Login', data)
+            this.$store.dispatch('loginUser', {
+                username: this.name,
+                password: this.password,
+                stayLoggedIn: this.checked
+            })
         }
     },
     watch: {
@@ -57,7 +60,6 @@ export default {
         }
     }
 }
-
 </script>
 
 <style src="~/assets/css/pages/index.scss" lang="scss" scoped />

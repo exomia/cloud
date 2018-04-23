@@ -9,21 +9,18 @@ import { UserGetters } from '~/store/getters/user'
 import { DirectoryGetters } from '~/store/getters/directory'
 
 // Mutations
+import { UserMutations } from '~/store/mutations/user'
 
 // Actions
-import { TestActions } from '~/store/actions/test'
+import { AuthActions } from '~/store/actions/auth'
 
 const Store = () => {
-  return new Vuex.Store({
-    // State
-    state: { ...UserState, ...DirectoryState },
-    // Getters
-    getters: { ...UserGetters, ...DirectoryGetters },
-    // Mutations
-    mutations: {},
-    // Actions
-    actions: { ...TestActions }
-  })
+    return new Vuex.Store({
+        state: { ...UserState, ...DirectoryState },
+        getters: { ...UserGetters, ...DirectoryGetters },
+        mutations: { ...UserMutations },
+        actions: { ...AuthActions }
+    })
 }
 
 export default Store

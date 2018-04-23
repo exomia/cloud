@@ -68,7 +68,7 @@ module.exports = {
   ** Axios module configuration
   */
     axios: {
-        baseURL: process.env.BASE_URL || 'http://127.0.0.1:3001',
+        baseURL: process.env.BASE_URL || 'http://127.0.0.1:3001/api',
         credentials: false,
         retry: { retries: 3 },
         responseType: 'json',

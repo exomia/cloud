@@ -1,5 +1,5 @@
 export const UserGetters = {
-  isAuthenticated: state => Boolean(state.user.token),
-  usedVolume: state => state.user.usedVolume,
-  maxVolume: state => state.user.maxVolume
+    isAuthenticated: state => Boolean(state.user.email),
+    volume: state => state.user.volume,
+    volumeUsed: state => state.user.volumeUsed
 }

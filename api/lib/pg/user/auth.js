@@ -6,7 +6,8 @@ export async function checkLoginData(nameOrEmail, password) {
           name,
           email,
           password,
-          flags
+          flags,
+          volume
         FROM private."user"
         WHERE ("name" = ${nameOrEmail} OR "email" = ${nameOrEmail})
               AND "password" = crypt(${password}, "password");`

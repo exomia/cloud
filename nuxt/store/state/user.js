@@ -2,7 +2,8 @@ export const UserState = {
     user: {
         name: '',
         email: '',
-        maxVolume: 1000000000,
-        usedVolume: 50000000
+        flags: 0,
+        volume: 0,
+        volumeUsed: 0
     }
 }

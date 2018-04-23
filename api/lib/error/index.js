@@ -22,3 +22,4 @@ export const JE500 = je(500, 'internal server error')
 
 export const JE1001 = je(1001, 'api usage error')
 export const JE1002 = je(1002, 'login required')
+export const JE1003 = je(1003, 'invalid login')
