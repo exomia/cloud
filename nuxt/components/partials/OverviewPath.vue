@@ -5,8 +5,8 @@
         </nuxt-link>
 
         <template v-for="entry in dirPath">
-            <i class="icon-arrow" :key="entry.uuid"/>
-            <nuxt-link :to="entry.uuid" tag="span" class="path-name" :key="entry.uuid">
+            <i class="icon-arrow" :key="entry.uuid + '-icon'"/>
+            <nuxt-link :to="entry.uuid" tag="span" class="path-name" :key="entry.uuid + '-span'">
                 {{entry.name}}
             </nuxt-link>
         </template>
