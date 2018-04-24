@@ -5,7 +5,7 @@ export default function({ $axios, redirect }) {
         if (t) {
             $axios.setHeader('x-token', t)
         }
-        const rt = localStorage.getItem('x-refresh-token')
+        const rt = localStorage.getItem('x-refresh-token') || sessionStorage.getItem('x-refresh-token')
         if (rt) {
             $axios.setHeader('x-refresh-token', t)
         }
@@ -15,8 +15,10 @@ export default function({ $axios, redirect }) {
         if (headers['x-token']) {
             localStorage.setItem('x-token', headers['x-token'])
         }
-        if (headers['x-refresh-token']) {
-            localStorage.setItem('x-refresh-token', headers['x-refresh-token'])
+        if (headers['x-refresh-l-token']) {
+            localStorage.setItem('x-refresh-token', headers['x-refresh-l-token'])
+        } else if (headers['x-refresh-s-token']) {
+            sessionStorage.setItem('x-refresh-token', headers['x-refresh-s-token'])
         }
     })
 

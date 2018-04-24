@@ -11,8 +11,8 @@ export async function checkLoginData(nameOrEmail, password) {
           COALESCE(SUM(f."size"), 0) AS "used_volume"
         FROM private."user" u
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
-        WHERE ("name" = ${nameOrEmail} OR "email" = ${nameOrEmail})
-              AND "password" = crypt(${password}, "password")
+        WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+              AND u."password" = crypt(${password}, u."password")
         GROUP BY u."uuid";`
     if (!result && result.rowCount <= 0) {
         return false

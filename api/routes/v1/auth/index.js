@@ -5,7 +5,7 @@ import { JE1002 } from '../../../lib/error'
 
 const router = express.Router()
 
-router.get('/', async ({ jwt }, res, next) => {
+router.all('/', async ({ jwt }, res, next) => {
     const result = await getUserInformation(jwt.email)
     if (result) {
         return res.json({
