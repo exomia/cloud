@@ -7,7 +7,7 @@ export async function sign(res, { email, password, flags }, stayLoggedIn) {
     res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-s-token, x-refresh-l-token')
     res.setHeader('x-token', jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t))
     res.setHeader(
-        !stayLoggedIn ? 'x-refresh-s-token' : 'x-refresh-l-token',
+        stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token',
         jwt.sign({ stayLoggedIn: !!stayLoggedIn }, password + config.SECRET_RT, config.jwt_options_rt)
     )
 }
@@ -51,7 +51,7 @@ export async function jwt_init(req, res, next) {
         res.setHeader('x-token', jwt.sign({ email: payload.email }, config.SECRET_T + password, config.jwt_options_t))
 
         res.setHeader(
-            !payload_rt.stayLoggedIn ? 'x-refresh-s-token' : 'x-refresh-l-token',
+            payload_rt.stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token',
             jwt.sign(payload_rt, password + config.SECRET_RT, config.jwt_options_rt)
         )
 

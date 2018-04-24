@@ -19,9 +19,13 @@ create the following files with at least these attributes
 ```json
 {
     "COOKIE": "jwt-cloud-api",
-    "SECRET": "xyz",
-    "jwt_options": {
+    "SECRET_T": "xyz",
+    "SECRET_RT": "xyz",
+    "jwt_options_t": {
         "expiresIn": "15m"
+    },
+    "jwt_options_rt": {
+        "expiresIn": "3d"
     },
     "jwt_verify_options": {}
 }
