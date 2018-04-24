@@ -107,6 +107,7 @@ input.confirm-button {
     cursor: pointer;
     background-color: #007e33;
     width: 100%;
+    outline: none;
     &:hover {
         background-color: darken(#007e33, 5%);
     }

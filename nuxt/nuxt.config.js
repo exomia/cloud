@@ -96,6 +96,13 @@ module.exports = {
         }
     },
 
+    /*
+  ** Router config
+  */
+    router: {
+        middleware: ['check-auth']
+    },
+
     transition: {
         name: 'fade',
         mode: 'out-in'

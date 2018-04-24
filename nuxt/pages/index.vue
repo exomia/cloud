@@ -33,17 +33,14 @@ export default {
     },
     methods: {
         async tryLogin() {
+            if (this.name && this.password) {
+            }
             this.loginBtnValue = 'Login...'
             this.$store.dispatch('loginUser', {
                 username: this.name,
                 password: this.password,
                 stayLoggedIn: this.checked
             })
-        }
-    },
-    watch: {
-        checked() {
-            this.tryLogin()
         }
     },
     validations: {
