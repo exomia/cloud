@@ -42,6 +42,7 @@ export async function jwt_init(req, res, next) {
             return res.json(JE1002)
         }
     }
+
     const rt =
         req.headers['x-refresh-token'] ||
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGF5TG9nZ2VkSW4iOmZhbHNlLCJpYXQiOjE1MjQ0MzAzNzMsImV4cCI6MTUyNTAzNTE3M30._Tzj4Z4ewcPH3ALJBRMsq0_cXg9_J4vrDALTqfmq5E8'

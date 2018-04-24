@@ -17,7 +17,6 @@ export async function deleteUser(nameOrEmail) {
 export async function listAllUsers() {
     const result = await query`
         SELECT
-          u."uuid",
           u."name",
           u."email",
           u."timestamp",
@@ -26,7 +25,6 @@ export async function listAllUsers() {
           COALESCE(SUM(f."size"), 0) AS "used_volume"
         FROM private."user" u
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
-        WHERE u."flags" & 1 != 1
         GROUP BY u."uuid";`
     if (result && result.rowCount > 0) {
         return result
@@ -66,6 +64,25 @@ export async function usedVolume(nameOrEmail) {
         SELECT
           SUM(f."size") AS "used_volume",
           u."volume"
+        FROM private."user" u
+          LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
+        WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+        GROUP BY u."uuid";`
+    if (result && result.rowCount > 0) {
+        return result.rows[0]
+    }
+    return false
+}
+
+export async function getUserInformation(nameOrEmail) {
+    const result = await query`
+        SELECT
+          u."name",
+          u."email",
+          u."timestamp",
+          u."flags"                  AS "flags",
+          u."volume",
+          COALESCE(SUM(f."size"), 0) AS "used_volume"
         FROM private."user" u
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
         WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})

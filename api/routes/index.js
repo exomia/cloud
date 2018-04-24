@@ -5,18 +5,19 @@ const endpoints = [[], [], [], [], []]
 function ep(dir) {
     const files = fs.readdirSync(path.join('routes', dir), 'utf8')
     for (let filename of files) {
-        const matches = /^index.js$/.exec(filename)
+        const matches = /^(index).js|(.+).js$/.exec(filename)
         if (!matches) {
             ep(path.join(dir, filename))
             continue
         }
+
         const ar = require(`./${dir.replace(/\\/g, '/')}/${filename}`).default
         if (!ar.security || ar.security > 4) {
             ar.security = 0
         }
 
         endpoints[ar.security].push({
-            path: dir.replace(/\\/g, '/'),
+            path: matches[1] ? dir.replace(/\\/g, '/') : `${dir.replace(/\\/g, '/')}/${matches[2]}`,
             router: ar.router
         })
     }
