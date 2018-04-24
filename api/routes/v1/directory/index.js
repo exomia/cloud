@@ -1,13 +1,18 @@
 import express from 'express'
-import { listAllDirectories, getDirectoryInfo, addDirectory, updateDirectory, deleteDirectory } from '../lib/pg_helper'
-import { JE500, JE1001 } from '../lib/error'
-import { xor_encode, xor_decode } from '../lib/util'
+import {
+    listAllDirectories,
+    getDirectoryInfo,
+    addDirectory,
+    updateDirectory,
+    deleteDirectory
+} from '../../../lib/pg/directory'
+import { JE500, JE1001 } from '../../../lib/error'
+import { xor_encode, xor_decode } from '../../../lib/util'
 
 const router = express.Router()
 
 router.get('/:directory_id?', async ({ jwt: { email }, params: { directory_id } }, res, next) => {
     const directory_uuid = xor_decode(directory_id)
-
     const directories = await listAllDirectories(email, directory_uuid)
     if (!directories) {
         return res.json(JE500)
