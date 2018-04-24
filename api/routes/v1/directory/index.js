@@ -31,7 +31,7 @@ router.get('/:directory_id?', async ({ jwt: { email }, params: { directory_id } 
         directory_id,
         directories,
         files,
-        path_info: path_info_json
+        path_info
     })
 })
 
