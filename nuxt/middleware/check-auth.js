@@ -1,3 +1,7 @@
 export default function(context) {
-    context.store.dispatch('checkAuth', context)
+    /*console.log('context request', context.req)
+    if (!process.server) {
+        console.log('middleware from client side')
+        context.store.dispatch('checkAuth', context)
+    }*/
 }

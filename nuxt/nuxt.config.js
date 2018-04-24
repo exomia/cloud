@@ -100,7 +100,7 @@ module.exports = {
   ** Router config
   */
     router: {
-        middleware: ['check-auth']
+        middleware: []
     },
 
     transition: {

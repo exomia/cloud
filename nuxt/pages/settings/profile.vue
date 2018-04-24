@@ -57,6 +57,9 @@ export default {
             changePasswordSubmit: false
         }
     },
+    auth: {
+        login: true
+    },
     components: {
         SettingsSidebar,
         SettingsDataChangeForm

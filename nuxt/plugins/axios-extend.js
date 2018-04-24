@@ -1,5 +1,5 @@
-export default function({ $axios, redirect }) {
-    $axios.setHeader('Content-Type', 'application/json', ['post', 'get'])
+export default function({ $axios, redirect, store }) {
+    $axios.setHeader('Content-Type', 'application/json', ['post', 'get', 'put', 'patch', 'delete'])
     $axios.onRequest(config => {
         const t = localStorage.getItem('x-token')
         if (t) {
@@ -9,7 +9,7 @@ export default function({ $axios, redirect }) {
         if (rt) {
             $axios.setHeader('x-refresh-token', t)
         }
-        console.log('Making request to ' + config.url)
+        console.log('Making request to ' + config.url, config.headers)
     })
     $axios.onResponse(({ headers }) => {
         if (headers['x-token']) {
@@ -31,4 +31,6 @@ export default function({ $axios, redirect }) {
     $axios.onResponseError(error => {
         console.error(error)
     })
+    //if page needs authcheck do this
+    store.dispatch('checkAuth')
 }

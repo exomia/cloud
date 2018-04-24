@@ -24,7 +24,10 @@ function bindep(index) {
     app.use((req, res, next) => {
         //CORS HEADER
         res.setHeader('Access-Control-Allow-Origin', '*')
-        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+        res.setHeader(
+            'Access-Control-Allow-Headers',
+            'Origin, X-Requested-With, Content-Type, Accept, x-token, x-refresh-token'
+        )
 
         next()
     })

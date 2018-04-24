@@ -17,6 +17,10 @@ import OverviewListHeader from '~/components/partials/OverviewListHeader'
 import OverviewList from '~/components/partials/OverviewList'
 
 export default {
+    //middleware: ['check-auth'],
+    auth: {
+        login: true
+    },
     components: {
         OverviewSidebar,
         OverviewPath,
