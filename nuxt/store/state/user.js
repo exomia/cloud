@@ -4,6 +4,6 @@ export const UserState = {
         email: '',
         flags: 0,
         volume: 0,
-        volumeUsed: 0
+        usedVolume: 0
     }
 }

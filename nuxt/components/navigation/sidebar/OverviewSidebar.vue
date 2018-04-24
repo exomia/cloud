@@ -6,9 +6,9 @@
         <div>
             <a class="sidebar-item no-hover">
                 <div class="volume-container">
-                    <span class="volume-header">{{volumeUsed | toUnitNoSuffix}}&nbsp;/&nbsp;{{volume | toUnit}}</span>
+                    <span class="volume-header">{{usedVolume | toUnitNoSuffix}}&nbsp;/&nbsp;{{volume | toUnit}}</span>
                     <div class="volume-bg">
-                        <div class="volume" :style="{width: (100 / volume * volumeUsed) + '%' }"/>
+                        <div class="volume" :style="{width: (100 / volume * usedVolume) + '%' }"/>
                     </div>
                 </div>
             </a>
@@ -28,7 +28,7 @@ export default {
         SidebarItem
     },
     computed: {
-        ...mapGetters(['volumeUsed', 'volume'])
+        ...mapGetters(['usedVolume', 'volume'])
     }
 }
 </script>

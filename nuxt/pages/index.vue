@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
     layout: 'landing',
@@ -33,20 +33,18 @@ export default {
     },
     methods: {
         async tryLogin() {
-            if (this.name && this.password) {
-            }
-            this.loginBtnValue = 'Login...'
+            //if (!this.$v.name.$invalid && !this.$v.password.$invalid) {
             this.$store.dispatch('loginUser', {
                 username: this.name,
                 password: this.password,
                 stayLoggedIn: this.checked
             })
+            //}
         }
     },
     validations: {
         name: {
             required,
-            //email,
             minLength: minLength(3),
             maxLength: maxLength(64)
         },
