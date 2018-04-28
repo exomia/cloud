@@ -12,7 +12,9 @@
     "nodemonConfig": {
         "ignore": [],
         "delay": "50",
-        "watch": ["*.*"],
+        "watch": [
+            "*.*"
+        ],
         "ext": "js html json"
     },
     "dependencies": {
@@ -21,6 +23,7 @@
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "body-parser": "^1.18.2",
+        "cookie-parser": "^1.4.3",
         "cors": "^2.8.4",
         "express": "^4.15.3",
         "jsonwebtoken": "^8.2.1",

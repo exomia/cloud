@@ -3,7 +3,7 @@ import { endpoints } from './routes'
 import { jwt_init } from './lib/jwt'
 import { JE404, JE500, JE1001, JE1002 } from './lib/error'
 import bodyParser from 'body-parser'
-//import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -19,18 +19,7 @@ function bindep(index) {
 ;(async function start() {
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
-    //app.use(cookieParser())
-
-    app.use((req, res, next) => {
-        //CORS HEADER
-        res.setHeader('Access-Control-Allow-Origin', '*')
-        res.setHeader(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept, x-token, x-refresh-token'
-        )
-
-        next()
-    })
+    app.use(cors())
 
     // Bind api endpoints security 0 (public)
     bindep(0)
