@@ -1,23 +1,23 @@
 import { query, lb, lbjoin } from '../'
 
-export async function addUser(name, email, password, flags, volume) {
+export async function addUser(username, email, password, flags, volume) {
     const result = await query`
-        INSERT INTO private."user" ("name", "email", "password", "flags", "volume")
-        VALUES (${name}, ${email}, crypt(${password}, gen_salt('bf', 8)), ${flags}, ${volume});`
+        INSERT INTO private."user" ("username", "email", "password", "flags", "volume")
+        VALUES (${username}, ${email}, crypt(${password}, gen_salt('bf', 8)), ${flags}, ${volume});`
     return result && result.rowCount > 0
 }
 
-export async function deleteUser(nameOrEmail) {
+export async function deleteUser(usernameOrEmail) {
     const result = await query`
         DELETE FROM private."user"
-        WHERE ("name" = ${nameOrEmail} OR "email" = ${nameOrEmail});`
+        WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail});`
     return result && result.rowCount > 0
 }
 
 export async function listAllUsers() {
     const result = await query`
         SELECT
-          u."name",
+          u."username",
           u."email",
           u."timestamp",
           u."flags"                  AS "flags",
@@ -32,10 +32,10 @@ export async function listAllUsers() {
     return false
 }
 
-export async function updateUser(nameOrEmail, { new_name, new_email, new_password, new_flags, new_volume }) {
+export async function updateUser(usernameOrEmail, { new_username, new_email, new_password, new_flags, new_volume }) {
     let updates = []
-    if (new_name !== undefined) {
-        updates.push(lb`"name" = ${new_name}`)
+    if (new_username !== undefined) {
+        updates.push(lb`"username" = ${new_username}`)
     }
     if (new_email !== undefined) {
         updates.push(lb`"email" = ${new_email}`)
@@ -55,18 +55,18 @@ export async function updateUser(nameOrEmail, { new_name, new_email, new_passwor
     const result = await query`
         UPDATE private."user"
         SET ${lbjoin(...updates)}
-        WHERE ("name" = ${nameOrEmail} OR "email" = ${nameOrEmail});`
+        WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail});`
     return result && result.rowCount > 0
 }
 
-export async function usedVolume(nameOrEmail) {
+export async function usedVolume(usernameOrEmail) {
     const result = await query`
         SELECT
           SUM(f."size") AS "used_volume",
           u."volume"
         FROM private."user" u
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
-        WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
         GROUP BY u."uuid";`
     if (result && result.rowCount > 0) {
         return result.rows[0]
@@ -74,10 +74,10 @@ export async function usedVolume(nameOrEmail) {
     return false
 }
 
-export async function getUserInformation(nameOrEmail) {
+export async function getUserInformation(usernameOrEmail) {
     const result = await query`
         SELECT
-          u."name",
+          u."username",
           u."email",
           u."timestamp",
           u."flags"                  AS "flags",
@@ -85,7 +85,7 @@ export async function getUserInformation(nameOrEmail) {
           COALESCE(SUM(f."size"), 0) AS "used_volume"
         FROM private."user" u
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
-        WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
         GROUP BY u."uuid";`
     if (result && result.rowCount > 0) {
         return result.rows[0]

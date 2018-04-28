@@ -1,41 +1,41 @@
 import { query, lb, lbjoin } from '../'
 
-export async function addFile(nameOrEmail, name, directory_uuid, local_name, size) {
+export async function addFile(usernameOrEmail, name, directory_uuid, local_name, size) {
     const result = await query`
-        INSERT INTO private."file" ("user_uuid", "name", "directory_uuid", "local_name", "size")
+        INSERT INTO private."file" ("user_uuid", "username", "directory_uuid", "local_name", "size")
         VALUES ((SELECT "uuid"
                  FROM private."user"
-                 WHERE ("name" = ${nameOrEmail} OR "email" = ${nameOrEmail})),
-                ${name},
+                 WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
+                ${username},
                 ${directory_uuid ? directory_uuid : null},
                 ${local_name},
                 ${size})
-        RETURNING "uuid", "name", "size", "timestamp";`
+        RETURNING "uuid", "username", "size", "timestamp";`
     if (result && result.rowCount > 0) {
         return result.rows[0]
     }
     return false
 }
 
-export async function deleteFile(nameOrEmail, file_uuid, force_delete) {
+export async function deleteFile(usernameOrEmail, file_uuid, force_delete) {
     const result = force_delete
         ? await query`
             DELETE FROM private."file" f
             USING private."user" u
             WHERE u."uuid" = f."user_uuid"
-                  AND (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+                  AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
                   AND f."uuid" = ${file_uuid};`
         : await query`
             UPDATE private."file" f
             SET f."delete_timestamp" = now()
             FROM private."user" u
             WHERE u."uuid" = f."user_uuid"
-                  AND (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+                  AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
                   AND f."uuid" = ${file_uuid};`
     return result && result.rowCount > 0
 }
 
-export async function listAllFiles(nameOrEmail, directory_uuid) {
+export async function listAllFiles(usernameOrEmail, directory_uuid) {
     const result = await query`
         SELECT
           f."uuid",
@@ -47,7 +47,7 @@ export async function listAllFiles(nameOrEmail, directory_uuid) {
           f."download_count"
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
-        WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
         AND f."delete_timestamp" IS NULL;`
     if (result && result.rowCount > 0) {
@@ -56,7 +56,7 @@ export async function listAllFiles(nameOrEmail, directory_uuid) {
     return false
 }
 
-export async function getFileInfo(nameOrEmail, file_uuid) {
+export async function getFileInfo(usernameOrEmail, file_uuid) {
     const result = await query`
         SELECT
           f."uuid",
@@ -69,7 +69,7 @@ export async function getFileInfo(nameOrEmail, file_uuid) {
           f."delete_timestamp"
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
-        WHERE (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND f."uuid" = ${file_uuid};`
     if (result && result.rowCount > 0) {
         return result.rows[0]
@@ -77,7 +77,7 @@ export async function getFileInfo(nameOrEmail, file_uuid) {
     return false
 }
 
-export async function updateFile(nameOrEmail, file_uuid, { new_name, new_directory_uuid, new_clamav_status }) {
+export async function updateFile(usernameOrEmail, file_uuid, { new_name, new_directory_uuid, new_clamav_status }) {
     let updates = []
     if (new_name !== undefined) {
         updates.push(lb`"name" = ${new_name}`)
@@ -96,7 +96,7 @@ export async function updateFile(nameOrEmail, file_uuid, { new_name, new_directo
         SET ${lbjoin(...updates)}
         FROM private."user" u
         WHERE u."uuid" = f."user_uuid"
-              AND (u."name" = ${nameOrEmail} OR u."email" = ${nameOrEmail})
+              AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND f."uuid" = ${file_uuid};`
     return result && result.rowCount > 0
 }

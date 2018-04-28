@@ -1,48 +1,46 @@
 {
-  "name": "cloud-api",
-  "version": "1.0.0",
-  "description": "Api for a Nuxt.js Cloud",
-  "author": "exomia",
-  "license": "MIT",
-  "scripts": {
-    "start": "nodemon index.js --exec babel-node",
-    "production": "babel-node index.js",
-    "update": "npm prune && npm-check -u"
-  },
-  "nodemonConfig": {
-    "ignore": [],
-    "delay": "50",
-    "watch": [
-      "*.*"
-    ],
-    "ext": "js html json"
-  },
-  "dependencies": {
-    "cookie-parser": "^1.4.3",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "body-parser": "^1.18.2",
-    "express": "^4.15.3",
-    "jsonwebtoken": "^8.2.1",
-    "nodemailer": "^4.6.4",
-    "pg": "^7.4.1"
-  },
-  "devDependencies": {
-    "cross-env": "^5.0.1",
-    "nodemon": "^1.11.0"
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ]
-  }
+    "name": "cloud-api",
+    "version": "1.0.0",
+    "description": "Api for a Nuxt.js Cloud",
+    "author": "exomia",
+    "license": "MIT",
+    "scripts": {
+        "start": "nodemon index.js --exec babel-node",
+        "production": "babel-node index.js",
+        "update": "npm prune && npm-check -u"
+    },
+    "nodemonConfig": {
+        "ignore": [],
+        "delay": "50",
+        "watch": ["*.*"],
+        "ext": "js html json"
+    },
+    "dependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "body-parser": "^1.18.2",
+        "cors": "^2.8.4",
+        "express": "^4.15.3",
+        "jsonwebtoken": "^8.2.1",
+        "nodemailer": "^4.6.4",
+        "pg": "^7.4.1"
+    },
+    "devDependencies": {
+        "cross-env": "^5.0.1",
+        "nodemon": "^1.11.0"
+    },
+    "babel": {
+        "presets": [
+            [
+                "env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ]
+    }
 }
