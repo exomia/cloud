@@ -1,25 +1,17 @@
 import Vuex from 'vuex'
 
-// State
-import { UserState } from '~/store/state/user'
-import { DirectoryState } from '~/store/state/directory'
-
-// Getters
-import { UserGetters } from '~/store/getters/user'
-import { DirectoryGetters } from '~/store/getters/directory'
-
-// Mutations
-import { UserMutations } from '~/store/mutations/user'
-
-// Actions
-import { AuthActions } from '~/store/actions/auth'
+// Modules
+import * as auth from '@/store/modules/auth'
+import * as directory from '@/store/modules/directory'
+import * as user from '@/store/modules/user'
 
 const Store = () => {
     return new Vuex.Store({
-        state: { ...UserState, ...DirectoryState },
-        getters: { ...UserGetters, ...DirectoryGetters },
-        mutations: { ...UserMutations },
-        actions: { ...AuthActions }
+        modules: {
+            auth,
+            directory,
+            user
+        }
     })
 }
 
