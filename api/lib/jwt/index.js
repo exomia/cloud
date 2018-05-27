@@ -4,12 +4,15 @@ import { getUserPassword } from '../pg/user/auth'
 import { JE1002 } from '../error'
 
 export async function sign(res, { email, password, flags }, stayLoggedIn) {
-    res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-s-token, x-refresh-l-token')
-    res.setHeader('x-token', jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t))
-    res.setHeader(
-        stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token',
-        jwt.sign({ stayLoggedIn: !!stayLoggedIn }, password + config.SECRET_RT, config.jwt_options_rt)
+    const token = jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t)
+    const refreshToken = jwt.sign(
+        { stayLoggedIn: Boolean(stayLoggedIn) },
+        password + config.SECRET_RT,
+        config.jwt_options_rt
     )
+    res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-s-token, x-refresh-l-token')
+    res.setHeader('x-token', token)
+    res.setHeader(stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token', refreshToken)
 }
 export async function jwt_init(req, res, next) {
     const t = req.headers['x-token']
