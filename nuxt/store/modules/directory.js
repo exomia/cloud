@@ -1,4 +1,4 @@
-export const DirectoryState = {
+export const state = () => ({
     directory: {
         dirPath: [
             { uuid: '46nq3246niqü3564üpq356', name: 'abc' },
@@ -15,5 +15,23 @@ export const DirectoryState = {
         followingDirectorys: 20,
         followingFiles: 500,
         sizeSum: 1303376534034
+    }
+})
+
+export const getters = {
+    dirPath: state => state.directory.dirPath,
+    dirItems: state => state.directory.dirItems,
+    followingDirectorys: state => state.directory.followingDirectorys,
+    followingFiles: state => state.directory.followingFiles,
+    sizeSum: state => state.directory.sizeSum
+}
+
+export const mutations = {
+    setAuthUser(state, { name, email, flags, volume, usedVolume }) {
+        state.user.name = name || ''
+        state.user.email = email || ''
+        state.user.flags = Number(flags) || 0
+        state.user.volume = Number(volume) || 0
+        state.user.usedVolume = Number(usedVolume) || 0
     }
 }

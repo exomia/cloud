@@ -21,18 +21,18 @@
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.3",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "babel-preset-env": "^1.6.1",
-        "body-parser": "^1.18.2",
+        "babel-preset-env": "^1.7.0",
+        "body-parser": "^1.18.3",
         "cookie-parser": "^1.4.3",
         "cors": "^2.8.4",
         "express": "^4.15.3",
         "jsonwebtoken": "^8.2.1",
-        "nodemailer": "^4.6.4",
-        "pg": "^7.4.1"
+        "nodemailer": "^4.6.5",
+        "pg": "^7.4.3"
     },
     "devDependencies": {
-        "cross-env": "^5.0.1",
-        "nodemon": "^1.11.0"
+        "cross-env": "^5.1.6",
+        "nodemon": "^1.17.5"
     },
     "babel": {
         "presets": [
