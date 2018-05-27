@@ -1,10 +1,13 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v3.0 | 20180413
-   License: none (public domain)
-*/
+/* Exomia Reset CSS */
 
-* {
+html {
     box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
 }
 
 html,

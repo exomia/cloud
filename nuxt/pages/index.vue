@@ -1,13 +1,13 @@
 <template>
     <main>
-        <img src="~/assets/img/cloud-logo.svg" alt="Logo" class="logo">
         <form>
+            <img src="~/assets/img/cloud-logo.svg" alt="Logo" class="logo">
             <input placeholder="Name/E-Mail" class="text-input" :class="{ 'input-error': $v.name.$invalid && name.length }" type="text" v-model="name" maxlength="64">
             <input placeholder="Passwort" class="text-input" :class="{ 'input-error': $v.password.$invalid && password.length }" type="password" v-model="password" maxlength="72">
             <div>
                 <input
-                  type="checkbox"
-                  v-model="checked">
+                type="checkbox"
+                v-model="checked">
                 <span @click="checked = !checked">Angemeldet bleiben</span>
             </div>
             <input class="confirm-button"

@@ -1,6 +1,7 @@
 <template>
-  <div class="page">
-    <the-header isAuthenticated/>
+  <div id="page">
+    <the-header v-if="isAuthenticated" isAuthenticated/>
+    <the-header v-if="!isAuthenticated"/>
     <nuxt/>
     <the-footer/>
   </div>
@@ -14,6 +15,11 @@ export default {
     components: {
         TheHeader,
         TheFooter
+    },
+    computed: {
+        isAuthenticated() {
+            return this.$store.getters.isAuthenticated
+        }
     }
 }
 </script>

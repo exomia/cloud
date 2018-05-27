@@ -13,22 +13,18 @@ body {
     font-size: 100%;
 }
 
-main {
-    display: flex;
-    flex: 1;
-}
-
-/* Global Page definition */
-div.page {
+#page {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 }
 
-div.content {
+main {
+    display: flex;
     flex: 1;
 }
 
+/* Global definition */
 .checkbox {
     display: inline-block;
     width: 1rem;
@@ -39,15 +35,6 @@ div.content {
     &:checked {
         opacity: 1 !important;
     }
-}
-
-/* Scrollbar */
-* {
-    -ms-overflow-style: none;
-}
-
-::-webkit-scrollbar {
-    display: none;
 }
 
 /* Extras */
