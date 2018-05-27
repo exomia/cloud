@@ -1,15 +1,15 @@
 <template>
     <div class="list-row list-row-hover">
-        <div style="width: 100px">
+        <div class="list-item" style="width: 100px">
             <input type="checkbox" class="checkbox" style="opacity: 0">
             <i v-if="type === 'Folder'" class="folder-icon"/>
             <i v-if="type === 'File'" class="file-icon"/>
         </div>
-        <div style="width: calc(100% - 535px)">
+        <div class="list-item" style="width: calc(100% - 535px)">
             <span v-if="!renameActive" class="row-name">{{name}}</span>
             <input v-else class="text-input rename-input" type="text" v-model="name">
         </div>
-        <div style="width: 85px">
+        <div class="list-item" style="position: relative; width: 85px">
             <a class="list-button em-button" @click="listOptionsActive = !listOptionsActive">
                 <i class="extended-menu-icon"/>
             </a>
@@ -36,15 +36,15 @@
                 </a>
             </div>
         </div>
-        <div style="width: 100px">
+        <div class="list-item" style="width: 100px">
             <i v-if="scanStatus == 0" class="status-icon-accepted"/>
             <i v-if="scanStatus == 1" class="status-icon-progress"/>
             <i v-if="scanStatus == 2" class="status-icon-attention"/>
         </div>
-        <div style="width: 100px">
+        <div class="list-item" style="width: 100px">
             <span>{{size | toUnit}}</span>
         </div>
-        <div style="width: 150px">
+        <div class="list-item" style="width: 150px">
             <span>{{date | toDatetime}}</span>
         </div>
     </div>

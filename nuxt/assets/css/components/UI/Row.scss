@@ -26,7 +26,7 @@ div.list-summary {
     transition: 0.25s;
     text-decoration: none;
     height: 3.5rem;
-    div {
+    div.list-item {
         display: flex;
         justify-content: flex-start;
         align-items: center;
