@@ -6,12 +6,15 @@ import {
     updateDirectory,
     deleteDirectory
 } from '../../../lib/pg/directory'
-import { JE500, JE1001 } from '../../../lib/error'
+import { EXIT_LOGIN_REQUIRED, JE500, JE1001 } from '../../../lib/error'
 import { xor_encode, xor_decode } from '../../../lib/util'
 
 const router = express.Router()
 
-router.get('/:directory_id?', async ({ jwt: { email }, params: { directory_id } }, res, next) => {
+router.get('/:directory_id?', async ({ jwt: { valid, payload: { email } }, params: { directory_id } }, res, next) => {
+    if (!valid) {
+        return EXIT_LOGIN_REQUIRED()
+    }
     const directory_uuid = xor_decode(directory_id)
     const directories = await listAllDirectories(email, directory_uuid)
     if (!directories) {
@@ -40,7 +43,10 @@ router.get('/:directory_id?', async ({ jwt: { email }, params: { directory_id } 
     })
 })
 
-router.post('/add', async ({ jwt: { email }, body: { name, parent_directory_id } }, res, next) => {
+router.post('/add', async ({ jwt: { valid, payload: { email } }, body: { name, parent_directory_id } }, res, next) => {
+    if (!valid) {
+        return EXIT_LOGIN_REQUIRED()
+    }
     const parent_directory_uuid = xor_decode(parent_directory_id)
 
     let result = await addDirectory(email, name, parent_directory_uuid)
@@ -57,7 +63,10 @@ router.post('/add', async ({ jwt: { email }, body: { name, parent_directory_id }
     })
 })
 
-router.post('/rename', async ({ jwt: { email }, body: { directory_id, new_name } }, res, next) => {
+router.post('/rename', async ({ jwt: { valid, payload: { email } }, body: { directory_id, new_name } }, res, next) => {
+    if (!valid) {
+        return EXIT_LOGIN_REQUIRED()
+    }
     const directory_uuid = xor_decode(directory_id)
     if (!directory_uuid || !new_name || new_name.length <= 0) {
         return res.json(JE1001)
@@ -76,26 +85,45 @@ router.post('/rename', async ({ jwt: { email }, body: { directory_id, new_name }
     })
 })
 
-router.post('/move', async ({ jwt: { email }, body: { directory_id, new_parent_directory_id } }, res, next) => {
-    const directory_uuid = xor_decode(directory_id)
-    const new_parent_directory_uuid = xor_decode(new_parent_directory_id)
-    if (!directory_uuid || !new_parent_directory_uuid) {
-        return res.json(JE1001)
-    }
-
-    let result = await updateDirectory(email, directory_uuid, { new_parent_directory_uuid })
-    if (!result) {
-        return res.json(JE500)
-    }
-    return res.json({
-        directory: {
-            id: directory_id
+router.post(
+    '/move',
+    async (
+        {
+            jwt: {
+                valid,
+                payload: { email }
+            },
+            body: { directory_id, new_parent_directory_id }
         },
-        error: false
-    })
-})
+        res,
+        next
+    ) => {
+        if (!valid) {
+            return EXIT_LOGIN_REQUIRED()
+        }
+        const directory_uuid = xor_decode(directory_id)
+        const new_parent_directory_uuid = xor_decode(new_parent_directory_id)
+        if (!directory_uuid || !new_parent_directory_uuid) {
+            return res.json(JE1001)
+        }
 
-router.post('/remove', async ({ jwt: { email }, body: { directory_id } }, res, next) => {
+        let result = await updateDirectory(email, directory_uuid, { new_parent_directory_uuid })
+        if (!result) {
+            return res.json(JE500)
+        }
+        return res.json({
+            directory: {
+                id: directory_id
+            },
+            error: false
+        })
+    }
+)
+
+router.post('/remove', async ({ jwt: { valid, payload: { email } }, body: { directory_id } }, res, next) => {
+    if (!valid) {
+        return EXIT_LOGIN_REQUIRED()
+    }
     const directory_uuid = xor_decode(directory_id)
     if (!directory_id) {
         return res.json(JE1001)
