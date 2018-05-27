@@ -5,7 +5,10 @@ import { JE1002 } from '../../../lib/error'
 
 const router = express.Router()
 
-router.all('/', async ({ jwt: { email } }, res, next) => {
+router.all('/', async ({ jwt: { valid, payload: { email } } }, res, next) => {
+    if (!valid) {
+        return EXIT_LOGIN_REQUIRED()
+    }
     const result = await getUserInformation(email)
     if (result) {
         return res.json({
