@@ -1,5 +1,5 @@
 <template>
-    <div id="page">
+    <main>
         <overview-sidebar></overview-sidebar>
         <!-- ondragover="allowDrop(event)" -->
         <div class="overview" dropzone="copy">
@@ -7,7 +7,7 @@
           <overview-list-header></overview-list-header>
           <overview-list></overview-list>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
@@ -17,10 +17,7 @@ import OverviewListHeader from '~/components/partials/OverviewListHeader'
 import OverviewList from '~/components/partials/OverviewList'
 
 export default {
-    //middleware: ['check-auth'],
-    auth: {
-        login: true
-    },
+    auth: true,
     components: {
         OverviewSidebar,
         OverviewPath,

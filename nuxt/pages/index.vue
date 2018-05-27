@@ -1,5 +1,5 @@
 <template>
-    <div id="page">
+    <main>
         <img src="~/assets/img/cloud-logo.svg" alt="Logo" class="logo">
         <form>
             <input placeholder="Name/E-Mail" class="text-input" :class="{ 'input-error': $v.name.$invalid && name.length }" type="text" v-model="name" maxlength="64">
@@ -15,14 +15,13 @@
                     type="button"
                     @click="tryLogin">
         </form>
-    </div>
+    </main>
 </template>
 
 <script>
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
-    layout: 'landing',
     data() {
         return {
             name: '',

@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar">
+    <aside>
         <div>
             <sidebar-item iconClass="directory" routeName="overview" text="Alle Dateien"/>
         </div>
@@ -15,7 +15,7 @@
             <sidebar-item iconClass="trash" routeName="trash" text="Papierkorb"/>
             <sidebar-item iconClass="settings" routeName="settings-profile" text="Einstellungen"/>
         </div>
-    </div>
+    </aside>
 </template>
 
 <script>

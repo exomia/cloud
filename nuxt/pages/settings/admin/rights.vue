@@ -1,10 +1,10 @@
 <template>
-  <div id="page">
+  <main>
     <settings-sidebar></settings-sidebar>
     <div class="overview">
         
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

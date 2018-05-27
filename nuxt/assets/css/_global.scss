@@ -13,7 +13,7 @@ body {
     font-size: 100%;
 }
 
-#page {
+main {
     display: flex;
     flex: 1;
 }
@@ -93,6 +93,10 @@ input.text-input-invalid {
 
 .space-around {
     justify-content: space-around;
+}
+
+.justify-center {
+    justify-content: center;
 }
 
 /* Button */
