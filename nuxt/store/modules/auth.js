@@ -24,5 +24,12 @@ export const actions = {
             token = JSON.parse(parsed.auth)
         }
         commit('authenticate', token)
+    },
+    async loginUser(vuexContext, { username, password, stayLoggedIn }) {
+        // Check if login would be valid
+        if (username && password) {
+            const res = await this.$axios.$post('/v1/auth/login', { username, password })
+            //console.log(res)
+        }
     }
 }

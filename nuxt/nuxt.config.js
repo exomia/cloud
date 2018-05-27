@@ -4,15 +4,15 @@ module.exports = {
     mode: 'universal',
 
     /*
-  ** Env Variables
-  */
+    ** Env Variables
+    */
     env: {
         projectTitle: 'Exomia Cloud'
     },
 
     /*
-  ** Headers of the page
-  */
+    ** Headers of the page
+    */
     head: {
         title: pkg.name,
         meta: [
@@ -37,36 +37,31 @@ module.exports = {
     },
 
     /*
-  ** Customize the progress-bar color
-  */
+    ** Customize the progress-bar color
+    */
     loading: { color: '#3B8070' },
 
     /*
-  ** Global CSS
-  */
+    ** Global CSS
+    */
     css: ['~/assets/css/_global.scss', '~/assets/css/_pageTransition.scss'],
 
     /*
-  ** Plugins to load before mounting the App
-  */
-    plugins: [
-        '~/plugins/file-size.js',
-        '~/plugins/date.js',
-        '~/plugins/vuelidate',
-        { src: '~/plugins/axios-extend', ssr: false }
-    ],
+    ** Plugins to load before mounting the App
+    */
+    plugins: ['~/plugins/auth.js', '~/plugins/file-size.js', '~/plugins/date.js', '~/plugins/vuelidate'],
 
     /*
-  ** Nuxt.js modules
-  */
+    ** Nuxt.js modules
+    */
     modules: [
         // Doc: https://github.com/nuxt-community/axios-module#usage
         '@nuxtjs/axios'
     ],
 
     /*
-  ** Axios module configuration
-  */
+    ** Axios module configuration
+    */
     axios: {
         baseURL: process.env.BASE_URL || 'http://127.0.0.1:3001/api',
         credentials: false,
@@ -77,12 +72,12 @@ module.exports = {
     },
 
     /*
-  ** Build configuration
-  */
+    ** Build configuration
+    */
     build: {
         /*
-    ** You can extend webpack config here
-    */
+        ** You can extend webpack config here
+        */
         extend(config, ctx) {
             // Run ESLint on save
             if (ctx.isDev && ctx.isClient) {
@@ -97,10 +92,10 @@ module.exports = {
     },
 
     /*
-  ** Router config
-  */
+    ** Router config
+    */
     router: {
-        middleware: []
+        middleware: ['auth']
     },
 
     transition: {
