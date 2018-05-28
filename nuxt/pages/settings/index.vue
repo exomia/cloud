@@ -44,7 +44,6 @@ import SettingsSidebar from '~/components/navigation/sidebar/SettingsSidebar'
 import SettingsDataChangeForm from '~/components/UI/SettingsDataChangeForm'
 
 export default {
-    auth: true,
     data() {
         return {
             changeName: '',

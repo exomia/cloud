@@ -1,5 +1,5 @@
 <template>
-    <div class="list-container" style="height: calc(100% - 98px)">
+    <div class="list-container" style="height: calc(100vh - 169px)">
         <list-row 
             v-for="(entry, idx) in dirItems" 
             :key="idx"

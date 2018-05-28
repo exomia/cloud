@@ -5,6 +5,7 @@ footer {
     width: 100%;
     background-color: $footer-color;
     justify-content: space-between;
+    z-index: 2;
     div {
         display: flex;
         a.footer-button {

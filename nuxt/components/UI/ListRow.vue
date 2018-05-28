@@ -5,7 +5,7 @@
             <i v-if="type === 'Folder'" class="folder-icon"/>
             <i v-if="type === 'File'" class="file-icon"/>
         </div>
-        <div class="list-item" style="width: calc(100% - 535px)">
+        <div class="list-item" style="width: calc(100% - 510px)">
             <span v-if="!renameActive" class="row-name">{{name}}</span>
             <input v-else class="text-input rename-input" type="text" v-model="name">
         </div>
@@ -44,7 +44,7 @@
         <div class="list-item" style="width: 100px">
             <span>{{size | toUnit}}</span>
         </div>
-        <div class="list-item" style="width: 150px">
+        <div class="list-item" style="width: 125px">
             <span>{{date | toDatetime}}</span>
         </div>
     </div>

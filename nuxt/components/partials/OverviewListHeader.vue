@@ -3,7 +3,7 @@
         <div style="width: 100px">
             <input type="checkbox" class="checkbox">
         </div>
-        <div style="width: calc(100% - 535px)">
+        <div style="width: calc(100% - 510px)">
             <span>Name</span>
         </div>
         <div style="width: 85px">
@@ -15,7 +15,7 @@
         <div style="width: 100px">
             <span>Größe</span>
         </div>
-        <div style="width: 150px">
+        <div style="width: 125px">
             <span>Datum</span>
         </div>
     </div>
