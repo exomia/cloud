@@ -4,7 +4,7 @@
             <i class="icon-home"/>
         </nuxt-link>
 
-        <template v-for="entry in dirPath">
+        <template v-for="entry in directories">
             <i class="icon-arrow" :key="entry.uuid + '-icon'"/>
             <nuxt-link :to="entry.uuid" tag="span" class="path-name" :key="entry.uuid + '-span'">
                 {{entry.name}}
@@ -39,7 +39,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['dirPath'])
+        ...mapGetters(['directories'])
     }
 }
 </script>

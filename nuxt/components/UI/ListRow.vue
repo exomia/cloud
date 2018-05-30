@@ -6,8 +6,8 @@
             <i v-if="type === 'File'" class="file-icon"/>
         </div>
         <div class="list-item" style="width: calc(100% - 510px)">
-            <span v-if="!renameActive" class="row-name">{{name}}</span>
-            <input v-else class="text-input rename-input" type="text" v-model="name">
+            <span v-if="!renameActive" class="row-name">{{newName}}</span>
+            <input v-else class="text-input rename-input" type="text" v-model="newName" ref="rename" @keydown.enter="rename()">
         </div>
         <div class="list-item" style="position: relative; width: 85px">
             <a class="list-button em-button" @click="listOptionsActive = !listOptionsActive">
@@ -45,7 +45,7 @@
             <span>{{size | toUnit}}</span>
         </div>
         <div class="list-item" style="width: 125px">
-            <span>{{date | toDatetime}}</span>
+            <span>{{timestamp | toDatetime}}</span>
         </div>
     </div>
 </template>
@@ -54,6 +54,7 @@
 export default {
     data() {
         return {
+            newName: '',
             renameActive: false,
             listOptionsActive: false
         }
@@ -74,9 +75,28 @@ export default {
         size: {
             type: Number
         },
-        date: {
-            type: Number,
+        timestamp: {
             required: true
+        }
+    },
+    mounted() {
+        this.newName = this.name
+    },
+    methods: {
+        rename() {
+            this.$nextTick(() => {
+                this.renameActive = false
+            })
+        }
+    },
+    watch: {
+        renameActive() {
+            if (this.renameActive) {
+                this.$nextTick(() => {
+                    this.$refs.rename.focus()
+                    this.$refs.rename.setSelectionRange(0, this.name.length)
+                })
+            }
         }
     }
 }

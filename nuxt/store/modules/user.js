@@ -3,8 +3,8 @@ export const state = () => ({
         name: '',
         email: '',
         flags: 0,
-        volume: 0,
-        usedVolume: 0
+        volume: 123456,
+        usedVolume: 123456
     }
 })
 

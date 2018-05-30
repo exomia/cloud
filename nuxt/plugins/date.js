@@ -1,11 +1,13 @@
 import Vue from 'vue'
 
+const options = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+}
+
 Vue.filter('toDatetime', value => {
-    const d = new Date(value)
-    return `${pad(d.getDate(), 2)}.${pad(
-        d.getMonth() + 1,
-        2
-    )}.${d.getFullYear()}`
+    return new Date(value).toLocaleDateString('de-DE', options)
 })
 
 export function pad(num, size) {

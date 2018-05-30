@@ -2,7 +2,7 @@
       <div class="list-summary">
         <div style="width: 100px" class="list-item"></div>
         <div style="width: calc(100% - 510px)" class="list-item">
-            <span>{{followingDirectorys}} Ordner, {{followingFilesDisplay}}</span>
+            <span>{{followingDirectories}} Ordner, {{followingFilesDisplay}}</span>
         </div>
         <div style="width: 185px" class="list-item"></div>
         <div style="width: 100px" class="list-item">
@@ -18,7 +18,7 @@ export default {
         return {}
     },
     props: {
-        followingDirectorys: {
+        followingDirectories: {
             type: Number,
             required: true
         },

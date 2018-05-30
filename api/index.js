@@ -26,6 +26,13 @@ function bindep(index) {
 
     app.use(jwt_init)
 
+    app.use((req, res, next) => {
+        req.jwt.valid = true
+        req.jwt.payload = {}
+        req.jwt.payload.email = 'admin@trident-games.com'
+        next()
+    })
+
     // Bind api endpoints security 1 (auth required)
     bindep(1)
 

@@ -6,6 +6,7 @@ import {
     updateDirectory,
     deleteDirectory
 } from '../../../lib/pg/directory'
+import { listAllFiles } from '../../../lib/pg/file'
 import { EXIT_LOGIN_REQUIRED, JE500, JE1001 } from '../../../lib/error'
 import { xor_encode, xor_decode } from '../../../lib/util'
 

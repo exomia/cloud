@@ -1,4 +1,4 @@
-import { query, lb, lbjoin } from '../'
+import { query, lb, lbjoin, e } from '../'
 
 export async function addFile(usernameOrEmail, name, directory_uuid, local_name, size) {
     const result = await query`
