@@ -1,10 +1,10 @@
 <template>
-  <main>
-    <settings-sidebar></settings-sidebar>
-    <div class="overview">
-        
-    </div>
-  </main>
+    <main>
+        <settings-sidebar></settings-sidebar>
+        <div class="overview">
+
+        </div>
+    </main>
 </template>
 
 <script>

@@ -19,9 +19,11 @@ export const getters = {
 export const mutations = {
     init(state, { directory_id, directories, files }) {
         state.directories = directories
-        files.forEach(file => {
-            state.files.push({ ...file, size: parseInt(file.size) })
-        })
+        if (files) {
+            files.forEach(file => {
+                state.files.push({ ...file, size: parseInt(file.size) })
+            })
+        }
     },
     setAuthUser(state, { name, email, flags, volume, usedVolume }) {
         state.user.name = name || ''

@@ -1,15 +1,17 @@
 <template>
     <main>
         <overview-sidebar></overview-sidebar>
-        <div class="overview" dropzone="copy" @dragover.prevent @drop="onDrop">
+        <div class="overview"
+             dropzone="copy"
+             @dragover.prevent
+             @drop="onDrop">
             <overview-path></overview-path>
             <overview-list-header></overview-list-header>
             <overview-list></overview-list>
-            <overview-upload-status 
-                v-if="uploadActive"
-                :fileCount="fileCount"
-                :fileSize="fileSize"
-                :uploadSpeed="uploadSpeed">
+            <overview-upload-status v-if="uploadActive"
+                                    :fileCount="fileCount"
+                                    :fileSize="fileSize"
+                                    :uploadSpeed="uploadSpeed">
             </overview-upload-status>
         </div>
     </main>
