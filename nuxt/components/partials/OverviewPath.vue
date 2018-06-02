@@ -1,27 +1,41 @@
 <template>
     <div class="path-container">
-        <nuxt-link :to="{ name: 'overview' }" tag="a" class="home-button">
-            <i class="icon-home"/>
+        <nuxt-link :to="{ name: 'overview-dir' }"
+                   tag="a"
+                   class="home-button">
+            <i class="icon-home" />
         </nuxt-link>
 
-        <template v-for="entry in directories">
-            <i class="icon-arrow" :key="entry.uuid + '-icon'"/>
-            <nuxt-link :to="entry.uuid" tag="span" class="path-name" :key="entry.uuid + '-span'">
+        <template v-for="entry in path">
+            <i class="icon-arrow"
+               :key="entry.id + '-icon'" />
+            <nuxt-link :to="entry.id"
+                       tag="span"
+                       class="path-name"
+                       :key="entry.id + '-span'">
                 {{entry.name}}
             </nuxt-link>
         </template>
 
         <div class="options">
-            <a class="option-button" @click="optionsShown = !optionsShown">
-                <i class="option-button-icon"/>
+            <a class="option-button"
+               @click="optionsShown = !optionsShown">
+                <i class="option-button-icon" />
             </a>
-            <div v-show="optionsShown" class="option-display">
-                <a class="option-item" @click="optionsShown = false">
-                    <i class="upload"/>
+            <div v-show="optionsShown"
+                 class="option-display">
+                <input ref="fileInput"
+                       type="file"
+                       style="display: none"
+                       multiple>
+                <a class="option-item"
+                   @click="triggerFileInput();optionsShown = false">
+                    <i class="upload" />
                     <span>Datei Hochladen</span>
                 </a>
-                <a class="option-item" @click="optionsShown = false">
-                    <i class="directory"/>
+                <a class="option-item"
+                   @click="optionsShown = false">
+                    <i class="directory" />
                     <span>Neuer Ordner</span>
                 </a>
             </div>
@@ -39,7 +53,12 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['directories'])
+        ...mapGetters(['directories', 'path'])
+    },
+    methods: {
+        triggerFileInput() {
+            this.$refs.fileInput.click()
+        }
     }
 }
 </script>

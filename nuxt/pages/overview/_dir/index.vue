@@ -4,10 +4,15 @@
         <div class="overview"
              dropzone="copy"
              @dragover.prevent
-             @drop="onDrop">
+             @drop.prevent.stop="onDrop">
             <overview-path></overview-path>
-            <overview-list-header></overview-list-header>
-            <overview-list></overview-list>
+            <template v-if="!isDirectoryEmpty">
+                <overview-list-header></overview-list-header>
+                <overview-list></overview-list>
+            </template>
+            <template v-else>
+                <overview-list-empty></overview-list-empty>
+            </template>
             <overview-upload-status v-if="uploadActive"
                                     :fileCount="fileCount"
                                     :fileSize="fileSize"
@@ -23,6 +28,7 @@ import OverviewPath from '~/components/partials/OverviewPath'
 import OverviewListHeader from '~/components/partials/OverviewListHeader'
 import OverviewList from '~/components/partials/OverviewList'
 import OverviewUploadStatus from '~/components/partials/OverviewUploadStatus'
+import OverviewListEmpty from '~/components/partials/OverviewListEmpty'
 
 export default {
     data() {
@@ -38,12 +44,16 @@ export default {
         OverviewPath,
         OverviewListHeader,
         OverviewList,
-        OverviewUploadStatus
+        OverviewUploadStatus,
+        OverviewListEmpty
+    },
+    computed: {
+        isDirectoryEmpty() {
+            return this.$store.getters.isDirectoryEmpty
+        }
     },
     methods: {
         onDrop(e) {
-            e.stopPropagation()
-            e.preventDefault()
             console.log(e)
         }
     }

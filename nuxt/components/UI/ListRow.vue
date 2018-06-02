@@ -1,50 +1,74 @@
 <template>
-    <div class="list-row list-row-hover">
-        <div class="list-item" style="width: 100px">
-            <input type="checkbox" class="checkbox" style="opacity: 0">
-            <i v-if="type === 'Folder'" class="folder-icon"/>
-            <i v-if="type === 'File'" class="file-icon"/>
+    <div class="list-row list-row-hover"
+         @click.prevent.stop="click">
+        <div class="list-item"
+             style="width: 100px">
+            <input type="checkbox"
+                   class="checkbox"
+                   style="opacity: 0">
+            <i v-if="type === 'Directory'"
+               class="directory-icon" />
+            <i v-if="type === 'File'"
+               class="file-icon" />
         </div>
-        <div class="list-item" style="width: calc(100% - 510px)">
-            <span v-if="!renameActive" class="row-name">{{newName}}</span>
-            <input v-else class="text-input rename-input" type="text" v-model="newName" ref="rename" @keydown.enter="rename()">
+        <div class="list-item"
+             style="width: calc(100% - 510px)">
+            <span v-if="!renameActive"
+                  class="row-name">{{newName}}</span>
+            <input v-else
+                   class="text-input rename-input"
+                   type="text"
+                   v-model="newName"
+                   ref="rename"
+                   @keydown.enter="rename()">
         </div>
-        <div class="list-item" style="position: relative; width: 85px">
-            <a class="list-button em-button" @click="listOptionsActive = !listOptionsActive">
-                <i class="extended-menu-icon"/>
+        <div class="list-item"
+             style="position: relative; width: 85px">
+            <a class="list-button em-button"
+               @click="listOptionsActive = !listOptionsActive">
+                <i class="extended-menu-icon" />
             </a>
-            <div v-show="listOptionsActive" class="option-list-display list-options">
+            <div v-show="listOptionsActive"
+                 class="option-list-display list-options">
                 <a class="option-item">
-                    <i class="info"/>
+                    <i class="info" />
                     <span>Info</span>
                 </a>
                 <a class="option-item">
-                    <i class="share"/>
+                    <i class="share" />
                     <span>Teilen</span>
                 </a>
-                <a class="option-item" @click="renameActive = !renameActive; listOptionsActive = false">
-                    <i class="edit"/>
+                <a class="option-item"
+                   @click="renameActive = !renameActive; listOptionsActive = false">
+                    <i class="edit" />
                     <span>Umbenennen</span>
                 </a>
-                <a class="option-item" onclick="//rar download ?">
-                    <i class="download"/>
+                <a class="option-item"
+                   onclick="//rar download ?">
+                    <i class="download" />
                     <span>Herunterladen</span>
                 </a>
                 <a class="option-item">
-                    <i class="remove"/>
+                    <i class="remove" />
                     <span>Löschen</span>
                 </a>
             </div>
         </div>
-        <div class="list-item" style="width: 100px">
-            <i v-if="scanStatus == 0" class="status-icon-accepted"/>
-            <i v-if="scanStatus == 1" class="status-icon-progress"/>
-            <i v-if="scanStatus == 2" class="status-icon-attention"/>
+        <div class="list-item"
+             style="width: 100px">
+            <i v-if="scanStatus == 0"
+               class="status-icon-accepted" />
+            <i v-if="scanStatus == 1"
+               class="status-icon-progress" />
+            <i v-if="scanStatus == 2"
+               class="status-icon-attention" />
         </div>
-        <div class="list-item" style="width: 100px">
+        <div class="list-item"
+             style="width: 100px">
             <span>{{size | toUnit}}</span>
         </div>
-        <div class="list-item" style="width: 125px">
+        <div class="list-item"
+             style="width: 125px">
             <span>{{timestamp | toDatetime}}</span>
         </div>
     </div>
@@ -77,6 +101,9 @@ export default {
         },
         timestamp: {
             required: true
+        },
+        path: {
+            type: String
         }
     },
     mounted() {
@@ -87,6 +114,11 @@ export default {
             this.$nextTick(() => {
                 this.renameActive = false
             })
+        },
+        click() {
+            if (this.type === 'Directory') {
+                this.$router.push({ name: 'overview-dir', params: { dir: this.path } })
+            }
         }
     },
     watch: {

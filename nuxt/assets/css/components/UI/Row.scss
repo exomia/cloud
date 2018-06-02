@@ -34,7 +34,7 @@ div.list-summary {
         padding: 0 0.5rem;
         white-space: nowrap;
         i.file-icon,
-        i.folder-icon {
+        i.directory-icon {
             margin: 0 auto;
             display: inline-block;
             width: 2.25rem;
@@ -44,7 +44,7 @@ div.list-summary {
         i.file-icon {
             background: url('~/assets/img/icon/list/file.svg') no-repeat right;
         }
-        i.folder-icon {
+        i.directory-icon {
             background: url('~/assets/img/icon/list/directory.svg') no-repeat right;
         }
         i.status-icon-accepted,

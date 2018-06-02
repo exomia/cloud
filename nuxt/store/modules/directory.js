@@ -1,6 +1,7 @@
 export const state = () => ({
     directories: [],
     files: [],
+    path: [],
     subDirectoryCount: 20,
     subFileCount: 500,
     followingDirectories: 20,
@@ -9,21 +10,20 @@ export const state = () => ({
 })
 
 export const getters = {
+    isDirectoryEmpty: state => !state.directories.length && !state.files.length,
     directories: state => state.directories,
     files: state => state.files,
     followingDirectories: state => state.followingDirectories,
     followingFiles: state => state.followingFiles,
-    sizeSum: state => state.sizeSum
+    sizeSum: state => state.sizeSum,
+    path: state => state.path
 }
 
 export const mutations = {
-    init(state, { directory_id, directories, files }) {
+    setDirectories(state, { directories, files, path_info }) {
         state.directories = directories
-        if (files) {
-            files.forEach(file => {
-                state.files.push({ ...file, size: parseInt(file.size) })
-            })
-        }
+        state.files = files
+        state.path = path_info
     },
     setAuthUser(state, { name, email, flags, volume, usedVolume }) {
         state.user.name = name || ''
@@ -35,10 +35,15 @@ export const mutations = {
 }
 
 export const actions = {
-    async nuxtServerInit({ commit }) {
-        const res = await this.$axios.$get('/v1/directory/')
+    // async nuxtServerInit({ commit, dispatch }, { route }) {
+    //     const dir = route.params.dir || null
+    //     await dispatch('setDirectories', dir)
+    //     //store.dispatch('setDirectories', route.params.dir || '')
+    // },
+    async setDirectories({ commit }, directory_id) {
+        const res = await this.$axios.$get(`/v1/directory/${directory_id || ''}`)
         if (res) {
-            commit('init', res)
+            await commit('setDirectories', res)
         }
     }
 }

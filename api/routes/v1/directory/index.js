@@ -18,6 +18,7 @@ router.get('/:directory_id?', async ({ jwt: { valid, payload: { email } }, param
     }
     const directory_uuid = xor_decode(directory_id)
     const directories = await listAllDirectories(email, directory_uuid)
+
     if (!directories) {
         return res.json(JE500)
     }
@@ -30,10 +31,20 @@ router.get('/:directory_id?', async ({ jwt: { valid, payload: { email } }, param
     const dires = await getDirectoryInfo(email, directory_uuid)
     let path_info = []
     if (dires) {
-        for (let path in dires.path_info_json) {
+        for (let path of dires.path_info_json) {
             path_info.push({ name: path.name, id: xor_encode(path.uuid) })
         }
         path_info.push({ name: dires.name, id: xor_encode(dires.uuid) })
+    }
+
+    for (let i = 0; i < directories.length; i++) {
+        directories[i].id = xor_encode(directories[i].uuid)
+        delete directories[i].uuid
+    }
+
+    for (let i = 0; i < files.length; i++) {
+        files[i].id = xor_encode(files[i].uuid)
+        delete files[i].uuid
     }
 
     return res.json({

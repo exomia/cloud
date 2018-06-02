@@ -45,13 +45,13 @@ export default {
     methods: {
         async tryLogin() {
             this.$v.$touch()
-            if (!this.$v.$invalid) {
-                this.$store.dispatch('loginUser', {
-                    username: this.name,
-                    password: this.password,
-                    stayLoggedIn: this.checked
-                })
-            }
+            // if (!this.$v.$invalid) {
+            this.$store.dispatch('loginUser', {
+                username: this.name,
+                password: this.password,
+                stayLoggedIn: this.checked
+            })
+            // }
         }
     },
     validations: {

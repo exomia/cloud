@@ -50,7 +50,7 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
         AND f."delete_timestamp" IS NULL;`
-    if (result && result.rowCount > 0) {
+    if (result) {
         return result.rows
     }
     return false

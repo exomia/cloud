@@ -1,16 +1,22 @@
 <template>
-    <div class="list-container" style="height: calc(100vh - 169px)">
-        <list-row 
-            v-for="(entry, idx) in files" 
-            :key="idx"
-            :name="entry.name"
-            :type="entry.type"
-            :size="entry.size"
-            :timestamp="entry.timestamp"/>
-        <list-summary
-            :followingDirectories="followingDirectories"
-            :followingFiles="followingFiles"
-            :sizeSum="sizeSum"/>
+    <div class="list-container"
+         style="height: calc(100vh - 169px)">
+        <list-row v-for="entry in directories"
+                  :key="entry.id"
+                  :name="entry.name"
+                  type="Directory"
+                  :size="entry.size"
+                  :timestamp="entry.timestamp"
+                  :path="entry.id" />
+        <list-row v-for="entry in files"
+                  :key="entry.id"
+                  :name="entry.name"
+                  type="File"
+                  :size="entry.size"
+                  :timestamp="entry.timestamp" />
+        <list-summary :followingDirectories="followingDirectories"
+                      :followingFiles="followingFiles"
+                      :sizeSum="sizeSum" />
     </div>
 </template>
 
@@ -28,7 +34,7 @@ export default {
         ListSummary
     },
     computed: {
-        ...mapGetters(['files', 'followingDirectories', 'followingFiles', 'sizeSum'])
+        ...mapGetters(['directories', 'files', 'followingDirectories', 'followingFiles', 'sizeSum'])
     }
 }
 </script>

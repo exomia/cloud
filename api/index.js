@@ -29,7 +29,7 @@ function bindep(index) {
     app.use((req, res, next) => {
         req.jwt.valid = true
         req.jwt.payload = {}
-        req.jwt.payload.email = 'admin@trident-games.com'
+        req.jwt.payload.email = 'admin@exomia.com'
         next()
     })
 

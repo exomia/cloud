@@ -17,7 +17,7 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
             INSERT INTO private."directory" ("user_uuid", "name", "parent_directory_uuid", "path_info_json")
             VALUES ((SELECT "uuid"
                      FROM private."user"
-                     WHERE ("name" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
+                     WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
                     ${name},
                     ${parent_directory_uuid},
                     ${JSON.stringify(dires.path_info_json)})
@@ -27,7 +27,7 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
             INSERT INTO private."directory" ("user_uuid", "name")
             VALUES ((SELECT "uuid"
                      FROM private."user"
-                     WHERE ("name" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
+                     WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
                     ${name})
             RETURNING "uuid", "name", "timestamp";`
     }
@@ -43,14 +43,14 @@ export async function deleteDirectory(usernameOrEmail, directory_uuid, force_del
             DELETE FROM private."directory" d
             USING private."user" u
             WHERE u."uuid" = d."user_uuid"
-                  AND (u."name" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+                  AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
                   AND d."uuid" = ${directory_uuid};`
         : await query`
             UPDATE private."directory" d
             SET d."delete_timestamp" = now()
             FROM private."user" u
             WHERE u."uuid" = d."user_uuid"
-                  AND (u."name" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+                  AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
                   AND d."uuid" = ${directory_uuid};`
     return result && result.rowCount > 0
 }
@@ -62,7 +62,7 @@ export async function listAllDirectories(usernameOrEmail, parent_directory_uuid)
           d."name",
           d."timestamp",
           d."download_count",
-          SUM(f."size")          AS "size",
+          SUM(f."size")::integer AS "size",
           max(f."clamav_status") AS "clamav_status"
         FROM private."directory" d
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")
@@ -71,7 +71,7 @@ export async function listAllDirectories(usernameOrEmail, parent_directory_uuid)
               AND d."parent_directory_uuid" ${parent_directory_uuid ? lb`= ${parent_directory_uuid}` : e`IS NULL`}
         AND d."delete_timestamp" IS NULL
         GROUP BY d."uuid";`
-    if (result && result.rowCount > 0) {
+    if (result) {
         return result.rows
     }
     return false
@@ -94,7 +94,7 @@ export async function getDirectoryInfo(usernameOrEmail, directory_uuid) {
         FROM private."directory" d
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")
           LEFT JOIN private."file" f ON (d."uuid" = f."directory_uuid")
-        WHERE (u."name" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND d."uuid" = ${directory_uuid}
               AND d."delete_timestamp" IS NULL
         GROUP BY d."uuid";`
@@ -136,7 +136,7 @@ export async function updateDirectory(usernameOrEmail, directory_uuid, { new_nam
         SET ${lbjoin(...updates)}
         FROM private."user" u
         WHERE u."uuid" = d."user_uuid"
-              AND (u."name" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+              AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND d."uuid" = ${directory_uuid};`
     return result && result.rowCount > 0
 }

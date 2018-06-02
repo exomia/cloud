@@ -95,11 +95,11 @@ module.exports = {
     ** Router config
     */
     router: {
-        middleware: ['auth']
-    },
-
-    transition: {
-        name: 'fade',
-        mode: 'out-in'
+        middleware: ['auth', 'directory']
     }
+
+    // transition: {
+    //     name: 'fade',
+    //     mode: 'out-in'
+    // }
 }
