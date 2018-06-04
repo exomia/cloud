@@ -36,7 +36,7 @@ export const mutations = {
 
 export const actions = {
     async setDirectories({ commit }, directory_id) {
-        const res = await this.$axios.$get(`/v1/directory/${directory_id || ''}`)
+        const res = await this.$axios.$post(`/v1/directory`, { directory_id })
         if (res) {
             await commit('setDirectories', res)
         }
