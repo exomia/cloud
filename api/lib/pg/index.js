@@ -12,15 +12,15 @@ export async function shutdown() {
 }
 
 class _LB {
-    constructor(qp, ...values) {
-        this.qp = qp
-        this.values = values
+    constructor(qp, values) {
+        this._qp = qp
+        this._values = values
     }
 }
 
 class _E {
     constructor(qp) {
-        this.qp = qp
+        this._qp = qp
     }
 }
 
@@ -31,7 +31,7 @@ class _E {
  * @returns {_LB} new _LB
  */
 export function lb(qp, ...values) {
-    return new _LB(qp, ...values)
+    return new _LB(qp, values)
 }
 
 /**
@@ -55,25 +55,24 @@ export async function query(qp, ...values) {
     for (let i = 0; i < qp.length - 1; ++i) {
         if (values[i] && values[i] instanceof _LB) {
             query += qp[i]
-            for (let k = 0; k < values[i].qp.length - 1; ++k) {
-                query += `${values[i].qp[k]}$${index++}`
+            for (let k = 0; k < values[i]._qp.length - 1; ++k) {
+                query += `${values[i]._qp[k]}$${index++}`
             }
-            query += values[i].qp[values[i].qp.length - 1]
-            values.splice(i, 1, ...values[i].values)
+            query += values[i]._qp[values[i]._qp.length - 1]
+            values.splice(i, 1, ...values[i]._values)
         } else if (values[i] && values[i] instanceof _E) {
-            query += qp[i] + values[i].qp
+            query += qp[i] + values[i]._qp
             values.splice(i, 1)
         } else {
             query += `${qp[i]}$${index++}`
         }
     }
     query += qp[qp.length - 1]
-
     const client = await pool.connect()
     try {
         return await client.query(query, values)
     } catch (err) {
-        console.error(query, values, err)
+        console.error(err, query, values)
         return false
     } finally {
         client.release()
@@ -92,19 +91,19 @@ export function lbjoin(...args) {
     for (let i = 0; i < args.length - 1; ++i) {
         if (args[i] && args[i] instanceof _LB) {
             qp[qp.length - 1] += args[i].qp[0]
-            for (let k = 1; k < args[i].qp.length - 1; ++k) {
-                qp.push(args[i].qp[k])
+            for (let k = 1; k < args[i]._qp.length - 1; ++k) {
+                qp.push(args[i]._qp[k])
             }
-            qp.push(args[i].qp[args[i].qp.length - 1] + ', ')
-            values.push(...args[i].values)
+            qp.push(args[i]._qp[args[i]._qp.length - 1] + ', ')
+            values.push(...args[i]._values)
         }
     }
     if (args.length > 0 && args[args.length - 1] && args[args.length - 1] instanceof _LB) {
-        qp[qp.length - 1] += args[args.length - 1].qp[0]
-        for (let k = 1; k < args[args.length - 1].qp.length; ++k) {
-            qp.push(args[args.length - 1].qp[k])
+        qp[qp.length - 1] += args[args.length - 1]._qp[0]
+        for (let k = 1; k < args[args.length - 1]._qp.length; ++k) {
+            qp.push(args[args.length - 1]._qp[k])
         }
-        values.push(...args[args.length - 1].values)
+        values.push(...args[args.length - 1]._values)
     }
     return new _LB(qp, values)
 }
