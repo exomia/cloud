@@ -116,7 +116,7 @@ export default {
             this.$nextTick(() => {
                 this.renameActive = false
                 /* Early return when name is invalid */
-                if (!this.newName) {
+                if (!this.newName || this.newName === this.name) {
                     this.newName = this.name
                     return
                 }
