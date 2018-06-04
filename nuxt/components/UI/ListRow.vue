@@ -20,6 +20,7 @@
                    type="text"
                    v-model="newName"
                    ref="rename"
+                   @blur="rename()"
                    @keydown.enter="rename()">
         </div>
         <div class="list-item"
@@ -114,12 +115,22 @@ export default {
         rename() {
             this.$nextTick(() => {
                 this.renameActive = false
+                /* Early return when name is invalid */
+                if (!this.newName) {
+                    this.newName = this.name
+                    return
+                }
+
                 if (this.type === 'Directory') {
                     this.$axios.$post('/v1/directory/rename', {
                         directory_id: this.id,
                         new_name: this.newName
                     })
                 } else if (this.type === 'File') {
+                    this.$axios.$post('/v1/file/rename', {
+                        file_id: this.id,
+                        new_name: this.newName
+                    })
                 }
             })
         },
