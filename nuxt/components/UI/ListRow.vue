@@ -137,6 +137,10 @@ export default {
         click() {
             if (this.type === 'Directory') {
                 this.$router.push({ name: 'overview-dir', params: { dir: this.id } })
+            } else if (this.type === 'File') {
+                this.$axios.$post('/v1/file/download', {
+                    file_id: this.id
+                })
             }
         }
     },

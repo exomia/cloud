@@ -16,7 +16,13 @@ export const getters = {
     followingDirectories: state => state.followingDirectories,
     followingFiles: state => state.followingFiles,
     sizeSum: state => state.sizeSum,
-    path: state => state.path
+    path: state => state.path,
+    currentDirectoryId: state => {
+        if (state.path.length < 1) {
+            return null
+        }
+        return state.path[state.path.length - 1].id || null
+    }
 }
 
 export const mutations = {

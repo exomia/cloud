@@ -50,11 +50,22 @@ export default {
     computed: {
         isDirectoryEmpty() {
             return this.$store.getters.isDirectoryEmpty
+        },
+        currentDirectoryId() {
+            return this.$store.getters.currentDirectoryId
         }
     },
     methods: {
         onDrop(e) {
-            console.log(e)
+            // Check if user has enough upload size left?
+            const transfer = e.dataTransfer
+            for (let i = 0; i < transfer.files.length; i++) {
+                this.$axios.$post('/v1/file/upload', {
+                    directory_id: this.currentDirectoryId,
+                    file: transfer.files[i]
+                })
+            }
+            //console.log(e)
         }
     }
 }
