@@ -7,12 +7,12 @@ import {
     deleteDirectory
 } from '../../../lib/pg/directory'
 import { listAllFiles } from '../../../lib/pg/file'
-import { EXIT_LOGIN_REQUIRED, JE500, JE1001 } from '../../../lib/error'
+import { EXIT_LOGIN_REQUIRED, JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR } from '../../../lib/error'
 import { xor_encode, xor_decode } from '../../../lib/util'
 
 const router = express.Router()
 
-router.get('/:directory_id?', async ({ jwt: { valid, payload: { email } }, params: { directory_id } }, res, next) => {
+router.post('/', async ({ jwt: { valid, payload: { email } }, body: { directory_id } }, res, next) => {
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
@@ -20,12 +20,12 @@ router.get('/:directory_id?', async ({ jwt: { valid, payload: { email } }, param
     const directories = await listAllDirectories(email, directory_uuid)
 
     if (!directories) {
-        return res.json(JE500)
+        return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
 
     const files = await listAllFiles(email, directory_uuid)
     if (!files) {
-        return res.json(JE500)
+        return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
 
     const dires = await getDirectoryInfo(email, directory_uuid)
@@ -63,7 +63,7 @@ router.post('/add', async ({ jwt: { valid, payload: { email } }, body: { name, p
 
     let result = await addDirectory(email, name, parent_directory_uuid)
     if (!result) {
-        return res.json(JE500)
+        return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
     return res.json({
         directory: {
@@ -81,12 +81,12 @@ router.post('/rename', async ({ jwt: { valid, payload: { email } }, body: { dire
     }
     const directory_uuid = xor_decode(directory_id)
     if (!directory_uuid || !new_name || new_name.length <= 0) {
-        return res.json(JE1001)
+        return res.json(JERROR_API_USAGE_ERROR)
     }
 
     let result = await updateDirectory(email, directory_uuid, { new_name })
     if (!result) {
-        return res.json(JE500)
+        return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
     return res.json({
         directory: {
@@ -116,12 +116,12 @@ router.post(
         const directory_uuid = xor_decode(directory_id)
         const new_parent_directory_uuid = xor_decode(new_parent_directory_id)
         if (!directory_uuid || !new_parent_directory_uuid) {
-            return res.json(JE1001)
+            return res.json(JERROR_API_USAGE_ERROR)
         }
 
         let result = await updateDirectory(email, directory_uuid, { new_parent_directory_uuid })
         if (!result) {
-            return res.json(JE500)
+            return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
         return res.json({
             directory: {
@@ -132,25 +132,38 @@ router.post(
     }
 )
 
-router.post('/remove', async ({ jwt: { valid, payload: { email } }, body: { directory_id } }, res, next) => {
-    if (!valid) {
-        return EXIT_LOGIN_REQUIRED()
-    }
-    const directory_uuid = xor_decode(directory_id)
-    if (!directory_id) {
-        return res.json(JE1001)
-    }
-
-    let result = await deleteDirectory(email, directory_id)
-    if (!result) {
-        return res.json(JE500)
-    }
-    return res.json({
-        directory: {
-            id: directory_id
+router.post(
+    '/delete',
+    async (
+        {
+            jwt: {
+                valid,
+                payload: { email }
+            },
+            body: { directory_id, force_delete }
         },
-        error: false
-    })
-})
+        res,
+        next
+    ) => {
+        if (!valid) {
+            return EXIT_LOGIN_REQUIRED()
+        }
+        const directory_uuid = xor_decode(directory_id)
+        if (!directory_id) {
+            return res.json(JERROR_API_USAGE_ERROR)
+        }
+
+        let result = await deleteDirectory(email, directory_id, force_delete)
+        if (!result) {
+            return res.json(JERROR_INTERNAL_SERVER_ERROR)
+        }
+        return res.json({
+            directory: {
+                id: directory_id
+            },
+            error: false
+        })
+    }
+)
 
 export default { router, security: 1 }
