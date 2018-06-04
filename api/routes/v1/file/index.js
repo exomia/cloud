@@ -12,7 +12,7 @@ const upload = multer({ dest: 'private/uploads/' })
 const router = express.Router()
 
 router.post(
-    '/upload',
+    '/upload/:directory_id?',
     upload.single('upload-file'),
     async (
         {
@@ -20,7 +20,7 @@ router.post(
                 valid,
                 payload: { email }
             },
-            body: { directory_id },
+            params: { directory_id },
             file
         },
         res,
