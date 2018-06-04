@@ -35,11 +35,6 @@ export const mutations = {
 }
 
 export const actions = {
-    // async nuxtServerInit({ commit, dispatch }, { route }) {
-    //     const dir = route.params.dir || null
-    //     await dispatch('setDirectories', dir)
-    //     //store.dispatch('setDirectories', route.params.dir || '')
-    // },
     async setDirectories({ commit }, directory_id) {
         const res = await this.$axios.$get(`/v1/directory/${directory_id || ''}`)
         if (res) {

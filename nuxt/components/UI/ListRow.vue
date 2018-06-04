@@ -25,7 +25,7 @@
         <div class="list-item"
              style="position: relative; width: 85px">
             <a class="list-button em-button"
-               @click="listOptionsActive = !listOptionsActive">
+               @click.stop="listOptionsActive = !listOptionsActive">
                 <i class="extended-menu-icon" />
             </a>
             <div v-show="listOptionsActive"
@@ -39,7 +39,7 @@
                     <span>Teilen</span>
                 </a>
                 <a class="option-item"
-                   @click="renameActive = !renameActive; listOptionsActive = false">
+                   @click.stop="renameActive = !renameActive; listOptionsActive = false">
                     <i class="edit" />
                     <span>Umbenennen</span>
                 </a>
@@ -84,6 +84,10 @@ export default {
         }
     },
     props: {
+        id: {
+            type: String,
+            required: true
+        },
         name: {
             type: String,
             required: true
@@ -101,9 +105,6 @@ export default {
         },
         timestamp: {
             required: true
-        },
-        path: {
-            type: String
         }
     },
     mounted() {
@@ -113,11 +114,18 @@ export default {
         rename() {
             this.$nextTick(() => {
                 this.renameActive = false
+                if (this.type === 'Directory') {
+                    this.$axios.$post('/v1/directory/rename', {
+                        directory_id: this.id,
+                        new_name: this.newName
+                    })
+                } else if (this.type === 'File') {
+                }
             })
         },
         click() {
             if (this.type === 'Directory') {
-                this.$router.push({ name: 'overview-dir', params: { dir: this.path } })
+                this.$router.push({ name: 'overview-dir', params: { dir: this.id } })
             }
         }
     },

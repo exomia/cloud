@@ -1,7 +1,7 @@
 <template>
     <aside>
         <div>
-            <sidebar-item iconClass="directory" routeName="overview" text="Alle Dateien"/>
+            <sidebar-item iconClass="directory" routeName="overview-dir" text="Alle Dateien"/>
         </div>
         <div>
             <a class="sidebar-item no-hover">
