@@ -1,16 +1,17 @@
 import { query, lb, lbjoin, e } from '../'
 
-export async function addFile(usernameOrEmail, name, directory_uuid, local_name, size) {
+export async function addFile(usernameOrEmail, name, mimetype, directory_uuid, local_name, size) {
     const result = await query`
-        INSERT INTO private."file" ("user_uuid", "username", "directory_uuid", "local_name", "size")
+        INSERT INTO private."file" ("user_uuid", "name", "mimetype", "directory_uuid", "local_name", "size")
         VALUES ((SELECT "uuid"
                  FROM private."user"
                  WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
-                ${username},
-                ${directory_uuid ? directory_uuid : null},
+                ${name},
+                ${mimetype},
+                ${directory_uuid || null},
                 ${local_name},
                 ${size})
-        RETURNING "uuid", "username", "size", "timestamp";`
+        RETURNING "uuid", "name", "mimetype", "size", "timestamp";`
     if (result && result.rowCount > 0) {
         return result.rows[0]
     }
@@ -40,6 +41,7 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
         SELECT
           f."uuid",
           f."name",
+          f."mimetype",
           f."local_name",
           f."size",
           f."timestamp",
@@ -61,6 +63,7 @@ export async function getFileInfo(usernameOrEmail, file_uuid) {
         SELECT
           f."uuid",
           f."name",
+          f."mimetype",
           f."local_name",
           f."size",
           f."timestamp",

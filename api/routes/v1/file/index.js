@@ -4,9 +4,11 @@ import { EXIT_LOGIN_REQUIRED, JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERR
 import { xor_encode, xor_decode } from '../../../lib/util'
 import { STATUS_QUEUED } from '../../../lib/clamav'
 
-import { join } from 'path'
+import fs from 'fs'
+import path from 'path'
 
 import multer from 'multer'
+import { createWriteStream } from 'fs'
 const upload = multer({ dest: 'private/uploads/' })
 
 const router = express.Router()
@@ -30,8 +32,7 @@ router.post(
             return EXIT_LOGIN_REQUIRED()
         }
         const directory_uuid = xor_decode(directory_id)
-
-        const result = await addFile(email, file.originalname, directory_uuid, file.filename, file.size)
+        const result = await addFile(email, file.originalname, file.mimetype, directory_uuid, file.filename, file.size)
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
@@ -41,6 +42,7 @@ router.post(
                 name: result.name,
                 status: STATUS_QUEUED,
                 size: result.size,
+                mimetype: result.mimetype,
                 timestamp: result.timestamp
             },
             error: false
@@ -52,16 +54,41 @@ router.post('/download', async ({ jwt: { valid, payload: { email } }, body: { fi
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
+
     const file_uuid = xor_decode(file_id)
+    if (!file_id) {
+        return res.json(JERROR_INTERNAL_SERVER_ERROR)
+    }
+
     const result = await getFileInfo(email, file_uuid)
     if (!result) {
         return next(E400)
     }
-    res.download(join(__dirname, '..', 'private', 'uploads', result.local_name), result.name, async err => {
+
+    /*res.download(path.join(process.cwd(), 'private', 'uploads', result.local_name), result.name, async err => {
         if (err) {
             return res.status(204).end()
         }
         await increaseDownloadFileCount(file_uuid)
+    })*/
+
+    fs.readFile(path.join(process.cwd(), 'private', 'uploads', result.local_name), async (err, buffer) => {
+        if (err) {
+            return res.json(JERROR_INTERNAL_SERVER_ERROR)
+        }
+        await increaseDownloadFileCount(file_uuid)
+        return res.json({
+            file: {
+                id: xor_encode(result.uuid),
+                name: result.name,
+                mimetype: result.mimetype,
+                clamav_status: result.clamav_status,
+                size: result.size,
+                timestamp: result.timestamp,
+                data: buffer.toString('base64')
+            },
+            error: false
+        })
     })
 })
 

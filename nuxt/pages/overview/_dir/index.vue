@@ -60,10 +60,17 @@ export default {
             // Check if user has enough upload size left?
             const transfer = e.dataTransfer
             for (let i = 0; i < transfer.files.length; i++) {
-                this.$axios.$post('/v1/file/upload', {
-                    directory_id: this.currentDirectoryId,
-                    file: transfer.files[i]
-                })
+                const fd = new FormData()
+                fd.append('upload-file', transfer.files[i])
+
+                const config = {
+                    onUploadProgress: function(event) {
+                        var percentCompleted = Math.round(event.loaded * 100 / event.total)
+                        console.log('upload', percentCompleted)
+                    }
+                }
+                this.$axios.$post(`/v1/file/upload/${this.currentDirectoryId || ''}`, fd, config)
+                console.log(`/v1/file/upload/${this.currentDirectoryId || ''}`)
             }
             //console.log(e)
         }
