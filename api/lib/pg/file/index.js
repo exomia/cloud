@@ -43,7 +43,7 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
           f."name",
           f."mimetype",
           f."local_name",
-          f."size"::integer,
+          f."size"::bigint,
           f."timestamp",
           f."clamav_status",
           f."download_count"
@@ -65,7 +65,7 @@ export async function getFileInfo(usernameOrEmail, file_uuid) {
           f."name",
           f."mimetype",
           f."local_name",
-          f."size"::integer,
+          f."size"::bigint,
           f."timestamp",
           f."clamav_status",
           f."download_count",
