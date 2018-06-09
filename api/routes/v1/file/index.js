@@ -8,7 +8,6 @@ import fs from 'fs'
 import path from 'path'
 
 import multer from 'multer'
-import { createWriteStream } from 'fs'
 const upload = multer({ dest: 'private/uploads/' })
 
 const router = express.Router()
@@ -34,6 +33,7 @@ router.post(
         const directory_uuid = xor_decode(directory_id)
         const result = await addFile(email, file.originalname, file.mimetype, directory_uuid, file.filename, file.size)
         if (!result) {
+            console.log(result)
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
         return res.json({

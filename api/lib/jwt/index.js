@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import config from '../../.config/.jwt.config.json'
 import { getUserPassword } from '../pg/user/auth'
-import { JE1002 } from '../error'
 
 export async function sign(res, { email, password, flags }, stayLoggedIn) {
     const token = jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t)

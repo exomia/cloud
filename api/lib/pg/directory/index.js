@@ -1,5 +1,4 @@
 import { query, lb, lbjoin, e } from '../'
-import { createWriteStream } from 'fs'
 
 export async function addDirectory(usernameOrEmail, name, parent_directory_uuid) {
     let result = false
