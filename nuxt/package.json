@@ -20,7 +20,7 @@
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-env": "^1.7.0",
         "cookieparser": "^0.1.0",
-        "nuxt": "^1.0.0",
+        "nuxt": "^1.4.1",
         "vuelidate": "^0.7.4"
     },
     "devDependencies": {
@@ -30,6 +30,6 @@
         "eslint-loader": "^2.0.0",
         "eslint-plugin-vue": "^4.5.0",
         "node-sass": "^4.9.0",
-        "sass-loader": "^7.0.1"
+        "sass-loader": "^7.0.3"
     }
 }
