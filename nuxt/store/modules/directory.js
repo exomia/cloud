@@ -10,7 +10,7 @@ export const state = () => ({
 })
 
 export const getters = {
-    isDirectoryEmpty: state => !state.directories.length && !state.files.length,
+    isDirectoryEmpty: state => !(state.directories || state.files),
     directories: state => state.directories,
     files: state => state.files,
     followingDirectories: state => state.followingDirectories,
@@ -18,7 +18,7 @@ export const getters = {
     sizeSum: state => state.sizeSum,
     path: state => state.path,
     currentDirectoryId: state => {
-        if (state.path.length < 1) {
+        if (!state.path) {
             return null
         }
         return state.path[state.path.length - 1].id || null
