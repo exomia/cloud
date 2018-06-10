@@ -17,13 +17,4 @@ const Store = () => {
     })
 }
 
-Store().watch(
-    function(state) {
-        return state
-    },
-    function(res) {
-        console.log(res)
-    }
-)
-
 export default Store
