@@ -18,7 +18,7 @@ export const getters = {
     sizeSum: state => state.sizeSum,
     path: state => state.path,
     currentDirectoryId: state => {
-        if (!state.path) {
+        if (!state.path || !state.path.length) {
             return null
         }
         return state.path[state.path.length - 1].id || null

@@ -1,19 +1,26 @@
 <template>
     <aside>
         <div>
-            <sidebar-item iconClass="directory" routeName="overview-dir" text="Alle Dateien"/>
+            <sidebar-item iconClass="directory"
+                          routeName="overview-dir"
+                          text="Alle Dateien" />
         </div>
         <div>
             <a class="sidebar-item no-hover">
                 <div class="volume-container">
                     <span class="volume-header">{{usedVolume | toUnit}}&nbsp;/&nbsp;{{volume | toUnit}}</span>
-                    <div class="volume-bg">
-                        <div class="volume" :style="{width: (100 / volume * usedVolume) + '%' }"/>
+                    <div class="volume">
+                        <div class="volume-progress"
+                             :style="{width: (100 / volume * usedVolume) + '%' }" />
                     </div>
                 </div>
             </a>
-            <sidebar-item iconClass="trash" routeName="trash" text="Papierkorb"/>
-            <sidebar-item iconClass="settings" routeName="settings-profile" text="Einstellungen"/>
+            <sidebar-item iconClass="trash"
+                          routeName="trash"
+                          text="Papierkorb" />
+            <sidebar-item iconClass="settings"
+                          routeName="settings-profile"
+                          text="Einstellungen" />
         </div>
     </aside>
 </template>

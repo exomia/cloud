@@ -21,7 +21,7 @@ router.post(
                 valid,
                 payload: { email }
             },
-            params: { directory_id },
+            params: { directory_id, replace },
             file
         },
         res,
@@ -31,22 +31,34 @@ router.post(
             return EXIT_LOGIN_REQUIRED()
         }
         const directory_uuid = xor_decode(directory_id)
-        const result = await addFile(email, file.originalname, file.mimetype, directory_uuid, file.filename, file.size)
-        if (!result) {
-            console.log(result)
-            return res.json(JERROR_INTERNAL_SERVER_ERROR)
+        if (!replace) {
+            const result = await addFile(
+                email,
+                file.originalname,
+                file.mimetype,
+                directory_uuid,
+                file.filename,
+                file.size
+            )
+
+            if (!result) {
+                //CLEAR/REMOVE LOCAL FILE
+                return res.json(JERROR_INTERNAL_SERVER_ERROR)
+            }
+            return res.json({
+                file: {
+                    id: xor_encode(result.uuid),
+                    name: result.name,
+                    status: STATUS_QUEUED,
+                    size: result.size,
+                    mimetype: result.mimetype,
+                    timestamp: result.timestamp
+                },
+                error: false
+            })
         }
-        return res.json({
-            file: {
-                id: xor_encode(result.uuid),
-                name: result.name,
-                status: STATUS_QUEUED,
-                size: result.size,
-                mimetype: result.mimetype,
-                timestamp: result.timestamp
-            },
-            error: false
-        })
+        //REPLACE FILE AND UPDATE
+        return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
 )
 

@@ -75,15 +75,19 @@ a.sidebar-item {
             width: 100%;
             font-size: 14px;
         }
-        div.volume-bg {
+        div.volume {
             width: 90%;
-            height: 0.4rem;
-            background-color: $contour-color;
+            height: 0.33rem;
+            background-color: $progress-background-color;
             margin: 0.5rem auto 0;
             overflow: hidden;
-            div.volume {
+            border-radius: 1rem;
+            div.volume-progress {
+                display: block;
                 height: 100%;
-                background-color: $primary-color;
+                background-color: $progress-color;
+                border-radius: 1rem;
+                transition: ease-in-out 0.25s;
             }
         }
     }
