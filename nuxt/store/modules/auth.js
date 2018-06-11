@@ -17,10 +17,10 @@ export const mutations = {
 export const actions = {
     nuxtServerInit({ commit }, { req }) {
         let token = null
-        if (req.headers.cookie) {
-            const parsed = cookieparser.parse(req.headers.cookie)
-            token = JSON.parse(parsed.auth)
-        }
+        // if (req.headers.cookie) {
+        //     const parsed = cookieparser.parse(req.headers.cookie)
+        //     token = JSON.parse(parsed.auth)
+        // }
         commit('authenticate', token)
     },
     async loginUser(vuexContext, { username, password, stayLoggedIn }) {
