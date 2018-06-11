@@ -6,6 +6,8 @@ const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
+import i18n from '../i18n'
+
 app.set('port', port)
 
 // Import and Set Nuxt.js options
@@ -13,7 +15,6 @@ import config from '../nuxt.config'
 config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {
-    console.log(config)
     // Init Nuxt.js
     const nuxt = new Nuxt(config)
 
