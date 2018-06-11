@@ -34,17 +34,5 @@
     "devDependencies": {
         "cross-env": "^5.1.6",
         "nodemon": "^1.17.5"
-    },
-    "babel": {
-        "presets": [
-            [
-                "env",
-                {
-                    "targets": {
-                        "node": "current"
-                    }
-                }
-            ]
-        ]
     }
 }
