@@ -26,6 +26,9 @@ export const getters = {
 }
 
 export const mutations = {
+    addFile(state, file) {
+        state.files.push(file)
+    },
     setDirectories(state, { directories, files, path_info }) {
         state.directories = directories
         state.files = files
