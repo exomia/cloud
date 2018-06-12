@@ -1,17 +1,26 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
+import path from 'path'
 
 const app = express()
 
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
-import i18n from '../i18n'
+import { I18N } from '../i18n'
 
 app.set('port', port)
 
 // Import and Set Nuxt.js options
 import config from '../nuxt.config'
+
+/*const defaultLocale = 'en_US'
+if (locales.indexOf(defaultLocale) === -1) {
+    throw 'Invalid translation directory (no en_US locale found)'
+}*/
+
+config.modules.push(['nuxt-i18n', I18N])
+
 config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {

@@ -33,11 +33,6 @@ import OverviewFileExchangeStatus from '~/components/partials/OverviewFileExchan
 import OverviewListEmpty from '~/components/partials/OverviewListEmpty'
 
 export default {
-    data() {
-        return {
-            uploadSpeed: 2
-        }
-    },
     components: {
         OverviewSidebar,
         OverviewPath,

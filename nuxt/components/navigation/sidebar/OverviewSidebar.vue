@@ -19,7 +19,7 @@
                           routeName="trash"
                           text="Papierkorb" />
             <sidebar-item iconClass="settings"
-                          routeName="settings-profile"
+                          routeName="settings"
                           text="Einstellungen" />
         </div>
     </aside>

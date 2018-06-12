@@ -1,18 +1,32 @@
 <template>
-    <header class="space-between" v-if="isAuthenticated">
-        <nuxt-link :to="{ name: 'index' }" tag="a" class="button">
-            <img class="logo" src="~/assets/img/cloud-logo.svg" alt="Trident Cloud">
+    <header class="space-between"
+            v-if="isAuthenticated">
+        <nuxt-link :to="localePath('overview-dir')"
+                   tag="a"
+                   class="button">
+            <img class="logo"
+                 src="~/assets/img/cloud-logo.svg"
+                 alt="Exomia Cloud">
         </nuxt-link>
-        <nuxt-link :to="{ name: 'index' }" tag="a" class="logout-button">
-            <i class="logout"/>
+        <nuxt-link :to="localePath('overview-dir')"
+                   tag="a"
+                   class="logout-button">
+            <i class="logout" />
             <span>Logout</span>
         </nuxt-link>
     </header>
-    <header class="justify-center" v-else>
-        <nuxt-link :to="{ name: 'index' }" tag="a">
+    <header class="justify-center"
+            v-else>
+        <nuxt-link :to="localePath('index')"
+                   tag="a">
             <h1 class="header-title">{{title}}</h1>
         </nuxt-link>
+        <nuxt-link v-for="locale in $i18n.locales"
+                   v-if="locale.code !== $i18n.locale"
+                   :key="locale.code"
+                   :to="switchLocalePath(locale.code)">{{ locale.name }}</nuxt-link>
     </header>
+
 </template>
 
 <script>

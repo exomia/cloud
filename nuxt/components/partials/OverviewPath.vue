@@ -1,6 +1,6 @@
 <template>
     <div class="path-container">
-        <nuxt-link :to="{ name: 'overview-dir' }"
+        <nuxt-link :to="localePath('overview-dir')"
                    tag="a"
                    class="home-button">
             <i class="icon-home" />

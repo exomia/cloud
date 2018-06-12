@@ -1,6 +1,9 @@
 <template>
-    <nuxt-link :to="{ name: routeName }" tag="a" class="sidebar-item">
-        <i v-if="iconClass" :class="[iconClass, hover ? 'no-hover' : '']"/>
+    <nuxt-link :to="localePath(routeName)"
+               tag="a"
+               class="sidebar-item">
+        <i v-if="iconClass"
+           :class="[iconClass, hover ? 'no-hover' : '']" />
         <span>{{text}}</span>
     </nuxt-link>
 </template>

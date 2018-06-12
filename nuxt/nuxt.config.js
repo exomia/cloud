@@ -68,7 +68,8 @@ module.exports = {
         retry: { retries: 3 },
         responseType: 'json',
         timeout: 1000 * 5, //5sec
-        debug: process.env.NODE_ENV != 'production'
+        //debug: process.env.NODE_ENV != 'production'
+        debug: false
     },
 
     /*
@@ -84,7 +85,7 @@ module.exports = {
     ** Router config
     */
     router: {
-        middleware: ['auth', 'directory']
+        middleware: ['directory']
     }
 
     // transition: {
