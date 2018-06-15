@@ -1,6 +1,5 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
-import path from 'path'
 
 const app = express()
 
@@ -13,11 +12,6 @@ app.set('port', port)
 
 // Import and Set Nuxt.js options
 import config from '../nuxt.config'
-
-/*const defaultLocale = 'en_US'
-if (locales.indexOf(defaultLocale) === -1) {
-    throw 'Invalid translation directory (no en_US locale found)'
-}*/
 
 config.modules.push(['nuxt-i18n', I18N])
 
@@ -38,6 +32,6 @@ async function start() {
 
     // Listen the server
     app.listen(port, host)
-    console.log('Server listening on http://' + host + ':' + port) // eslint-disable-line no-console
+    console.log('Server listening on http://' + host + ':' + port)
 }
 start()
