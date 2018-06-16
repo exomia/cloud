@@ -1,4 +1,4 @@
-const pkg = require('./package')
+import pkg from './package'
 
 module.exports = {
     mode: 'universal',

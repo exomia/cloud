@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const endpoints = [[], [], [], [], []]
-function ep(dir) {
+async function ep(dir) {
     const files = fs.readdirSync(path.join('routes', dir), 'utf8')
     for (let filename of files) {
         const matches = /^(index).js|(.+).js$/.exec(filename)
