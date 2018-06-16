@@ -13,7 +13,6 @@ header {
         text-decoration: none;
         h1.header-title {
             font-size: 22px;
-            padding: 0.8rem;
             color: white;
             cursor: pointer;
         }
@@ -52,5 +51,23 @@ header {
             background: url('~/assets/img/icon/logout.svg') no-repeat center;
             background-size: 1.35rem;
         }
+    }
+    .lang {
+        width: 3rem;
+        height: 3rem;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 75%;
+        opacity: 0.75;
+        transition: 0.25s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    .lang-de {
+        background-image: url('~/assets/img/icon/lang_de.svg');
+    }
+    .lang-en {
+        background-image: url('~/assets/img/icon/lang_en.svg');
     }
 }

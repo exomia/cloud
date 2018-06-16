@@ -15,7 +15,7 @@
             <span>Logout</span>
         </nuxt-link>
     </header>
-    <header class="justify-center"
+    <header class="space-between"
             v-else>
         <nuxt-link :to="localePath('index')"
                    tag="a">
@@ -24,7 +24,10 @@
         <nuxt-link v-for="locale in $i18n.locales"
                    v-if="locale.code !== $i18n.locale"
                    :key="locale.code"
-                   :to="switchLocalePath(locale.code)">{{ locale.name }}</nuxt-link>
+                   :to="switchLocalePath(locale.code)"
+                   class="lang"
+                   :class="'lang-' + locale.code"
+                   tag="a"></nuxt-link>
     </header>
 
 </template>
