@@ -9,7 +9,7 @@ export const I18N = {
         {
             code: 'de',
             iso: 'de-DE',
-            name: 'German',
+            name: 'Deutsch',
             file: 'de.js'
         }
     ],
@@ -17,7 +17,7 @@ export const I18N = {
         useCookie: false,
         cookieKey: 'i18n_redirected'
     },
-    defaultLocale: 'en',
+    defaultLocale: 'de',
     lazy: true,
     langDir: 'i18n/translations/',
     vueI18n: {

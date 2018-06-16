@@ -2,15 +2,15 @@
     <main>
         <form>
             <img src="~/assets/img/cloud-logo.svg"
-                 alt="Logo"
+                 alt="logo"
                  class="logo">
-            <input placeholder="Name/E-Mail"
+            <input :placeholder="$t('index.form.nameOrEmail')"
                    class="text-input"
                    :class="{ 'input-error': $v.name.$error }"
                    type="text"
                    v-model="name"
                    maxlength="64">
-            <input placeholder="Passwort"
+            <input :placeholder="$t('index.form.password')"
                    class="text-input"
                    :class="{ 'input-error': $v.password.$error }"
                    type="password"
@@ -19,13 +19,12 @@
             <div>
                 <input type="checkbox"
                        v-model="checked">
-                <span @click="checked = !checked">Angemeldet bleiben</span>
+                <span @click="checked = !checked">{{$t('index.form.stayLoggedIn')}}</span>
             </div>
             <input class="confirm-button"
                    :value="loginBtnValue"
                    type="button"
                    @click="tryLogin">
-            <span></span>
         </form>
     </main>
 </template>
@@ -39,7 +38,7 @@ export default {
             name: '',
             password: '',
             checked: false,
-            loginBtnValue: 'Login'
+            loginBtnValue: this.$i18n.t('index.form.login')
         }
     },
     methods: {

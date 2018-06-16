@@ -3,10 +3,10 @@
         <div>
             <nuxt-link :to="localePath('imprint')"
                        tag="a"
-                       class="footer-button">Impressum</nuxt-link>
-            <nuxt-link :to="localePath('privacypolicy')"
+                       class="footer-button">{{$t('navigation.TheFooter.imprint')}}</nuxt-link>
+            <nuxt-link :to="localePath('privacy')"
                        tag="a"
-                       class="footer-button">Datenschutz</nuxt-link>
+                       class="footer-button">{{$t('navigation.TheFooter.privacy')}}</nuxt-link>
         </div>
         <span class="copyright">© 2018 exomia.com</span>
     </footer>
