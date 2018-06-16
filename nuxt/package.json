@@ -25,7 +25,7 @@
         "babel-register": "^6.26.0"
     },
     "devDependencies": {
-        "cross-env": "^5.0.1",
+        "cross-env": "^5.2.0",
         "node-sass": "^4.9.0",
         "nodemon": "^1.17.5",
         "sass-loader": "^7.0.3"
