@@ -1,6 +1,8 @@
 import pg from 'pg'
 import db_config from '../../.config/.db.config.json'
 
+pg.types.setTypeParser(20, 'text', parseInt)
+
 const pool = new pg.Pool(db_config)
 
 pool.on('error', (err, client) => {

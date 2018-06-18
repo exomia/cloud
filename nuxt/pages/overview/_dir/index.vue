@@ -13,11 +13,13 @@
             <template v-else>
                 <overview-list-empty></overview-list-empty>
             </template>
-            <overview-upload-status v-if="uploadActive"
-                                    :fileCount="fileCount"
-                                    :fileSize="fileSize"
-                                    :uploadSpeed="uploadSpeed">
-            </overview-upload-status>
+            <overview-file-exchange-status v-if="fileExchangeActive"
+                                           :name="fileExchangeFilename"
+                                           :progress="fileExchangeProgress"
+                                           :fileCount="fileExchangeCount"
+                                           :fileSize="fileExchangeSize"
+                                           :uploadSpeed="fileExchangeRate">
+            </overview-file-exchange-status>
         </div>
     </main>
 </template>
@@ -27,27 +29,37 @@ import OverviewSidebar from '~/components/navigation/sidebar/OverviewSidebar'
 import OverviewPath from '~/components/partials/OverviewPath'
 import OverviewListHeader from '~/components/partials/OverviewListHeader'
 import OverviewList from '~/components/partials/OverviewList'
-import OverviewUploadStatus from '~/components/partials/OverviewUploadStatus'
+import OverviewFileExchangeStatus from '~/components/partials/OverviewFileExchangeStatus'
 import OverviewListEmpty from '~/components/partials/OverviewListEmpty'
 
 export default {
-    data() {
-        return {
-            uploadActive: false,
-            fileCount: 2,
-            fileSize: 10,
-            uploadSpeed: 2
-        }
-    },
     components: {
         OverviewSidebar,
         OverviewPath,
         OverviewListHeader,
         OverviewList,
-        OverviewUploadStatus,
+        OverviewFileExchangeStatus,
         OverviewListEmpty
     },
     computed: {
+        fileExchangeFilename() {
+            return this.$store.getters.exchangeFilename
+        },
+        fileExchangeActive() {
+            return this.$store.getters.exchangeActive
+        },
+        fileExchangeCount() {
+            return this.$store.getters.exchangeFileCount
+        },
+        fileExchangeSize() {
+            return this.$store.getters.exchangeSize
+        },
+        fileExchangeProgress() {
+            return this.$store.getters.exchangeProgress
+        },
+        fileExchangeRate() {
+            return this.$store.getters.exchangeRate
+        },
         isDirectoryEmpty() {
             return this.$store.getters.isDirectoryEmpty
         },
@@ -56,23 +68,12 @@ export default {
         }
     },
     methods: {
-        onDrop(e) {
-            // Check if user has enough upload size left?
-            const transfer = e.dataTransfer
-            for (let i = 0; i < transfer.files.length; i++) {
-                const fd = new FormData()
-                fd.append('upload-file', transfer.files[i])
-
-                const config = {
-                    onUploadProgress: function(event) {
-                        var percentCompleted = Math.round(event.loaded * 100 / event.total)
-                        console.log('upload', percentCompleted)
-                    }
-                }
-                this.$axios.$post(`/v1/file/upload/${this.currentDirectoryId || ''}`, fd, config)
-                console.log(`/v1/file/upload/${this.currentDirectoryId || ''}`)
+        onDrop({ dataTransfer }) {
+            if (dataTransfer) {
+                console.log(dataTransfer)
+                // Check if user has enough upload size left?
+                this.$store.dispatch('startFileUpload', dataTransfer)
             }
-            //console.log(e)
         }
     }
 }

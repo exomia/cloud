@@ -1,4 +1,4 @@
-const pkg = require('./package')
+import pkg from './package'
 
 module.exports = {
     mode: 'universal',
@@ -68,7 +68,8 @@ module.exports = {
         retry: { retries: 3 },
         responseType: 'json',
         timeout: 1000 * 5, //5sec
-        debug: process.env.NODE_ENV != 'production'
+        //debug: process.env.NODE_ENV != 'production'
+        debug: false
     },
 
     /*
@@ -78,24 +79,13 @@ module.exports = {
         /*
         ** You can extend webpack config here
         */
-        extend(config, ctx) {
-            // Run ESLint on save
-            if (ctx.isDev && ctx.isClient) {
-                config.module.rules.push({
-                    enforce: 'pre',
-                    test: /\.(js|vue)$/,
-                    loader: 'eslint-loader',
-                    exclude: /(node_modules)/
-                })
-            }
-        }
     },
 
     /*
     ** Router config
     */
     router: {
-        middleware: ['auth', 'directory']
+        middleware: ['directory']
     }
 
     // transition: {

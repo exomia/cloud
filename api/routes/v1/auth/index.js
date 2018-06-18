@@ -1,6 +1,5 @@
 import express from 'express'
 import { getUserInformation } from '../../../lib/pg/user'
-import { sign } from '../../../lib/jwt'
 import { JE1002 } from '../../../lib/error'
 
 const router = express.Router()

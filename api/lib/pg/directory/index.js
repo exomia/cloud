@@ -1,5 +1,4 @@
 import { query, lb, lbjoin, e } from '../'
-import { createWriteStream } from 'fs'
 
 export async function addDirectory(usernameOrEmail, name, parent_directory_uuid) {
     let result = false
@@ -63,7 +62,7 @@ export async function listAllDirectories(usernameOrEmail, parent_directory_uuid)
           d."name",
           d."timestamp",
           d."download_count",
-          SUM(f."size")::integer AS "size",
+          SUM(f."size") AS "size",
           max(f."clamav_status") AS "clamav_status"
         FROM private."directory" d
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")

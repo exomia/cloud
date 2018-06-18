@@ -1,22 +1,23 @@
 <template>
     <div class="list-header">
         <div style="width: 100px">
-            <input type="checkbox" class="checkbox">
+            <input type="checkbox"
+                   class="checkbox">
         </div>
         <div style="width: calc(100% - 510px)">
-            <span>Name</span>
+            <span>{{ $t('partials.OverviewListHeader.name') }}</span>
         </div>
         <div style="width: 85px">
             <span></span>
         </div>
         <div style="width: 100px">
-            <span>Status</span>
+            <span>{{ $t('partials.OverviewListHeader.status') }}</span>
         </div>
         <div style="width: 100px">
-            <span>Größe</span>
+            <span>{{ $t('partials.OverviewListHeader.size') }}</span>
         </div>
         <div style="width: 125px">
-            <span>Datum</span>
+            <span>{{ $t('partials.OverviewListHeader.date') }}</span>
         </div>
     </div>
 </template>

@@ -1,28 +1,26 @@
 import cookieparser from 'cookieparser'
 
 export const state = () => ({
-    auth: {
-        token: null
-    }
+    token: null
 })
 
 export const getters = {
-    isAuthenticated: state => Boolean(state.auth.token)
+    isAuthenticated: state => Boolean(state.token)
 }
 
 export const mutations = {
     authenticate(state, token) {
-        state.auth.token = token
+        state.token = token
     }
 }
 
 export const actions = {
     nuxtServerInit({ commit }, { req }) {
         let token = null
-        if (req.headers.cookie) {
-            const parsed = cookieparser.parse(req.headers.cookie)
-            token = JSON.parse(parsed.auth)
-        }
+        // if (req.headers.cookie) {
+        //     const parsed = cookieparser.parse(req.headers.cookie)
+        //     token = JSON.parse(parsed.auth)
+        // }
         commit('authenticate', token)
     },
     async loginUser(vuexContext, { username, password, stayLoggedIn }) {

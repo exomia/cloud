@@ -1,22 +1,7 @@
-# nuxt-cloud
+# Exomia Cloud
+> A fast allround solution to a modern private cloud that aims to be super fast, slim and serves a crisp user experience. 
 
-> A simple cloud where we use features known from other clouds to build our own meaning of a cloud - still in progress
-
-## Build Setup
-
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## Introduction
+The exomia cloud solution is a web based private cloud like [ownCloud](https://owncloud.org/) or [Nextcloud](https://nextcloud.com/).
+It aims to implement all the features you know and implement them in our own responsive and modern style.
+So its like a fusion of multiple cool cloud projects with a special spice and modern techniques i. e. modern frameworks like [Nuxt.js](https://nuxtjs.org/) which is using [Vue.js](https://vuejs.org/) in the background to serve the best user experience we can.

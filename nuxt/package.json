@@ -5,12 +5,10 @@
     "author": "exomia",
     "license": "MIT",
     "scripts": {
-        "dev": "nuxt",
+        "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server --exec babel-node",
         "build": "nuxt build",
-        "start": "nuxt start",
+        "start": "cross-env NODE_ENV=production babel-node server/index.js",
         "generate": "nuxt generate",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-        "precommit": "npm run lint",
         "update": "npm prune && npm-check -u"
     },
     "dependencies": {
@@ -20,16 +18,23 @@
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-env": "^1.7.0",
         "cookieparser": "^0.1.0",
-        "nuxt": "^1.0.0",
-        "vuelidate": "^0.7.4"
+        "nuxt": "^1.4.1",
+        "nuxt-i18n": "^4.0.0",
+        "vuelidate": "^0.7.4",
+        "express": "^4.15.3",
+        "babel-register": "^6.26.0"
     },
     "devDependencies": {
-        "babel-eslint": "^8.2.1",
-        "cross-env": "^5.1.6",
-        "eslint": "^4.15.0",
-        "eslint-loader": "^2.0.0",
-        "eslint-plugin-vue": "^4.5.0",
+        "cross-env": "^5.2.0",
         "node-sass": "^4.9.0",
-        "sass-loader": "^7.0.1"
+        "nodemon": "^1.17.5",
+        "sass-loader": "^7.0.3"
+    },
+    "nodemonConfig": {
+        "delay": "50",
+        "watch": [
+            "*.*"
+        ],
+        "ext": "vue js scss sass json svg png jpg jpeg"
     }
 }

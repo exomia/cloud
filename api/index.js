@@ -1,7 +1,7 @@
 import express from 'express'
 import { endpoints } from './routes'
 import { jwt_init } from './lib/jwt'
-import { JE404, JE500, JE1001, JE1002 } from './lib/error'
+import { JE404, JE500 } from './lib/error'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 
