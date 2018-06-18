@@ -31,15 +31,9 @@ router.post(
             return EXIT_LOGIN_REQUIRED()
         }
         const directory_uuid = xor_decode(directory_id)
-        const result = await addFile(
-            email,
-            directory_uuid,
-            file.originalname,
-            path.extname(file.originalname),
-            file.filename,
-            file.mimetype,
-            file.size
-        )
+
+        const fi = path.parse(file.originalname)
+        const result = await addFile(email, directory_uuid, fi.name, fi.ext, file.filename, file.mimetype, file.size)
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
