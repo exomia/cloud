@@ -1,8 +1,8 @@
 import { query, lb, lbjoin, e } from '../'
 
-export async function addFile(usernameOrEmail, name, mimetype, directory_uuid, local_name, size) {
+export async function addFile(usernameOrEmail, directory_uuid, name, extension, local_name, mimetype, size) {
     const result = await query`
-        INSERT INTO private."file" ("user_uuid", "name", "mimetype", "directory_uuid", "local_name", "size")
+        INSERT INTO private."file" ("user_uuid","directory_uuid", "name", "extension", "local_name", "mimetype", "size")
         VALUES ((SELECT "uuid"
                  FROM private."user"
                  WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
@@ -11,7 +11,7 @@ export async function addFile(usernameOrEmail, name, mimetype, directory_uuid, l
                 ${directory_uuid || null},
                 ${local_name},
                 ${size})
-        RETURNING "uuid", "name", "mimetype", "size", "timestamp";`
+        RETURNING "uuid", "name", "extension", "mimetype", "size", "timestamp";`
     if (result && result.rowCount > 0) {
         return result.rows[0]
     }
@@ -41,8 +41,9 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
         SELECT
           f."uuid",
           f."name",
-          f."mimetype",
+          f."extension",
           f."local_name",
+          f."mimetype",
           f."size",
           f."timestamp",
           f."clamav_status",
@@ -63,8 +64,9 @@ export async function getFileInfo(usernameOrEmail, file_uuid) {
         SELECT
           f."uuid",
           f."name",
-          f."mimetype",
+          f."extension",
           f."local_name",
+          f."mimetype",
           f."size",
           f."timestamp",
           f."clamav_status",

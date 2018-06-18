@@ -32,7 +32,15 @@ router.post(
             return EXIT_LOGIN_REQUIRED()
         }
         const directory_uuid = xor_decode(directory_id)
-        const result = await addFile(email, file.originalname, file.mimetype, directory_uuid, file.filename, file.size)
+        const result = await addFile(
+            email,
+            directory_uuid,
+            file.originalname,
+            path.extname(file.originalname),
+            file.filename,
+            file.mimetype,
+            file.size
+        )
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
@@ -81,6 +89,7 @@ router.post('/download', async ({ jwt: { valid, payload: { email } }, body: { fi
             file: {
                 id: xor_encode(result.uuid),
                 name: result.name,
+                extension: result.extension,
                 mimetype: result.mimetype,
                 clamav_status: result.clamav_status,
                 size: result.size,
