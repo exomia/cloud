@@ -1,6 +1,7 @@
 <template>
     <div class="list-row list-row-hover"
          @click.prevent.stop="click">
+         <!-- File/Directory -->
         <div class="list-item"
              style="width: 100px">
             <input type="checkbox"
@@ -11,18 +12,21 @@
             <i v-if="type === 'File'"
                class="file-icon" />
         </div>
+        <!-- Name -->
         <div class="list-item"
              style="width: calc(100% - 510px)">
-            <span v-if="!renameActive"
-                  class="row-name">{{newName}}</span>
-            <input v-else
-                   class="text-input rename-input"
-                   type="text"
-                   v-model="newName"
-                   ref="rename"
-                   @blur="rename()"
-                   @keydown.enter="rename()">
+             <!-- Rename / New Directory -->
+            <input v-if="inputActive"
+                class="text-input"
+                type="text"
+                v-model="newName"
+                ref="input"
+                @click.prevent.stop
+                @blur="setName()"
+                @keydown.enter="setName()">
+            <span v-else class="row-name">{{newName}}</span>
         </div>
+        <!-- Extended menu button -->
         <div class="list-item"
              style="position: relative; width: 85px">
             <a class="list-button em-button"
@@ -40,7 +44,7 @@
                     <span>Teilen</span>
                 </a>
                 <a class="option-item"
-                   @click.stop="renameActive = !renameActive; listOptionsActive = false">
+                   @click.stop="inputActive = !inputActive; listOptionsActive = false">
                     <i class="edit" />
                     <span>Umbenennen</span>
                 </a>
@@ -55,6 +59,7 @@
                 </a>
             </div>
         </div>
+        <!-- Clamav -->
         <div class="list-item"
              style="width: 100px">
             <i v-if="scanStatus == 0"
@@ -64,10 +69,12 @@
             <i v-if="scanStatus == 2"
                class="status-icon-attention" />
         </div>
+        <!-- Size -->
         <div class="list-item"
              style="width: 100px">
             <span>{{size | toUnit}}</span>
         </div>
+        <!-- Timestamp -->
         <div class="list-item"
              style="width: 125px">
             <span>{{timestamp | toDatetime}}</span>
@@ -82,18 +89,18 @@ export default {
     data() {
         return {
             newName: '',
-            renameActive: false,
+            inputActive: false,
             listOptionsActive: false
         }
     },
     props: {
         id: {
             type: String,
-            required: true
+            required: false
         },
         name: {
             type: String,
-            required: true
+            required: false
         },
         type: {
             type: String,
@@ -108,31 +115,54 @@ export default {
         },
         timestamp: {
             required: true
+        },
+        isNewDirectory: {
+            type: Boolean,
+            default: false
         }
     },
     mounted() {
         this.newName = this.name
+        if (this.isNewDirectory) {
+            this.focusInput()
+        }
     },
     methods: {
-        rename() {
+        setName() {
             this.$nextTick(() => {
-                this.renameActive = false
-                /* Early return when name is invalid */
-                if (!this.newName || this.newName === this.name) {
-                    this.newName = this.name
-                    return
+                /* Create new Directory */
+                if (this.isNewDirectory) {
+                    this.$store.commit('setCreateDirectoryShown', false)
                 }
+                /* Rename File / Directory */
+                if (!this.isNewDirectory) {
+                    this.inputActive = false
+                    /* Early return when name is invalid */
+                    if (!this.newName || this.newName === this.name) {
+                        this.newName = this.name
+                        return
+                    }
 
-                if (this.type === 'Directory') {
-                    this.$axios.$post('/v1/directory/rename', {
-                        directory_id: this.id,
-                        new_name: this.newName
-                    })
-                } else if (this.type === 'File') {
-                    this.$axios.$post('/v1/file/rename', {
-                        file_id: this.id,
-                        new_name: this.newName
-                    })
+                    if (this.type === 'Directory') {
+                        this.$axios.$post('/v1/directory/rename', {
+                            directory_id: this.id,
+                            new_name: this.newName
+                        })
+                    } else if (this.type === 'File') {
+                        this.$axios.$post('/v1/file/rename', {
+                            file_id: this.id,
+                            new_name: this.newName
+                        })
+                    }
+                }
+            })
+        },
+        focusInput() {
+            this.inputActive = true
+            this.$nextTick(() => {
+                this.$refs.input.focus()
+                if (this.name && this.name.length) {
+                    this.$refs.input.setSelectionRange(0, this.name.length)
                 }
             })
         },
@@ -184,12 +214,9 @@ export default {
         }
     },
     watch: {
-        renameActive() {
-            if (this.renameActive) {
-                this.$nextTick(() => {
-                    this.$refs.rename.focus()
-                    this.$refs.rename.setSelectionRange(0, this.name.length)
-                })
+        inputActive() {
+            if (this.inputActive) {
+                this.focusInput()
             }
         }
     }

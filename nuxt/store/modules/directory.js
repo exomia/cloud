@@ -6,7 +6,8 @@ export const state = () => ({
     subFileCount: 500,
     followingDirectories: 20,
     followingFiles: 500,
-    sizeSum: 1303376534034
+    sizeSum: 1303376534034,
+    createDirectoryShown: false
 })
 
 export const getters = {
@@ -22,7 +23,8 @@ export const getters = {
             return null
         }
         return state.path[state.path.length - 1].id || null
-    }
+    },
+    isCreateDirectoryShown: state => state.createDirectoryShown
 }
 
 export const mutations = {
@@ -40,6 +42,9 @@ export const mutations = {
         state.user.flags = Number(flags) || 0
         state.user.volume = Number(volume) || 0
         state.user.usedVolume = Number(usedVolume) || 0
+    },
+    setCreateDirectoryShown(state, shown) {
+        state.createDirectoryShown = shown
     }
 }
 

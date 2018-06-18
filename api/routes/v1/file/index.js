@@ -1,6 +1,11 @@
 import express from 'express'
 import { addFile, getFileInfo, updateFile, deleteFile, increaseDownloadFileCount } from '../../../lib/pg/file'
-import { EXIT_LOGIN_REQUIRED, JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR } from '../../../lib/error'
+import {
+    EXIT_LOGIN_REQUIRED,
+    JERROR_INTERNAL_SERVER_ERROR,
+    JERROR_API_USAGE_ERROR,
+    JERROR_FILE_ALREADY_EXIST
+} from '../../../lib/error'
 import { xor_encode, xor_decode } from '../../../lib/util'
 import { STATUS_QUEUED } from '../../../lib/clamav'
 
@@ -43,8 +48,10 @@ router.post(
 
             if (!result) {
                 //CLEAR/REMOVE LOCAL FILE
-                return res.json(JERROR_INTERNAL_SERVER_ERROR)
+                console.log('duplicate')
+                return res.json(JERROR_FILE_ALREADY_EXIST)
             }
+
             return res.json({
                 file: {
                     id: xor_encode(result.uuid),

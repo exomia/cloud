@@ -23,6 +23,7 @@ export const JERROR_INTERNAL_SERVER_ERROR = je(500, 'internal server error')
 export const JERROR_API_USAGE_ERROR = je(1001, 'api usage error')
 export const JERROR_LOGIN_REQUIRED = je(1002, 'login required')
 export const JERROR_INVALID_LOGIN = je(1003, 'invalid login')
+export const JERROR_FILE_ALREADY_EXIST = je(1004, 'file already exist')
 
 export const EXIT_LOGIN_REQUIRED = res => {
     res.status(200)

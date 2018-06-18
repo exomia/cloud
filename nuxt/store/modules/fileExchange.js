@@ -139,6 +139,10 @@ export const actions = {
                     // Start uploading to server
                     const res = await this.$axios.$post(`/v1/file/upload/${this.currentDirectoryId || ''}`, fd, config)
 
+                    if (res.error) {
+                        console.log(res.error)
+                    }
+
                     if (!res.error && res.file) {
                         commit('addFile', res.file)
                     }

@@ -39,13 +39,15 @@ div.list-summary {
             display: inline-block;
             width: 2.25rem;
             height: 2.25rem;
-            background-size: 1.5rem;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: 50%;
         }
         i.file-icon {
-            background: url('~/assets/img/icon/list/file.svg') no-repeat right;
+            background-image: url('~/assets/img/icon/list/file.svg');
         }
         i.directory-icon {
-            background: url('~/assets/img/icon/list/directory.svg') no-repeat right;
+            background-image: url('~/assets/img/icon/list/directory.svg');
         }
         i.status-icon-accepted,
         i.status-icon-attention,

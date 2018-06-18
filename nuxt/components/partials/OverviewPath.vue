@@ -29,12 +29,12 @@
                        style="display: none"
                        multiple>
                 <a class="option-item"
-                   @click="triggerFileInput();optionsShown = false">
+                   @click="triggerFileInput()">
                     <i class="upload" />
                     <span>Datei Hochladen</span>
                 </a>
                 <a class="option-item"
-                   @click="optionsShown = false">
+                   @click="triggerCreateNewDirectory()">
                     <i class="directory" />
                     <span>Neuer Ordner</span>
                 </a>
@@ -58,6 +58,11 @@ export default {
     methods: {
         triggerFileInput() {
             this.$refs.fileInput.click()
+            this.optionsShown = false
+        },
+        triggerCreateNewDirectory() {
+            this.$store.commit('setCreateDirectoryShown', true)
+            this.optionsShown = false
         }
     }
 }
