@@ -6,10 +6,11 @@ export async function addFile(usernameOrEmail, directory_uuid, name, extension, 
         VALUES ((SELECT "uuid"
                  FROM private."user"
                  WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
-                ${name},
-                ${mimetype},
                 ${directory_uuid || null},
+                ${name},
+                ${extension},
                 ${local_name},
+                ${mimetype},
                 ${size})
         RETURNING "uuid", "name", "extension", "mimetype", "size", "timestamp";`
     if (result && result.rowCount > 0) {
