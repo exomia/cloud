@@ -36,13 +36,33 @@ router.post(
             return EXIT_LOGIN_REQUIRED()
         }
         const directory_uuid = xor_decode(directory_id)
-
-        const fi = path.parse(file.originalname)
-        const result = await addFile(email, directory_uuid, fi.name, fi.ext, file.filename, file.mimetype, file.size)
-        if (!result) {
-            //CLEAR/REMOVE LOCAL FILE
-            console.log('duplicate')
-            return res.json(JERROR_FILE_ALREADY_EXIST)
+        if (!replace) {
+            const fi = path.parse(file.originalname)
+            const result = await addFile(
+                email,
+                directory_uuid,
+                fi.name,
+                fi.ext,
+                file.filename,
+                file.mimetype,
+                file.size
+            )
+            if (!result) {
+                //CLEAR/REMOVE LOCAL FILE
+                return res.json(JERROR_FILE_ALREADY_EXIST)
+            }
+            return res.json({
+                file: {
+                    id: xor_encode(result.uuid),
+                    name: result.name,
+                    extension: result.extension,
+                    mimetype: result.mimetype,
+                    status: STATUS_QUEUED,
+                    size: result.size,
+                    timestamp: result.timestamp
+                },
+                error: false
+            })
         }
         //REPLACE FILE AND UPDATE
         return res.json(JERROR_INTERNAL_SERVER_ERROR)
