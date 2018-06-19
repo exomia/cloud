@@ -65,6 +65,7 @@ router.post('/add', async ({ jwt: { valid, payload: { email } }, body: { name, p
     if (!result) {
         return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
+
     return res.json({
         directory: {
             id: xor_encode(result.uuid),

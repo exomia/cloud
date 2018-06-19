@@ -129,6 +129,9 @@ export default {
     computed: {
         directories: function() {
             return this.$store.getters.directories
+        },
+        isCreateDirectoryShown: function() {
+            return this.$store.getters.isCreateDirectoryShown
         }
     },
     methods: {
@@ -136,6 +139,11 @@ export default {
             this.$nextTick(async () => {
                 /* Create new Directory */
                 if (this.isNewDirectory) {
+                    /* If create directory is hidden */
+                    if (!this.isCreateDirectoryShown) {
+                        return
+                    }
+
                     /* Check if input was filled */
                     if (!this.newName) {
                         return
@@ -187,8 +195,9 @@ export default {
         },
         async click() {
             if (this.type === 'Directory') {
+                // this.$i18n.t('path', 'en', { foo: 'bar' })
                 // this.$router.history.push(`${this.$i18n.locale}/overview-dir/${this.id}`)
-                console.log(this)
+                console.log(this.$i18n)
                 // .localePath('overview-dir')
                 // console.log()
                 // console.log(this.$i18n.vm.localePath, this.$i18n.locale)
