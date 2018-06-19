@@ -124,7 +124,6 @@ export default {
         if (this.isNewDirectory) {
             this.focusInput()
         }
-        console.log(this.$route.params.dir)
     },
     computed: {
         directories: function() {
@@ -193,19 +192,13 @@ export default {
                 }
             })
         },
-        async click() {
+        click() {
             if (this.type === 'Directory') {
-                // this.$i18n.t('path', 'en', { foo: 'bar' })
-                // this.$router.history.push(`${this.$i18n.locale}/overview-dir/${this.id}`)
-                console.log(this.$i18n)
-                // .localePath('overview-dir')
-                // console.log()
-                // console.log(this.$i18n.vm.localePath, this.$i18n.locale)
-                // console.log(this.$i18n.vm.localePath('overview-dir', this.$i18n.locale))
-                // this.$router.push({ name: 'overview-dir', params: { dir: this.id } })
-                //this.$router.push({ path: `${this.$i18n.locale}/overview-dir`, params: `${this.id}` })
-                //this.$router.push(`${this.$i18n.locale}/overview-dir/${this.id}`)
-                //this.$router.push({ name: 'overview-dir', params: { dir: this.id } })
+                /* Open directory */
+                $nuxt.$router.push({
+                    name: `overview-dir___${this.$i18n.locale}`,
+                    params: { dir: this.id }
+                })
             } else if (this.type === 'File') {
                 // const source = CancelToken.source()
                 // const config = {
