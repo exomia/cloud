@@ -140,7 +140,7 @@ export const actions = {
                     const res = await this.$axios.$post(`/v1/file/upload/${this.currentDirectoryId || ''}`, fd, config)
 
                     if (res.error) {
-                        console.log(res.error)
+                        console.error(res.error)
                     }
 
                     if (!res.error && res.file) {

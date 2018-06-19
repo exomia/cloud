@@ -4,7 +4,7 @@
         <list-row v-if="createDirectoryShown"
                   type="Directory"
                   :size="0"
-                  :timestamp="Date.now()" 
+                  :timestamp="Date.now()"
                   isNewDirectory></list-row>
         <list-row v-for="entry in directories"
                   :key="entry.id"

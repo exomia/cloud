@@ -1,7 +1,7 @@
 <template>
     <div class="list-row list-row-hover"
          @click.prevent.stop="click">
-         <!-- File/Directory -->
+        <!-- File/Directory -->
         <div class="list-item"
              style="width: 100px">
             <input type="checkbox"
@@ -15,16 +15,17 @@
         <!-- Name -->
         <div class="list-item"
              style="width: calc(100% - 510px)">
-             <!-- Rename / New Directory -->
+            <!-- Rename / New Directory -->
             <input v-if="inputActive"
-                class="text-input"
-                type="text"
-                v-model="newName"
-                ref="input"
-                @click.prevent.stop
-                @blur="setName()"
-                @keydown.enter="setName()">
-            <span v-else class="row-name">{{newName}}</span>
+                   class="text-input"
+                   type="text"
+                   v-model="newName"
+                   ref="input"
+                   @click.prevent.stop
+                   @blur="setName()"
+                   @keydown.enter="setName()">
+            <span v-else
+                  class="row-name">{{newName}}</span>
         </div>
         <!-- Extended menu button -->
         <div class="list-item"

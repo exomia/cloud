@@ -60,6 +60,6 @@ function bindep(index) {
 
     // Listen the server
     app.listen(port, host, () => {
-        console.log(`API listening on http(s)://${host}:${port}`) // eslint-disable-line no-console
+        console.log(`API listening on http(s)://${host}:${port}`)
     })
 })()

@@ -6,12 +6,12 @@
              @dragover.prevent
              @drop.prevent.stop="onDrop">
             <overview-path></overview-path>
-            <template v-if="!isDirectoryEmpty">
-                <overview-list-header></overview-list-header>
-                <overview-list></overview-list>
+            <template v-if="isDirectoryEmpty">
+                <overview-list-empty></overview-list-empty>
             </template>
             <template v-else>
-                <overview-list-empty></overview-list-empty>
+                <overview-list-header></overview-list-header>
+                <overview-list></overview-list>
             </template>
             <overview-file-exchange-status v-if="fileExchangeActive"
                                            :name="fileExchangeFilename"
@@ -70,7 +70,6 @@ export default {
     methods: {
         onDrop({ dataTransfer }) {
             if (dataTransfer) {
-                console.log(dataTransfer)
                 // Check if user has enough upload size left?
                 this.$store.dispatch('startFileUpload', dataTransfer)
             }

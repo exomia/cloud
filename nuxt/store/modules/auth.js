@@ -27,7 +27,6 @@ export const actions = {
         // Check if login would be valid
         if (username && password) {
             const res = await this.$axios.$post('/v1/auth/login', { username, password })
-            //console.log(res)
         }
     }
 }

@@ -11,6 +11,7 @@ export const state = () => ({
 })
 
 export const getters = {
+    //rewrite because it does not work like that anymore
     isDirectoryEmpty: state => !(state.directories || state.files),
     directories: state => state.directories,
     files: state => state.files,
