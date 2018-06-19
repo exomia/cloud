@@ -84,13 +84,6 @@
 
 <script>
 export default {
-    data() {
-        return {
-            newName: '',
-            inputActive: false,
-            listOptionsActive: false
-        }
-    },
     props: {
         id: {
             type: String,
@@ -119,21 +112,70 @@ export default {
             default: false
         }
     },
+    data() {
+        return {
+            newName: '',
+            inputActive: false,
+            listOptionsActive: false
+        }
+    },
     mounted() {
         this.newName = this.name
         if (this.isNewDirectory) {
             this.focusInput()
         }
     },
-    computed: {
-        directories: function() {
-            return this.$store.getters.directories
-        },
-        isCreateDirectoryShown: function() {
-            return this.$store.getters.isCreateDirectoryShown
-        }
-    },
     methods: {
+        click() {
+            if (this.type === 'Directory') {
+                /* Open directory */
+                $nuxt.$router.push({
+                    name: `overview-dir___${this.$i18n.locale}`,
+                    params: { dir: this.id }
+                })
+            } else if (this.type === 'File') {
+                // const source = CancelToken.source()
+                // const config = {
+                //     onDownloadProgress: function(event) {
+                //         var percentCompleted = Math.round(event.loaded * 100 / event.total)
+                //         console.log('download', percentCompleted)
+                //         //if (percentCompleted > 50) source.cancel('download canceled by user')
+                //     },
+                //     cancelToken: source.token
+                // }
+                // this.$axios
+                //     .$post(
+                //         '/v1/file/download',
+                //         {
+                //             file_id: this.id
+                //         },
+                //         config
+                //     )
+                //     .then(result => {
+                //         if (result.error) {
+                //             console.error(result.error)
+                //             return
+                //         }
+                //         let byteCharacters = atob(result.file.data)
+                //         let byteArrays = []
+                //         for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+                //             let slice = byteCharacters.slice(offset, offset + 512)
+                //             const byteNumbers = new Array(slice.length)
+                //             for (let i = 0; i < slice.length; i++) {
+                //                 byteNumbers[i] = slice.charCodeAt(i)
+                //             }
+                //             byteArrays.push(new Uint8Array(byteNumbers))
+                //         }
+                //         const link = document.createElement('a')
+                //         link.href = window.URL.createObjectURL(new Blob(byteArrays, { type: result.file.mimetype }))
+                //         link.setAttribute('download', result.file.name)
+                //         link.click()
+                //     })
+                //     .catch(err => {
+                //         console.log(err)
+                //     })
+            }
+        },
         setName() {
             this.$nextTick(async () => {
                 /* Create new Directory */
@@ -191,56 +233,14 @@ export default {
                     this.$refs.input.setSelectionRange(0, this.name.length)
                 }
             })
+        }
+    },
+    computed: {
+        directories: function() {
+            return this.$store.getters.directories
         },
-        click() {
-            if (this.type === 'Directory') {
-                /* Open directory */
-                $nuxt.$router.push({
-                    name: `overview-dir___${this.$i18n.locale}`,
-                    params: { dir: this.id }
-                })
-            } else if (this.type === 'File') {
-                // const source = CancelToken.source()
-                // const config = {
-                //     onDownloadProgress: function(event) {
-                //         var percentCompleted = Math.round(event.loaded * 100 / event.total)
-                //         console.log('download', percentCompleted)
-                //         //if (percentCompleted > 50) source.cancel('download canceled by user')
-                //     },
-                //     cancelToken: source.token
-                // }
-                // this.$axios
-                //     .$post(
-                //         '/v1/file/download',
-                //         {
-                //             file_id: this.id
-                //         },
-                //         config
-                //     )
-                //     .then(result => {
-                //         if (result.error) {
-                //             console.error(result.error)
-                //             return
-                //         }
-                //         let byteCharacters = atob(result.file.data)
-                //         let byteArrays = []
-                //         for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-                //             let slice = byteCharacters.slice(offset, offset + 512)
-                //             const byteNumbers = new Array(slice.length)
-                //             for (let i = 0; i < slice.length; i++) {
-                //                 byteNumbers[i] = slice.charCodeAt(i)
-                //             }
-                //             byteArrays.push(new Uint8Array(byteNumbers))
-                //         }
-                //         const link = document.createElement('a')
-                //         link.href = window.URL.createObjectURL(new Blob(byteArrays, { type: result.file.mimetype }))
-                //         link.setAttribute('download', result.file.name)
-                //         link.click()
-                //     })
-                //     .catch(err => {
-                //         console.log(err)
-                //     })
-            }
+        isCreateDirectoryShown: function() {
+            return this.$store.getters.isCreateDirectoryShown
         }
     },
     watch: {
