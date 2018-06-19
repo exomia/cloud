@@ -83,8 +83,6 @@
 </template>
 
 <script>
-import { CancelToken } from 'axios'
-
 export default {
     data() {
         return {
@@ -126,16 +124,37 @@ export default {
         if (this.isNewDirectory) {
             this.focusInput()
         }
+        console.log(this.$route.params.dir)
+    },
+    computed: {
+        directories: function() {
+            return this.$store.getters.directories
+        }
     },
     methods: {
         setName() {
-            this.$nextTick(() => {
+            this.$nextTick(async () => {
                 /* Create new Directory */
                 if (this.isNewDirectory) {
+                    /* Check if input was filled */
+                    if (!this.newName) {
+                        return
+                    }
+
+                    /* Hide create directory row */
                     this.$store.commit('setCreateDirectoryShown', false)
-                }
-                /* Rename File / Directory */
-                if (!this.isNewDirectory) {
+
+                    /* Send new directory name to server */
+                    const res = await this.$axios.$post('/v1/directory/add', {
+                        name: this.newName,
+                        parent_directory_id: this.$route.params.dir || ''
+                    })
+
+                    /* Add directory if no error occoured */
+                    if (!res.error) {
+                        this.$store.commit('addDirectory', res)
+                    }
+                } else if (!this.isNewDirectory) {
                     this.inputActive = false
                     /* Early return when name is invalid */
                     if (!this.newName || this.newName === this.name) {
@@ -168,7 +187,16 @@ export default {
         },
         async click() {
             if (this.type === 'Directory') {
-                this.$router.push({ name: 'overview-dir', params: { dir: this.id } })
+                // this.$router.history.push(`${this.$i18n.locale}/overview-dir/${this.id}`)
+                console.log(this)
+                // .localePath('overview-dir')
+                // console.log()
+                // console.log(this.$i18n.vm.localePath, this.$i18n.locale)
+                // console.log(this.$i18n.vm.localePath('overview-dir', this.$i18n.locale))
+                // this.$router.push({ name: 'overview-dir', params: { dir: this.id } })
+                //this.$router.push({ path: `${this.$i18n.locale}/overview-dir`, params: `${this.id}` })
+                //this.$router.push(`${this.$i18n.locale}/overview-dir/${this.id}`)
+                //this.$router.push({ name: 'overview-dir', params: { dir: this.id } })
             } else if (this.type === 'File') {
                 // const source = CancelToken.source()
                 // const config = {

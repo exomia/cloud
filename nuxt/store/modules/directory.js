@@ -31,6 +31,9 @@ export const mutations = {
     addFile(state, file) {
         state.files.push(file)
     },
+    addDirectory(state, { directory }) {
+        state.directories.push(directory)
+    },
     setDirectories(state, { directories, files, path_info }) {
         state.directories = directories
         state.files = files

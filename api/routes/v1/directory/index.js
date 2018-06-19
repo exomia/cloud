@@ -69,7 +69,10 @@ router.post('/add', async ({ jwt: { valid, payload: { email } }, body: { name, p
         directory: {
             id: xor_encode(result.uuid),
             name: result.name,
-            timestamp: result.timestamp
+            timestamp: result.timestamp,
+            size: 0,
+            clamav_status: 0,
+            download_count: 0
         },
         error: false
     })
