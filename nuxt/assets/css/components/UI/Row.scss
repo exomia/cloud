@@ -42,12 +42,13 @@ div.list-summary {
             background-size: 100% 100%;
             background-repeat: no-repeat;
             background-position: 50%;
+            opacity: 0.75;
         }
         i.file-icon {
             background-image: url('~/assets/img/icon/list/file.svg');
         }
         i.directory-icon {
-            background-image: url('~/assets/img/icon/list/directory.svg');
+            background-image: url('~/assets/img/icon/directory.svg');
         }
         i.status-icon-accepted,
         i.status-icon-attention,
