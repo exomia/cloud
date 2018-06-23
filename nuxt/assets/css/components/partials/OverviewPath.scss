@@ -61,12 +61,12 @@ div.path-container {
             i.option-button-icon {
                 position: absolute;
                 display: block;
-                height: 0.75rem;
-                width: 0.75rem;
+                height: 1.5rem;
+                width: 1.5rem;
                 opacity: 0.75;
                 user-select: none;
                 background: url('~/assets/img/icon/plus.svg') no-repeat center;
-                background-size: 0.75rem 0.75rem;
+                background-size: 100% 100%;
             }
         }
     }

@@ -25,16 +25,15 @@ div.exchange-container {
         padding: 0.5rem 0;
         z-index: 2;
         button.cancel {
-            width: 1rem;
-            height: 1rem;
+            width: 1.25rem;
+            height: 1.25rem;
             background-color: black;
             outline: none;
             border: none;
             align-self: flex-end;
             user-select: none;
-            background: url('~/assets/img/icon/plus.svg') no-repeat center;
+            background: url('~/assets/img/icon/cross.svg') no-repeat center;
             background-size: 75% 75%;
-            transform: rotate(-45deg);
             padding: 0;
             cursor: pointer;
             opacity: 0.75;
