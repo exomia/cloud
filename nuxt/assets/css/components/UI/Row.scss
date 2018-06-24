@@ -45,7 +45,7 @@ div.list-summary {
             opacity: 0.75;
         }
         i.file-icon {
-            background-image: url('~/assets/img/icon/list/file.svg');
+            background-image: url('~/assets/img/icon/file.svg');
         }
         i.directory-icon {
             background-image: url('~/assets/img/icon/directory.svg');
@@ -55,7 +55,7 @@ div.list-summary {
         i.status-icon-progress {
             width: 1.5rem;
             height: 1.5rem;
-            background-size: 1.5rem 1.5rem;
+            background-size: 100% 100%;
         }
         i.status-icon-accepted {
             background: url('~/assets/img/icon/accepted.svg') no-repeat center;
@@ -70,8 +70,8 @@ div.list-summary {
             width: 0.75rem;
             height: 0.75rem;
             transform: rotate(90deg);
-            background: url('~/assets/img/icon/dropdown-arrow.svg') no-repeat center;
-            background-size: 0.75rem 0.75rem;
+            background: url('~/assets/img/icon/dropdown.svg') no-repeat center;
+            background-size: 100% 100%;
         }
         input.volume-input {
             margin: 0 0.25rem;
