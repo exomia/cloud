@@ -54,6 +54,32 @@ export const mutations = {
     },
     checkAll(state, checked) {
         state.checkAll = checked
+    },
+    sortByX(state, { val, desc = true }) {
+        state.directories.sort((a, b) => {
+            if (a[val] && b[val]) {
+                const aVal = a[val].toLowerCase()
+                const bVal = b[val].toLowerCase()
+                if (aVal < bVal) {
+                    return desc ? -1 : 1
+                } else if (aVal > bVal) {
+                    return desc ? 1 : -1
+                }
+            }
+            return 0
+        })
+        state.files.sort((a, b) => {
+            if (a[val] && b[val]) {
+                const aVal = a[val].toLowerCase()
+                const bVal = b[val].toLowerCase()
+                if (aVal < bVal) {
+                    return desc ? -1 : 1
+                } else if (aVal > bVal) {
+                    return desc ? 1 : -1
+                }
+            }
+            return 0
+        })
     }
 }
 

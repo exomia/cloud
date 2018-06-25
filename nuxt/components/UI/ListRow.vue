@@ -7,6 +7,7 @@
             <input type="checkbox"
                    class="checkbox"
                    style="opacity: 0"
+                   @click.stop
                    v-model="checked">
             <i v-if="type === 'Directory'"
                class="directory-icon" />

@@ -29,7 +29,6 @@
                    :class="'lang-' + locale.code"
                    tag="a"></nuxt-link>
     </header>
-
 </template>
 
 <script>
