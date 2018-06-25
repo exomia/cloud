@@ -6,7 +6,8 @@
              style="width: 100px">
             <input type="checkbox"
                    class="checkbox"
-                   style="opacity: 0">
+                   style="opacity: 0"
+                   v-model="checked">
             <i v-if="type === 'Directory'"
                class="directory-icon" />
             <i v-if="type === 'File'"
@@ -117,7 +118,8 @@ export default {
         return {
             newName: '',
             inputActive: false,
-            listOptionsActive: false
+            listOptionsActive: false,
+            checked: false
         }
     },
     mounted() {
@@ -242,6 +244,9 @@ export default {
         },
         isCreateDirectoryShown: function() {
             return this.$store.getters.isCreateDirectoryShown
+        },
+        isCheckAll: function() {
+            return this.$store.getters.isCheckAll
         }
     },
     watch: {
@@ -249,6 +254,9 @@ export default {
             if (this.inputActive) {
                 this.focusInput()
             }
+        },
+        isCheckAll: function() {
+            this.checked = this.isCheckAll
         }
     }
 }

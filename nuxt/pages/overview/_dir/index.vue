@@ -6,9 +6,7 @@
              @dragover.prevent
              @drop.prevent.stop="onDrop">
             <overview-path></overview-path>
-            <template v-if="isDirectoryEmpty">
-                <overview-list-empty></overview-list-empty>
-            </template>
+            <overview-list-empty v-if="isDirectoryEmpty"></overview-list-empty>
             <template v-else>
                 <overview-list-header></overview-list-header>
                 <overview-list></overview-list>
@@ -33,6 +31,11 @@ import OverviewFileExchangeStatus from '~/components/partials/OverviewFileExchan
 import OverviewListEmpty from '~/components/partials/OverviewListEmpty'
 
 export default {
+    data() {
+        return {
+            checked: false
+        }
+    },
     components: {
         OverviewSidebar,
         OverviewPath,
@@ -68,6 +71,9 @@ export default {
         }
     },
     methods: {
+        toggleCheckbox() {
+            this.checked = !this.checked
+        },
         onDrop({ dataTransfer }) {
             if (dataTransfer) {
                 // Check if user has enough upload size left?
@@ -78,4 +84,4 @@ export default {
 }
 </script>
 
-<style src="~/assets/css/pages/overview/index.scss" lang="scss" scoped />
+<style src="~/assets/css/pages/overview/index.scss" lang="scss" scoped></style>

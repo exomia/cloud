@@ -7,7 +7,8 @@ export const state = () => ({
     followingDirectories: 20,
     followingFiles: 500,
     sizeSum: 1303376534034,
-    createDirectoryShown: false
+    createDirectoryShown: false,
+    checkAll: false
 })
 
 export const getters = {
@@ -25,15 +26,16 @@ export const getters = {
         }
         return state.path[state.path.length - 1].id || null
     },
-    isCreateDirectoryShown: state => state.createDirectoryShown
+    isCreateDirectoryShown: state => state.createDirectoryShown,
+    isCheckAll: state => state.checkAll
 }
 
 export const mutations = {
     addFile(state, file) {
-        state.files.push(file)
+        state.files.push({ ...file, checked: false })
     },
     addDirectory(state, { directory }) {
-        state.directories.push(directory)
+        state.directories.push({ ...directory, checked: false })
     },
     setDirectories(state, { directories, files, path_info }) {
         state.directories = directories
@@ -49,6 +51,9 @@ export const mutations = {
     },
     setCreateDirectoryShown(state, shown) {
         state.createDirectoryShown = shown
+    },
+    checkAll(state, checked) {
+        state.checkAll = checked
     }
 }
 

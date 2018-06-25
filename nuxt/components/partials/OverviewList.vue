@@ -32,9 +32,6 @@ import ListRow from '~/components/UI/ListRow'
 import ListSummary from '~/components/UI/ListSummary'
 
 export default {
-    data() {
-        return {}
-    },
     components: {
         ListRow,
         ListSummary

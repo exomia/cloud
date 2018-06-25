@@ -2,7 +2,8 @@
     <div class="list-header">
         <div style="width: 100px">
             <input type="checkbox"
-                   class="checkbox">
+                   class="checkbox"
+                   v-model="checked">
         </div>
         <div style="width: calc(100% - 510px)">
             <span>{{ $t('partials.OverviewListHeader.name') }}</span>
@@ -21,6 +22,22 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            checked: false
+        }
+    },
+    watch: {
+        checked() {
+            this.$store.commit('checkAll', this.checked)
+        }
+    }
+}
+</script>
+
 
 <style src="~/assets/css/components/partials/OverviewListHeader.scss" lang="scss" scoped>
 </style>
