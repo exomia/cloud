@@ -39,11 +39,7 @@ export const getters = {
 
 export const mutations = {
     cancelExchange(state, reset = false) {
-        if (reset) {
-            state.canceled = false
-        } else {
-            state.canceled = true
-        }
+        state.canceled = !reset
     },
     setExchangeType(state, isDownload) {
         if (isDownload === 1 || isDownload === 0) {

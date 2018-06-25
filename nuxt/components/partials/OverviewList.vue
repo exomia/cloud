@@ -1,6 +1,6 @@
 <template>
     <div class="list-container"
-         style="height: calc(100vh - 169px)">
+         style="height: calc(100vh - 184px)">
         <list-row v-if="createDirectoryShown"
                   type="Directory"
                   :size="0"
@@ -19,7 +19,8 @@
                   :name="entry.name"
                   type="File"
                   :size="entry.size"
-                  :timestamp="entry.timestamp" />
+                  :timestamp="entry.timestamp"
+                  :extension="entry.extension" />
         <list-summary :followingDirectories="followingDirectories"
                       :followingFiles="followingFiles"
                       :sizeSum="sizeSum" />

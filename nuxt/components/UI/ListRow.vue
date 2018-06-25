@@ -26,8 +26,10 @@
                    @click.prevent.stop
                    @blur="setName()"
                    @keydown.enter="setName()">
-            <span v-else
-                  class="row-name">{{newName}}</span>
+            <template v-else>
+                <span>{{newName}}</span>
+                <span class="extension">{{extension}}</span>
+            </template>
         </div>
         <!-- Extended menu button -->
         <div class="list-item"
@@ -75,7 +77,7 @@
         <!-- Size -->
         <div class="list-item"
              style="width: 100px">
-            <span>{{size | toUnit}}</span>
+            <span v-if="size > 0">{{size | toUnit}}</span>
         </div>
         <!-- Timestamp -->
         <div class="list-item"
@@ -113,6 +115,9 @@ export default {
         isNewDirectory: {
             type: Boolean,
             default: false
+        },
+        extension: {
+            type: String
         }
     },
     data() {
