@@ -1,6 +1,6 @@
 <template>
     <div class="list-container"
-         style="height: calc(100vh - 184px)">
+         style="height: calc(100vh - 175px)">
         <list-row v-if="createDirectoryShown"
                   type="Directory"
                   :size="0"
