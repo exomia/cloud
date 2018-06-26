@@ -72,11 +72,11 @@
         <div class="list-item"
              style="width: 100px">
             <i v-if="scanStatus == 0"
-               class="status-icon-accepted" />
+               class="status-icon-fine" />
             <i v-if="scanStatus == 1"
-               class="status-icon-progress" />
+               class="status-icon-process" />
             <i v-if="scanStatus == 2"
-               class="status-icon-attention" />
+               class="status-icon-detected" />
         </div>
         <!-- Size -->
         <div class="list-item"
@@ -108,7 +108,7 @@ export default {
         },
         scanStatus: {
             type: Number,
-            default: 1
+            default: 0
         },
         size: {
             type: Number
