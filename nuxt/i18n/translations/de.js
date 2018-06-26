@@ -10,7 +10,7 @@ export default {
     },
     /* Components */
     partials: {
-        OverviewListHeader: {
+        ListHeader: {
             type: 'Typ',
             name: 'Name',
             status: 'Status',

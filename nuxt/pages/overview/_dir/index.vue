@@ -8,7 +8,7 @@
             <overview-path></overview-path>
             <overview-list-empty v-if="isDirectoryEmpty"></overview-list-empty>
             <template v-else>
-                <overview-list-header></overview-list-header>
+                <list-header></list-header>
                 <overview-list></overview-list>
             </template>
             <overview-file-exchange-status v-if="fileExchangeActive"
@@ -25,7 +25,7 @@
 <script>
 import OverviewSidebar from '~/components/navigation/sidebar/OverviewSidebar'
 import OverviewPath from '~/components/partials/OverviewPath'
-import OverviewListHeader from '~/components/partials/OverviewListHeader'
+import ListHeader from '~/components/UI/ListHeader'
 import OverviewList from '~/components/partials/OverviewList'
 import OverviewFileExchangeStatus from '~/components/partials/OverviewFileExchangeStatus'
 import OverviewListEmpty from '~/components/partials/OverviewListEmpty'
@@ -39,7 +39,7 @@ export default {
     components: {
         OverviewSidebar,
         OverviewPath,
-        OverviewListHeader,
+        ListHeader,
         OverviewList,
         OverviewFileExchangeStatus,
         OverviewListEmpty

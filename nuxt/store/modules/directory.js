@@ -68,7 +68,6 @@ export const mutations = {
         /* Directory Count */
         state.directoryCount = state.data.filter(e => e.type === 'Directory').length
         /* File Count */
-        console.log(state.data.filter(e => e.type === 'File'))
         state.fileCount = state.data.filter(e => e.type === 'File').length
     }
 }
