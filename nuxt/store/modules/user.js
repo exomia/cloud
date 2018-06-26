@@ -16,10 +16,10 @@ export const getters = {
 
 export const mutations = {
     setAuthUser(state, { name, email, flags, volume, usedVolume }) {
-        state.user.name = name || ''
-        state.user.email = email || ''
-        state.user.flags = Number(flags) || 0
-        state.user.volume = Number(volume) || 0
-        state.user.usedVolume = Number(usedVolume) || 0
+        state.name = name || ''
+        state.email = email || ''
+        state.flags = Number(flags) || 0
+        state.volume = Number(volume) || 0
+        state.usedVolume = Number(usedVolume) || 0
     }
 }

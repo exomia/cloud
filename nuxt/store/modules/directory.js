@@ -29,12 +29,10 @@ export const getters = {
 
 export const mutations = {
     addFile(state, file) {
-        const size = file.size || 0
-        state.data.push({ ...file, size, type: 'File', checked: false })
+        state.data.push({ ...file, size: file.size || 0, type: 'File', checked: false })
     },
     addDirectory(state, directory) {
-        const size = directory.size || 0
-        state.data.push({ ...directory, size, type: 'Directory', checked: false })
+        state.data.push({ ...directory, size: directory.size || 0, type: 'Directory', checked: false })
     },
     setDirectoryData(state, { directories, files, path_info }) {
         directories.forEach(e => {
@@ -47,13 +45,6 @@ export const mutations = {
     },
     resetDirectoryData(state) {
         state.data = []
-    },
-    setAuthUser(state, { name, email, flags, volume, usedVolume }) {
-        state.user.name = name || ''
-        state.user.email = email || ''
-        state.user.flags = Number(flags) || 0
-        state.user.volume = Number(volume) || 0
-        state.user.usedVolume = Number(usedVolume) || 0
     },
     setCreateDirectoryShown(state, shown) {
         state.createDirectoryShown = shown
