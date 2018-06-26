@@ -6,18 +6,11 @@
                   :size="0"
                   :timestamp="Date.now()"
                   isNewDirectory></list-row>
-        <list-row v-for="entry in directories"
+        <list-row v-for="entry in getDirectoryData"
                   :key="entry.id"
                   :id="entry.id"
                   :name="entry.name"
-                  type="Directory"
-                  :size="entry.size"
-                  :timestamp="entry.timestamp" />
-        <list-row v-for="entry in files"
-                  :key="entry.id"
-                  :id="entry.id"
-                  :name="entry.name"
-                  type="File"
+                  :type="entry.type"
                   :size="entry.size"
                   :timestamp="entry.timestamp"
                   :extension="entry.extension" />
@@ -38,7 +31,7 @@ export default {
         ListSummary
     },
     computed: {
-        ...mapGetters(['directories', 'files', 'followingDirectories', 'followingFiles', 'sizeSum']),
+        ...mapGetters(['getDirectoryData', 'followingDirectories', 'followingFiles', 'sizeSum']),
         createDirectoryShown: {
             get() {
                 return this.$store.getters.isCreateDirectoryShown

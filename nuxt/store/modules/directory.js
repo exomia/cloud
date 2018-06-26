@@ -1,6 +1,5 @@
 export const state = () => ({
-    directories: [],
-    files: [],
+    data: [],
     path: [],
     subDirectoryCount: 20,
     subFileCount: 500,
@@ -12,10 +11,8 @@ export const state = () => ({
 })
 
 export const getters = {
-    //rewrite because it does not work like that anymore
-    isDirectoryEmpty: state => !(state.directories || state.files),
-    directories: state => state.directories,
-    files: state => state.files,
+    isDirectoryEmpty: state => !state.data.length,
+    getDirectoryData: state => state.data,
     followingDirectories: state => state.followingDirectories,
     followingFiles: state => state.followingFiles,
     sizeSum: state => state.sizeSum,
@@ -32,15 +29,24 @@ export const getters = {
 
 export const mutations = {
     addFile(state, file) {
-        state.files.push({ ...file, checked: false })
+        const size = file.size || 0
+        state.data.push({ ...file, size, type: 'File', checked: false })
     },
-    addDirectory(state, { directory }) {
-        state.directories.push({ ...directory, checked: false })
+    addDirectory(state, directory) {
+        const size = directory.size || 0
+        state.data.push({ ...directory, size, type: 'Directory', checked: false })
     },
-    setDirectories(state, { directories, files, path_info }) {
-        state.directories = directories
-        state.files = files
+    setDirectoryData(state, { directories, files, path_info }) {
+        directories.forEach(e => {
+            this.commit('addDirectory', e)
+        })
+        files.forEach(e => {
+            this.commit('addFile', e)
+        })
         state.path = path_info
+    },
+    resetDirectoryData(state) {
+        state.data = []
     },
     setAuthUser(state, { name, email, flags, volume, usedVolume }) {
         state.user.name = name || ''
@@ -56,38 +62,19 @@ export const mutations = {
         state.checkAll = checked
     },
     sortByX(state, { val, desc = true }) {
-        state.directories.sort((a, b) => {
-            if (a[val] && b[val]) {
-                const aVal = a[val].toLowerCase()
-                const bVal = b[val].toLowerCase()
-                if (aVal < bVal) {
-                    return desc ? -1 : 1
-                } else if (aVal > bVal) {
-                    return desc ? 1 : -1
-                }
-            }
-            return 0
-        })
-        state.files.sort((a, b) => {
-            if (a[val] && b[val]) {
-                const aVal = a[val].toLowerCase()
-                const bVal = b[val].toLowerCase()
-                if (aVal < bVal) {
-                    return desc ? -1 : 1
-                } else if (aVal > bVal) {
-                    return desc ? 1 : -1
-                }
-            }
-            return 0
+        state.data.sort((a, b) => {
+            const sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare(a[val], b[val])
+            return desc ? sort : sort * -1
         })
     }
 }
 
 export const actions = {
-    async setDirectories({ commit }, directory_id) {
+    async setDirectoryData({ commit }, directory_id) {
         const res = await this.$axios.$post(`/v1/directory`, { directory_id })
         if (res) {
-            await commit('setDirectories', res)
+            await commit('resetDirectoryData')
+            await commit('setDirectoryData', res)
         }
     }
 }
