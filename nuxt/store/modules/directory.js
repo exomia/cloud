@@ -1,11 +1,9 @@
 export const state = () => ({
     data: [],
     path: [],
-    subDirectoryCount: 20,
-    subFileCount: 500,
-    followingDirectories: 20,
-    followingFiles: 500,
-    sizeSum: 1303376534034,
+    directoryCount: 0,
+    fileCount: 0,
+    sizeSum: 0,
     createDirectoryShown: false,
     checkAll: false
 })
@@ -13,8 +11,6 @@ export const state = () => ({
 export const getters = {
     isDirectoryEmpty: state => !state.data.length,
     getDirectoryData: state => state.data,
-    followingDirectories: state => state.followingDirectories,
-    followingFiles: state => state.followingFiles,
     sizeSum: state => state.sizeSum,
     path: state => state.path,
     currentDirectoryId: state => {
@@ -24,15 +20,19 @@ export const getters = {
         return state.path[state.path.length - 1].id || null
     },
     isCreateDirectoryShown: state => state.createDirectoryShown,
-    isCheckAll: state => state.checkAll
+    isCheckAll: state => state.checkAll,
+    getDirectoryCount: state => state.directoryCount,
+    getFileCount: state => state.fileCount
 }
 
 export const mutations = {
     addFile(state, file) {
         state.data.push({ ...file, size: file.size || 0, type: 'File', checked: false })
+        this.commit('updateDirectorySummary')
     },
     addDirectory(state, directory) {
         state.data.push({ ...directory, size: directory.size || 0, type: 'Directory', checked: false })
+        this.commit('updateDirectorySummary')
     },
     setDirectoryData(state, { directories, files, path_info }) {
         directories.forEach(e => {
@@ -57,6 +57,19 @@ export const mutations = {
             const sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare(a[val], b[val])
             return desc ? sort : sort * -1
         })
+    },
+    updateDirectorySummary(state) {
+        /* Size Sum */
+        let sum = 0
+        state.data.forEach(e => {
+            sum += e.size
+        })
+        state.sizeSum = sum
+        /* Directory Count */
+        state.directoryCount = state.data.filter(e => e.type === 'Directory').length
+        /* File Count */
+        console.log(state.data.filter(e => e.type === 'File'))
+        state.fileCount = state.data.filter(e => e.type === 'File').length
     }
 }
 

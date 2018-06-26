@@ -2,13 +2,17 @@
     <div class="list-row list-row-hover"
          @click.prevent.stop="click">
         <!-- File/Directory -->
-        <div class="list-item"
-             style="width: 100px">
+        <div class="list-item justify-center"
+             style="width: 50px">
             <input type="checkbox"
                    class="checkbox"
                    style="opacity: 0"
                    @click.stop
                    v-model="checked">
+        </div>
+        <!-- Type -->
+        <div class="list-item justify-start"
+             style="width: 100px">
             <i v-if="type === 'Directory'"
                class="directory-icon" />
             <i v-if="type === 'File'"

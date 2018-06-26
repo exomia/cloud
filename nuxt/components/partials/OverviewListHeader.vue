@@ -1,35 +1,56 @@
 <template>
     <div class="list-header">
-        <div style="width: 100px">
+        <!-- Checkbox -->
+        <div class="list-item justify-center"
+             style="width: 50px">
             <input type="checkbox"
                    class="checkbox"
                    v-model="checked">
         </div>
-        <div style="width: calc(100% - 510px)">
+        <!-- Type -->
+        <div class="list-item justify-start"
+             style="width: 100px">
+            <div @click="toggleOrderType()">
+                <span>{{ $t('partials.OverviewListHeader.type') }}</span>
+                <i class="dropdown"
+                   :class="[isOrderTypeActive ? (orderTypeDesc ? 'dropdown-shown' :  'dropdown-active dropdown-shown') : '']"></i>
+            </div>
+        </div>
+        <!-- Name -->
+        <div class="list-item"
+             style="width: calc(100% - 510px)">
             <div @click="toggleOrderName()">
                 <span>{{ $t('partials.OverviewListHeader.name') }}</span>
                 <i class="dropdown"
                    :class="[isOrderNameActive ? (orderNameDesc ? 'dropdown-shown' :  'dropdown-active dropdown-shown') : '']"></i>
             </div>
         </div>
-        <div style="width: 85px">
+        <!-- Extended Menu -->
+        <div class="list-item"
+             style="width: 85px">
             <span></span>
         </div>
-        <div style="width: 100px">
+        <!-- Status -->
+        <div class="list-item"
+             style="width: 100px">
             <div @click="toggleOrderStatus()">
                 <span>{{ $t('partials.OverviewListHeader.status') }}</span>
                 <i class="dropdown"
                    :class="[isOrderStatusActive ? (orderStatusDesc ? 'dropdown-shown' :  'dropdown-active dropdown-shown') : '']"></i>
             </div>
         </div>
-        <div style="width: 100px">
+        <!-- Size -->
+        <div class="list-item"
+             style="width: 100px">
             <div @click="toggleOrderSize()">
                 <span>{{ $t('partials.OverviewListHeader.size') }}</span>
                 <i class="dropdown"
                    :class="[isOrderSizeActive ? (orderSizeDesc ? 'dropdown-shown' :  'dropdown-active dropdown-shown') : '']"></i>
             </div>
         </div>
-        <div style="width: 125px">
+        <!-- Date -->
+        <div class="list-item"
+             style="width: 125px">
             <div @click="toggleOrderDate()">
                 <span>{{ $t('partials.OverviewListHeader.date') }}</span>
                 <i class="dropdown"
@@ -50,6 +71,8 @@ export default {
     },
     computed: {
         ...mapGetters([
+            'isOrderTypeActive',
+            'orderTypeDesc',
             'isOrderNameActive',
             'orderNameDesc',
             'isOrderStatusActive',
@@ -61,6 +84,19 @@ export default {
         ])
     },
     methods: {
+        toggleOrderType: function() {
+            if (!this.isOrderTypeActive) {
+                this.$store.commit('setOrderTypeActive')
+                this.$store.commit('setOrderTypeDesc', true)
+            } else {
+                if (this.orderTypeDesc) {
+                    this.$store.commit('setOrderTypeDesc', !this.orderTypeDesc)
+                } else {
+                    this.$store.commit('setOrderTypeDesc', !this.orderTypeDesc)
+                    this.$store.commit('setOrderTypeActive', false)
+                }
+            }
+        },
         toggleOrderName: function() {
             if (!this.isOrderNameActive) {
                 this.$store.commit('setOrderNameActive')
@@ -123,5 +159,5 @@ export default {
 </script>
 
 
-<style src="~/assets/css/components/partials/OverviewListHeader.scss" lang="scss" scoped>
+<style src="~/assets/css/components/UI/Row.scss" lang="scss" scoped>
 </style>

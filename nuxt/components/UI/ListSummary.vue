@@ -1,33 +1,30 @@
 <template>
     <div class="list-summary">
-        <div style="width: 100px"
-             class="list-item"></div>
-        <div style="width: calc(100% - 510px)"
-             class="list-item">
-            <span>{{followingDirectories}} Ordner, {{followingFilesDisplay}}</span>
+        <div class="list-item"
+             style="width: 100px"></div>
+        <div class="list-item"
+             style="width: calc(100% - 510px)">
+            <span>{{directoryCount}} Ordner, {{formatFileCount}}</span>
         </div>
-        <div style="width: 185px"
-             class="list-item"></div>
-        <div style="width: 100px"
-             class="list-item">
+        <div class="list-item"
+             style="width: 185px"></div>
+        <div class="list-item"
+             style="width: 100px">
             <span>{{sizeSum | toUnit}}</span>
         </div>
-        <div style="width: 125px"
-             class="list-item"></div>
+        <div class="list-item"
+             style="width: 125px"></div>
     </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {}
-    },
     props: {
-        followingDirectories: {
+        directoryCount: {
             type: Number,
             required: true
         },
-        followingFiles: {
+        fileCount: {
             type: Number,
             required: true
         },
@@ -37,8 +34,8 @@ export default {
         }
     },
     computed: {
-        followingFilesDisplay() {
-            return `${this.followingFiles} ${this.followingFiles > 1 || this.followingFiles == 0 ? 'Dateien' : 'Datei'}`
+        formatFileCount() {
+            return `${this.fileCount} ${this.fileCount > 1 || this.fileCount == 0 ? 'Dateien' : 'Datei'}`
         }
     }
 }

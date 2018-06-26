@@ -19,6 +19,7 @@ div.list-row:not(:last-of-type) {
     border-bottom: 1px solid $contour-color;
 }
 
+div.list-header,
 div.list-row,
 div.list-summary {
     display: flex;
@@ -26,17 +27,15 @@ div.list-summary {
     background-color: $background-color;
     transition: 0.25s;
     text-decoration: none;
-    height: 3.5rem;
+    height: 3rem;
     div.list-item {
         display: flex;
-        justify-content: flex-start;
         align-items: center;
         height: 100%;
         padding: 0 0.5rem;
         white-space: nowrap;
         i.file-icon,
         i.directory-icon {
-            margin: 0 auto;
             display: inline-block;
             width: 2.25rem;
             height: 2.25rem;
@@ -118,6 +117,44 @@ div.list-summary {
             i.remove-icon {
                 background: url('~/assets/img/icon/trash.svg') no-repeat center;
                 opacity: 0.75;
+            }
+        }
+    }
+}
+
+div.list-header {
+    border-bottom: 1px solid $contour-color;
+    div.list-item {
+        font-weight: 400;
+        div {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            &:hover {
+                i.dropdown {
+                    display: inline-block;
+                    opacity: 0.5;
+                }
+            }
+            span {
+                user-select: none;
+            }
+            i.dropdown {
+                display: none;
+                width: 1rem;
+                height: 1rem;
+                background-image: url('~/assets/img/icon/dropdown.svg');
+                background-size: 75%;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                padding: 0 0.25rem;
+                &-active {
+                    transform: rotate(180deg);
+                }
+                &-shown {
+                    display: inline-block;
+                    opacity: 1 !important;
+                }
             }
         }
     }

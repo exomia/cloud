@@ -1,4 +1,7 @@
 export const state = () => ({
+    orderTypeActive: false,
+    orderTypeDesc: true,
+    //
     orderNameActive: false,
     orderNameDesc: true,
     //
@@ -13,6 +16,9 @@ export const state = () => ({
 })
 
 export const getters = {
+    isOrderTypeActive: state => state.orderTypeActive,
+    orderTypeDesc: state => state.orderTypeDesc,
+    //
     isOrderNameActive: state => state.orderNameActive,
     orderNameDesc: state => state.orderNameDesc,
     //
@@ -27,8 +33,23 @@ export const getters = {
 }
 
 export const mutations = {
+    setOrderTypeActive(state, active = true) {
+        if (active === true) {
+            state.orderNameActive = false
+            state.orderStatusActive = false
+            state.orderSizeActive = false
+            state.orderDateActive = false
+        }
+        state.orderTypeActive = active
+    },
+    setOrderTypeDesc(state, toggle) {
+        state.orderTypeDesc = toggle
+        this.commit('sortByX', { val: 'type', desc: toggle })
+    },
+    //
     setOrderNameActive(state, active = true) {
         if (active === true) {
+            state.orderTypeActive = false
             state.orderStatusActive = false
             state.orderSizeActive = false
             state.orderDateActive = false
@@ -42,6 +63,7 @@ export const mutations = {
     //
     setOrderStatusActive(state, active = true) {
         if (active === true) {
+            state.orderTypeActive = false
             state.orderNameActive = false
             state.orderSizeActive = false
             state.orderDateActive = false
@@ -55,6 +77,7 @@ export const mutations = {
     //
     setOrderSizeActive(state, active = true) {
         if (active === true) {
+            state.orderTypeActive = false
             state.orderStatusActive = false
             state.orderNameActive = false
             state.orderDateActive = false
@@ -68,6 +91,7 @@ export const mutations = {
     //
     setOrderDateActive(state, active = true) {
         if (active === true) {
+            state.orderTypeActive = false
             state.orderStatusActive = false
             state.orderSizeActive = false
             state.orderNameActive = false

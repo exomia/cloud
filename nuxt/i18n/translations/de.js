@@ -11,6 +11,7 @@ export default {
     /* Components */
     partials: {
         OverviewListHeader: {
+            type: 'Typ',
             name: 'Name',
             status: 'Status',
             size: 'Größe',

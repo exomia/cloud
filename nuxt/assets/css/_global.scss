@@ -87,6 +87,14 @@ input.text-input-invalid {
     justify-content: center;
 }
 
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
 /* Button */
 input.confirm-button {
     display: block;

@@ -14,8 +14,8 @@
                   :size="entry.size"
                   :timestamp="entry.timestamp"
                   :extension="entry.extension" />
-        <list-summary :followingDirectories="followingDirectories"
-                      :followingFiles="followingFiles"
+        <list-summary :directoryCount="getDirectoryCount"
+                      :fileCount="getFileCount"
                       :sizeSum="sizeSum" />
     </div>
 </template>
@@ -31,7 +31,7 @@ export default {
         ListSummary
     },
     computed: {
-        ...mapGetters(['getDirectoryData', 'followingDirectories', 'followingFiles', 'sizeSum']),
+        ...mapGetters(['getDirectoryData', 'getDirectoryCount', 'getFileCount', 'sizeSum']),
         createDirectoryShown: {
             get() {
                 return this.$store.getters.isCreateDirectoryShown
