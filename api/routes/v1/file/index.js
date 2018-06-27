@@ -75,6 +75,7 @@ router.post('/download', async ({ jwt: { valid, payload: { email } }, body: { fi
     }
 
     const file_uuid = xor_decode(file_id)
+    // Check nach file id nachdem er eine uuid erstellt hat ? @Daniel
     if (!file_id) {
         return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }

@@ -161,5 +161,106 @@ export const actions = {
             // Reset cancel action
             commit('cancelExchange', true)
         }
+    },
+    async startFileDownload({ commit, state, getters }, fileID) {
+        // When action is already running and the exchangeType
+        // is not set to upload return to prevent interruption
+        if (state.active === true && getters.exchangeType !== 1) {
+            return
+        }
+
+        // Return when no fileID is given
+        if (!fileID) {
+            return
+        }
+
+        // Creates file and checks if it's not undefined
+        const file = getters.getDirectoryData.filter(e => e.id === fileID)
+        if (!file) {
+            return
+        }
+
+        // Adds file info
+        commit('addFileInfo', ...file)
+
+        // Sets exchange type to download
+        commit('setExchangeType', 1)
+
+        // Checks if queue is already in progress
+        if (state.active === false) {
+            state.active = true
+
+            // Starts the upload
+            for (let i = 0; i < state.fileInfos.length; i++) {
+                let fi = state.fileInfos[i]
+
+                // Axios config
+                const config = {
+                    onDownloadProgress: function({ loaded, total }) {
+                        // Check if action got canceled
+                        if (state.canceled) {
+                            fi.cancel('Canceled via cancel button')
+                        }
+
+                        fi.progress = loaded / total
+                        commit('setCurrentFileRate', (loaded / (Date.now() - fi.start)) * 1000)
+                    },
+                    cancelToken: fi._cancelTokenSource.token
+                }
+
+                // Sets file to downloading and writes the filename to display
+                fi.status = 'downloading'
+                commit('setCurrentFileName', fi.file.name + fi.file.extension)
+
+                try {
+                    // Set download start time
+                    fi.start = Date.now()
+
+                    // Start dowloading from server
+                    const res = await this.$axios
+                        .$post(
+                            '/v1/file/download',
+                            {
+                                file_id: fi.file.id
+                            },
+                            config
+                        )
+                        .then(result => {
+                            if (result.error) {
+                                console.error(result.error)
+                                return
+                            }
+                            let byteCharacters = atob(result.file.data)
+                            let byteArrays = []
+                            for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+                                let slice = byteCharacters.slice(offset, offset + 512)
+                                const byteNumbers = new Array(slice.length)
+                                for (let i = 0; i < slice.length; i++) {
+                                    byteNumbers[i] = slice.charCodeAt(i)
+                                }
+                                byteArrays.push(new Uint8Array(byteNumbers))
+                            }
+                            const link = document.createElement('a')
+                            link.href = window.URL.createObjectURL(new Blob(byteArrays, { type: result.file.mimetype }))
+                            link.setAttribute('download', result.file.name)
+                            link.click()
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+
+                    if (res.error) {
+                        console.error(res.error)
+                    }
+
+                    // Catch error !here!
+
+                    fi.status = 'done'
+                } catch (e) {
+                    console.error(e)
+                    break
+                }
+            }
+        }
     }
 }
