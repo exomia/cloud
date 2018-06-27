@@ -1,16 +1,21 @@
 <template>
     <div class="exchange-container">
         <div class="center">
-            <button class="cancel"
-                    @click="cancel()"></button>
+            <div class="status">
+                <div>
+                    <i :class="[fileExchangeType === 0 ? 'upload' : 'download']"></i>
+                    <span>{{fileExchangeFilename}}</span>
+                </div>
+                <button class="cancel"
+                        @click="cancel()"></button>
+            </div>
             <div class="bar">
                 <div class="bar-progress"
-                     :style="{width: (progress * 100) + '%'}"></div>
+                     :style="{width: (fileExchangeProgress * 100) + '%'}"></div>
             </div>
             <div class="status">
-                <span>{{getFileCount(fileCount)}},&nbsp;{{fileSize | toUnit}}</span>
-                <span>{{name}}</span>
-                <span>{{uploadSpeed | toUnit}}/s</span>
+                <span>{{getFileCount(fileExchangeCount)}},&nbsp;{{fileExchangeSize | toUnit}}</span>
+                <span>{{fileExchangeRate | toUnit}}/s</span>
             </div>
         </div>
     </div>
@@ -18,26 +23,24 @@
 
 <script>
 export default {
-    props: {
-        name: {
-            type: String,
-            required: true
+    computed: {
+        fileExchangeType() {
+            return this.$store.getters.exchangeType
         },
-        progress: {
-            type: Number,
-            required: true
+        fileExchangeCount() {
+            return this.$store.getters.exchangeFileCount
         },
-        fileCount: {
-            type: Number,
-            required: true
+        fileExchangeSize() {
+            return this.$store.getters.exchangeSize
         },
-        fileSize: {
-            type: Number,
-            required: true
+        fileExchangeProgress() {
+            return this.$store.getters.exchangeProgress
         },
-        uploadSpeed: {
-            type: Number,
-            required: true
+        fileExchangeRate() {
+            return this.$store.getters.exchangeRate
+        },
+        fileExchangeFilename() {
+            return this.$store.getters.exchangeFilename
         }
     },
     methods: {

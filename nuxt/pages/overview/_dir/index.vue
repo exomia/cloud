@@ -11,12 +11,7 @@
                 <list-header></list-header>
                 <overview-list></overview-list>
             </template>
-            <overview-file-exchange-status v-if="fileExchangeActive"
-                                           :name="fileExchangeFilename"
-                                           :progress="fileExchangeProgress"
-                                           :fileCount="fileExchangeCount"
-                                           :fileSize="fileExchangeSize"
-                                           :uploadSpeed="fileExchangeRate">
+            <overview-file-exchange-status v-if="fileExchangeActive">
             </overview-file-exchange-status>
         </div>
     </main>
@@ -45,23 +40,8 @@ export default {
         OverviewListEmpty
     },
     computed: {
-        fileExchangeFilename() {
-            return this.$store.getters.exchangeFilename
-        },
         fileExchangeActive() {
             return this.$store.getters.exchangeActive
-        },
-        fileExchangeCount() {
-            return this.$store.getters.exchangeFileCount
-        },
-        fileExchangeSize() {
-            return this.$store.getters.exchangeSize
-        },
-        fileExchangeProgress() {
-            return this.$store.getters.exchangeProgress
-        },
-        fileExchangeRate() {
-            return this.$store.getters.exchangeRate
         },
         isDirectoryEmpty() {
             return this.$store.getters.isDirectoryEmpty

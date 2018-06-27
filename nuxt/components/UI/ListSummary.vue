@@ -1,7 +1,7 @@
 <template>
     <div class="list-summary">
         <div class="list-item"
-             style="width: 100px"></div>
+             style="width: 150px"></div>
         <div class="list-item"
              style="width: calc(100% - 510px)">
             <span>{{directoryCount}} Ordner, {{formatFileCount}}</span>
