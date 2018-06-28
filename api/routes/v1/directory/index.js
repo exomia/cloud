@@ -16,6 +16,7 @@ router.post('/', async ({ jwt: { valid, payload: { email } }, body: { directory_
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
+
     const directory_uuid = xor_decode(directory_id)
     const directories = await listAllDirectories(email, directory_uuid)
 
@@ -59,6 +60,7 @@ router.post('/add', async ({ jwt: { valid, payload: { email } }, body: { name, p
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
+
     const parent_directory_uuid = xor_decode(parent_directory_id)
 
     let result = await addDirectory(email, name, parent_directory_uuid)
@@ -83,10 +85,12 @@ router.post('/rename', async ({ jwt: { valid, payload: { email } }, body: { dire
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
-    const directory_uuid = xor_decode(directory_id)
-    if (!directory_uuid || !new_name || new_name.length <= 0) {
+
+    if (!directory_id || !new_name || new_name.length <= 0) {
         return res.json(JERROR_API_USAGE_ERROR)
     }
+
+    const directory_uuid = xor_decode(directory_id)
 
     let result = await updateDirectory(email, directory_uuid, { new_name })
     if (!result) {
@@ -117,11 +121,12 @@ router.post(
         if (!valid) {
             return EXIT_LOGIN_REQUIRED()
         }
-        const directory_uuid = xor_decode(directory_id)
-        const new_parent_directory_uuid = xor_decode(new_parent_directory_id)
-        if (!directory_uuid || !new_parent_directory_uuid) {
+        if (!directory_id || !new_parent_directory_id) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
+
+        const directory_uuid = xor_decode(directory_id)
+        const new_parent_directory_uuid = xor_decode(new_parent_directory_id)
 
         let result = await updateDirectory(email, directory_uuid, { new_parent_directory_uuid })
         if (!result) {
@@ -152,10 +157,11 @@ router.post(
         if (!valid) {
             return EXIT_LOGIN_REQUIRED()
         }
-        const directory_uuid = xor_decode(directory_id)
         if (!directory_id) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
+
+        const directory_uuid = xor_decode(directory_id)
 
         let result = await deleteDirectory(email, directory_id, force_delete)
         if (!result) {

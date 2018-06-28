@@ -73,26 +73,29 @@ router.post('/download', async ({ jwt: { valid, payload: { email } }, body: { fi
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
+    if (!file_id) {
+        return res.status(204).end() //no content
+    }
 
     const file_uuid = xor_decode(file_id)
-    // Check nach file id nachdem er eine uuid erstellt hat ? @Daniel
-    if (!file_id) {
-        return res.json(JERROR_INTERNAL_SERVER_ERROR)
-    }
 
     const result = await getFileInfo(email, file_uuid)
     if (!result) {
-        return next(E400)
+        return res.status(204).end() //no content
     }
 
-    /*res.download(path.join(process.cwd(), 'private', 'uploads', result.local_name), result.name, async err => {
-        if (err) {
-            return res.status(204).end()
+    res.download(
+        path.join(process.cwd(), 'private', 'uploads', result.local_name),
+        result.name + result.extension,
+        async err => {
+            if (err) {
+                return res.status(204).end() //no content
+            }
+            await increaseDownloadFileCount(file_uuid)
         }
-        await increaseDownloadFileCount(file_uuid)
-    })*/
+    )
 
-    fs.readFile(path.join(process.cwd(), 'private', 'uploads', result.local_name), async (err, buffer) => {
+    /*fs.readFile(path.join(process.cwd(), 'private', 'uploads', result.local_name), async (err, buffer) => {
         if (err) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
@@ -110,17 +113,19 @@ router.post('/download', async ({ jwt: { valid, payload: { email } }, body: { fi
             },
             error: false
         })
-    })
+    })*/
 })
 
 router.post('/rename', async ({ jwt: { valid, payload: { email } }, body: { file_id, new_name } }, res, next) => {
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
-    const file_uuid = xor_decode(file_id)
-    if (!file_uuid || !new_name || new_name.length <= 0) {
+    if (!file_id || !new_name || new_name.length <= 0) {
         return res.json(JERROR_API_USAGE_ERROR)
     }
+
+    const file_uuid = xor_decode(file_id)
+
     let result = await updateFile(email, file_uuid, { new_name })
     if (!result) {
         return res.json(JERROR_INTERNAL_SERVER_ERROR)
@@ -138,12 +143,14 @@ router.post('/move', async ({ jwt: { valid, payload: { email } }, body: { file_i
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
+
+    if (!file_id || !new_directory_id) {
+        return res.json(JERROR_API_USAGE_ERROR)
+    }
+
     const file_uuid = xor_decode(file_id)
     const new_directory_uuid = xor_decode(new_directory_id)
 
-    if (!file_uuid || !new_directory_uuid) {
-        return res.json(JERROR_API_USAGE_ERROR)
-    }
     let result = await updateFile(payload.email, file_uuid, { new_directory_uuid })
     if (!result) {
         return res.json(JERROR_INTERNAL_SERVER_ERROR)
@@ -160,10 +167,10 @@ router.post('/delete', async ({ jwt: { valid, payload: { email } }, body: { file
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
-    const file_uuid = xor_decode(file_id)
-    if (!file_uuid) {
+    if (!file_id) {
         return res.json(JERROR_API_USAGE_ERROR)
     }
+    const file_uuid = xor_decode(file_id)
     let result = await deleteFile(email, file_uuid, force_delete)
     if (!result) {
         return res.json(JERROR_INTERNAL_SERVER_ERROR)

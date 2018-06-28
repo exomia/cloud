@@ -190,7 +190,7 @@ export const actions = {
         if (state.active === false) {
             state.active = true
 
-            // Starts the upload
+            // Starts the download
             for (let i = 0; i < state.fileInfos.length; i++) {
                 let fi = state.fileInfos[i]
 
@@ -205,7 +205,8 @@ export const actions = {
                         fi.progress = loaded / total
                         commit('setCurrentFileRate', (loaded / (Date.now() - fi.start)) * 1000)
                     },
-                    cancelToken: fi._cancelTokenSource.token
+                    cancelToken: fi._cancelTokenSource.token,
+                    responseType: 'blob'
                 }
 
                 // Sets file to downloading and writes the filename to display
@@ -225,39 +226,22 @@ export const actions = {
                             },
                             config
                         )
-                        .then(result => {
-                            if (result.error) {
-                                console.error(result.error)
-                                return
-                            }
-                            let byteCharacters = atob(result.file.data)
-                            let byteArrays = []
-                            for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-                                let slice = byteCharacters.slice(offset, offset + 512)
-                                const byteNumbers = new Array(slice.length)
-                                for (let i = 0; i < slice.length; i++) {
-                                    byteNumbers[i] = slice.charCodeAt(i)
-                                }
-                                byteArrays.push(new Uint8Array(byteNumbers))
-                            }
-                            const link = document.createElement('a')
-                            link.href = window.URL.createObjectURL(new Blob(byteArrays, { type: result.file.mimetype }))
-                            link.setAttribute('download', result.file.name)
-                            link.click()
-                        })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err, 'error')
                         })
 
-                    if (res.error) {
-                        console.error(res.error)
-                    }
+                    //DEBUG
+                    console.log(res, typeof res)
 
-                    // Catch error !here!
-
+                    const link = document.createElement('a')
+                    const url = window.URL.createObjectURL(res)
+                    link.href = url
+                    link.setAttribute('download', fi.file.name + fi.file.extension)
+                    link.click()
+                    window.URL.revokeObjectURL(url)
                     fi.status = 'done'
                 } catch (e) {
-                    console.error(e)
+                    console.error(e, 'error')
                     break
                 }
             }
