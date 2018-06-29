@@ -46,8 +46,8 @@ export default {
         isDirectoryEmpty() {
             return this.$store.getters.isDirectoryEmpty
         },
-        currentDirectoryId() {
-            return this.$store.getters.currentDirectoryId
+        currentDirectoryUuid() {
+            return this.$store.getters.currentDirectoryUuid
         }
     },
     methods: {

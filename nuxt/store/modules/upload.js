@@ -107,7 +107,7 @@ export const actions = {
                     fi.start = Date.now()
 
                     // Start uploading to server
-                    const res = await this.$axios.$put(`/v1/file/${getters.currentDirectoryId}`, fd, config)
+                    const res = await this.$axios.$put(`/v1/file/${getters.currentDirectoryUuid}`, fd, config)
 
                     if (res.error) {
                         console.error(res.error)

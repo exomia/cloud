@@ -7,8 +7,8 @@
                   :timestamp="Date.now()"
                   isNewDirectory></list-row>
         <list-row v-for="entry in getDirectoryData"
-                  :key="entry.id"
-                  :id="entry.id"
+                  :key="entry.uuid"
+                  :uuid="entry.uuid"
                   :name="entry.name"
                   :type="entry.type"
                   :size="entry.size"

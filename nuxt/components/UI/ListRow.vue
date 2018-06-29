@@ -94,7 +94,7 @@
 <script>
 export default {
     props: {
-        id: {
+        uuid: {
             type: String,
             required: false
         },
@@ -144,13 +144,14 @@ export default {
                 /* Open directory */
                 $nuxt.$router.push({
                     name: `overview-dir___${this.$i18n.locale}`,
-                    params: { dir: this.id }
+                    params: { dir: this.uuid }
                 })
             } else if (this.type === 'File') {
                 /* Starts file download */
+                //TODO: test if still working out of dev mode (api no auth check)
                 const downloadFrame = document.createElement('iframe')
                 downloadFrame.style = 'display: none;'
-                downloadFrame.src = `${process.env.API_URL}/v1/file/${this.id}`
+                downloadFrame.src = `${process.env.API_URL}/v1/file/${this.uuid}`
                 document.querySelector('body').appendChild(downloadFrame)
                 setTimeout(() => document.querySelector('body').removeChild(downloadFrame), 1000)
             }
@@ -173,7 +174,7 @@ export default {
                     this.$store.commit('setCreateDirectoryShown', false)
 
                     /* Send new directory name to server */
-                    const res = await this.$axios.$put(`/v1/directory/${this.$store.getters.currentDirectoryId}`, {
+                    const res = await this.$axios.$put(`/v1/directory/${this.$store.getters.currentDirectoryUuid}`, {
                         name: this.newName
                     })
 
@@ -190,11 +191,11 @@ export default {
                     }
 
                     if (this.type === 'Directory') {
-                        this.$axios.$post(`/v1/directory/${this.id}/rename`, {
+                        this.$axios.$post(`/v1/directory/${this.uuid}/rename`, {
                             new_name: this.newName
                         })
                     } else if (this.type === 'File') {
-                        this.$axios.$post(`/v1/file/${this.id}/rename`, {
+                        this.$axios.$post(`/v1/file/${this.uuid}/rename`, {
                             new_name: this.newName
                         })
                     }

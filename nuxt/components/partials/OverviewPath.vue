@@ -8,11 +8,11 @@
 
         <template v-for="entry in path">
             <i class="icon-arrow"
-               :key="entry.id + '-icon'" />
-            <nuxt-link :to="entry.id"
+               :key="entry.uuid + '-icon'" />
+            <nuxt-link :to="entry.uuid"
                        tag="span"
                        class="path-name"
-                       :key="entry.id + '-span'">
+                       :key="entry.uuid + '-span'">
                 {{entry.name}}
             </nuxt-link>
         </template>

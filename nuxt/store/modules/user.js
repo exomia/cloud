@@ -1,17 +1,15 @@
 export const state = () => ({
-    user: {
-        name: '',
-        email: '',
-        flags: 0,
-        volume: 123456,
-        usedVolume: 123456
-    }
+    name: '',
+    email: '',
+    flags: 0,
+    volume: 123456,
+    usedVolume: 123456
 })
 
 export const getters = {
     userAuthData: state => {},
-    volume: state => state.user.volume,
-    usedVolume: state => state.user.usedVolume
+    volume: state => state.volume,
+    usedVolume: state => state.usedVolume
 }
 
 export const mutations = {
