@@ -1,5 +1,7 @@
 import pkg from './package'
 
+const API_URL = process.env.API_URL || 'http://127.0.0.1/api'
+
 module.exports = {
     mode: 'universal',
 
@@ -7,7 +9,8 @@ module.exports = {
     ** Env Variables
     */
     env: {
-        projectTitle: 'Exomia Cloud'
+        projectTitle: 'Exomia Cloud',
+        API_URL
     },
 
     /*
@@ -63,12 +66,11 @@ module.exports = {
     ** Axios module configuration
     */
     axios: {
-        baseURL: process.env.BASE_URL || 'http://127.0.0.1:3001/api',
+        baseURL: API_URL,
         credentials: false,
         retry: { retries: 3 },
         responseType: 'json',
         timeout: 1000 * 5, //5sec
-        //debug: process.env.NODE_ENV != 'production'
         debug: false
     },
 

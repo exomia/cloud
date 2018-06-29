@@ -15,9 +15,9 @@ export const getters = {
     path: state => state.path,
     currentDirectoryId: state => {
         if (!state.path || !state.path.length) {
-            return null
+            return 'ROOT'
         }
-        return state.path[state.path.length - 1].id || null
+        return state.path[state.path.length - 1].id || 'ROOT'
     },
     isCreateDirectoryShown: state => state.createDirectoryShown,
     isCheckAll: state => state.checkAll,
@@ -73,8 +73,8 @@ export const mutations = {
 }
 
 export const actions = {
-    async setDirectoryData({ commit }, directory_id) {
-        const res = await this.$axios.$post(`/v1/directory`, { directory_id })
+    async setDirectoryData({ commit }, directory_id = 'ROOT') {
+        const res = await this.$axios.$get(`/v1/directory/${directory_id}`)
         if (res) {
             await commit('resetDirectoryData')
             await commit('setDirectoryData', res)

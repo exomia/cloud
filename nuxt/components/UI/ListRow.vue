@@ -148,7 +148,11 @@ export default {
                 })
             } else if (this.type === 'File') {
                 /* Starts file download */
-                this.$store.dispatch('startFileDownload', this.id)
+                const downloadFrame = document.createElement('iframe')
+                downloadFrame.style = 'display: none;'
+                downloadFrame.src = `${process.env.API_URL}/v1/file/${this.id}`
+                document.querySelector('body').appendChild(downloadFrame)
+                setTimeout(() => document.querySelector('body').removeChild(downloadFrame), 1000)
             }
         },
         setName() {
@@ -169,14 +173,13 @@ export default {
                     this.$store.commit('setCreateDirectoryShown', false)
 
                     /* Send new directory name to server */
-                    const res = await this.$axios.$post('/v1/directory/add', {
-                        name: this.newName,
-                        parent_directory_id: this.$route.params.dir || ''
+                    const res = await this.$axios.$put(`/v1/directory/${this.$store.getters.currentDirectoryId}`, {
+                        name: this.newName
                     })
 
                     /* Add directory if no error occoured */
                     if (!res.error) {
-                        this.$store.commit('addDirectory', res)
+                        this.$store.commit('addDirectory', res.directory)
                     }
                 } else if (!this.isNewDirectory) {
                     this.inputActive = false
@@ -187,13 +190,11 @@ export default {
                     }
 
                     if (this.type === 'Directory') {
-                        this.$axios.$post('/v1/directory/rename', {
-                            directory_id: this.id,
+                        this.$axios.$post(`/v1/directory/${this.id}/rename`, {
                             new_name: this.newName
                         })
                     } else if (this.type === 'File') {
-                        this.$axios.$post('/v1/file/rename', {
-                            file_id: this.id,
+                        this.$axios.$post(`/v1/file/${this.id}/rename`, {
                             new_name: this.newName
                         })
                     }

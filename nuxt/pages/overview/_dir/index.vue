@@ -11,8 +11,8 @@
                 <list-header></list-header>
                 <overview-list></overview-list>
             </template>
-            <overview-file-exchange-status v-if="fileExchangeActive">
-            </overview-file-exchange-status>
+            <overview-upload-status v-if="uploadActive">
+            </overview-upload-status>
         </div>
     </main>
 </template>
@@ -22,7 +22,7 @@ import OverviewSidebar from '~/components/navigation/sidebar/OverviewSidebar'
 import OverviewPath from '~/components/partials/OverviewPath'
 import ListHeader from '~/components/UI/ListHeader'
 import OverviewList from '~/components/partials/OverviewList'
-import OverviewFileExchangeStatus from '~/components/partials/OverviewFileExchangeStatus'
+import OverviewUploadStatus from '~/components/partials/OverviewUploadStatus'
 import OverviewListEmpty from '~/components/partials/OverviewListEmpty'
 
 export default {
@@ -36,12 +36,12 @@ export default {
         OverviewPath,
         ListHeader,
         OverviewList,
-        OverviewFileExchangeStatus,
+        OverviewUploadStatus,
         OverviewListEmpty
     },
     computed: {
-        fileExchangeActive() {
-            return this.$store.getters.exchangeActive
+        uploadActive() {
+            return this.$store.getters.uploadActive
         },
         isDirectoryEmpty() {
             return this.$store.getters.isDirectoryEmpty

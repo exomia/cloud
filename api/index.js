@@ -17,9 +17,21 @@ function bindep(index) {
 }
 
 ;(async function start() {
+    app.all('/', (req, res) => {
+        res.redirect('/api')
+    })
+    app.all('/api', (req, res) => {
+        res.end('Welcome to the backend of exomia cloud')
+    })
+
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
     app.use(cors())
+
+    app.use((req, res, next) => {
+        console.log(`[DEBUG] ${req.method} ${req.path}`)
+        next()
+    })
 
     // Bind api endpoints security 0 (public)
     bindep(0)

@@ -4,7 +4,7 @@ import { JE1002 } from '../../../lib/error'
 
 const router = express.Router()
 
-router.all('/', async ({ jwt: { valid, payload: { email } } }, res, next) => {
+router.all('/', async ({ jwt: { valid, payload: { email } } }, res) => {
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }

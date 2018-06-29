@@ -5,7 +5,7 @@ import { JE1001, JE1003 } from '../../../lib/error'
 
 const router = express.Router()
 
-router.post('/', async ({ body: { username, password, stayLoggedIn } }, res, next) => {
+router.post('/', async ({ body: { username, password, stayLoggedIn } }, res) => {
     if (username && password) {
         const result = await checkLoginData(username, password)
         if (result) {
@@ -23,7 +23,7 @@ router.post('/', async ({ body: { username, password, stayLoggedIn } }, res, nex
     return res.json(JE1001)
 })
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
     return res.json(JE1001)
 })
 

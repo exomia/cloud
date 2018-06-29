@@ -8,6 +8,13 @@ function je(code, msg) {
     return { error: { code, msg } }
 }
 
+/**
+ * TODO write method builder
+ * then use
+ * JERROR_NOT_FOUND(res)
+ * to send json response with real status code
+ */
+
 export const ERROR_NO_CONTENT = e(204, 'No Content')
 export const ERROR_BAD_REQUEST = e(400, 'Bad Request')
 export const ERROR_NOT_FOUND = e(404, 'Not Found')
