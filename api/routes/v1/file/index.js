@@ -59,7 +59,6 @@ router.put(
     }
 )
 
-//TODO: use http-method: delete
 router.delete(
     '/:file_id',
     async (

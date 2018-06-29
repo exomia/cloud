@@ -62,7 +62,7 @@ export const mutations = {
         /* Size Sum */
         let sum = 0
         state.data.forEach(e => {
-            sum += e.size
+            sum += e.size * 1
         })
         state.sizeSum = sum
         /* Directory Count */
