@@ -16,7 +16,7 @@ const upload = multer({ dest: 'private/uploads/' })
 const router = express.Router()
 
 router.put(
-    '/:directory_id',
+    '/:directory_uuid',
     upload.single('upload-file'),
     async (
         {
@@ -24,7 +24,7 @@ router.put(
                 valid,
                 payload: { email }
             },
-            params: { directory_id },
+            params: { directory_uuid },
             body: { replace },
             file
         },
@@ -36,14 +36,22 @@ router.put(
 
         if (!replace) {
             const fi = path.parse(file.originalname)
-            const result = await addFile(email, directory_id, fi.name, fi.ext, file.filename, file.mimetype, file.size)
+            const result = await addFile(
+                email,
+                directory_uuid,
+                fi.name,
+                fi.ext,
+                file.filename,
+                file.mimetype,
+                file.size
+            )
             if (!result) {
                 //TODO: CLEAR/REMOVE LOCAL FILE
                 return res.json(JERROR_FILE_ALREADY_EXIST)
             }
             return res.json({
                 file: {
-                    id: result.uuid,
+                    uuid: result.uuid,
                     name: result.name,
                     extension: result.extension,
                     mimetype: result.mimetype,
@@ -60,14 +68,14 @@ router.put(
 )
 
 router.delete(
-    '/:file_id',
+    '/:file_uuid',
     async (
         {
             jwt: {
                 valid,
                 payload: { email }
             },
-            params: { file_id },
+            params: { file_uuid },
             body: { force_delete }
         },
         res
@@ -75,31 +83,32 @@ router.delete(
         if (!valid) {
             return EXIT_LOGIN_REQUIRED()
         }
-        if (!file_id) {
+        if (!file_uuid) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
-        let result = await deleteFile(email, file_id, force_delete)
+        let result = await deleteFile(email, file_uuid, force_delete)
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
         return res.json({
             file: {
-                id: file_id
+                uuid: file_uuid
             },
             error: false
         })
     }
 )
 
-router.get('/:file_id', async ({ jwt: { valid, payload: { email } }, params: { file_id } }, res) => {
+router.get('/:file_uuid', async ({ jwt: { valid, payload: { email } }, params: { file_uuid } }, res) => {
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
-    if (!file_id) {
+
+    if (!file_uuid) {
         return res.status(204).end() //no content
     }
 
-    const result = await getFileInfo(email, file_id)
+    const result = await getFileInfo(email, file_uuid)
     if (!result) {
         return res.status(204).end() //no content
     }
@@ -111,20 +120,20 @@ router.get('/:file_id', async ({ jwt: { valid, payload: { email } }, params: { f
             if (err) {
                 return res.status(204).end() //no content
             }
-            await increaseDownloadFileCount(file_id)
+            await increaseDownloadFileCount(file_uuid)
         }
     )
 })
 
 router.post(
-    '/:file_id/rename',
+    '/:file_uuid/rename',
     async (
         {
             jwt: {
                 valid,
                 payload: { email }
             },
-            params: { file_id },
+            params: { file_uuid },
             body: { new_name }
         },
         res
@@ -132,17 +141,19 @@ router.post(
         if (!valid) {
             return EXIT_LOGIN_REQUIRED()
         }
-        if (!file_id || !new_name || new_name.length <= 0) {
+
+        if (!file_uuid || !new_name || new_name.length <= 0) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
 
-        let result = await updateFile(email, file_id, { new_name })
+        let result = await updateFile(email, file_uuid, { new_name })
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
+
         return res.json({
             file: {
-                id: file_id,
+                uuid: file_uuid,
                 new_name
             },
             error: false
@@ -151,15 +162,15 @@ router.post(
 )
 
 router.post(
-    '/:file_id/move',
+    '/:file_uuid/move',
     async (
         {
             jwt: {
                 valid,
                 payload: { email }
             },
-            params: { file_id },
-            body: { new_directory_id }
+            params: { file_uuid },
+            body: { new_directory_uuid }
         },
         res
     ) => {
@@ -167,17 +178,18 @@ router.post(
             return EXIT_LOGIN_REQUIRED()
         }
 
-        if (!file_id || !new_directory_id) {
+        if (!file_uuid || !new_directory_uuid) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
 
-        let result = await updateFile(payload.email, file_id, { new_directory_id })
+        let result = await updateFile(payload.email, file_uuid, { new_directory_uuid })
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
+
         return res.json({
             file: {
-                id: file_id
+                uuid: file_uuid
             },
             error: false
         })

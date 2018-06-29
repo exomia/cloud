@@ -1,9 +1,8 @@
 import { query, lb, lbjoin, e } from '../'
-import { isRootDir } from '../../util'
 
 export async function addDirectory(usernameOrEmail, name, parent_directory_uuid) {
     let result = false
-    if (!isRootDir(parent_directory_uuid)) {
+    if (parent_directory_uuid) {
         const dires = await getDirectoryInfo(usernameOrEmail, parent_directory_uuid)
         if (!dires) {
             return false
@@ -69,9 +68,7 @@ export async function listAllDirectories(usernameOrEmail, parent_directory_uuid)
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")
           LEFT JOIN private."file" f ON (d."uuid" = f."directory_uuid")
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
-              AND d."parent_directory_uuid" ${
-                  isRootDir(parent_directory_uuid) ? e`IS NULL` : lb`= ${parent_directory_uuid}`
-              }
+        AND d."parent_directory_uuid" ${parent_directory_uuid ? lb`= ${parent_directory_uuid}` : e`IS NULL`}
         AND d."delete_timestamp" IS NULL
         GROUP BY d."uuid";`
     if (result) {
@@ -81,7 +78,7 @@ export async function listAllDirectories(usernameOrEmail, parent_directory_uuid)
 }
 
 export async function getDirectoryInfo(usernameOrEmail, directory_uuid) {
-    if (isRootDir(directory_uuid)) {
+    if (!directory_uuid) {
         return false
     }
     const result = await query`

@@ -11,43 +11,33 @@ import { EXIT_LOGIN_REQUIRED, JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERR
 
 const router = express.Router()
 
-router.get('/:directory_id', async ({ jwt: { valid, payload: { email } }, params: { directory_id } }, res) => {
+router.get('/:directory_uuid?', async ({ jwt: { valid, payload: { email } }, params: { directory_uuid } }, res) => {
     if (!valid) {
         return EXIT_LOGIN_REQUIRED()
     }
 
-    const directories = await listAllDirectories(email, directory_id)
+    const directories = await listAllDirectories(email, directory_uuid)
 
     if (!directories) {
         return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
 
-    const files = await listAllFiles(email, directory_id)
+    const files = await listAllFiles(email, directory_uuid)
     if (!files) {
         return res.json(JERROR_INTERNAL_SERVER_ERROR)
     }
 
-    const dires = await getDirectoryInfo(email, directory_id)
+    const dires = await getDirectoryInfo(email, directory_uuid)
     let path_info = []
     if (dires) {
         for (let path of dires.path_info_json) {
-            path_info.push({ name: path.name, id: path.uuid })
+            path_info.push({ name: path.name, uuid: path.uuid })
         }
-        path_info.push({ name: dires.name, id: dires.uuid })
-    }
-
-    for (let i = 0; i < directories.length; i++) {
-        directories[i].id = directories[i].uuid
-        delete directories[i].uuid
-    }
-
-    for (let i = 0; i < files.length; i++) {
-        files[i].id = files[i].uuid
-        delete files[i].uuid
+        path_info.push({ name: dires.name, uuid: dires.uuid })
     }
 
     return res.json({
-        directory_id,
+        directory_uuid,
         directories,
         files,
         path_info
@@ -55,7 +45,7 @@ router.get('/:directory_id', async ({ jwt: { valid, payload: { email } }, params
 })
 
 router.delete(
-    '/:directory_id',
+    '/:directory_uuid',
     async (
         {
             jwt: {
@@ -63,24 +53,26 @@ router.delete(
                 payload: { email }
             },
             body: { force_delete },
-            params: { directory_id }
+            params: { directory_uuid }
         },
         res
     ) => {
         if (!valid) {
             return EXIT_LOGIN_REQUIRED()
         }
-        if (!directory_id) {
+
+        if (!directory_uuid) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
 
-        let result = await deleteDirectory(email, directory_id, force_delete)
+        let result = await deleteDirectory(email, directory_uuid, force_delete)
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
+
         return res.json({
             directory: {
-                id: directory_id
+                uuid: directory_uuid
             },
             error: false
         })
@@ -88,7 +80,7 @@ router.delete(
 )
 
 router.put(
-    '/:parent_directory_id',
+    '/:parent_directory_uuid?',
     async (
         {
             jwt: {
@@ -96,7 +88,7 @@ router.put(
                 payload: { email }
             },
             body: { name },
-            params: { parent_directory_id }
+            params: { parent_directory_uuid }
         },
         res
     ) => {
@@ -104,14 +96,14 @@ router.put(
             return EXIT_LOGIN_REQUIRED()
         }
 
-        const result = await addDirectory(email, name, parent_directory_id)
+        const result = await addDirectory(email, name, parent_directory_uuid)
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
 
         return res.json({
             directory: {
-                id: result.uuid,
+                uuid: result.uuid,
                 name: result.name,
                 timestamp: result.timestamp,
                 size: 0,
@@ -124,7 +116,7 @@ router.put(
 )
 
 router.post(
-    '/:directory_id/rename',
+    '/:directory_uuid/rename/',
     async (
         {
             jwt: {
@@ -132,7 +124,7 @@ router.post(
                 payload: { email }
             },
             body: { new_name },
-            params: { directory_id }
+            params: { directory_uuid }
         },
         res
     ) => {
@@ -140,17 +132,18 @@ router.post(
             return EXIT_LOGIN_REQUIRED()
         }
 
-        if (!directory_id || !new_name || new_name.length <= 0) {
+        if (!directory_uuid || !new_name || new_name.length <= 0) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
 
-        let result = await updateDirectory(email, directory_id, { new_name })
+        let result = await updateDirectory(email, directory_uuid, { new_name })
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
+
         return res.json({
             directory: {
-                id: directory_id,
+                uuid: directory_uuid,
                 name: new_name
             },
             error: false
@@ -159,31 +152,34 @@ router.post(
 )
 
 router.post(
-    '/move',
+    '/:directory_uuid/move',
     async (
         {
             jwt: {
                 valid,
                 payload: { email }
             },
-            body: { directory_id, new_parent_directory_id }
+            body: { new_parent_directory_uuid },
+            params: { directory_uuid }
         },
         res
     ) => {
         if (!valid) {
             return EXIT_LOGIN_REQUIRED()
         }
-        if (!directory_id || !new_parent_directory_id) {
+
+        if (!directory_uuid) {
             return res.json(JERROR_API_USAGE_ERROR)
         }
 
-        let result = await updateDirectory(email, directory_id, { new_parent_directory_id })
+        let result = await updateDirectory(email, directory_uuid, { new_parent_directory_uuid })
         if (!result) {
             return res.json(JERROR_INTERNAL_SERVER_ERROR)
         }
+
         return res.json({
             directory: {
-                id: directory_id
+                uuid: directory_uuid
             },
             error: false
         })

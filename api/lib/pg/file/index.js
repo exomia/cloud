@@ -1,5 +1,4 @@
 import { query, lb, lbjoin, e } from '../'
-import { isRootDir } from '../../util'
 
 export async function addFile(usernameOrEmail, directory_uuid, name, extension, local_name, mimetype, size) {
     const result = await query`
@@ -7,7 +6,7 @@ export async function addFile(usernameOrEmail, directory_uuid, name, extension, 
         VALUES ((SELECT "uuid"
                  FROM private."user"
                  WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
-                ${isRootDir(directory_uuid) ? null : directory_uuid},
+                ${directory_uuid || null},
                 ${name},
                 ${extension},
                 ${local_name},
@@ -21,7 +20,6 @@ export async function addFile(usernameOrEmail, directory_uuid, name, extension, 
 }
 
 export async function deleteFile(usernameOrEmail, file_uuid, force_delete) {
-    //TODO: actually delete file // We are not the NSA
     const result = force_delete
         ? await query`
             DELETE FROM private."file" f
@@ -54,7 +52,7 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
-              AND f."directory_uuid" ${isRootDir(directory_uuid) ? e`IS NULL` : lb`= ${directory_uuid}`}
+              AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
         AND f."delete_timestamp" IS NULL;`
     if (result) {
         return result.rows
