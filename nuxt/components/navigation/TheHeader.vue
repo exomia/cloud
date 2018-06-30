@@ -35,7 +35,7 @@
 export default {
     data() {
         return {
-            title: process.env.projectTitle
+            title: process.env.PROJECT_TITLE
         }
     },
     props: {
