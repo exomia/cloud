@@ -6,7 +6,7 @@
              style="width: 50px">
             <input type="checkbox"
                    class="checkbox"
-                   style="opacity: 0"
+                   style="display: none"
                    @click.stop
                    v-model="checked">
         </div>

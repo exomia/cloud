@@ -11,7 +11,7 @@ div.list-row-hover {
     &:hover {
         background-color: #eee;
         input.checkbox {
-            opacity: 1 !important;
+            display: inline-block !important;
         }
     }
 }

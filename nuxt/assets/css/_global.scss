@@ -32,9 +32,25 @@ main {
     height: 1rem;
     margin: 0;
     transition: 0.1s;
+    opacity: 0.35;
+    border: 1px solid black;
+    border-radius: 2px;
+    appearance: none;
+    cursor: pointer;
     &:hover,
     &:checked {
-        opacity: 1 !important;
+        opacity: 1;
+        border: 1px solid $primary-color;
+    }
+    &:checked {
+        display: inline-block !important;
+        background-image: url('~/assets/img/icon/checked.svg');
+        background-size: 92%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+    &:focus {
+        outline: none;
     }
 }
 
