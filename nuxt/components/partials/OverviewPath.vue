@@ -24,20 +24,22 @@
             </a>
             <div v-show="optionsShown"
                  class="option-display">
-                <input ref="fileInput"
-                       type="file"
-                       style="display: none"
-                       multiple>
-                <a class="option-item"
-                   @click="triggerFileInput()">
-                    <i class="upload" />
-                    <span>Datei Hochladen</span>
-                </a>
-                <a class="option-item"
-                   @click="triggerCreateNewDirectory()">
-                    <i class="directory" />
-                    <span>Neuer Ordner</span>
-                </a>
+                <div class="wrapper">
+                    <input ref="fileInput"
+                           type="file"
+                           style="display: none"
+                           multiple>
+                    <a class="option-item"
+                       @click="triggerFileInput()">
+                        <i class="upload" />
+                        <span>Datei Hochladen</span>
+                    </a>
+                    <a class="option-item"
+                       @click="triggerCreateNewDirectory()">
+                        <i class="directory" />
+                        <span>Neuer Ordner</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

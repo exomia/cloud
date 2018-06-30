@@ -50,30 +50,33 @@
                @click.stop="listOptionsActive = !listOptionsActive">
                 <i class="extended-menu-icon" />
             </a>
+
             <div v-show="listOptionsActive"
                  class="option-list-display list-options">
-                <a class="option-item">
-                    <i class="info" />
-                    <span>Info</span>
-                </a>
-                <a class="option-item">
-                    <i class="share" />
-                    <span>Teilen</span>
-                </a>
-                <a class="option-item"
-                   @click.stop="inputActive = !inputActive; listOptionsActive = false">
-                    <i class="edit" />
-                    <span>Umbenennen</span>
-                </a>
-                <a class="option-item"
-                   onclick="//rar download ?">
-                    <i class="download" />
-                    <span>Herunterladen</span>
-                </a>
-                <a class="option-item">
-                    <i class="remove" />
-                    <span>Löschen</span>
-                </a>
+                <div class="wrapper">
+                    <a class="option-item">
+                        <i class="info" />
+                        <span>Info</span>
+                    </a>
+                    <a class="option-item">
+                        <i class="share" />
+                        <span>Teilen</span>
+                    </a>
+                    <a class="option-item"
+                       @click.stop="inputActive = !inputActive; listOptionsActive = false">
+                        <i class="edit" />
+                        <span>Umbenennen</span>
+                    </a>
+                    <a class="option-item"
+                       onclick="//rar download ?">
+                        <i class="download" />
+                        <span>Herunterladen</span>
+                    </a>
+                    <a class="option-item">
+                        <i class="remove" />
+                        <span>Löschen</span>
+                    </a>
+                </div>
             </div>
         </div>
         <!-- Size -->
