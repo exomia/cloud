@@ -64,15 +64,11 @@ div.list-summary {
         i.directory-icon {
             background-image: url('~/assets/img/icon/directory.svg');
         }
-        i.status-icon-fine,
         i.status-icon-process,
         i.status-icon-detected {
             width: 1.5rem;
             height: 1.5rem;
             background-size: 100% 100%;
-        }
-        i.status-icon-fine {
-            background: url('~/assets/img/icon/virus-fine.svg') no-repeat center;
         }
         i.status-icon-process {
             background: url('~/assets/img/icon/virus-process.svg') no-repeat center;
