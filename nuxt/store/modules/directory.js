@@ -29,10 +29,12 @@ export const mutations = {
     addFile(state, file) {
         state.data.push({ ...file, size: file.size || 0, type: 'File', checked: false })
         this.commit('updateDirectorySummary')
+        this.commit('sortByActiveMethod')
     },
     addDirectory(state, directory) {
         state.data.push({ ...directory, size: directory.size || 0, type: 'Directory', checked: false })
         this.commit('updateDirectorySummary')
+        this.commit('sortByActiveMethod')
     },
     setDirectoryData(state, { directories, files, path_info }) {
         directories.forEach(e => {

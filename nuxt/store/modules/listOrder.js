@@ -1,12 +1,9 @@
 export const state = () => ({
-    orderTypeActive: false,
+    orderTypeActive: true,
     orderTypeDesc: true,
     //
     orderNameActive: false,
     orderNameDesc: true,
-    //
-    orderStatusActive: false,
-    orderStatusDesc: true,
     //
     orderSizeActive: false,
     orderSizeDesc: true,
@@ -22,9 +19,6 @@ export const getters = {
     isOrderNameActive: state => state.orderNameActive,
     orderNameDesc: state => state.orderNameDesc,
     //
-    isOrderStatusActive: state => state.orderStatusActive,
-    orderStatusDesc: state => state.orderStatusDesc,
-    //
     isOrderSizeActive: state => state.orderSizeActive,
     orderSizeDesc: state => state.orderSizeDesc,
     //
@@ -33,10 +27,28 @@ export const getters = {
 }
 
 export const mutations = {
+    sortByActiveMethod(state) {
+        let method = undefined
+        let desc = undefined
+        if (state.orderTypeActive === true) {
+            method = 'type'
+            desc = state.orderTypeDesc
+        } else if (state.orderNameActive === true) {
+            method = 'name'
+            desc = state.orderNameDesc
+        } else if (state.orderSizeActive === true) {
+            method = 'size'
+            desc = state.orderSizeDesc
+        } else if (state.orderDateActive === true) {
+            method = 'timestamp'
+            desc = state.orderDateDesc
+        }
+        this.commit('sortByX', { val: method, desc })
+    },
+    //
     setOrderTypeActive(state, active = true) {
         if (active === true) {
             state.orderNameActive = false
-            state.orderStatusActive = false
             state.orderSizeActive = false
             state.orderDateActive = false
         }
@@ -44,13 +56,12 @@ export const mutations = {
     },
     setOrderTypeDesc(state, toggle) {
         state.orderTypeDesc = toggle
-        this.commit('sortByX', { val: 'type', desc: toggle })
+        this.commit('sortByActiveMethod')
     },
     //
     setOrderNameActive(state, active = true) {
         if (active === true) {
             state.orderTypeActive = false
-            state.orderStatusActive = false
             state.orderSizeActive = false
             state.orderDateActive = false
         }
@@ -58,27 +69,12 @@ export const mutations = {
     },
     setOrderNameDesc(state, toggle) {
         state.orderNameDesc = toggle
-        this.commit('sortByX', { val: 'name', desc: toggle })
-    },
-    //
-    setOrderStatusActive(state, active = true) {
-        if (active === true) {
-            state.orderTypeActive = false
-            state.orderNameActive = false
-            state.orderSizeActive = false
-            state.orderDateActive = false
-        }
-        state.orderStatusActive = active
-    },
-    setOrderStatusDesc(state, toggle) {
-        state.orderStatusDesc = toggle
-        this.commit('sortByX', { val: 'clamav_status', desc: toggle })
+        this.commit('sortByActiveMethod')
     },
     //
     setOrderSizeActive(state, active = true) {
         if (active === true) {
             state.orderTypeActive = false
-            state.orderStatusActive = false
             state.orderNameActive = false
             state.orderDateActive = false
         }
@@ -86,13 +82,12 @@ export const mutations = {
     },
     setOrderSizeDesc(state, toggle) {
         state.orderSizeDesc = toggle
-        this.commit('sortByX', { val: 'size', desc: toggle })
+        this.commit('sortByActiveMethod')
     },
     //
     setOrderDateActive(state, active = true) {
         if (active === true) {
             state.orderTypeActive = false
-            state.orderStatusActive = false
             state.orderSizeActive = false
             state.orderNameActive = false
         }
@@ -100,6 +95,6 @@ export const mutations = {
     },
     setOrderDateDesc(state, toggle) {
         state.orderDateDesc = toggle
-        this.commit('sortByX', { val: 'timestamp', desc: toggle })
+        this.commit('sortByActiveMethod')
     }
 }

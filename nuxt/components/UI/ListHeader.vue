@@ -66,8 +66,6 @@ export default {
             'orderTypeDesc',
             'isOrderNameActive',
             'orderNameDesc',
-            'isOrderStatusActive',
-            'orderStatusDesc',
             'isOrderSizeActive',
             'orderSizeDesc',
             'isOrderDateActive',
@@ -98,19 +96,6 @@ export default {
                 } else {
                     this.$store.commit('setOrderNameDesc', !this.orderNameDesc)
                     this.$store.commit('setOrderNameActive', false)
-                }
-            }
-        },
-        toggleOrderStatus: function() {
-            if (!this.isOrderStatusActive) {
-                this.$store.commit('setOrderStatusActive')
-                this.$store.commit('setOrderStatusDesc', true)
-            } else {
-                if (this.orderStatusDesc) {
-                    this.$store.commit('setOrderStatusDesc', !this.orderStatusDesc)
-                } else {
-                    this.$store.commit('setOrderStatusDesc', !this.orderStatusDesc)
-                    this.$store.commit('setOrderStatusActive', false)
                 }
             }
         },
