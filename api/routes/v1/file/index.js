@@ -31,7 +31,7 @@ router.put(
         res
     ) => {
         if (!valid) {
-            return EXIT_LOGIN_REQUIRED()
+            return EXIT_LOGIN_REQUIRED(res)
         }
 
         if (!replace) {
@@ -81,7 +81,7 @@ router.delete(
         res
     ) => {
         if (!valid) {
-            return EXIT_LOGIN_REQUIRED()
+            return EXIT_LOGIN_REQUIRED(res)
         }
         if (!file_uuid) {
             return res.json(JERROR_API_USAGE_ERROR)
@@ -101,7 +101,7 @@ router.delete(
 
 router.get('/:file_uuid', async ({ jwt: { valid, payload: { email } }, params: { file_uuid } }, res) => {
     if (!valid) {
-        return EXIT_LOGIN_REQUIRED()
+        return EXIT_LOGIN_REQUIRED(res)
     }
 
     if (!file_uuid) {
@@ -139,7 +139,7 @@ router.post(
         res
     ) => {
         if (!valid) {
-            return EXIT_LOGIN_REQUIRED()
+            return EXIT_LOGIN_REQUIRED(res)
         }
 
         if (!file_uuid || !new_name || new_name.length <= 0) {

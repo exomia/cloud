@@ -1,5 +1,6 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 
@@ -27,6 +28,7 @@ async function start() {
         await builder.build()
     }
 
+    app.use(cookieParser())
     // Give nuxt middleware to express
     app.use(nuxt.render)
 

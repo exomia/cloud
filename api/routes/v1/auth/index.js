@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.all('/', async ({ jwt: { valid, payload: { email } } }, res) => {
     if (!valid) {
-        return EXIT_LOGIN_REQUIRED()
+        return EXIT_LOGIN_REQUIRED(res)
     }
     const result = await getUserInformation(email)
     if (result) {

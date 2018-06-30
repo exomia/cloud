@@ -112,7 +112,7 @@ export default {
             default: 0
         },
         size: {
-            type: Number
+            //type: Number
         },
         timestamp: {
             required: true

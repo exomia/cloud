@@ -24,6 +24,7 @@ export const SUCCESS = 0
 export const ERROR = 1
 
 export const JERROR_BAD_REQUEST = je(400, 'bad request')
+export const JERROR_FORBIDDEN = je(403, 'forbidden')
 export const JERROR_NOT_FOUND = je(404, 'not found')
 export const JERROR_INTERNAL_SERVER_ERROR = je(500, 'internal server error')
 

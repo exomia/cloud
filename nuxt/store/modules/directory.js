@@ -37,12 +37,12 @@ export const mutations = {
         this.commit('sortByActiveMethod')
     },
     setDirectoryData(state, { directories, files, path_info }) {
-        directories.forEach(e => {
-            this.commit('addDirectory', e)
-        })
-        files.forEach(e => {
-            this.commit('addFile', e)
-        })
+        for (let e in directories) {
+            this.commit('addDirectory', directories[e])
+        }
+        for (let e in files) {
+            this.commit('addFile', files[e])
+        }
         state.path = path_info
     },
     resetDirectoryData(state) {

@@ -1,8 +1,9 @@
 import express from 'express'
 import { endpoints } from './routes'
 import { jwt_init } from './lib/jwt'
-import { JE404, JE500 } from './lib/error'
+import { JERROR_NOT_FOUND, JERROR_INTERNAL_SERVER_ERROR, JERROR_FORBIDDEN } from './lib/error'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
 const app = express()
@@ -17,6 +18,15 @@ function bindep(index) {
 }
 
 ;(async function start() {
+    app.use((req, res, next) => {
+        console.log(`[DEBUG] ${req.protocol} | ${req.method} ${req.path}`)
+        if (req.protocol === 'https' || req.protocol === 'http') {
+            return next()
+        }
+        res.status(403)
+        res.json(JERROR_FORBIDDEN)
+    })
+
     app.all('/', (req, res) => {
         res.redirect('/api')
     })
@@ -26,24 +36,13 @@ function bindep(index) {
 
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
+    app.use(cookieParser())
     app.use(cors())
-
-    app.use((req, res, next) => {
-        console.log(`[DEBUG] ${req.method} ${req.path}`)
-        next()
-    })
 
     // Bind api endpoints security 0 (public)
     bindep(0)
 
     app.use(jwt_init)
-
-    app.use((req, res, next) => {
-        req.jwt.valid = true
-        req.jwt.payload = {}
-        req.jwt.payload.email = 'admin@exomia.com'
-        next()
-    })
 
     // Bind api endpoints security 1 (auth required)
     bindep(1)
@@ -59,12 +58,12 @@ function bindep(index) {
 
     app.use((req, res, next) => {
         res.status(404)
-        res.json(JE404)
+        res.json(JERROR_NOT_FOUND)
     })
 
     app.use((err, req, res, next) => {
         res.status(500)
-        res.json(JE500)
+        res.json(JERROR_INTERNAL_SERVER_ERROR)
     })
 
     app.disable('x-powered-by')
@@ -72,6 +71,6 @@ function bindep(index) {
 
     // Listen the server
     app.listen(port, host, () => {
-        console.log(`API listening on http(s)://${host}:${port}`)
+        console.log(`API listening on https://${host}:${port}`)
     })
 })()

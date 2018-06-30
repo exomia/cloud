@@ -13,7 +13,7 @@ const router = express.Router()
 
 router.get('/:directory_uuid?', async ({ jwt: { valid, payload: { email } }, params: { directory_uuid } }, res) => {
     if (!valid) {
-        return EXIT_LOGIN_REQUIRED()
+        return EXIT_LOGIN_REQUIRED(res)
     }
 
     const directories = await listAllDirectories(email, directory_uuid)
@@ -58,7 +58,7 @@ router.delete(
         res
     ) => {
         if (!valid) {
-            return EXIT_LOGIN_REQUIRED()
+            return EXIT_LOGIN_REQUIRED(res)
         }
 
         if (!directory_uuid) {
@@ -93,7 +93,7 @@ router.put(
         res
     ) => {
         if (!valid) {
-            return EXIT_LOGIN_REQUIRED()
+            return EXIT_LOGIN_REQUIRED(res)
         }
 
         const result = await addDirectory(email, name, parent_directory_uuid)
@@ -129,7 +129,7 @@ router.post(
         res
     ) => {
         if (!valid) {
-            return EXIT_LOGIN_REQUIRED()
+            return EXIT_LOGIN_REQUIRED(res)
         }
 
         if (!directory_uuid || !new_name || new_name.length <= 0) {
@@ -165,7 +165,7 @@ router.post(
         res
     ) => {
         if (!valid) {
-            return EXIT_LOGIN_REQUIRED()
+            return EXIT_LOGIN_REQUIRED(res)
         }
 
         if (!directory_uuid) {

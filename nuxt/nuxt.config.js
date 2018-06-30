@@ -1,6 +1,6 @@
 import pkg from './package'
 
-const API_URL = process.env.API_URL || 'http://127.0.0.1/api'
+const API_URL = process.env.API_URL || 'http://127.0.0.1:3001/api'
 
 module.exports = {
     mode: 'universal',
@@ -52,8 +52,13 @@ module.exports = {
     /*
     ** Plugins to load before mounting the App
     */
-    plugins: ['~/plugins/auth', '~/plugins/file-size', '~/plugins/date', '~/plugins/vuelidate'],
-
+    plugins: [
+        '~/plugins/auth',
+        '~/plugins/file-size',
+        '~/plugins/date',
+        '~/plugins/vuelidate',
+        { src: '~/plugins/axios-client', ssr: true }
+    ],
     /*
     ** Nuxt.js modules
     */
@@ -71,7 +76,8 @@ module.exports = {
         retry: { retries: 3 },
         responseType: 'json',
         timeout: 1000 * 5, //5sec
-        debug: false
+        debug: false,
+        https: false
     },
 
     /*
