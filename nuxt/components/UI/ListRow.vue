@@ -19,8 +19,8 @@
                class="file-icon" />
         </div>
         <!-- Name -->
-        <div class="list-item"
-             style="width: calc(100% - 510px)">
+        <div class="list-item space-between"
+             style="width: calc(100vw - 605px - 50px)">
             <!-- Rename / New Directory -->
             <input v-if="inputActive"
                    class="text-input"
@@ -31,13 +31,21 @@
                    @blur="setName()"
                    @keydown.enter="setName()">
             <template v-else>
-                <span>{{newName}}</span>
-                <span class="extension">{{extension}}</span>
+                <div>
+                    <span>{{newName}}</span>
+                    <span class="extension">{{extension}}</span>
+                </div>
+            </template>
+            <template>
+                <i v-if="scanStatus == 1"
+                   class="status-icon-process" />
+                <i v-if="scanStatus == 2"
+                   class="status-icon-detected" />
             </template>
         </div>
         <!-- Extended menu button -->
         <div class="list-item"
-             style="position: relative; width: 85px">
+             style="width: 100px">
             <a class="list-button em-button"
                @click.stop="listOptionsActive = !listOptionsActive">
                 <i class="extended-menu-icon" />
@@ -68,16 +76,6 @@
                 </a>
             </div>
         </div>
-        <!-- Clamav -->
-        <div class="list-item"
-             style="width: 100px">
-            <i v-if="scanStatus == 0"
-               class="status-icon-fine" />
-            <i v-if="scanStatus == 1"
-               class="status-icon-process" />
-            <i v-if="scanStatus == 2"
-               class="status-icon-detected" />
-        </div>
         <!-- Size -->
         <div class="list-item"
              style="width: 100px">
@@ -85,7 +83,7 @@
         </div>
         <!-- Timestamp -->
         <div class="list-item"
-             style="width: 125px">
+             style="width: 100px">
             <span>{{timestamp | toDatetime}}</span>
         </div>
     </div>

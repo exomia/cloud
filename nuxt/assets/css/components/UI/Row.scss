@@ -46,6 +46,7 @@ div.list-summary {
         height: 100%;
         padding: 0 0.5rem;
         white-space: nowrap;
+        position: relative;
         i.file-icon,
         i.directory-icon {
             display: inline-block;

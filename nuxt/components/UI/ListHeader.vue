@@ -18,7 +18,7 @@
         </div>
         <!-- Name -->
         <div class="list-item"
-             style="width: calc(100% - 510px)">
+             style="width: calc(100vw - 605px - 50px)">
             <div @click="toggleOrderName()">
                 <span>{{ $t('partials.ListHeader.name') }}</span>
                 <i class="dropdown"
@@ -27,17 +27,8 @@
         </div>
         <!-- Extended Menu -->
         <div class="list-item"
-             style="width: 85px">
-            <span></span>
-        </div>
-        <!-- Status -->
-        <div class="list-item"
              style="width: 100px">
-            <div @click="toggleOrderStatus()">
-                <span>{{ $t('partials.ListHeader.status') }}</span>
-                <i class="dropdown"
-                   :class="[isOrderStatusActive ? (orderStatusDesc ? 'dropdown-shown' :  'dropdown-active dropdown-shown') : '']"></i>
-            </div>
+            <span></span>
         </div>
         <!-- Size -->
         <div class="list-item"
@@ -50,7 +41,7 @@
         </div>
         <!-- Date -->
         <div class="list-item"
-             style="width: 125px">
+             style="width: 100px">
             <div @click="toggleOrderDate()">
                 <span>{{ $t('partials.ListHeader.date') }}</span>
                 <i class="dropdown"
