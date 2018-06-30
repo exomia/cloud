@@ -4,4 +4,14 @@
     </main>
 </template>
 
+<script>
+export default {
+    head() {
+        return {
+            title: `${process.env.PROJECT_TITLE} - ${this.$i18n.t('title.imprint')}`
+        }
+    }
+}
+</script>
+
 <style src="~/assets/css/pages/legal.scss" lang="scss" scoped />

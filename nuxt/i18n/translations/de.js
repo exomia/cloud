@@ -8,6 +8,14 @@ export default {
             login: 'Anmelden'
         }
     },
+    /* Page - Title */
+    title: {
+        home: 'Login',
+        privacy: 'Datenschutz',
+        imprint: 'Impressum',
+        overview: 'Übersicht',
+        settings: 'Einstellungen'
+    },
     /* Components */
     partials: {
         ListHeader: {

@@ -10,6 +10,7 @@ export async function sign(res, { email, password, flags }, stayLoggedIn) {
         password + config.SECRET_RT,
         config.jwt_options_rt
     )
+
     res.setHeader(
         'Access-Control-Expose-Headers',
         'x-token, x-refresh-s-token, x-refresh-l-token, x-token-c, x-refresh-token-c'
@@ -21,8 +22,7 @@ export async function sign(res, { email, password, flags }, stayLoggedIn) {
         'x-token-c',
         cookie.serialize('x-token-c', xToken, {
             httpOnly: false,
-            secure: false,
-            maxAge: 60 * 15
+            secure: false
         })
     )
 
@@ -51,10 +51,12 @@ export async function jwt_init(req, res, next) {
         valid: false,
         payload: {}
     }
+
     const t = req.headers['x-token'] || req.cookies['x-token-c']
     if (!t) {
         return next()
     }
+
     let payload = jwt.decode(t)
     if (!payload || !payload.email) {
         return next()

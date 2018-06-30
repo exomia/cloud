@@ -50,7 +50,6 @@
                @click.stop="listOptionsActive = !listOptionsActive">
                 <i class="extended-menu-icon" />
             </a>
-
             <div v-show="listOptionsActive"
                  class="option-list-display list-options">
                 <div class="wrapper">

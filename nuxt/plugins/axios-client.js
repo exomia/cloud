@@ -1,13 +1,17 @@
 export default function({ req, res, $axios }) {
     $axios.onRequest(config => {
         console.log(process.server ? 'SERVER' : 'CLIENT', 'Making request to ' + config.url)
+
         const xToken = !process.server ? localStorage.getItem('x-token') : req.cookies['x-token-c']
+
         const xRefreshToken = !process.server
             ? localStorage.getItem('x-refresh-token') || sessionStorage.getItem('x-refresh-token')
             : req.cookies['x-refresh-token-c']
+
         if (xToken) {
             $axios.setHeader('x-token', xToken)
         }
+
         if (xRefreshToken) {
             $axios.setHeader('x-refresh-token', xRefreshToken)
         }

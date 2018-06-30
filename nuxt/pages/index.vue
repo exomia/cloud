@@ -33,6 +33,11 @@
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
+    head() {
+        return {
+            title: `${process.env.PROJECT_TITLE} - ${this.$i18n.t('title.home')}`
+        }
+    },
     data() {
         return {
             name: '',

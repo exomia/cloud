@@ -8,6 +8,14 @@ export default {
             login: 'Login'
         }
     },
+    /* Page - Title */
+    title: {
+        home: 'Login',
+        privacy: 'Privacy',
+        imprint: 'Imprint',
+        overview: 'Overview',
+        settings: 'Settings'
+    },
     /* Components */
     partials: {
         ListHeader: {

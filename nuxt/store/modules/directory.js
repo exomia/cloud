@@ -57,7 +57,7 @@ export const mutations = {
     sortByX(state, { val, desc = true }) {
         state.data.sort((a, b) => {
             const sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare(a[val], b[val])
-            return desc ? sort : sort * -1
+            return desc ? sort * -1 : sort
         })
     },
     updateDirectorySummary(state) {

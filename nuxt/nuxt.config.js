@@ -9,7 +9,7 @@ module.exports = {
     ** Env Variables
     */
     env: {
-        projectTitle: 'Exomia Cloud',
+        PROJECT_TITLE: 'Exomia Cloud',
         API_URL
     },
 

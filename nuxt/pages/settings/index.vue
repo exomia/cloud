@@ -55,6 +55,11 @@ import SettingsSidebar from '~/components/navigation/sidebar/SettingsSidebar'
 import SettingsDataChangeForm from '~/components/UI/SettingsDataChangeForm'
 
 export default {
+    head() {
+        return {
+            title: `${process.env.PROJECT_TITLE} - ${this.$i18n.t('title.settings')}`
+        }
+    },
     data() {
         return {
             changeName: '',

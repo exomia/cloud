@@ -4,4 +4,14 @@
     </main>
 </template>
 
-<style src="~/assets/css/pages/legal.scss" lang="scss" scoped />
+<script>
+export default {
+    head() {
+        return {
+            title: `${process.env.PROJECT_TITLE} - ${this.$i18n.t('title.privacy')}`
+        }
+    }
+}
+</script>
+
+<style src="~/assets/css/pages/legal.scss" lang="scss" scoped></style>
