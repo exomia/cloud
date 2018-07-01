@@ -86,7 +86,7 @@
         <!-- Timestamp -->
         <div class="list-item"
              style="width: 100px">
-            <span>{{timestamp}}</span>
+            <span>{{timestamp | toDatetime}}</span>
         </div>
     </div>
 </template>

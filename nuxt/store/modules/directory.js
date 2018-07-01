@@ -31,8 +31,7 @@ export const mutations = {
             ...file,
             size: file.size || 0,
             type: 'File',
-            checked: false,
-            timestamp: toDatetime(file.timestamp)
+            checked: false
         })
         this.commit('updateDirectorySummary')
         this.commit('sortByActiveMethod')
@@ -42,8 +41,7 @@ export const mutations = {
             ...directory,
             size: directory.size || 0,
             type: 'Directory',
-            checked: false,
-            timestamp: toDatetime(directory.timestamp)
+            checked: false
         })
         this.commit('updateDirectorySummary')
         this.commit('sortByActiveMethod')
@@ -71,6 +69,10 @@ export const mutations = {
             const sort = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare(a[val], b[val])
             return desc ? sort * -1 : sort
         })
+        /* Switch on type Directory/File */
+        if (val === 'type') {
+            state.data.reverse()
+        }
     },
     updateDirectorySummary(state) {
         /* Size Sum */
@@ -94,14 +96,4 @@ export const actions = {
             await commit('setDirectoryData', res)
         }
     }
-}
-
-const options = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-}
-
-function toDatetime(val) {
-    return new Date(val).toLocaleDateString('de-DE', options)
 }

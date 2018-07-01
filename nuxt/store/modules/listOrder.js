@@ -1,6 +1,6 @@
 export const state = () => ({
     orderTypeActive: true,
-    orderTypeDesc: false,
+    orderTypeDesc: true,
     //
     orderNameActive: false,
     orderNameDesc: true,
