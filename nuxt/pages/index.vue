@@ -59,8 +59,10 @@ export default {
                     stayLoggedIn: this.checked
                 })
                 if (res) {
-                    $nuxt.$router.push({
-                        name: `overview-dir___${this.$i18n.locale}`
+                    this.$nextTick(() => {
+                        $nuxt.$router.push({
+                            name: `overview-dir___${this.$i18n.locale}`
+                        })
                     })
                 } else {
                     this.loggingIn = false

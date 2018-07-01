@@ -1,49 +1,14 @@
 import jwt from 'jsonwebtoken'
-import cookie from 'cookie'
 import config from '../../.config/.jwt.config.json'
 import { getUserPassword } from '../pg/user/auth'
 
 export async function sign(res, { email, password, flags }, stayLoggedIn) {
-    const xToken = jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t)
-    const xRefreshToken = jwt.sign(
-        { stayLoggedIn: Boolean(stayLoggedIn) },
-        password + config.SECRET_RT,
-        config.jwt_options_rt
-    )
-
+    res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-s-token, x-refresh-l-token')
+    res.setHeader('x-token', jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t))
     res.setHeader(
-        'Access-Control-Expose-Headers',
-        'x-token, x-refresh-s-token, x-refresh-l-token, x-token-c, x-refresh-token-c'
+        stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token',
+        jwt.sign({ stayLoggedIn: Boolean(stayLoggedIn) }, password + config.SECRET_RT, config.jwt_options_rt)
     )
-    res.setHeader('x-token', xToken)
-    res.setHeader(stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token', xRefreshToken)
-
-    res.setHeader(
-        'x-token-c',
-        cookie.serialize('x-token-c', xToken, {
-            httpOnly: false,
-            secure: false
-        })
-    )
-
-    if (stayLoggedIn) {
-        res.setHeader(
-            'x-refresh-token-c',
-            cookie.serialize('x-refresh-token-c', xRefreshToken, {
-                httpOnly: false,
-                secure: false,
-                maxAge: 60 * 60 * 24 * 7
-            })
-        )
-    } else {
-        res.setHeader(
-            'x-refresh-token-c',
-            cookie.serialize('x-refresh-token-c', xRefreshToken, {
-                httpOnly: false,
-                secure: false
-            })
-        )
-    }
 }
 
 export async function jwt_init(req, res, next) {

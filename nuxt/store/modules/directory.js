@@ -77,7 +77,7 @@ export const mutations = {
 export const actions = {
     async setDirectoryData({ commit }, directory_uuid = null) {
         const res = await this.$axios.$get(`/v1/directory/${directory_uuid || ''}`)
-        console.log(res)
+        //console.log(res)
         if (res) {
             await commit('resetDirectoryData')
             await commit('setDirectoryData', res)

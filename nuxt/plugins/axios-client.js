@@ -1,58 +1,48 @@
 export default function({ req, res, $axios }) {
     $axios.onRequest(config => {
-        console.log(process.server ? 'SERVER' : 'CLIENT', 'Making request to ' + config.url)
-
-        const xToken = !process.server ? localStorage.getItem('x-token') : req.cookies['x-token-c']
-
-        const xRefreshToken = !process.server
-            ? localStorage.getItem('x-refresh-token') || sessionStorage.getItem('x-refresh-token')
-            : req.cookies['x-refresh-token-c']
-
-        if (xToken) {
-            $axios.setHeader('x-token', xToken)
-        }
-
-        if (xRefreshToken) {
-            $axios.setHeader('x-refresh-token', xRefreshToken)
-        }
+        console.log(`[DEBUG] ${process.server ? 'SERVER' : 'CLIENT'} making request to ${config.url}`)
     })
 
+    //TODO: check if process.server == true does we have to send the cookie back to the client?
     $axios.onResponse(response => {
         const xToken = response.headers['x-token']
         const xRefreshLToken = response.headers['x-refresh-l-token']
         const xRefreshSToken = response.headers['x-refresh-s-token']
 
-        const xTokenC = response.headers['x-token-c']
-        const xRefreshTokenC = response.headers['x-refresh-token-c']
-
-        if (!process.server) {
-            if (xToken) {
+        if (xToken) {
+            if (!process.server) {
                 if (localStorage) {
                     localStorage.setItem('x-token', xToken)
                 }
+                setCookie('x-token-c', xToken)
             }
-            if (xRefreshLToken) {
+            $axios.setHeader('x-token', xToken)
+        }
+
+        if (xRefreshLToken) {
+            if (!process.server) {
                 if (localStorage) {
                     localStorage.setItem('x-refresh-token', xRefreshLToken)
                 }
-            } else if (xRefreshSToken) {
+                setCookie('x-refresh-token-c', xRefreshLToken, 7 * 24 * 60 * 60 * 1000)
+            }
+            $axios.setHeader('x-refresh-token', xRefreshLToken)
+        } else if (xRefreshSToken) {
+            if (!process.server) {
                 if (sessionStorage) {
                     sessionStorage.setItem('x-refresh-token', xRefreshSToken)
                 }
+                setCookie('x-refresh-token-c', xRefreshSToken)
             }
-
-            if (xTokenC) {
-                document.cookie = xTokenC + ''
-            }
-            if (xRefreshTokenC) {
-                document.cookie = xRefreshTokenC + ''
-            }
-        } /*else {
-            res.cookie('x-token-c', xToken, { http: true, secure: true })
-            res.cookie('x-refresh-token-c', xRefreshLToken || xRefreshSToken, {
-                http: true,
-                secure: true
-            })
-        }*/
+            $axios.setHeader('x-refresh-token', xRefreshSToken)
+        }
     })
+}
+
+function setCookie(name, value, expire = false) {
+    let expires = ''
+    if (expire) {
+        expires = 'expires=' + new Date(Date.now() + expire).toUTCString()
+    }
+    document.cookie = name + '=' + value + ';' + expires + ';path=/'
 }
