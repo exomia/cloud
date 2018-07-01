@@ -1,6 +1,5 @@
 <template>
-    <header class="space-between"
-            v-if="isAuthenticated">
+    <header class="space-between">
         <nuxt-link :to="localePath('overview-dir')"
                    tag="a"
                    class="button">
@@ -8,26 +7,17 @@
                  src="~/assets/img/cloud-logo.svg"
                  alt="Exomia Cloud">
         </nuxt-link>
-        <nuxt-link :to="localePath('overview-dir')"
-                   tag="a"
-                   class="logout-button">
-            <i class="logout" />
-            <span>Logout</span>
-        </nuxt-link>
-    </header>
-    <header class="space-between"
-            v-else>
-        <nuxt-link :to="localePath('index')"
-                   tag="a">
-            <h1 class="header-title">{{title}}</h1>
-        </nuxt-link>
-        <nuxt-link v-for="locale in $i18n.locales"
-                   v-if="locale.code !== $i18n.locale"
-                   :key="locale.code"
-                   :to="switchLocalePath(locale.code)"
-                   class="lang"
-                   :class="'lang-' + locale.code"
-                   tag="a"></nuxt-link>
+        <div>
+            <nuxt-link v-for="locale in $i18n.locales"
+                       v-if="locale.code !== $i18n.locale"
+                       :key="locale.code"
+                       :to="switchLocalePath(locale.code)"
+                       class="lang"
+                       :class="'lang-' + locale.code"
+                       tag="a"></nuxt-link>
+            <i @click="logout()"
+               class="logout"></i>
+        </div>
     </header>
 </template>
 
@@ -38,12 +28,34 @@ export default {
             title: process.env.PROJECT_TITLE
         }
     },
+    methods: {
+        logout() {
+            /* Clear tokens */
+            delete_cookie('x-refresh-token-c')
+            delete_cookie('x-token-c')
+
+            /* Clear Local/-Sessionstorage */
+            localStorage.clear()
+            sessionStorage.clear()
+
+            /* Redirect to login page */
+            this.$nextTick(() => {
+                $nuxt.$router.push({
+                    name: `index___${this.$i18n.locale}`
+                })
+            })
+        }
+    },
     props: {
         isAuthenticated: {
             type: Boolean,
             default: false
         }
     }
+}
+
+function delete_cookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`
 }
 </script>
 

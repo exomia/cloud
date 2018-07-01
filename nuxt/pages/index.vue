@@ -62,7 +62,7 @@ export default {
                 })
                 if (!res.error) {
                     this.$nextTick(() =>
-                        this.$nuxt.$router.push({
+                        $nuxt.$router.push({
                             name: `overview-dir___${this.$i18n.locale}`
                         })
                     )

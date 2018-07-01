@@ -25,31 +25,15 @@ header {
         width: 3rem;
         height: 3rem;
     }
-    a.logout-button {
+    div {
         display: flex;
-        justify-content: space-around;
-        width: 6.5rem;
-        border: 1px solid #fff;
-        padding: 0.25rem;
-        border-radius: 2px;
-        transition: 0.2s;
-        &:hover {
-            background-color: #fff;
-            i.logout {
-                filter: invert(1);
-            }
-            span {
-                color: #000;
-            }
-        }
-        span {
-            color: white;
-        }
         i.logout {
-            width: 1.35rem;
-            height: 1.35rem;
+            width: 3rem;
+            height: 3rem;
             background: url('~/assets/img/icon/logout.svg') no-repeat center;
             background-size: 1.35rem;
+            transition: 0.2s;
+            cursor: pointer;
         }
     }
     .lang {
