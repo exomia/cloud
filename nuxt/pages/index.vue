@@ -21,10 +21,12 @@
                        v-model="checked">
                 <span @click="checked = !checked">{{$t('index.form.stayLoggedIn')}}</span>
             </div>
-            <input class="confirm-button"
-                   :value="loginBtnValue"
-                   type="button"
-                   @click="tryLogin">
+            <div class="confirm-button-wrapper"
+                 @click="tryLogin">
+                <span>{{this.$i18n.t('index.form.login')}}</span>
+                <span v-if="loggingIn"
+                      class="loading"></span>
+            </div>
         </form>
     </main>
 </template>
@@ -43,19 +45,27 @@ export default {
             name: '',
             password: '',
             checked: false,
-            loginBtnValue: this.$i18n.t('index.form.login')
+            loggingIn: false
         }
     },
     methods: {
         async tryLogin() {
             this.$v.$touch()
-            // if (!this.$v.$invalid) {
-            this.$store.dispatch('loginUser', {
-                username: this.name,
-                password: this.password,
-                stayLoggedIn: this.checked
-            })
-            // }
+            if (!this.$v.$invalid) {
+                this.loggingIn = true
+                let res = await this.$store.dispatch('loginUser', {
+                    username: this.name,
+                    password: this.password,
+                    stayLoggedIn: this.checked
+                })
+                if (res) {
+                    $nuxt.$router.push({
+                        name: `overview-dir___${this.$i18n.locale}`
+                    })
+                } else {
+                    this.loggingIn = false
+                }
+            }
         }
     },
     validations: {
@@ -66,8 +76,15 @@ export default {
         },
         password: {
             required,
-            minLength: minLength(6),
+            minLength: minLength(4),
             maxLength: maxLength(72)
+        }
+    },
+    watch: {
+        checked() {
+            if (this.checked && !this.$v.$invalid) {
+                this.tryLogin()
+            }
         }
     }
 }

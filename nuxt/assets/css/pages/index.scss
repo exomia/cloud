@@ -1,3 +1,5 @@
+@import '../_variables.scss';
+
 main {
     justify-content: center;
     padding: 10rem 1rem 1rem;
@@ -28,5 +30,49 @@ main {
                 cursor: pointer;
             }
         }
+        .confirm-button-wrapper {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 2px;
+            border: 1px solid black;
+            line-height: 1.5;
+            color: white;
+            cursor: pointer;
+            background-color: #007e33;
+            width: 100%;
+            outline: none;
+            &:hover {
+                background-color: darken(#007e33, 5%);
+            }
+            span {
+                font-size: 18px;
+                font-weight: 400;
+            }
+            span.loading {
+                display: flex;
+                position: absolute;
+                right: 0.5rem;
+                &:before {
+                    content: '';
+                    top: 50%;
+                    left: 50%;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    border-radius: 50%;
+                    border: 0.15rem solid lightgray;
+                    border-top-color: $primary-color;
+                    animation: spinner 0.8s linear infinite;
+                }
+            }
+        }
+    }
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
     }
 }
