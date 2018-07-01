@@ -1,13 +1,14 @@
 export default async function({ $axios, redirect, route, app }) {
+    const l = app.i18n.locale === 'de' ? '/' : '/' + app.i18n.locale
     const res = await $axios.get('/v1/auth')
     if (res.data.error) {
-        if (route.path !== '/') {
-            return redirect('/' + (app.i18n.locale === 'de' ? '' : app.i18n.locale))
+        if (route.path !== l) {
+            return redirect(l)
         }
         return
     }
 
-    if (route.path === '/' || route.path == '/' + app.i18n.locale) {
+    if (route.path === l) {
         return redirect(`/${app.i18n.locale === 'de' ? '' : app.i18n.locale + '/'}overview`)
     }
 

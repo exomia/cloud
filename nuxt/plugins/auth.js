@@ -36,7 +36,7 @@ export default function({ $axios }) {
                 }
                 setCookie('x-token-c', xToken)
             }
-            //$axios.setHeader('x-token', xToken)
+            $axios.setHeader('x-token', xToken)
         }
 
         if (xRefreshLToken) {
@@ -46,7 +46,7 @@ export default function({ $axios }) {
                 }
                 setCookie('x-refresh-token-c', xRefreshLToken, 7 * 24 * 60 * 60 * 1000)
             }
-            //$axios.setHeader('x-refresh-token', xRefreshLToken)
+            $axios.setHeader('x-refresh-token', xRefreshLToken)
         } else if (xRefreshSToken) {
             if (!process.server) {
                 if (sessionStorage) {
@@ -54,7 +54,7 @@ export default function({ $axios }) {
                 }
                 setCookie('x-refresh-token-c', xRefreshSToken)
             }
-            //$axios.setHeader('x-refresh-token', xRefreshSToken)
+            $axios.setHeader('x-refresh-token', xRefreshSToken)
         }
     })
 }
