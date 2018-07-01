@@ -1,6 +1,6 @@
 import express from 'express'
 import { getUserInformation } from '../../../lib/pg/user'
-import { JE1002 } from '../../../lib/error'
+import { EXIT_LOGIN_REQUIRED, JERROR_LOGIN_REQUIRED } from '../../../lib/error'
 
 const router = express.Router()
 
@@ -18,7 +18,7 @@ router.all('/', async ({ jwt: { valid, payload: { email } } }, res) => {
             usedVolume: result.used_volume
         })
     }
-    return res.json(JE1002)
+    return res.json(JERROR_LOGIN_REQUIRED)
 })
 
 export default { router, security: 1 }

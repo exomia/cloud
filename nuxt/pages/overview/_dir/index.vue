@@ -26,6 +26,12 @@ import OverviewUploadStatus from '~/components/partials/OverviewUploadStatus'
 import OverviewListEmpty from '~/components/partials/OverviewListEmpty'
 
 export default {
+    middleware: ['auth', 'directory'],
+    /*meta: {
+        auth: {
+            security: 1
+        }
+    },*/
     head() {
         return {
             title: `${process.env.PROJECT_TITLE} - ${this.$i18n.t('title.overview')}`

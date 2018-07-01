@@ -52,13 +52,7 @@ module.exports = {
     /*
     ** Plugins to load before mounting the App
     */
-    plugins: [
-        '~/plugins/auth',
-        '~/plugins/file-size',
-        '~/plugins/date',
-        '~/plugins/vuelidate',
-        { src: '~/plugins/axios-client', ssr: true }
-    ],
+    plugins: ['~/plugins/auth', '~/plugins/file-size', '~/plugins/date', '~/plugins/vuelidate'],
     /*
     ** Nuxt.js modules
     */
@@ -93,7 +87,7 @@ module.exports = {
     ** Router config
     */
     router: {
-        middleware: ['directory']
+        //middleware: ['directory']
     }
 
     // transition: {

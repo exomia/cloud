@@ -27,12 +27,24 @@ export const getters = {
 
 export const mutations = {
     addFile(state, file) {
-        state.data.push({ ...file, size: file.size || 0, type: 'File', checked: false })
+        state.data.push({
+            ...file,
+            size: file.size || 0,
+            type: 'File',
+            checked: false,
+            timestamp: toDatetime(file.timestamp)
+        })
         this.commit('updateDirectorySummary')
         this.commit('sortByActiveMethod')
     },
     addDirectory(state, directory) {
-        state.data.push({ ...directory, size: directory.size || 0, type: 'Directory', checked: false })
+        state.data.push({
+            ...directory,
+            size: directory.size || 0,
+            type: 'Directory',
+            checked: false,
+            timestamp: toDatetime(directory.timestamp)
+        })
         this.commit('updateDirectorySummary')
         this.commit('sortByActiveMethod')
     },
@@ -63,9 +75,9 @@ export const mutations = {
     updateDirectorySummary(state) {
         /* Size Sum */
         let sum = 0
-        state.data.forEach(e => {
+        for (let e of state.data) {
             sum += e.size * 1
-        })
+        }
         state.sizeSum = sum
         /* Directory Count */
         state.directoryCount = state.data.filter(e => e.type === 'Directory').length
@@ -77,10 +89,20 @@ export const mutations = {
 export const actions = {
     async setDirectoryData({ commit }, directory_uuid = null) {
         const res = await this.$axios.$get(`/v1/directory/${directory_uuid || ''}`)
-        //console.log(res)
+        console.log(res)
         if (res) {
             await commit('resetDirectoryData')
             await commit('setDirectoryData', res)
         }
     }
+}
+
+const options = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+}
+
+function toDatetime(val) {
+    return new Date(val).toLocaleDateString('de-DE', options)
 }

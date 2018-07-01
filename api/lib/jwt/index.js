@@ -41,7 +41,6 @@ export async function jwt_init(req, res, next) {
             return next()
         }
     }
-
     const rt = req.headers['x-refresh-token'] || req.cookies['x-refresh-token-c']
     if (!rt) {
         return next()

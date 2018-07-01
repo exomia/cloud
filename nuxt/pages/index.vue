@@ -35,6 +35,7 @@
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
+    middleware: ['auth'],
     head() {
         return {
             title: `${process.env.PROJECT_TITLE} - ${this.$i18n.t('title.home')}`
@@ -53,16 +54,16 @@ export default {
             this.$v.$touch()
             if (!this.$v.$invalid) {
                 this.loggingIn = true
-                let res = await this.$store.dispatch('loginUser', {
+                // Check if login is valid
+                const res = await this.$axios.$post('/v1/auth/login', {
                     username: this.name,
                     password: this.password,
                     stayLoggedIn: this.checked
                 })
-                if (res) {
-                    this.$nextTick(() => {
-                        $nuxt.$router.push({
-                            name: `overview-dir___${this.$i18n.locale}`
-                        })
+                console.log(res)
+                if (!res.error) {
+                    $nuxt.$router.push({
+                        name: `overview-dir___${this.$i18n.locale}`
                     })
                 } else {
                     this.loggingIn = false
