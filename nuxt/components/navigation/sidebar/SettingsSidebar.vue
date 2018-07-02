@@ -1,11 +1,15 @@
 <template>
     <aside>
         <div>
-            <sidebar-item iconClass="profile" routeName="settings" text="Profil"/>
+            <sidebar-item iconClass="profile"
+                          routeName="settings"
+                          :text="$t('sidebar.settings.profile')" />
         </div>
         <div>
-            <div class="sidebar-header">Admin</div>
-            <sidebar-item iconClass="rights" routeName="settings-admin-rights" text="Rechte"/>
+            <div class="sidebar-header">{{$t('sidebar.settings.admin')}}</div>
+            <sidebar-item iconClass="rights"
+                          routeName="settings-admin-rights"
+                          :text="$t('sidebar.settings.rights')" />
         </div>
     </aside>
 </template>

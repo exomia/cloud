@@ -24,6 +24,10 @@ export default {
             status: 'Status',
             size: 'Größe',
             date: 'Datum'
+        },
+        OverviewPath: {
+            uploadFile: 'Datei Hochladen',
+            newDirectory: 'Neuer Ordner'
         }
     },
     navigation: {
@@ -31,6 +35,19 @@ export default {
             imprint: 'Impressum',
             privacy: 'Datenschutz',
             cookies: 'Cookies'
+        }
+    },
+    /* Sidebar */
+    sidebar: {
+        settings: {
+            admin: 'Administrator',
+            profile: 'Profil',
+            rights: 'Rechte'
+        },
+        overview: {
+            allFiles: 'Alle Dateien',
+            trash: 'Papierkorb',
+            settings: 'Einstellungen'
         }
     }
 }

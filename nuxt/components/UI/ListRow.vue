@@ -5,7 +5,6 @@
         <div class="list-item justify-center"
              style="width: 50px">
             <input type="checkbox"
-                   class="checkbox"
                    style="display: none"
                    @click.stop
                    v-model="checked">

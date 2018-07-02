@@ -32,12 +32,12 @@
                     <a class="option-item"
                        @click="triggerFileInput()">
                         <i class="upload" />
-                        <span>Datei Hochladen</span>
+                        <span>{{$t('partials.OverviewPath.uploadFile')}}</span>
                     </a>
                     <a class="option-item"
                        @click="triggerCreateNewDirectory()">
                         <i class="directory" />
-                        <span>Neuer Ordner</span>
+                        <span>{{$t('partials.OverviewPath.newDirectory')}}</span>
                     </a>
                 </div>
             </div>

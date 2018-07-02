@@ -3,7 +3,7 @@
         <div>
             <sidebar-item iconClass="directory"
                           routeName="overview-dir"
-                          text="Alle Dateien" />
+                          :text="$t('sidebar.overview.allFiles')" />
         </div>
         <div>
             <a class="sidebar-item no-hover">
@@ -17,10 +17,10 @@
             </a>
             <sidebar-item iconClass="trash"
                           routeName="trash"
-                          text="Papierkorb" />
+                          :text="$t('sidebar.overview.trash')" />
             <sidebar-item iconClass="settings"
                           routeName="settings"
-                          text="Einstellungen" />
+                          :text="$t('sidebar.overview.settings')" />
         </div>
     </aside>
 </template>

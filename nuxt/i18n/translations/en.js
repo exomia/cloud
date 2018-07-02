@@ -24,13 +24,30 @@ export default {
             status: 'Status',
             size: 'Size',
             date: 'Date'
+        },
+        OverviewPath: {
+            uploadFile: 'Upload file',
+            newDirectory: 'New directory'
         }
     },
     navigation: {
         TheFooter: {
-            imprint: 'imprint',
-            privacy: 'privacy',
-            cookies: 'cookies'
+            imprint: 'Imprint',
+            privacy: 'Privacy',
+            cookies: 'Cookies'
+        }
+    },
+    /* Sidebar */
+    sidebar: {
+        settings: {
+            admin: 'Admin',
+            profile: 'Profile',
+            rights: 'Rights'
+        },
+        overview: {
+            allFiles: 'All Files',
+            trash: 'Trash',
+            settings: 'Settings'
         }
     }
 }

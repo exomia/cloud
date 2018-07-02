@@ -39,10 +39,8 @@ export default {
             sessionStorage.clear()
 
             /* Redirect to login page */
-            this.$nextTick(() => {
-                $nuxt.$router.push({
-                    name: `index___${this.$i18n.locale}`
-                })
+            $nuxt.$router.push({
+                name: `index___${this.$i18n.locale}`
             })
         }
     },

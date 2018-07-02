@@ -10,7 +10,7 @@ div.list-row-hover {
     cursor: pointer;
     &:hover {
         background-color: #eee;
-        input.checkbox {
+        input[type='checkbox'] {
             display: inline-block !important;
         }
     }
