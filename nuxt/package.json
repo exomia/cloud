@@ -28,7 +28,7 @@
     },
     "devDependencies": {
         "cross-env": "^5.2.0",
-        "node-sass": "^4.9.0",
+        "node-sass": "^4.9.1",
         "nodemon": "^1.17.5",
         "sass-loader": "^7.0.3"
     },
