@@ -84,6 +84,3 @@ export default {
 
 <style src="~/assets/css/components/partials/OverviewPath.scss" lang="scss" scoped>
 </style>
-
-<style src="~/assets/css/components/extras/FloatingMenu.scss" lang="scss" scoped>
-</style>
