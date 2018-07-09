@@ -19,26 +19,22 @@
 
         <div class="options">
             <a class="option-button"
-               @click="optionsShown = !optionsShown">
+               @click="floatingMenuActive = !floatingMenuActive">
                 <i class="option-button-icon" />
             </a>
-            <div v-show="optionsShown"
+            <div v-if="floatingMenuActive"
                  class="option-display">
                 <div class="wrapper">
                     <input ref="fileInput"
                            type="file"
                            style="display: none"
                            multiple>
-                    <a class="option-item"
-                       @click="triggerFileInput()">
-                        <i class="upload" />
-                        <span>{{$t('partials.OverviewPath.uploadFile')}}</span>
-                    </a>
-                    <a class="option-item"
-                       @click="triggerCreateNewDirectory()">
-                        <i class="directory" />
-                        <span>{{$t('partials.OverviewPath.newDirectory')}}</span>
-                    </a>
+                    <floating-menu v-if="floatingMenuActive"
+                                   class="topbar-settings"
+                                   :items="floatingMenuItems"
+                                   @clicked="floatingMenuActive = false"
+                                   @triggerFileInput="triggerFileInput()"
+                                   @triggerCreateNewDirectory="triggerCreateNewDirectory()"></floating-menu>
                 </div>
             </div>
         </div>
@@ -46,13 +42,29 @@
 </template>
 
 <script>
+import FloatingMenu from '~/components/UI/FloatingMenu.vue'
 import { mapGetters } from 'vuex'
 
 export default {
     data() {
         return {
-            optionsShown: false
+            floatingMenuActive: false,
+            floatingMenuItems: [
+                {
+                    name: this.$i18n.t('partials.OverviewPath.uploadFile'),
+                    iconClass: 'upload',
+                    emit: 'triggerFileInput'
+                },
+                {
+                    name: this.$i18n.t('partials.OverviewPath.newDirectory'),
+                    iconClass: 'directory',
+                    emit: 'triggerCreateNewDirectory'
+                }
+            ]
         }
+    },
+    components: {
+        FloatingMenu
     },
     computed: {
         ...mapGetters(['directories', 'path'])
@@ -71,7 +83,4 @@ export default {
 </script>
 
 <style src="~/assets/css/components/partials/OverviewPath.scss" lang="scss" scoped>
-</style>
-
-<style src="~/assets/css/components/extras/FloatingMenu.scss" lang="scss" scoped>
 </style>

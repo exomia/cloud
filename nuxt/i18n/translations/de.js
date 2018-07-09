@@ -28,6 +28,13 @@ export default {
         OverviewPath: {
             uploadFile: 'Datei Hochladen',
             newDirectory: 'Neuer Ordner'
+        },
+        ListRow: {
+            info: 'Info',
+            share: 'Teilen',
+            rename: 'Umbenennen',
+            download: 'Herunterladen',
+            remove: 'Löschen'
         }
     },
     navigation: {

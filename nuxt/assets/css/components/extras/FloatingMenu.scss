@@ -1,13 +1,14 @@
 @import '../../_variables.scss';
 
-div.option-list-display {
+/* Settings */
+.row-settings {
     top: 55px;
     &::before {
         left: 2.5px;
     }
 }
 
-div.option-display {
+.topbar-settings {
     margin-top: 3px;
     left: 1rem;
     &::before {
@@ -15,6 +16,7 @@ div.option-display {
     }
 }
 
+/* Style */
 div.option-display,
 div.option-list-display {
     border-radius: 1px;
