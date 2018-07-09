@@ -6,6 +6,11 @@ module.exports = {
     mode: 'universal',
 
     /*
+    ** Disable default loading
+    */
+    loading: false,
+
+    /*
     ** Env Variables
     */
     env: {

@@ -114,6 +114,7 @@ input.text-input-invalid {
 /* Button */
 input.confirm-button {
     display: block;
+    position: relative;
     padding: 4px 8px;
     border-radius: 2px;
     border: 1px solid black;
@@ -126,6 +127,16 @@ input.confirm-button {
     outline: none;
     &:hover {
         background-color: darken(#007e33, 5%);
+    }
+    &::before {
+        display: block;
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: white;
     }
 }
 

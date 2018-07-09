@@ -23,12 +23,10 @@
                        v-model="checked">
                 <span @click="checked = !checked">{{$t('index.form.stayLoggedIn')}}</span>
             </div>
-            <div class="confirm-button-wrapper"
-                 @click="tryLogin">
-                <span>{{this.$i18n.t('index.form.login')}}</span>
-                <span v-if="loggingIn"
-                      class="loading"></span>
-            </div>
+            <input class="confirm-button"
+                   :value="this.$i18n.t('index.form.login')"
+                   type="button"
+                   @click="tryLogin()">
         </form>
     </main>
 </template>
