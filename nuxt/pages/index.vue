@@ -9,13 +9,15 @@
                    :class="{ 'input-error': $v.name.$error }"
                    type="text"
                    v-model="name"
-                   maxlength="64">
+                   maxlength="64"
+                   @keydown.enter="tryLogin()">
             <input :placeholder="$t('index.form.password')"
                    class="text-input"
                    :class="{ 'input-error': $v.password.$error }"
                    type="password"
                    v-model="password"
-                   maxlength="72">
+                   maxlength="72"
+                   @keydown.enter="tryLogin()">
             <div>
                 <input type="checkbox"
                        v-model="checked">
@@ -49,6 +51,18 @@ export default {
             loggingIn: false
         }
     },
+    validations: {
+        name: {
+            required,
+            minLength: minLength(3),
+            maxLength: maxLength(64)
+        },
+        password: {
+            required,
+            minLength: minLength(4),
+            maxLength: maxLength(72)
+        }
+    },
     methods: {
         async tryLogin() {
             this.$v.$touch()
@@ -70,18 +84,6 @@ export default {
                     this.loggingIn = false
                 }
             }
-        }
-    },
-    validations: {
-        name: {
-            required,
-            minLength: minLength(3),
-            maxLength: maxLength(64)
-        },
-        password: {
-            required,
-            minLength: minLength(4),
-            maxLength: maxLength(72)
         }
     },
     watch: {
