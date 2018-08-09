@@ -1,0 +1,176 @@
+@import '../_variables.scss';
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../img/icon/login/login_bg.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 80%;
+    div.page-wrapper {
+        width: 1200px;
+        @media screen and (max-width: $break-large) {
+            width: 100%;
+        }
+        div.header,
+        div.footer {
+            height: 45px;
+            display: flex;
+            padding: 0 16px 0 32px;
+        }
+        div.header {
+            justify-content: flex-end;
+            a {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                padding: 0 16px;
+                div.flag,
+                span.lang {
+                    height: 16px;
+                }
+                div.flag {
+                    width: 16px;
+                    margin-right: 0.5rem;
+                }
+                span.lang {
+                    text-align: center;
+                    user-select: none;
+                }
+                div.de,
+                div.en {
+                    background-position: 50% 50%;
+                    background-repeat: no-repeat;
+                }
+                div.de {
+                    background-image: url('../../img/icon/login/lang_de.svg');
+                }
+                div.en {
+                    background-image: url('../../img/icon/login/lang_en.svg');
+                }
+            }
+        }
+        div.center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            @media screen and (max-width: $break-small) {
+                height: calc(100vh - 135px);
+            }
+            height: calc(100vh - 90px);
+            form.login-form {
+                width: 250px;
+                div.form-section {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    img.logo {
+                        width: 50px;
+                        height: 50px;
+                        background-image: url('../../img/icon/login/logo.svg');
+                        margin-bottom: 12px;
+                    }
+                    h1 {
+                        font-family: 'Roboto Condensed', sans-serif;
+                        text-transform: uppercase;
+                        font-size: 25pt;
+                        font-weight: 300;
+                    }
+                    div.input-wrapper {
+                        display: flex;
+                        width: 100%;
+                        height: 45px;
+                        border-bottom: 1px solid black;
+                        align-items: center;
+                        &:first-of-type {
+                            margin-bottom: 32px;
+                        }
+                        &:not(:first-of-type) {
+                            margin-bottom: 64px;
+                        }
+                        img.input-icon {
+                            width: 20px;
+                            height: 20px;
+                            margin: 0 16px;
+                        }
+                        input[type='text'],
+                        input[type='password'] {
+                            border: none;
+                            background-color: transparent;
+                            font-size: 15pt;
+                            font-weight: 300;
+                            outline: none;
+                            height: 100%;
+                            width: 100%;
+                            &::placeholder {
+                                font-weight: 300;
+                                color: black;
+                            }
+                        }
+                        &-error {
+                            border-bottom: 1px solid red;
+                        }
+                    }
+                    input.signIn,
+                    input.forgotPw {
+                        width: 100%;
+                        height: 45px;
+                        outline: none;
+                        border: none;
+                        cursor: pointer;
+                    }
+                    input.signIn {
+                        background-color: #f26030;
+                        color: white;
+                        border-radius: 8px;
+                        font-size: 15pt;
+                        &:hover {
+                            background-color: darken(#f26030, 10%);
+                        }
+                    }
+                    input.forgotPw {
+                        position: relative;
+                        background-color: transparent;
+                        font-size: 13pt;
+                        font-weight: 300;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+        div.footer {
+            display: flex;
+            justify-content: space-between;
+            @media screen and (max-width: $break-small) {
+                height: 90px;
+                flex-direction: column;
+            }
+            div.footer-section {
+                display: flex;
+                align-items: center;
+                @media screen and (max-width: $break-small) {
+                    height: 45px;
+                    justify-content: center;
+                    &:first-of-type {
+                        order: 1;
+                    }
+                }
+                a {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    padding: 0 16px;
+                    cursor: pointer;
+                    &:hover > span {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "name": "vue-cloud",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "ssr:serve": "vue-cli-service ssr:serve",
+        "ssr:build": "vue-cli-service ssr:build",
+        "ssr:start": "vue-cli-service ssr:start",
+        "generate": "vue-cli-service generate",
+        "update": "npm-check -u"
+    },
+    "dependencies": {
+        "@vueneue/ssr-core": "^0.3.0",
+        "@vueneue/ssr-server": "^0.3.0",
+        "axios": "^0.18.0",
+        "node-fetch": "^2.2.0",
+        "vue": "^2.5.16",
+        "vue-class-component": "^6.2.0",
+        "vue-i18n": "^8.0.0",
+        "vue-meta": "^1.5.0",
+        "vue-no-ssr": "^0.2.2",
+        "vue-property-decorator": "^7.0.0",
+        "vue-router": "^3.0.1",
+        "vuelidate": "^0.7.4",
+        "vuex": "^3.0.1",
+        "vuex-class": "^0.3.1"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.0.0-rc.10",
+        "@vue/cli-service": "^3.0.0-rc.10",
+        "@vueneue/vue-cli-plugin-ssr": "^0.3.11",
+        "node-sass": "^4.9.0",
+        "sass-loader": "^7.0.1",
+        "vue-cli-plugin-i18n": "^0.5.0",
+        "vue-template-compiler": "^2.5.16"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
+}

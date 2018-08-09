@@ -1,0 +1,67 @@
+<template>
+    <header class="space-between">
+        <router-link :to="{ name: 'overview-dir' }"
+                     tag="a"
+                     class="button">
+            <img class="logo"
+                 src="@/assets/img/cloud-logo.svg"
+                 alt="Exomia Cloud">
+        </router-link>
+        <div>
+            <select v-model="$i18n.locale">
+                <option v-for="(lang, i) in langs"
+                        :key="`lang-${i}`"
+                        :value="lang">{{ lang }}</option>
+            </select>
+            <!-- <router-link v-for="locale in $i18n.locales"
+                       v-if="locale.code !== $i18n.locale"
+                       :key="locale.code"
+                       :to="switchLocalePath(locale.code)"
+                       class="lang"
+                       :class="'lang-' + locale.code"
+                       tag="a"></router-link> -->
+            <i @click="logout()"
+               class="logout"></i>
+        </div>
+    </header>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            langs: ['en', 'de'],
+            title: process.env.PROJECT_TITLE
+        }
+    },
+    methods: {
+        logout() {
+            /* Clear tokens */
+            delete_cookie('x-refresh-token-c')
+            delete_cookie('x-token-c')
+
+            /* Clear Local/-Sessionstorage */
+            localStorage.clear()
+            sessionStorage.clear()
+
+            /* Redirect to login page */
+            // $nuxt.$router.push({
+            //     name: `index___${this.$i18n.locale}`
+            // })
+        }
+    },
+    props: {
+        isAuthenticated: {
+            type: Boolean,
+            default: false
+        }
+    }
+}
+
+function delete_cookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`
+}
+</script>
+
+<style src="@/assets/css/components/navigation/TheHeader" lang="scss" scoped>
+</style>

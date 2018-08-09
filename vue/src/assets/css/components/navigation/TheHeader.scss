@@ -1,0 +1,57 @@
+@import '../../_variables.scss';
+
+header {
+    display: flex;
+    width: 100%;
+    background-color: $primary-color;
+    align-items: center;
+    padding: 0 1rem;
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        h1.header-title {
+            font-size: 22px;
+            color: white;
+            cursor: pointer;
+        }
+        img.logo {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+    a.button {
+        width: 3rem;
+        height: 3rem;
+    }
+    div {
+        display: flex;
+        i.logout {
+            width: 3rem;
+            height: 3rem;
+            background: url('../../../img/icon/logout.svg') no-repeat center;
+            background-size: 1.35rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+    }
+    .lang {
+        width: 3rem;
+        height: 3rem;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 75%;
+        opacity: 0.75;
+        transition: 0.25s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    .lang-de {
+        background-image: url('../../../img/icon/flag-de.svg');
+    }
+    .lang-en {
+        background-image: url('../../../img/icon/flag-us.svg');
+    }
+}
