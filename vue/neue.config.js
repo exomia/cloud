@@ -20,8 +20,5 @@ module.exports = {
             src: '@/plugins/call',
             ssr: true
         }
-    },
-    env: {
-        API_URL
     }
 }
