@@ -1,56 +1,56 @@
 {
-    "index": {
-        "form": {
-            "nameOrEmail": "Name / E-Mail",
-            "password": "Passwort",
-            "stayLoggedIn": "Angemeldet bleiben",
-            "login": "Anmelden"
-        }
-    },
-    "title": {
-        "home": "Login",
-        "privacy": "Datenschutz",
-        "imprint": "Impressum",
-        "overview": "Übersicht",
-        "settings": "Einstellungen"
-    },
-    "partials": {
-        "ListHeader": {
-            "type": "Typ",
-            "name": "Name",
-            "status": "Status",
-            "size": "Größe",
-            "date": "Datum"
-        },
-        "OverviewPath": {
-            "uploadFile": "Datei Hochladen",
-            "newDirectory": "Neuer Ordner"
-        },
-        "ListRow": {
-            "info": "Info",
-            "share": "Teilen",
-            "rename": "Umbenennen",
-            "download": "Herunterladen",
-            "remove": "Löschen"
-        }
-    },
-    "navigation": {
-        "TheFooter": {
-            "imprint": "Impressum",
-            "privacy": "Datenschutz",
-            "cookies": "Cookies"
-        }
-    },
-    "sidebar": {
-        "settings": {
-            "admin": "Administrator",
-            "profile": "Profil",
-            "rights": "Rechte"
-        },
-        "overview": {
-            "allFiles": "Alle Dateien",
-            "trash": "Papierkorb",
-            "settings": "Einstellungen"
-        }
+  "index": {
+    "form": {
+      "forgotPassword": "Passwort vergessen?",
+      "nameOrEmail": "Name / E-Mail",
+      "password": "Passwort",
+      "signIn": "Anmelden"
     }
+  },
+  "navigation": {
+    "TheFooter": {
+      "cookies": "Cookies",
+      "imprint": "Impressum",
+      "privacy": "Datenschutz"
+    }
+  },
+  "partials": {
+    "ListHeader": {
+      "date": "Datum",
+      "name": "Name",
+      "size": "Größe",
+      "status": "Status",
+      "type": "Typ"
+    },
+    "ListRow": {
+      "download": "Herunterladen",
+      "info": "Info",
+      "remove": "Löschen",
+      "rename": "Umbenennen",
+      "share": "Teilen"
+    },
+    "OverviewPath": {
+      "newDirectory": "Neuer Ordner",
+      "uploadFile": "Datei Hochladen"
+    }
+  },
+  "sidebar": {
+    "overview": {
+      "allFiles": "Alle Dateien",
+      "settings": "Einstellungen",
+      "trash": "Papierkorb"
+    },
+    "settings": {
+      "admin": "Administrator",
+      "profile": "Profil",
+      "rights": "Rechte"
+    }
+  },
+  "title": {
+    "home": "Login",
+    "imprint": "Impressum",
+    "overview": "Übersicht",
+    "privacy": "Datenschutz",
+    "settings": "Einstellungen"
+  }
 }

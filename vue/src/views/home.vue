@@ -4,7 +4,7 @@
             <div class="header">
                 <a @click="switchLang()">
                     <div class="flag"
-                         :class="lang"></div>
+                         :class="$i18n.locale"></div>
                     <span class="lang">{{upperLang}}</span>
                 </a>
             </div>
@@ -40,10 +40,10 @@
                     <div class="form-section">
                         <input class="signIn"
                                type="button"
-                               value="Sign in">
+                               :value="this.$i18n.t('index.form.signIn')">
                         <input class="forgotPw"
                                type="button"
-                               value="Forgot Password?">
+                               :value="this.$i18n.t('index.form.forgotPassword')">
                     </div>
                 </form>
             </div>
@@ -53,10 +53,10 @@
                 </div>
                 <div class="footer-section">
                     <a>
-                        <span>Imprint</span>
+                        <span>{{$t('navigation.TheFooter.imprint')}}</span>
                     </a>
                     <a>
-                        <span>Privacy</span>
+                        <span>{{$t('navigation.TheFooter.privacy')}}</span>
                     </a>
                 </div>
             </div>
@@ -68,17 +68,16 @@
 export default {
     data() {
         return {
-            lang: 'de',
-            langList: ['de', 'en'],
-            usernamePH: 'Username',
+            langs: ['de', 'en'],
+            usernamePH: this.$t('index.form.nameOrEmail'),
             usernameFocused: false,
-            passwordPH: 'Password',
+            passwordPH: this.$t('index.form.password'),
             passwordFocused: false
         }
     },
     computed: {
         upperLang: function() {
-            return this.lang.toUpperCase()
+            return this.$i18n.locale.toUpperCase()
         }
     },
     methods: {
@@ -86,17 +85,17 @@ export default {
             /* Lock context */
             const self = this
 
-            const idx = self.langList.findIndex(function(el) {
-                return el === self.lang
+            const idx = self.langs.findIndex(function(el) {
+                return el === self.$i18n.locale
             })
 
             /* Dont continue if only one language is given */
-            if (self.langList.length <= 1) return
+            if (self.langs.length <= 1) return
 
-            if (idx + 1 < self.langList.length) {
-                self.lang = self.langList[idx + 1]
+            if (idx + 1 < self.langs.length) {
+                self.$i18n.locale = self.langs[idx + 1]
             } else {
-                self.lang = self.langList[0]
+                self.$i18n.locale = self.langs[0]
             }
         }
     }
