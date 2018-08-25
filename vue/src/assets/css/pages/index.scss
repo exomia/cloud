@@ -49,6 +49,7 @@ main {
                         text-transform: uppercase;
                         font-size: 25pt;
                         font-weight: 300;
+                        user-select: none;
                     }
                     div.input-wrapper {
                         display: flex;
@@ -84,7 +85,13 @@ main {
                         &-error {
                             border-bottom: 1px solid red;
                             svg.input-icon {
+                                fill: red;
+                            }
+                            input {
                                 color: red;
+                                &::placeholder {
+                                    color: red !important;
+                                }
                             }
                         }
                     }

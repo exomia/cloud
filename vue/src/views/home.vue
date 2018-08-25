@@ -16,17 +16,21 @@
                              :class="{ 'input-wrapper-error': $v.username.$error }">
                             <UserIcon class="input-icon" />
                             <input type="text"
+                                   v-model="username"
                                    @focus="usernameFocused = true"
                                    @blur="usernameFocused = false"
-                                   :placeholder="[usernameFocused ? '' : usernamePH]">
+                                   :placeholder="[usernameFocused ? '' : usernamePH]"
+                                   @keydown.enter="signIn()">
                         </div>
                         <div class="input-wrapper"
                              :class="{ 'input-wrapper-error': $v.password.$error }">
                             <LockIcon class="input-icon" />
                             <input type="password"
+                                   v-model="password"
                                    @focus="passwordFocused = true"
                                    @blur="passwordFocused = false"
-                                   :placeholder="[passwordFocused ? '' : passwordPH]">
+                                   :placeholder="[passwordFocused ? '' : passwordPH]"
+                                   @keydown.enter="signIn()">
                         </div>
                     </div>
                     <div class="form-section">
@@ -74,8 +78,10 @@ export default {
     },
     data() {
         return {
+            username: '',
             usernamePH: this.$t('index.form.nameOrEmail'),
             usernameFocused: false,
+            password: '',
             passwordPH: this.$t('index.form.password'),
             passwordFocused: false
         }
@@ -87,10 +93,16 @@ export default {
         LangSwitcher
     },
     methods: {
-        signIn: function() {
+        signIn: async function() {
             this.$v.$touch()
-
             if (!this.$v.$error) {
+                this.call('/v1/auth/login', {
+                    username: this.username,
+                    password: this.password,
+                    stayLoggedIn: false
+                }).then(res => {
+                    console.log(res)
+                })
             } else {
                 console.error('Input error')
             }

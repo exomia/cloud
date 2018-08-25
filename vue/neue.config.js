@@ -1,5 +1,3 @@
-const API_URL = 'http://127.0.0.1:3001/api'
-
 module.exports = {
     plugins: {
         date: {
@@ -12,10 +10,14 @@ module.exports = {
         },
         math: {
             src: '@/plugins/math',
-            ssr: true
+            ssr: false
         },
         math: {
             src: '@/plugins/vuelidate',
+            ssr: true
+        },
+        call: {
+            src: '@/plugins/call',
             ssr: true
         }
     },
