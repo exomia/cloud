@@ -21,35 +21,6 @@ main {
         }
         div.header {
             justify-content: flex-end;
-            a {
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-                padding: 0 16px;
-                div.flag,
-                span.lang {
-                    height: 16px;
-                }
-                div.flag {
-                    width: 16px;
-                    margin-right: 0.5rem;
-                }
-                span.lang {
-                    text-align: center;
-                    user-select: none;
-                }
-                div.de,
-                div.en {
-                    background-position: 50% 50%;
-                    background-repeat: no-repeat;
-                }
-                div.de {
-                    background-image: url('../../img/icon/login/lang_de.svg');
-                }
-                div.en {
-                    background-image: url('../../img/icon/login/lang_en.svg');
-                }
-            }
         }
         div.center {
             display: flex;
@@ -67,11 +38,11 @@ main {
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    img.logo {
+                    svg.logo {
                         width: 50px;
                         height: 50px;
-                        background-image: url('../../img/icon/login/logo.svg');
                         margin-bottom: 12px;
+                        user-select: none;
                     }
                     h1 {
                         font-family: 'Roboto Condensed', sans-serif;
@@ -91,7 +62,7 @@ main {
                         &:not(:first-of-type) {
                             margin-bottom: 64px;
                         }
-                        img.input-icon {
+                        svg.input-icon {
                             width: 20px;
                             height: 20px;
                             margin: 0 16px;
@@ -112,6 +83,9 @@ main {
                         }
                         &-error {
                             border-bottom: 1px solid red;
+                            svg.input-icon {
+                                color: red;
+                            }
                         }
                     }
                     input.signIn,

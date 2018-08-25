@@ -2,35 +2,27 @@
     <main>
         <div class="page-wrapper">
             <div class="header">
-                <a @click="switchLang()">
-                    <div class="flag"
-                         :class="$i18n.locale"></div>
-                    <span class="lang">{{upperLang}}</span>
-                </a>
+                <LangSwitcher/>
             </div>
             <div class="center">
                 <form class="login-form">
                     <div class="form-section">
-                        <img src="@/assets/img/icon/login/logo.svg"
-                             alt="Logo"
-                             class="logo">
+                        <LogoIcon class="logo" />
                         <h1>Exomia Cloud</h1>
                     </div>
                     <div class="form-section"
                          style="margin-top: 96px">
-                        <div class="input-wrapper">
-                            <img class="input-icon"
-                                 src="@/assets/img/icon/login/user.svg"
-                                 alt="User">
+                        <div class="input-wrapper"
+                             :class="{ 'input-wrapper-error': $v.username.$error }">
+                            <UserIcon class="input-icon" />
                             <input type="text"
                                    @focus="usernameFocused = true"
                                    @blur="usernameFocused = false"
                                    :placeholder="[usernameFocused ? '' : usernamePH]">
                         </div>
-                        <div class="input-wrapper">
-                            <img class="input-icon"
-                                 src="@/assets/img/icon/login/lock.svg"
-                                 alt="Password">
+                        <div class="input-wrapper"
+                             :class="{ 'input-wrapper-error': $v.password.$error }">
+                            <LockIcon class="input-icon" />
                             <input type="password"
                                    @focus="passwordFocused = true"
                                    @blur="passwordFocused = false"
@@ -40,7 +32,8 @@
                     <div class="form-section">
                         <input class="signIn"
                                type="button"
-                               :value="this.$i18n.t('index.form.signIn')">
+                               :value="this.$i18n.t('index.form.signIn')"
+                               @click="signIn()">
                         <input class="forgotPw"
                                type="button"
                                :value="this.$i18n.t('index.form.forgotPassword')">
@@ -65,38 +58,54 @@
 </template>
 
 <script>
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import LangSwitcher from '@/components/UI/LangSwitcher.vue'
+
+/* SVG */
+import LogoIcon from '@/assets/img/icon/login/logo.svg'
+import UserIcon from '@/assets/img/icon/login/user.svg'
+import LockIcon from '@/assets/img/icon/login/lock.svg'
+
 export default {
+    head() {
+        return {
+            title: this.$t('title.home')
+        }
+    },
     data() {
         return {
-            langs: ['de', 'en'],
             usernamePH: this.$t('index.form.nameOrEmail'),
             usernameFocused: false,
             passwordPH: this.$t('index.form.password'),
             passwordFocused: false
         }
     },
-    computed: {
-        upperLang: function() {
-            return this.$i18n.locale.toUpperCase()
-        }
+    components: {
+        LogoIcon,
+        UserIcon,
+        LockIcon,
+        LangSwitcher
     },
     methods: {
-        switchLang: function() {
-            /* Lock context */
-            const self = this
+        signIn: function() {
+            this.$v.$touch()
 
-            const idx = self.langs.findIndex(function(el) {
-                return el === self.$i18n.locale
-            })
-
-            /* Dont continue if only one language is given */
-            if (self.langs.length <= 1) return
-
-            if (idx + 1 < self.langs.length) {
-                self.$i18n.locale = self.langs[idx + 1]
+            if (!this.$v.$error) {
             } else {
-                self.$i18n.locale = self.langs[0]
+                console.error('Input error')
             }
+        }
+    },
+    validations: {
+        username: {
+            required,
+            minLength: minLength(3),
+            maxLength: maxLength(64)
+        },
+        password: {
+            required,
+            minLength: minLength(4),
+            maxLength: maxLength(72)
         }
     }
 }

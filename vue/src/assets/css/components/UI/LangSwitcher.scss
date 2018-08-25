@@ -1,0 +1,13 @@
+a {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 16px;
+    svg.flag {
+        height: 15px;
+        margin-right: 0.5rem;
+    }
+    span.lang {
+        user-select: none;
+    }
+}
