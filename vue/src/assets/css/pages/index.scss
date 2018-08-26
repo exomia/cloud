@@ -147,6 +147,9 @@ main {
                     height: 100%;
                     padding: 0 16px;
                     cursor: pointer;
+                    span {
+                        color: black;
+                    }
                     &:hover > span {
                         text-decoration: underline;
                     }
