@@ -18,6 +18,7 @@ function bindep(index) {
 }
 
 ;(async function start() {
+    app.use(cors())
     app.use((req, res, next) => {
         console.log(`[DEBUG] ${req.protocol} | ${req.method} ${req.path}`)
         if (req.protocol === 'https' || req.protocol === 'http') {
@@ -37,7 +38,6 @@ function bindep(index) {
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json())
     app.use(cookieParser())
-    app.use(cors())
 
     // Bind api endpoints security 0 (public)
     bindep(0)

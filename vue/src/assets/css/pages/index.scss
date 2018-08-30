@@ -145,8 +145,12 @@ main {
                     display: flex;
                     align-items: center;
                     height: 100%;
-                    padding: 0 16px;
+                    padding: 0 1rem;
                     cursor: pointer;
+                    text-decoration: none;
+                    span {
+                        color: black;
+                    }
                     &:hover > span {
                         text-decoration: underline;
                     }

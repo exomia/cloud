@@ -49,12 +49,14 @@
                     <span>© 2018 Exomia.com</span>
                 </div>
                 <div class="footer-section">
-                    <a>
+                    <router-link :to="{ name: 'imprint' }"
+                                 tag="a">
                         <span>{{$t('navigation.TheFooter.imprint')}}</span>
-                    </a>
-                    <a>
+                    </router-link>
+                    <router-link :to="{ name: 'privacy' }"
+                                 tag="a">
                         <span>{{$t('navigation.TheFooter.privacy')}}</span>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -122,6 +124,5 @@ export default {
     }
 }
 </script>
-
 
 <style src="@/assets/css/pages/index" lang="scss" scoped></style>

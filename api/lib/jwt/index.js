@@ -4,10 +4,20 @@ import { getUserPassword } from '../pg/user/auth'
 
 export async function sign(res, { email, password, flags }, stayLoggedIn) {
     res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-s-token, x-refresh-l-token')
-    res.setHeader('x-token', jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t))
+    //res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:8080')
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    /*res.setHeader('Access-Control-Allow-Headers', 'x-token, x-refresh-s-token, x-refresh-l-token')*/
+    res.setHeader(
+        'x-token',
+        jwt.sign({ email, flags }, config.SECRET_T + password, config.jwt_options_t)
+    )
     res.setHeader(
         stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token',
-        jwt.sign({ stayLoggedIn: Boolean(stayLoggedIn) }, password + config.SECRET_RT, config.jwt_options_rt)
+        jwt.sign(
+            { stayLoggedIn: Boolean(stayLoggedIn) },
+            password + config.SECRET_RT,
+            config.jwt_options_rt
+        )
     )
 }
 
