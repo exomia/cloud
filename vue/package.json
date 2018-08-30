@@ -10,8 +10,8 @@
         "update": "npm-check -u"
     },
     "dependencies": {
-        "@vueneue/ssr-core": "^0.3.18",
-        "@vueneue/ssr-server": "^0.3.18",
+        "@vueneue/ssr-core": "^0.3.19",
+        "@vueneue/ssr-server": "^0.3.19",
         "axios": "^0.18.0",
         "node-fetch": "^2.2.0",
         "vue": "^2.5.16",
@@ -28,7 +28,12 @@
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.0.1",
         "@vue/cli-service": "^3.0.1",
-        "@vueneue/vue-cli-plugin-ssr": "^0.3.18",
+        "@vueneue/vue-cli-plugin-ssr": "^0.3.20",
+        "imagemin-gifsicle": "^5.2.0",
+        "imagemin-mozjpeg": "^7.0.0",
+        "imagemin-pngquant": "^6.0.0",
+        "imagemin-svgo": "^7.0.0",
+        "imagemin-webpack": "^3.0.0",
         "node-sass": "^4.9.3",
         "sass-loader": "^7.0.1",
         "vue-cli-plugin-i18n": "^0.5.0",
@@ -37,7 +42,6 @@
     },
     "browserslist": [
         "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
+        "not ie <= 11"
     ]
 }
