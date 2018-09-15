@@ -4,7 +4,10 @@ import createI18n from './i18n'
 
 Vue.config.productionTip = false
 
-export default ({ router, store }) => {
+export default ({
+    router,
+    store
+}) => {
     return new Vue({
         router,
         store,

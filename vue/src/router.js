@@ -7,8 +7,7 @@ import overview from '@/views/overview/_dir/index'
 export default () => {
     return new Router({
         mode: process.ssr ? 'history' : 'hash',
-        routes: [
-            {
+        routes: [{
                 path: '/',
                 name: 'home',
                 component: home
@@ -28,24 +27,27 @@ export default () => {
             {
                 path: '/imprint',
                 name: 'imprint',
-                component: () => import(/* webpackChunkName: "legal" */ '@/views/imprint')
+                component: () =>
+                    import( /* webpackChunkName: "legal" */ '@/views/imprint')
             },
             {
                 path: '/privacy',
                 name: 'privacy',
-                component: () => import(/* webpackChunkName: "legal" */ '@/views/privacy')
+                component: () =>
+                    import( /* webpackChunkName: "legal" */ '@/views/privacy')
             },
             /* Settings */
             {
                 path: '/settings',
                 name: 'settings',
-                component: () => import(/* webpackChunkName: "settings" */ '@/views/settings/index')
+                component: () =>
+                    import( /* webpackChunkName: "settings" */ '@/views/settings/index')
             },
             {
                 path: '/settings/admin',
                 name: 'settings-admin',
                 component: () =>
-                    import(/* webpackChunkName: "settings" */ '@/views/settings/admin/index')
+                    import( /* webpackChunkName: "settings" */ '@/views/settings/admin/index')
             }
         ]
     })

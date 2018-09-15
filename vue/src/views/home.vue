@@ -64,64 +64,64 @@
 </template>
 
 <script>
-import { required, minLength, maxLength } from 'vuelidate/lib/validators';
-import LangSwitcher from '@/components/UI/LangSwitcher.vue';
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
+import LangSwitcher from "@/components/UI/LangSwitcher.vue";
 
 /* SVG */
-import LogoIcon from '@/assets/img/icon/login/logo.svg';
-import UserIcon from '@/assets/img/icon/login/user.svg';
-import LockIcon from '@/assets/img/icon/login/lock.svg';
+import LogoIcon from "@/assets/img/icon/login/logo.svg";
+import UserIcon from "@/assets/img/icon/login/user.svg";
+import LockIcon from "@/assets/img/icon/login/lock.svg";
 
 export default {
-    head() {
-        return {
-            title: this.$t('title.home'),
-        };
+  head() {
+    return {
+      title: this.$t("title.home")
+    };
+  },
+  data() {
+    return {
+      username: "",
+      usernamePH: this.$t("index.form.nameOrEmail"),
+      usernameFocused: false,
+      password: "",
+      passwordPH: this.$t("index.form.password"),
+      passwordFocused: false
+    };
+  },
+  components: {
+    LogoIcon,
+    UserIcon,
+    LockIcon,
+    LangSwitcher
+  },
+  methods: {
+    signIn: async function() {
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        this.call("/v1/auth/login", {
+          username: this.username,
+          password: this.password,
+          stayLoggedIn: false
+        }).then(res => {
+          console.log(res);
+        });
+      } else {
+        console.error("Input error");
+      }
+    }
+  },
+  validations: {
+    username: {
+      required,
+      minLength: minLength(3),
+      maxLength: maxLength(64)
     },
-    data() {
-        return {
-            username: '',
-            usernamePH: this.$t('index.form.nameOrEmail'),
-            usernameFocused: false,
-            password: '',
-            passwordPH: this.$t('index.form.password'),
-            passwordFocused: false,
-        };
-    },
-    components: {
-        LogoIcon,
-        UserIcon,
-        LockIcon,
-        LangSwitcher,
-    },
-    methods: {
-        signIn: async function() {
-            this.$v.$touch();
-            if (!this.$v.$error) {
-                this.call('/v1/auth/login', {
-                    username: this.username,
-                    password: this.password,
-                    stayLoggedIn: false,
-                }).then(res => {
-                    console.log(res);
-                });
-            } else {
-                console.error('Input error');
-            }
-        },
-    },
-    validations: {
-        username: {
-            required,
-            minLength: minLength(3),
-            maxLength: maxLength(64),
-        },
-        password: {
-            required,
-            minLength: minLength(4),
-            maxLength: maxLength(72),
-        },
-    },
+    password: {
+      required,
+      minLength: minLength(4),
+      maxLength: maxLength(72)
+    }
+  }
 };
 </script>
 
