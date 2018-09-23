@@ -6,8 +6,7 @@
         "ssr:serve": "vue-cli-service ssr:serve",
         "ssr:build": "vue-cli-service ssr:build",
         "ssr:start": "vue-cli-service ssr:start",
-        "generate": "vue-cli-service generate",
-        "update": "npm-check -u"
+        "generate": "vue-cli-service generate"
     },
     "dependencies": {
         "@vueneue/ssr-core": "^0.3.21",
@@ -16,10 +15,10 @@
         "node-fetch": "^2.2.0",
         "vue": "^2.5.16",
         "vue-class-component": "^6.2.0",
-        "vue-i18n": "^8.0.0",
-        "vue-meta": "^1.5.3",
+        "vue-i18n": "^8.1.0",
+        "vue-meta": "^1.5.4",
         "vue-no-ssr": "^0.2.2",
-        "vue-property-decorator": "^7.0.0",
+        "vue-property-decorator": "^7.1.1",
         "vue-router": "^3.0.1",
         "vuelidate": "^0.7.4",
         "vuex": "^3.0.1",
