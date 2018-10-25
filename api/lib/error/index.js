@@ -8,13 +8,6 @@ function je(code, msg) {
     return { error: { code, msg } }
 }
 
-/**
- * TODO write method builder
- * then use
- * JERROR_NOT_FOUND(res)
- * to send json response with real status code
- */
-
 export const ERROR_NO_CONTENT = e(204, 'No Content')
 export const ERROR_BAD_REQUEST = e(400, 'Bad Request')
 export const ERROR_NOT_FOUND = e(404, 'Not Found')
@@ -32,8 +25,3 @@ export const JERROR_API_USAGE_ERROR = je(1001, 'api usage error')
 export const JERROR_LOGIN_REQUIRED = je(1002, 'login required')
 export const JERROR_INVALID_LOGIN = je(1003, 'invalid login')
 export const JERROR_FILE_ALREADY_EXIST = je(1004, 'file already exist')
-
-export const EXIT_LOGIN_REQUIRED = res => {
-    res.status(200)
-    return res.json(JERROR_LOGIN_REQUIRED)
-}

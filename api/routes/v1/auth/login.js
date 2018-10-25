@@ -10,7 +10,7 @@ router.post('/', async ({ body: { username, password, stayLoggedIn } }, res) => 
         const result = await checkLoginData(username, password)
         if (result) {
             sign(res, result, stayLoggedIn)
-            return res.json({
+            return res.status(200).json({
                 name: result.name,
                 email: result.email,
                 flags: result.flags,
@@ -18,13 +18,13 @@ router.post('/', async ({ body: { username, password, stayLoggedIn } }, res) => 
                 usedVolume: result.used_volume
             })
         }
-        return res.json(JERROR_INVALID_LOGIN)
+        return res.status(200).json(JERROR_INVALID_LOGIN)
     }
-    return res.json(JERROR_API_USAGE_ERROR)
+    return res.status(200).json(JERROR_API_USAGE_ERROR)
 })
 
 router.get('/', (req, res) => {
     return res.json(JERROR_API_USAGE_ERROR)
 })
 
-export default { router, security: 0 }
+export default { router, scope: '', access: 0 }
