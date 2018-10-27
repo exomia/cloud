@@ -1,27 +1,10 @@
 import express from 'express'
-import {
-    addDirectory
-} from '../../../lib/pg/directory'
-import {
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_API_USAGE_ERROR
-} from '../../../lib/error'
+import { addDirectory } from '../../../lib/pg/directory'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR } from '../../../lib/error'
 
 const router = express.Router()
 
-router.put('/:parent_directory_uuid?', async ({
-    jwt: {
-        payload: {
-            email
-        }
-    },
-    body: {
-        name
-    },
-    params: {
-        parent_directory_uuid
-    }
-}, res) => {
+router.put('/:parent_directory_uuid?', async ({ jwt: { payload: { email } }, body: { name }, params: { parent_directory_uuid } }, res) => {
     if (!name || name.length <= 0) {
         return res.status(200).json(JERROR_API_USAGE_ERROR)
     }

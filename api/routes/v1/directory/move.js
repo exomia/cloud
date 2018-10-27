@@ -1,27 +1,10 @@
 import express from 'express'
-import {
-    updateDirectory
-} from '../../../lib/pg/directory'
-import {
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_API_USAGE_ERROR
-} from '../../../lib/error'
+import { updateDirectory } from '../../../lib/pg/directory'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR } from '../../../lib/error'
 
 const router = express.Router()
 
-router.post('/:directory_uuid/move', async ({
-    jwt: {
-        payload: {
-            email
-        }
-    },
-    body: {
-        new_parent_directory_uuid
-    },
-    params: {
-        directory_uuid
-    }
-}, res) => {
+router.post('/:directory_uuid/move', async ({ jwt: { payload: { email } }, body: { new_parent_directory_uuid }, params: { directory_uuid } }, res) => {
     if (!directory_uuid) {
         return res.status(200).json(JERROR_API_USAGE_ERROR)
     }

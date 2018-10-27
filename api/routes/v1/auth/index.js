@@ -1,20 +1,10 @@
 import express from 'express'
-import {
-    getUserInformation
-} from '../../../lib/pg/user'
-import {
-    JERROR_LOGIN_REQUIRED
-} from '../../../lib/error'
+import { getUserInformation } from '../../../lib/pg/user'
+import { JERROR_LOGIN_REQUIRED } from '../../../lib/error'
 
 const router = express.Router()
 
-router.all('/', async ({
-    jwt: {
-        payload: {
-            email
-        }
-    }
-}, res) => {
+router.all('/', async ({ jwt: { payload: { email } } }, res) => {
     const result = await getUserInformation(email)
     if (result) {
         return res.status(200).json({

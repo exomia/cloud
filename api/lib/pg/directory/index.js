@@ -1,9 +1,4 @@
-import {
-    query,
-    lb,
-    lbjoin,
-    e
-} from '../'
+import { query, lb, lbjoin, e } from '../'
 
 export async function addDirectory(usernameOrEmail, name, parent_directory_uuid) {
     let result = false
@@ -21,7 +16,7 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
             name: dires.name,
             uuid: dires.uuid
         })
-        result = await query `
+        result = await query`
             INSERT INTO private."directory" ("user_uuid", "name", "parent_directory_uuid", "path_info_json")
             VALUES ((SELECT "uuid"
                      FROM private."user"
@@ -31,7 +26,7 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
                     ${JSON.stringify(dires.path_info_json)})
             RETURNING "uuid", "name", "timestamp";`
     } else {
-        result = await query `
+        result = await query`
             INSERT INTO private."directory" ("user_uuid", "name")
             VALUES ((SELECT "uuid"
                      FROM private."user"
@@ -46,14 +41,14 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
 }
 
 export async function deleteDirectory(usernameOrEmail, directory_uuid, force_delete) {
-    const result = force_delete ?
-        await query `
+    const result = force_delete
+        ? await query`
             DELETE FROM private."directory" d
             USING private."user" u
             WHERE u."uuid" = d."user_uuid"
                   AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
-                  AND d."uuid" = ${directory_uuid};` :
-        await query `
+                  AND d."uuid" = ${directory_uuid};`
+        : await query`
             UPDATE private."directory" d
             SET d."delete_timestamp" = now()
             FROM private."user" u
@@ -64,7 +59,7 @@ export async function deleteDirectory(usernameOrEmail, directory_uuid, force_del
 }
 
 export async function listAllDirectories(usernameOrEmail, parent_directory_uuid) {
-    const result = await query `
+    const result = await query`
         SELECT
           d."uuid",
           d."name",
@@ -89,7 +84,7 @@ export async function getDirectoryInfo(usernameOrEmail, directory_uuid) {
     if (!directory_uuid) {
         return false
     }
-    const result = await query `
+    const result = await query`
         SELECT
           d."uuid",
           d."name",
@@ -112,13 +107,10 @@ export async function getDirectoryInfo(usernameOrEmail, directory_uuid) {
     return false
 }
 
-export async function updateDirectory(usernameOrEmail, directory_uuid, {
-    new_name,
-    new_parent_directory_uuid
-}) {
+export async function updateDirectory(usernameOrEmail, directory_uuid, { new_name, new_parent_directory_uuid }) {
     let updates = []
     if (new_name !== undefined) {
-        updates.push(lb `"name" = ${new_name}`)
+        updates.push(lb`"name" = ${new_name}`)
     }
     if (new_parent_directory_uuid !== undefined) {
         if (new_parent_directory_uuid !== 'NULL') {
@@ -135,17 +127,15 @@ export async function updateDirectory(usernameOrEmail, directory_uuid, {
                 name: dires.name,
                 uuid: dires.uuid
             })
-            updates.push(
-                lb `"parent_directory_uuid" = ${new_parent_directory_uuid}, "path_info_json" = ${dires.path_info_json}`
-            )
+            updates.push(lb`"parent_directory_uuid" = ${new_parent_directory_uuid}, "path_info_json" = ${dires.path_info_json}`)
         } else {
-            updates.push(lb `"parent_directory_uuid" = NULL, "path_info_json" = '[]'`)
+            updates.push(lb`"parent_directory_uuid" = NULL, "path_info_json" = '[]'`)
         }
     }
     if (updates.length <= 0) {
         return false
     }
-    const result = await query `
+    const result = await query`
         UPDATE private."directory" d
         SET ${lbjoin(...updates)}
         FROM private."user" u

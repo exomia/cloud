@@ -1,19 +1,7 @@
 import express from 'express'
-import {
-    addFile,
-    getFileInfo,
-    updateFile,
-    deleteFile,
-    increaseDownloadFileCount
-} from '../../../lib/pg/file'
-import {
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_API_USAGE_ERROR,
-    JERROR_FILE_ALREADY_EXIST
-} from '../../../lib/error'
-import {
-    STATUS_QUEUED
-} from '../../../lib/clamav'
+import { addFile, getFileInfo, updateFile, deleteFile, increaseDownloadFileCount } from '../../../lib/pg/file'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR, JERROR_FILE_ALREADY_EXIST } from '../../../lib/error'
+import { STATUS_QUEUED } from '../../../lib/clamav'
 
 import path from 'path'
 
@@ -24,20 +12,7 @@ const upload = multer({
 
 const router = express.Router()
 
-router.put('/:directory_uuid', upload.single('upload-file'), async ({
-    jwt: {
-        payload: {
-            email
-        }
-    },
-    params: {
-        directory_uuid
-    },
-    body: {
-        replace
-    },
-    file
-}, res) => {
+router.put('/:directory_uuid', upload.single('upload-file'), async ({ jwt: { payload: { email } }, params: { directory_uuid }, body: { replace }, file }, res) => {
     if (!replace) {
         const fi = path.parse(file.originalname)
         const result = await addFile(email, directory_uuid, fi.name, fi.ext, file.filename, file.mimetype, file.size)
@@ -62,19 +37,7 @@ router.put('/:directory_uuid', upload.single('upload-file'), async ({
     return res.json(JERROR_INTERNAL_SERVER_ERROR)
 })
 
-router.delete('/:file_uuid', async ({
-    jwt: {
-        payload: {
-            email
-        }
-    },
-    params: {
-        file_uuid
-    },
-    body: {
-        force_delete
-    }
-}, res) => {
+router.delete('/:file_uuid', async ({ jwt: { payload: { email } }, params: { file_uuid }, body: { force_delete } }, res) => {
     if (!file_uuid) {
         return res.json(JERROR_API_USAGE_ERROR)
     }
@@ -90,16 +53,7 @@ router.delete('/:file_uuid', async ({
     })
 })
 
-router.get('/:file_uuid', async ({
-    jwt: {
-        payload: {
-            email
-        }
-    },
-    params: {
-        file_uuid
-    }
-}, res) => {
+router.get('/:file_uuid', async ({ jwt: { payload: { email } }, params: { file_uuid } }, res) => {
     if (!file_uuid) {
         return res.status(204).end() //no content
     }
@@ -117,19 +71,7 @@ router.get('/:file_uuid', async ({
     })
 })
 
-router.post('/:file_uuid/rename', async ({
-    jwt: {
-        payload: {
-            email
-        }
-    },
-    params: {
-        file_uuid
-    },
-    body: {
-        new_name
-    }
-}, res) => {
+router.post('/:file_uuid/rename', async ({ jwt: { payload: { email } }, params: { file_uuid }, body: { new_name } }, res) => {
     if (!file_uuid || !new_name || new_name.length <= 0) {
         return res.status(200).json(JERROR_API_USAGE_ERROR)
     }
@@ -150,19 +92,7 @@ router.post('/:file_uuid/rename', async ({
     })
 })
 
-router.post('/:file_uuid/move', async ({
-    jwt: {
-        payload: {
-            email
-        }
-    },
-    params: {
-        file_uuid
-    },
-    body: {
-        new_directory_uuid
-    }
-}, res) => {
+router.post('/:file_uuid/move', async ({ jwt: { payload: { email } }, params: { file_uuid }, body: { new_directory_uuid } }, res) => {
     if (!file_uuid || !new_directory_uuid) {
         return res.status(200).json(JERROR_API_USAGE_ERROR)
     }

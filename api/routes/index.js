@@ -39,6 +39,4 @@ for (let version of versions) {
     }
 }
 
-export {
-    endpoints
-}
+export { endpoints }

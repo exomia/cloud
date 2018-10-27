@@ -1,23 +1,31 @@
 import jwt from 'jsonwebtoken'
 import config from '../../.config/.jwt.config.json'
-import {
-    getUserPassword
-} from '../pg/user/auth'
+import { getUserPassword } from '../pg/user/auth'
 
-export async function sign(res, {
-    email,
-    password,
-    flags
-}, stayLoggedIn) {
+export async function sign(res, { email, password, scopes }, stayLoggedIn) {
     res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-s-token, x-refresh-l-token')
     res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('x-token', jwt.sign({
-        email,
-        flags
-    }, config.SECRET_T + password, config.jwt_options_t))
-    res.setHeader(stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token', jwt.sign({
-        stayLoggedIn: Boolean(stayLoggedIn)
-    }, password + config.SECRET_RT, config.jwt_options_rt))
+    res.setHeader(
+        'x-token',
+        jwt.sign(
+            {
+                email,
+                scopes
+            },
+            config.SECRET_T + password,
+            config.jwt_options_t
+        )
+    )
+    res.setHeader(
+        stayLoggedIn ? 'x-refresh-l-token' : 'x-refresh-s-token',
+        jwt.sign(
+            {
+                stayLoggedIn: Boolean(stayLoggedIn)
+            },
+            password + config.SECRET_RT,
+            config.jwt_options_rt
+        )
+    )
 }
 
 export async function jwt_init(req, res, next) {
