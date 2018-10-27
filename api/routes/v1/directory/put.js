@@ -30,5 +30,5 @@ router.put('/:parent_directory_uuid?', async ({ jwt: { payload: { email } }, bod
 export default {
     router,
     scope: 'directory',
-    access: 10
+    access: 0
 }
