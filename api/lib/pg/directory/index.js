@@ -12,7 +12,10 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
         } else if (dires.path_info_json.length === 4) {
             dires.path_info_json.splice(1, 1)
         }
-        dires.path_info_json.push({ name: dires.name, uuid: dires.uuid })
+        dires.path_info_json.push({
+            name: dires.name,
+            uuid: dires.uuid
+        })
         result = await query`
             INSERT INTO private."directory" ("user_uuid", "name", "parent_directory_uuid", "path_info_json")
             VALUES ((SELECT "uuid"
@@ -120,10 +123,11 @@ export async function updateDirectory(usernameOrEmail, directory_uuid, { new_nam
             } else if (dires.path_info_json.length === 4) {
                 dires.path_info_json.splice(1, 1)
             }
-            dires.path_info_json.push({ name: dires.name, uuid: dires.uuid })
-            updates.push(
-                lb`"parent_directory_uuid" = ${new_parent_directory_uuid}, "path_info_json" = ${dires.path_info_json}`
-            )
+            dires.path_info_json.push({
+                name: dires.name,
+                uuid: dires.uuid
+            })
+            updates.push(lb`"parent_directory_uuid" = ${new_parent_directory_uuid}, "path_info_json" = ${dires.path_info_json}`)
         } else {
             updates.push(lb`"parent_directory_uuid" = NULL, "path_info_json" = '[]'`)
         }

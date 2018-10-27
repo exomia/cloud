@@ -5,7 +5,12 @@ function e(status, msg) {
 }
 
 function je(code, msg) {
-    return { error: { code, msg } }
+    return {
+        error: {
+            code,
+            msg
+        }
+    }
 }
 
 export const ERROR_NO_CONTENT = e(204, 'No Content')

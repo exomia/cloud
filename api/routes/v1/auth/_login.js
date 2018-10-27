@@ -27,4 +27,4 @@ router.get('/', (req, res) => {
     return res.json(JERROR_API_USAGE_ERROR)
 })
 
-export default { router, scope: '', access: 0 }
+export default { router, access: 0 }

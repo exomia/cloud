@@ -7,7 +7,7 @@ export async function checkLoginData(usernameOrEmail, password) {
           u."email",
           u."password",
           u."timestamp",
-          u."flags"                  AS "flags",
+          u."scopes"                 AS "scopes",
           u."volume",
           COALESCE(SUM(f."size"), 0) AS "used_volume"
         FROM private."user" u
