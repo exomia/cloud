@@ -8,42 +8,53 @@ main {
     background-image: url('../../img/icon/login/login_bg.jpg');
     background-repeat: no-repeat;
     background-position: 50% 75%;
+
     div.page-wrapper {
         width: 1200px;
+
         @media screen and (max-width: $break-large) {
             width: 100%;
         }
+
         div.header,
         div.footer {
             height: 45px;
             display: flex;
             padding: 0 16px 0 32px;
         }
+
         div.header {
             justify-content: flex-end;
         }
+
         div.center {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
+
             @media screen and (max-width: $break-small) {
                 height: calc(100vh - 135px);
             }
+
             height: calc(100vh - 90px);
+
             form.login-form {
                 width: 250px;
+
                 div.form-section {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
+
                     svg.logo {
                         width: 50px;
                         height: 50px;
                         margin-bottom: 12px;
                         user-select: none;
                     }
+
                     h1 {
                         font-family: 'Roboto Condensed', sans-serif;
                         text-transform: uppercase;
@@ -51,23 +62,31 @@ main {
                         font-weight: 300;
                         user-select: none;
                     }
+
                     div.input-wrapper {
                         display: flex;
                         width: 100%;
                         height: 45px;
                         border-bottom: 1px solid black;
                         align-items: center;
+
                         &:first-of-type {
                             margin-bottom: 32px;
                         }
+
                         &:not(:first-of-type) {
                             margin-bottom: 64px;
                         }
-                        svg.input-icon {
-                            width: 20px;
-                            height: 20px;
+
+                        div.icon-wrapper {
                             margin: 0 16px;
+
+                            svg.input-icon {
+                                width: 20px;
+                                height: 20px;
+                            }
                         }
+
                         input[type='text'],
                         input[type='password'] {
                             border: none;
@@ -77,24 +96,31 @@ main {
                             outline: none;
                             height: 100%;
                             width: 100%;
+
                             &::placeholder {
                                 font-weight: 300;
                                 color: black;
+                                opacity: 1;
                             }
                         }
+
                         &-error {
                             border-bottom: 1px solid red;
+
                             svg.input-icon {
                                 fill: red;
                             }
+
                             input {
                                 color: red;
+
                                 &::placeholder {
                                     color: red !important;
                                 }
                             }
                         }
                     }
+
                     input.signIn,
                     input.forgotPw {
                         width: 100%;
@@ -103,20 +129,24 @@ main {
                         border: none;
                         cursor: pointer;
                     }
+
                     input.signIn {
                         background-color: #f26030;
                         color: white;
                         border-radius: 8px;
                         font-size: 15pt;
+
                         &:hover {
                             background-color: darken(#f26030, 10%);
                         }
                     }
+
                     input.forgotPw {
                         position: relative;
                         background-color: transparent;
                         font-size: 13pt;
                         font-weight: 300;
+
                         &:hover {
                             text-decoration: underline;
                         }
@@ -124,23 +154,29 @@ main {
                 }
             }
         }
+
         div.footer {
             display: flex;
             justify-content: space-between;
+
             @media screen and (max-width: $break-small) {
                 height: 90px;
                 flex-direction: column;
             }
+
             div.footer-section {
                 display: flex;
                 align-items: center;
+
                 @media screen and (max-width: $break-small) {
                     height: 45px;
                     justify-content: center;
+
                     &:first-of-type {
                         order: 1;
                     }
                 }
+
                 a {
                     display: flex;
                     align-items: center;
@@ -148,10 +184,12 @@ main {
                     padding: 0 1rem;
                     cursor: pointer;
                     text-decoration: none;
+
                     span {
                         color: black;
                     }
-                    &:hover > span {
+
+                    &:hover>span {
                         text-decoration: underline;
                     }
                 }
