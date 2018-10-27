@@ -1,16 +1,13 @@
 import express from 'express'
 import { getUserInformation } from '../../../lib/pg/user'
-import { EXIT_LOGIN_REQUIRED, JERROR_LOGIN_REQUIRED } from '../../../lib/error'
+import { JERROR_LOGIN_REQUIRED } from '../../../lib/error'
 
 const router = express.Router()
 
 router.all('/', async ({ jwt: { valid, payload: { email } } }, res) => {
-    if (!valid) {
-        return EXIT_LOGIN_REQUIRED(res)
-    }
     const result = await getUserInformation(email)
     if (result) {
-        return res.json({
+        return res.status(200).json({
             name: result.name,
             email: result.email,
             flags: result.flags,
@@ -18,7 +15,7 @@ router.all('/', async ({ jwt: { valid, payload: { email } } }, res) => {
             usedVolume: result.used_volume
         })
     }
-    return res.json(JERROR_LOGIN_REQUIRED)
+    return res.status(200).json(JERROR_LOGIN_REQUIRED)
 })
 
-export default { router, security: 1 }
+export default { router, scope: '', access: 0 }
