@@ -6,23 +6,27 @@ const endpoints = {}
 function ep(dir) {
     const files = fs.readdirSync(path.join('routes', dir), 'utf8')
     for (let filename of files) {
-        const matches = /^(index).js|(.+).js$/.exec(filename)
+        const matches = /^_(.+).js|(index|.+).js$/.exec(filename)
         if (!matches) {
             ep(path.join(dir, filename))
             continue
         }
 
-        const ar = require(`./${dir.replace(/\\/g, '/')}/${filename}`).default
+        const p = dir.replace(/\\/g, '/')
+        const ar = require(`./${p}/${filename}`).default
         if (!ar.scope) {
             ar.scope = ''
         }
-
+        if (!ar.access) {
+            ar.access = 0
+        }
         if (!endpoints[ar.scope]) {
             endpoints[ar.scope] = []
         }
         endpoints[ar.scope].push({
-            path: matches[1] ? dir.replace(/\\/g, '/') : `${dir.replace(/\\/g, '/')}/${matches[2]}`,
-            ...ar
+            path: matches[1] ? `${p}/${matches[1]}` : p,
+            ...ar,
+            filename
         })
     }
 }
@@ -35,4 +39,6 @@ for (let version of versions) {
     }
 }
 
-export { endpoints }
+export {
+    endpoints
+}
