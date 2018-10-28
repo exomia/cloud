@@ -26,7 +26,11 @@ const port = process.env.PORT || 3001
         res.end('Welcome to the backend of exomia cloud')
     })
 
-    app.use(express.urlencoded({ extended: true }))
+    app.use(
+        express.urlencoded({
+            extended: true
+        })
+    )
     app.use(express.json())
     app.use(cookieParser())
 
@@ -40,25 +44,27 @@ const port = process.env.PORT || 3001
                     if (!req.jwt.valid) {
                         return res.status(200).json(JERROR_LOGIN_REQUIRED)
                     }
-                    if (route.access != 0 && (route.access & req.jwt.scopes[route.scope]) !== route.access) {
-                        return res.status(403).json(JERROR_FORBIDDEN)
+                    if (route.access === 0 || (route.access & req.jwt.payload.scopes[route.scope]) === route.access) {
+                        return next()
                     }
-                    return next()
+                    return res.status(403).json(JERROR_FORBIDDEN)
                 })
             }
             app.use(`/api/${route.path}`, route.router)
-            console.log(`[${route.scope === '' ? '' : `scope ${route.scope} - `}access ${route.access}] +route 'api/${route.path}'`)
+            console.log(
+                `${route.filename.padEnd(20, ' ')} - [${`${`scope ${route.scope}`.padEnd(20, ' ')} - access ${`${route.access}`.padStart(4, ' ')}]`.padEnd(35, ' ')} +route 'api/${route.path}'`
+            )
         }
     }
 
     app.use((req, res, next) => {
         res.status(404)
-        res.json(JERROR_NOT_FOUND)
+        return res.json(JERROR_NOT_FOUND)
     })
 
     app.use((err, req, res, next) => {
         res.status(500)
-        res.json(JERROR_INTERNAL_SERVER_ERROR)
+        return res.json(JERROR_INTERNAL_SERVER_ERROR)
     })
 
     app.disable('x-powered-by')

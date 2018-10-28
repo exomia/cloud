@@ -1,9 +1,10 @@
 import { query, lb, lbjoin } from '../'
 
-export async function addUser(username, email, password, flags, volume) {
+export async function addUser(username, email, password, scopes, volume) {
     const result = await query`
-        INSERT INTO private."user" ("username", "email", "password", "flags", "volume")
-        VALUES (${username}, ${email}, crypt(${password}, gen_salt('bf', 8)), ${flags}, ${volume});`
+        INSERT INTO private.
+        "user"("username", "email", "password", "scopes", "volume")
+        VALUES (${username}, ${email}, crypt(${password}, gen_salt('bf', 8)), ${scopes}, ${volume});`
     return result && result.rowCount > 0
 }
 
@@ -20,7 +21,7 @@ export async function listAllUsers() {
           u."username",
           u."email",
           u."timestamp",
-          u."flags"                  AS "flags",
+          u."scopes"                 AS "scopes",
           u."volume",
           COALESCE(SUM(f."size"), 0) AS "used_volume"
         FROM private."user" u
@@ -32,7 +33,7 @@ export async function listAllUsers() {
     return false
 }
 
-export async function updateUser(usernameOrEmail, { new_username, new_email, new_password, new_flags, new_volume }) {
+export async function updateUser(usernameOrEmail, { new_username, new_email, new_password, new_scopes, new_volume }) {
     let updates = []
     if (new_username !== undefined) {
         updates.push(lb`"username" = ${new_username}`)
@@ -43,8 +44,8 @@ export async function updateUser(usernameOrEmail, { new_username, new_email, new
     if (new_password !== undefined) {
         updates.push(lb`"password" = crypt(${new_password}, gen_salt('bf', 8)`)
     }
-    if (new_flags !== undefined) {
-        updates.push(lb`"flags" = ${new_flags}`)
+    if (new_scopes !== undefined) {
+        updates.push(lb`"scopes" = ${new_scopes}`)
     }
     if (new_volume !== undefined) {
         updates.push(lb`"volume" = ${new_volume}`)
