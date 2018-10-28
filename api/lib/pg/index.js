@@ -10,6 +10,9 @@ pool.on('error', (err, client) => {
     console.error('idle client error', err, client)
 })
 
+/**
+ * shutdown
+ */
 export async function shutdown() {
     await pool.end()
 }
@@ -43,7 +46,6 @@ export function lb(qp, ...values) {
  * @param {*} values
  * @returns {_E} new _E
  */
-
 export function e(qp, ...values) {
     let res = ''
     for (let i = 0; i < qp.length - 1; ++i) {
@@ -52,6 +54,12 @@ export function e(qp, ...values) {
     return new _E(res + qp[qp.length - 1])
 }
 
+/**
+ * query
+ * @param {*} qp
+ * @param {*} values
+ * @returns {Promise<pg.QueryResult | false}
+ */
 export async function query(qp, ...values) {
     let query = ''
     let index = 1
