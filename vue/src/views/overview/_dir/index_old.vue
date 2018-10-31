@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import OverviewSidebar from '@/components/navigation/sidebar/OverviewSidebar'
-import OverviewPath from '@/components/partials/OverviewPath'
-import ListHeader from '@/components/UI/ListHeader'
-import OverviewList from '@/components/partials/OverviewList'
-import OverviewUploadStatus from '@/components/partials/OverviewUploadStatus'
-import OverviewListEmpty from '@/components/partials/OverviewListEmpty'
+import OverviewSidebar from "@/components/navigation/sidebar/OverviewSidebar_old"
+import OverviewPath from "@/components/partials/OverviewPath_old"
+import ListHeader from "@/components/UI/ListHeader_old"
+import OverviewList from "@/components/partials/OverviewList_old"
+import OverviewUploadStatus from "@/components/partials/OverviewUploadStatus_old"
+import OverviewListEmpty from "@/components/partials/OverviewListEmpty_old"
 
 export default {
     /*meta: {
@@ -33,7 +33,7 @@ export default {
     },*/
     head() {
         return {
-            title: this.$t('title.overview')
+            title: this.$t("title.overview")
         }
     },
     data() {
@@ -67,11 +67,11 @@ export default {
         onDrop({ dataTransfer }) {
             if (dataTransfer) {
                 // Check if user has enough upload size left?
-                this.$store.dispatch('startFileUpload', dataTransfer)
+                this.$store.dispatch("startFileUpload", dataTransfer)
             }
         }
     }
 }
 </script>
 
-<style src="@/assets/css/pages/overview/index" lang="scss" scoped></style>
+<style src="@/assets/css/pages/overview/index_old" lang="scss" scoped></style>

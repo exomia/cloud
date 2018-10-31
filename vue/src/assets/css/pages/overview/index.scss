@@ -1,3 +1,5 @@
+@import '../../_variables.scss';
+
 main {
     display: flex;
     background-image: url('../../../img/icon/overview/_tmp.jpg');
@@ -7,9 +9,19 @@ main {
         position: relative;
         width: 270px;
         height: 100vh;
-        background-image: url('../../../img/icon/overview/background.jpg');
-        background-repeat: no-repeat;
-        background-position: 30% 34%;
+
+        div.img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../../../img/icon/overview/background.jpg');
+            background-repeat: no-repeat;
+            background-position: 30% 34%;
+        }
 
         div.overlay {
             position: absolute;
@@ -42,7 +54,7 @@ main {
                     justify-content: center;
                     align-items: center;
                     margin-top: 4rem;
-                    margin-bottom: 6rem;
+                    margin-bottom: 8rem;
                     cursor: pointer;
 
                     svg.logo {
@@ -86,14 +98,15 @@ main {
     }
 
     div.center {
-        width: calc(100% - 270px);
+        width: calc(100vw - 270px);
         background-color: white;
-        // opacity: .5;
+        // opacity: .75;
 
         nav.path {
             display: flex;
             align-items: center;
             padding: 0 1rem;
+            margin-bottom: 3rem;
 
             div.path-item {
                 display: flex;
@@ -118,6 +131,92 @@ main {
             svg.path-arrow {
                 width: 14px;
                 height: 14px;
+            }
+        }
+
+        section.list {
+            width: 100%;
+            height: calc(100vh - 50px);
+            overflow-y: scroll;
+        }
+
+        div.list-row.header {
+            border-top: 1px solid $contour-color;
+            border-bottom: 1px solid $contour-color;
+
+            div.list-item {
+                span {
+                    font-weight: 400;
+                }
+            }
+        }
+
+        // div.list-row:not(.header) {
+        //     &::before {
+        //         content: "";
+        //         width: 50px;
+        //     }
+        // }
+
+        div.list-row {
+            display: flex;
+            padding: 0 1rem;
+            height: 50px;
+
+            div.list-item {
+                display: flex;
+                height: 100%;
+                justify-content: flex-start;
+                align-items: center;
+                cursor: pointer;
+
+                span.ext {
+                    opacity: .5;
+                }
+
+                svg.dropdown {
+                    width: 10px;
+                    height: 10px;
+                    background-image: url('../../../img/icon/overview/dropdown.svg');
+                    background-repeat: no-repeat;
+                    margin: .5rem;
+                }
+
+                svg.type {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                svg.extended-menu {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            div.list-item:first-of-type {
+                width: 50px;
+            }
+
+            div.list-item:nth-of-type(2) {
+                width: 100px;
+            }
+
+            div.list-item.stretch {
+                width: calc(100vw - 270px - (1rem * 2) - 50px - 100px - 300px);
+            }
+
+            div.dynamic-list-menu {
+                display: flex;
+                width: 330px;
+
+                div.list-item {
+                    width: 100px;
+                }
+
+                // &::before {
+                //     content: "";
+                //     width: 100px;
+                // }
             }
         }
     }

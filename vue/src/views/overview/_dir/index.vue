@@ -1,6 +1,7 @@
 <template>
     <main>
         <aside>
+            <div class="img"></div>
             <div class="overlay"></div>
             <div class="wrapper">
 
@@ -44,6 +45,7 @@
             </div>
         </aside>
         <div class="center">
+
             <nav class="path">
 
                 <div class="path-item">
@@ -61,6 +63,75 @@
                 </div>
 
             </nav>
+
+            <div class="list-row header">
+
+                <div class="list-item">
+                    <input type="checkbox">
+                </div>
+
+                <div class="list-item">
+                    <span>Typ</span>
+                    <DropdownIcon class="dropdown"></DropdownIcon>
+                </div>
+
+                <div class="list-item stretch">
+                    <span>Name</span>
+                    <DropdownIcon class="dropdown"></DropdownIcon>
+                </div>
+
+                <div class="dynamic-list-menu">
+
+                    <div class="list-item"></div>
+
+                    <div class="list-item">
+                        <span>Größe</span>
+                        <DropdownIcon class="dropdown"></DropdownIcon>
+                    </div>
+
+                    <div class="list-item">
+                        <span>Datum</span>
+                        <DropdownIcon class="dropdown"></DropdownIcon>
+                    </div>
+
+                </div>
+            </div>
+
+            <section class="list">
+
+                <div class="list-row"
+                     v-for="n in 20"
+                     :key="n">
+
+                    <div class="list-item"></div>
+
+                    <div class="list-item">
+                        <FileIcon class="type"></FileIcon>
+                    </div>
+
+                    <div class="list-item stretch">
+                        <span>Testfile</span>
+                        <span class="ext">.exe</span>
+                    </div>
+
+                    <div class="dynamic-list-menu">
+
+                        <div class="list-item">
+                            <ExtendedMenuIcon class="extended-menu"></ExtendedMenuIcon>
+                        </div>
+
+                        <div class="list-item">
+                            <span>25.2 MB</span>
+                        </div>
+
+                        <div class="list-item">
+                            <span>31.10.2018</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
         </div>
     </main>
 </template>
@@ -75,6 +146,8 @@ import SettingsIcon from "@/assets/img/icon/overview/settings.svg"
 import LogoutIcon from "@/assets/img/icon/overview/logout.svg"
 import HomeIcon from "@/assets/img/icon/overview/home.svg"
 import PathArrowIcon from "@/assets/img/icon/overview/path-arrow.svg"
+import DropdownIcon from "@/assets/img/icon/overview/dropdown.svg"
+import ExtendedMenuIcon from "@/assets/img/icon/overview/extended-menu.svg"
 
 export default {
     head() {
@@ -90,7 +163,9 @@ export default {
         SettingsIcon,
         LogoutIcon,
         HomeIcon,
-        PathArrowIcon
+        PathArrowIcon,
+        DropdownIcon,
+        ExtendedMenuIcon
     }
 }
 </script>
