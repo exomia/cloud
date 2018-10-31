@@ -10,13 +10,7 @@ router.post('/', async ({ body: { username, password, stayLoggedIn } }, res) => 
         const result = await checkLoginData(username, password)
         if (result) {
             sign(res, result, stayLoggedIn)
-            return res.status(200).json({
-                name: result.name,
-                email: result.email,
-                flags: result.flags,
-                volume: result.volume,
-                usedVolume: result.used_volume
-            })
+            return res.status(200).json({ name: result.name, email: result.email, scopes: result.scopes, volume: result.volume, usedVolume: result.used_volume })
         }
         return res.status(200).json(JERROR_INVALID_LOGIN)
     }
