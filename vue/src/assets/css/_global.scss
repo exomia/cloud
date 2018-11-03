@@ -66,11 +66,13 @@ input[type='checkbox'] {
     border-radius: 2px;
     appearance: none;
     cursor: pointer;
+
     &:hover,
     &:checked {
         opacity: 1;
         border: 1px solid $primary-color;
     }
+
     &:checked {
         display: inline-block !important;
         background-image: url('../img/icon/checked.svg');
@@ -78,6 +80,7 @@ input[type='checkbox'] {
         background-repeat: no-repeat;
         background-position: 50% 50%;
     }
+
     &:focus {
         outline: none;
     }
@@ -154,9 +157,11 @@ input.confirm-button {
     background-color: #007e33;
     width: 100%;
     outline: none;
+
     &:hover {
         background-color: darken(#007e33, 5%);
     }
+
     &::before {
         display: block;
         position: absolute;

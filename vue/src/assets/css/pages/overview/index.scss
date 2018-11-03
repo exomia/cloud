@@ -135,9 +135,13 @@ main {
         }
 
         section.list {
-            width: 100%;
+            // width: calc(100vw - 270px);
             height: calc(100vh - 50px);
-            overflow-y: scroll;
+            overflow-y: auto;
+
+            div.list-row {
+                width: calc(100vw - 270px);
+            }
         }
 
         div.list-row.header {
@@ -202,7 +206,7 @@ main {
             }
 
             div.list-item.stretch {
-                width: calc(100vw - 270px - (1rem * 2) - 50px - 100px - 300px);
+                width: calc(100% - 50px - (100px * 4) - (1rem * 2));
             }
 
             div.dynamic-list-menu {
