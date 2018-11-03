@@ -1,0 +1,31 @@
+nav.path {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    margin-bottom: 3rem;
+
+    div.path-item {
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+
+        &:first-of-type {
+            width: 50px;
+        }
+
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        span {
+            padding: 0 1rem;
+        }
+    }
+
+    svg.path-arrow {
+        width: 14px;
+        height: 14px;
+    }
+}

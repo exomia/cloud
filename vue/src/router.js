@@ -37,18 +37,18 @@ export default () => {
                     import( /* webpackChunkName: "legal" */ '@/views/privacy')
             },
             /* Settings */
-            {
-                path: '/settings',
-                name: 'settings',
-                component: () =>
-                    import( /* webpackChunkName: "settings" */ '@/views/settings/index')
-            },
-            {
-                path: '/settings/admin',
-                name: 'settings-admin',
-                component: () =>
-                    import( /* webpackChunkName: "settings" */ '@/views/settings/admin/index')
-            }
+            // {
+            //     path: '/settings',
+            //     name: 'settings',
+            //     component: () =>
+            //         import( /* webpackChunkName: "settings" */ '@/views/settings/index')
+            // },
+            // {
+            //     path: '/settings/admin',
+            //     name: 'settings-admin',
+            //     component: () =>
+            //         import( /* webpackChunkName: "settings" */ '@/views/settings/admin/index')
+            // }
         ]
     })
 }
