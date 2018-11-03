@@ -135,7 +135,6 @@ main {
         }
 
         section.list {
-            // width: calc(100vw - 270px);
             height: calc(100vh - 50px);
             overflow-y: auto;
 
@@ -154,13 +153,6 @@ main {
                 }
             }
         }
-
-        // div.list-row:not(.header) {
-        //     &::before {
-        //         content: "";
-        //         width: 50px;
-        //     }
-        // }
 
         div.list-row {
             display: flex;
@@ -216,11 +208,6 @@ main {
                 div.list-item {
                     width: 100px;
                 }
-
-                // &::before {
-                //     content: "";
-                //     width: 100px;
-                // }
             }
         }
     }
