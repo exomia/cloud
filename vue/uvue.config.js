@@ -14,6 +14,7 @@ export default {
         '@/plugins/file-size',
         '@/plugins/math',
         '@/plugins/vuelidate',
-        '@/plugins/httpClient'
+        '@/plugins/http',
+        '@/plugins/meta',
     ]
 }

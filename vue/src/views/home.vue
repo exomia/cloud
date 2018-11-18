@@ -80,7 +80,7 @@ import UserIcon from "@/assets/img/icon/login/user.svg"
 import LockIcon from "@/assets/img/icon/login/lock.svg"
 
 export default {
-    head() {
+    metaInfo() {
         return {
             title: this.$t("title.home")
         }

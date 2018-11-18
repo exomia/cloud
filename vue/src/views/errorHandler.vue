@@ -11,6 +11,11 @@
 
 <script>
 export default {
+    metaInfo() {
+        return {
+            title: this.$t("title.error")
+        }
+    },
     data: () => ({
         isProduction: process.prod
     }),

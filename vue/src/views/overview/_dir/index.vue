@@ -22,7 +22,7 @@ import checkPageAuth from "@/middlewares/checkPageAuth"
 
 export default {
     middlewares: [checkPageAuth],
-    head() {
+    metaInfo() {
         return {
             title: this.$t("title.overview")
         }

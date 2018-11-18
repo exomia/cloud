@@ -12,19 +12,21 @@ export default {
         const { error, req } = context;
 
         // Create axios client
-        const httpClient = axios.create({
+        const http = axios.create({
             baseURL: process.env.VUE_APP_API_URL
         });
 
         // Use request interceptors
-        httpClient.interceptors.request.use(config => {
+        http.interceptors.request.use(config => {
             let xToken = undefined;
             let xRefreshToken = undefined;
 
             // Get current token in cookies
             if (process.server) {
-                xToken = req.cookies['x-token-c']
-                xRefreshToken = req.cookies['x-refresh-token-c']
+                if (req.cookies) {
+                    xToken = req.cookies['x-token-c']
+                    xRefreshToken = req.cookies['x-refresh-token-c']
+                }
             } else {
                 xToken = getCookie('x-token-c')
                 xRefreshToken = getCookie('x-refresh-token-c')
@@ -40,7 +42,7 @@ export default {
         });
 
         // Use response interceptor
-        httpClient.interceptors.response.use(
+        http.interceptors.response.use(
             response => {
                 let xToken = response.headers["x-token"];
                 let xRefreshToken = response.headers["x-refresh-s-token"];
@@ -66,12 +68,12 @@ export default {
         );
 
         // Install a shortcut to http client in context
-        context.http = httpClient;
+        context.http = http;
 
         // With this we can call http client everywhere in components or Vuex actions
         Vue.use({
             install(Vue) {
-                Vue.http = Vue.prototype.$http = httpClient;
+                Vue.http = Vue.prototype.$http = http;
             },
         });
     },

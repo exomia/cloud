@@ -6,9 +6,9 @@
 
 <script>
 export default {
-    head() {
+    metaInfo() {
         return {
-            title: this.$t('title.privacy')
+            title: this.$t("title.privacy")
         }
     }
 }

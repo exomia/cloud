@@ -1,4 +1,4 @@
-// import { CancelToken } from 'axios'
+import { CancelToken } from 'axios'
 
 export const state = () => ({
     canceled: false,
@@ -41,10 +41,10 @@ export const mutations = {
             file,
             progress: 0,
             start: 0,
-            // _cancelTokenSource: CancelToken.source()
+            _cancelTokenSource: CancelToken.source()
         }
         fi.cancel = msg => {
-            // fi._cancelTokenSource.cancel(msg)
+            fi._cancelTokenSource.cancel(msg)
         }
         state.fileInfos.push(fi)
     },

@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 export const state = () => ({
     data: [],
     path: [],

@@ -1,6 +1,3 @@
-import { call } from "@/plugins/call"
-import fetch from 'node-fetch'
-
 export const state = () => ({
     email: '',
     flags: 0,

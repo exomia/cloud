@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <router-view v-if="!$errorHandler.error"/>
-    <ErrorHandler v-else></ErrorHandler>
-  </div>
+    <div id="app">
+        <router-view v-if="!$errorHandler.error"/>
+        <ErrorHandler v-else></ErrorHandler>
+    </div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ import TheFooter from "@/components/navigation/TheFooter"
 import ErrorHandler from "@/views/errorHandler"
 
 export default {
-    head: {
+    metaInfo: {
         title: "Default",
         titleTemplate: "Exomia Cloud - %s",
         htmlAttrs: {

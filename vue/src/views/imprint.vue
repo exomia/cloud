@@ -6,9 +6,9 @@
 
 <script>
 export default {
-    head() {
+    metaInfo() {
         return {
-            title: this.$t('title.imprint')
+            title: this.$t("title.imprint")
         }
     }
 }
