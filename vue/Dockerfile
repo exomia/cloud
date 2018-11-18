@@ -12,10 +12,10 @@ COPY . /home/node/app
 
 RUN yarn ssr:build && \
   yarn --production && \
-  yarn add core-js regenerator-runtime && \
-  yarn cache clean
+  yarn cache clean && \
+  rm -rf /home/node/app/src && \
+  rm -rf /home/node/app/public
 
-#######################################################
 FROM node:10-alpine
 
 ENV NODE_ENV production
@@ -29,4 +29,4 @@ RUN chown -R node:node /home/node/app
 USER node
 WORKDIR /home/node/app
 
-CMD ["./node_modules/@vueneue/ssr-server/docker"]
+CMD ["./node_modules/@uvue/server/start.js"]

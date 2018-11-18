@@ -3,31 +3,29 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "ssr:serve": "vue-cli-service ssr:serve",
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
         "ssr:build": "vue-cli-service ssr:build",
+        "ssr:fix": "vue-cli-service ssr:fix",
+        "ssr:serve": "vue-cli-service ssr:serve",
         "ssr:start": "vue-cli-service ssr:start",
-        "generate": "vue-cli-service generate"
+        "ssr:static": "vue-cli-service ssr:static"
     },
     "dependencies": {
-        "@vueneue/ssr-core": "^0.3.22",
-        "@vueneue/ssr-server": "^0.3.23",
-        "node-fetch": "^2.3.0",
+        "@uvue/core": "^0.1.0-alpha",
+        "@uvue/server": "^0.1.0-alpha",
+        "axios": "^0.18.0",
+        "js-cookie": "^2.2.0",
         "vue": "^2.5.16",
-        "vue-class-component": "^6.3.2",
-        "vue-cookies": "^1.5.7",
         "vue-i18n": "^8.3.1",
-        "vue-meta": "^1.5.5",
-        "vue-no-ssr": "^0.2.2",
-        "vue-property-decorator": "^7.2.0",
         "vue-router": "^3.0.1",
         "vuelidate": "^0.7.4",
-        "vuex": "^3.0.1",
-        "vuex-class": "^0.3.1"
+        "vuex": "^3.0.1"
     },
     "devDependencies": {
+        "@uvue/vue-cli-plugin-ssr": "0.1.0-alpha.2",
         "@vue/cli-plugin-babel": "^3.1.1",
         "@vue/cli-service": "^3.1.4",
-        "@vueneue/vue-cli-plugin-ssr": "^0.3.23",
         "brotli-gzip-webpack-plugin": "^0.5.0",
         "copy-webpack-plugin": "^4.6.0",
         "iltorb": "^2.4.1",
