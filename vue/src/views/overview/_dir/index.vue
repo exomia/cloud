@@ -5,7 +5,14 @@
       <OverviewNav></OverviewNav>
       <ListHeader></ListHeader>
       <section class="list">
-        <ListRow v-for="n in 10" :key="n"></ListRow>
+        <ListRow v-for="el in getDirectoryData" 
+                :key="el.uuid"
+                :uuid="el.uuid"
+                :name="el.name"
+                :type="el.type"
+                :size="el.size"
+                :timestamp="el.timestamp"
+                :extension="el.extension"></ListRow>
       </section>
     </div>
   </main>
@@ -20,19 +27,30 @@ import OverviewSidebar from "@/components/navigation/sidebar/Overview"
 //
 import checkPageAuth from "@/middlewares/checkPageAuth"
 
+import { mapGetters } from "vuex"
+
 export default {
     middlewares: [checkPageAuth],
+    async asyncData({ store, http, route }) {
+        const { data } = await http.get(`/v1/directory/${route.params.dir || ""}`)
+        if (data) {
+            await store.commit("setDirectoryData", data)
+        }
+    },
     metaInfo() {
         return {
-            title: this.$t("title.overview")
+            title: this.$t("title.overview"),
         }
+    },
+    computed: {
+        ...mapGetters(["getDirectoryData", "getDirectoryCount", "getFileCount", "sizeSum"]),
     },
     components: {
         ListRow,
         ListHeader,
         OverviewNav,
-        OverviewSidebar
-    }
+        OverviewSidebar,
+    },
 }
 </script>
 

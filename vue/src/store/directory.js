@@ -5,7 +5,7 @@ export const state = () => ({
     fileCount: 0,
     sizeSum: 0,
     createDirectoryShown: false,
-    checkAll: false
+    checkAll: false,
 })
 
 export const getters = {
@@ -22,7 +22,7 @@ export const getters = {
     isCreateDirectoryShown: state => state.createDirectoryShown,
     isCheckAll: state => state.checkAll,
     getDirectoryCount: state => state.directoryCount,
-    getFileCount: state => state.fileCount
+    getFileCount: state => state.fileCount,
 }
 
 export const mutations = {
@@ -30,33 +30,35 @@ export const mutations = {
         state.data.push({
             ...file,
             size: file.size || 0,
-            type: 'File',
-            checked: false
+            type: "File",
+            checked: false,
         })
-        this.commit('updateDirectorySummary')
-        this.commit('sortByActiveMethod')
+        this.commit("updateDirectorySummary")
+        this.commit("sortByActiveMethod")
     },
     addDirectory(state, directory) {
         state.data.push({
             ...directory,
             size: directory.size || 0,
-            type: 'Directory',
-            checked: false
+            type: "Directory",
+            checked: false,
         })
-        this.commit('updateDirectorySummary')
-        this.commit('sortByActiveMethod')
+        this.commit("updateDirectorySummary")
+        this.commit("sortByActiveMethod")
     },
     setDirectoryData(state, { directories, files, path_info }) {
-        for (let e in directories) {
-            this.commit('addDirectory', directories[e])
+        state.data = []
+        if (directories) {
+            for (let directory of directories) {
+                this.commit("addDirectory", directory)
+            }
         }
-        for (let e in files) {
-            this.commit('addFile', files[e])
+        if (files) {
+            for (let file of files) {
+                this.commit("addFile", file)
+            }
         }
         state.path = path_info
-    },
-    resetDirectoryData(state) {
-        state.data = []
     },
     setCreateDirectoryShown(state, shown) {
         state.createDirectoryShown = shown
@@ -68,12 +70,12 @@ export const mutations = {
         state.data.sort((a, b) => {
             const sort = new Intl.Collator(undefined, {
                 numeric: true,
-                sensitivity: 'base'
+                sensitivity: "base",
             }).compare(a[val], b[val])
             return desc ? sort * -1 : sort
         })
         /* Switch on type Directory/File */
-        if (val === 'type') {
+        if (val === "type") {
             state.data.reverse()
         }
     },
@@ -85,28 +87,8 @@ export const mutations = {
         }
         state.sizeSum = sum
         /* Directory Count */
-        state.directoryCount = state.data.filter(e => e.type === 'Directory').length
+        state.directoryCount = state.data.filter(e => e.type === "Directory").length
         /* File Count */
-        state.fileCount = state.data.filter(e => e.type === 'File').length
-    }
-}
-
-export const actions = {
-    //async onHttpRequest({ commit }, { url }) {},
-    // async onHttpRequest(val1, val2) {
-    //     console.log(process.env)
-    //     const res = await fetch('http://127.0.0.1:3001/v1/directory/', {
-    //         method: 'GET'
-    //     })
-    //         .then(res => res.json())
-    //         .catch(err => console.error(err))
-    //     console.log(res)
-    // }
-    // async setDirectoryData({ commit }, directory_uuid = null) {
-    //     const res = await this.$axios.$get(`/v1/directory/${directory_uuid || ''}`)
-    //     if (res) {
-    //         await commit('resetDirectoryData')
-    //         await commit('setDirectoryData', res)
-    //     }
-    // }
+        state.fileCount = state.data.filter(e => e.type === "File").length
+    },
 }

@@ -3,27 +3,33 @@
 
         <div class="list-item"></div>
 
+        <!-- Type -->
         <div class="list-item">
-            <FileIcon class="type"></FileIcon>
+            <DirectoryIcon v-if="type === 'Directory'" class="type"></DirectoryIcon>
+            <FileIcon v-else-if="type === 'File'" class="type"></FileIcon>
         </div>
 
+        <!-- Name -->
         <div class="list-item stretch">
-            <span>Testfile</span>
-            <span class="ext">.exe</span>
+            <span>{{name}}</span>
+            <span class="ext">{{extension}}</span>
         </div>
 
         <div class="dynamic-list-menu">
 
+            <!-- Extended menu -->
             <div class="list-item">
                 <ExtendedMenuIcon class="extended-menu"></ExtendedMenuIcon>
             </div>
 
+            <!-- Size -->
             <div class="list-item">
-                <span>25.2 MB</span>
+                <span>{{size | toUnit}}</span>
             </div>
 
+            <!-- Date -->
             <div class="list-item">
-                <span>31.10.2018</span>
+                <span>{{timestamp | toDatetime}}</span>
             </div>
 
         </div>
@@ -37,11 +43,42 @@ import DirectoryIcon from "@/assets/img/icon/overview/directory.svg"
 import ExtendedMenuIcon from "@/assets/img/icon/overview/extended-menu.svg"
 
 export default {
+    props: {
+        uuid: {
+            type: String,
+            required: false,
+        },
+        name: {
+            type: String,
+            required: false,
+        },
+        type: {
+            type: String,
+            default: "File",
+        },
+        scanStatus: {
+            type: Number,
+            default: 0,
+        },
+        size: {
+            type: Number,
+        },
+        timestamp: {
+            required: true,
+        },
+        isNewDirectory: {
+            type: Boolean,
+            default: false,
+        },
+        extension: {
+            type: String,
+        },
+    },
     components: {
         DirectoryIcon,
         FileIcon,
-        ExtendedMenuIcon
-    }
+        ExtendedMenuIcon,
+    },
 }
 </script>
 
