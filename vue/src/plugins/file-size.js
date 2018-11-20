@@ -1,8 +1,8 @@
-import Vue from 'vue'
+import Vue from "vue"
 
-const units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+const units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
 
-Vue.filter('toUnit', value => {
+Vue.filter("toUnit", value => {
     let i = 0
     for (; i < units.length; i++) {
         if (value < 1024) {
@@ -14,12 +14,12 @@ Vue.filter('toUnit', value => {
         Number(value)
             .toFixed(value < 10 ? 2 : value < 100 ? 1 : 0)
             .toString() +
-        ' ' +
+        " " +
         units[i]
     )
 })
 
-Vue.filter('toUnitNoSuffix', value => {
+Vue.filter("toUnitNoSuffix", value => {
     let i = 0
     for (; i < units.length; i++) {
         if (value < 1024) {
