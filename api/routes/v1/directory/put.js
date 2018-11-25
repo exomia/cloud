@@ -1,11 +1,11 @@
-import express from 'express'
-import { addDirectory } from '../../../lib/pg/directory'
-import { JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR } from '../../../lib/error'
+import express from "express"
+import { addDirectory } from "../../../lib/pg/directory"
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR } from "../../../lib/error"
 
 const router = express.Router()
 
-router.put('/:parent_directory_uuid?', async ({ jwt: { payload: { email } }, body: { name }, params: { parent_directory_uuid } }, res) => {
-    if (!name || name.length <= 0) {
+router.put("/:parent_directory_uuid?", async ({ jwt: { payload: { email } }, body: { name }, params: { parent_directory_uuid } }, res) => {
+    if (!name || !name.length) {
         return res.status(200).json(JERROR_API_USAGE_ERROR)
     }
 
@@ -21,14 +21,14 @@ router.put('/:parent_directory_uuid?', async ({ jwt: { payload: { email } }, bod
             timestamp: result.timestamp,
             size: 0,
             clamav_status: 0,
-            download_count: 0
+            download_count: 0,
         },
-        error: false
+        error: false,
     })
 })
 
 export default {
     router,
-    scope: 'directory',
-    access: 0
+    scope: "directory",
+    access: 0,
 }

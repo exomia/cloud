@@ -1,4 +1,4 @@
-import { query } from '../'
+import { query } from "../"
 
 export async function checkLoginData(usernameOrEmail, password) {
     const result = await query`
@@ -15,7 +15,7 @@ export async function checkLoginData(usernameOrEmail, password) {
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND u."password" = crypt(${password}, u."password")
         GROUP BY u."uuid";`
-    if (!result && result.rowCount <= 0) {
+    if (!result && !result.rowCount) {
         return false
     }
     return result.rows[0]
@@ -26,7 +26,7 @@ export async function getUserPassword(usernameOrEmail) {
         SELECT password
         FROM private."user"
         WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail});`
-    if (!result && result.rowCount <= 0) {
+    if (!result && !result.rowCount) {
         return false
     }
     return result.rows[0].password

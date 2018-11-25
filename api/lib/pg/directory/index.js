@@ -1,4 +1,4 @@
-import { query, lb, lbjoin, e } from '../'
+import { query, lb, lbjoin, e } from "../"
 
 export async function addDirectory(usernameOrEmail, name, parent_directory_uuid) {
     let result = false
@@ -14,7 +14,7 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
         }
         dires.path_info_json.push({
             name: dires.name,
-            uuid: dires.uuid
+            uuid: dires.uuid,
         })
         result = await query`
             INSERT INTO private."directory" ("user_uuid", "name", "parent_directory_uuid", "path_info_json")
@@ -113,7 +113,7 @@ export async function updateDirectory(usernameOrEmail, directory_uuid, { new_nam
         updates.push(lb`"name" = ${new_name}`)
     }
     if (new_parent_directory_uuid !== undefined) {
-        if (new_parent_directory_uuid !== 'NULL') {
+        if (new_parent_directory_uuid !== "NULL") {
             const dires = getDirectoryInfo(usernameOrEmail, new_parent_directory_uuid)
             if (!dires) {
                 return false
@@ -125,14 +125,14 @@ export async function updateDirectory(usernameOrEmail, directory_uuid, { new_nam
             }
             dires.path_info_json.push({
                 name: dires.name,
-                uuid: dires.uuid
+                uuid: dires.uuid,
             })
             updates.push(lb`"parent_directory_uuid" = ${new_parent_directory_uuid}, "path_info_json" = ${dires.path_info_json}`)
         } else {
             updates.push(lb`"parent_directory_uuid" = NULL, "path_info_json" = '[]'`)
         }
     }
-    if (updates.length <= 0) {
+    if (!updates.length) {
         return false
     }
     const result = await query`

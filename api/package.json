@@ -6,7 +6,7 @@
     "scripts": {
         "start": "nodemon index.js --exec babel-node",
         "production": "babel-node index.js",
-        "update": "npm prune && npm-check -u  --specials"
+        "update": "npm prune && npm-check -u"
     },
     "nodemonConfig": {
         "ignore": [],

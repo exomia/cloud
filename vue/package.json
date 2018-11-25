@@ -10,7 +10,7 @@
         "ssr:serve": "vue-cli-service ssr:serve",
         "ssr:start": "vue-cli-service ssr:start",
         "ssr:static": "vue-cli-service ssr:static",
-        "update": "npm prune && npm-check -u --specials"
+        "update": "npm prune && npm-check -u"
     },
     "dependencies": {
         "@uvue/core": "^0.1.0-alpha",
