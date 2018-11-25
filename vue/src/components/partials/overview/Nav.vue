@@ -1,19 +1,16 @@
 <template>
     <nav class="path">
 
-        <div class="path-item">
+        <router-link class="path-item" tag="div" :to="{ name: 'overview-dir' }">
             <HomeIcon></HomeIcon>
-        </div>
+        </router-link>
 
-        <PathArrowIcon class="path-arrow"></PathArrowIcon>
-        <div class="path-item">
-            <span>Test Ordner</span>
-        </div>
-
-        <PathArrowIcon class="path-arrow"></PathArrowIcon>
-        <div class="path-item">
-            <span>Test Ordner</span>
-        </div>
+        <template v-for="(pi, idx) in pathInfo">
+            <PathArrowIcon class="path-arrow" :key="'pathInfo-' + idx"></PathArrowIcon>
+            <router-link :key="'pathInfo-' + idx" class="path-item" tag="div" :to="{ name: 'overview-dir', params: {dir: pi.uuid} }">
+                <span>{{pi.name}}</span>
+            </router-link>
+        </template>
 
     </nav>
 </template>
@@ -26,8 +23,13 @@ import PathArrowIcon from "@/assets/img/icon/overview/path-arrow.svg"
 export default {
     components: {
         HomeIcon,
-        PathArrowIcon
-    }
+        PathArrowIcon,
+    },
+    computed: {
+        pathInfo() {
+            return this.$store.getters.pathInfo
+        },
+    },
 }
 </script>
 

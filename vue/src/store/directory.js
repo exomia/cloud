@@ -1,6 +1,6 @@
 export const state = () => ({
     data: [],
-    path: [],
+    pathInfo: [],
     directoryCount: 0,
     fileCount: 0,
     sizeSum: 0,
@@ -12,12 +12,12 @@ export const getters = {
     isDirectoryEmpty: state => !state.data.length,
     getDirectoryData: state => state.data,
     sizeSum: state => state.sizeSum,
-    path: state => state.path,
+    pathInfo: state => state.pathInfo,
     currentDirectoryUuid: state => {
-        if (!state.path || !state.path.length) {
+        if (!state.pathInfo || !state.pathInfo.length) {
             return null
         }
-        return state.path[state.path.length - 1].uuid
+        return state.pathInfo[state.pathInfo.length - 1].uuid
     },
     isCreateDirectoryShown: state => state.createDirectoryShown,
     isCheckAll: state => state.checkAll,
@@ -58,7 +58,7 @@ export const mutations = {
                 this.commit("addFile", file)
             }
         }
-        state.path = path_info
+        state.pathInfo = path_info
     },
     setCreateDirectoryShown(state, shown) {
         state.createDirectoryShown = shown

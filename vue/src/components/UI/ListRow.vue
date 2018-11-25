@@ -1,5 +1,5 @@
 <template>
-    <div class="list-row">
+    <div class="list-row" @click="onClick()">
 
         <div class="list-item"></div>
 
@@ -24,7 +24,7 @@
 
             <!-- Size -->
             <div class="list-item">
-                <span>{{size | toUnit}}</span>
+                <span v-if="type !== 'Directory'">{{size | toUnit}}</span>
             </div>
 
             <!-- Date -->
@@ -78,6 +78,13 @@ export default {
         DirectoryIcon,
         FileIcon,
         ExtendedMenuIcon,
+    },
+    methods: {
+        onClick: function() {
+            if (this.type === "Directory") {
+                this.$router.push({ name: "overview-dir", params: { dir: this.uuid } })
+            }
+        },
     },
 }
 </script>
