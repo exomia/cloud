@@ -1,7 +1,6 @@
 {
     "name": "cloud-api",
     "version": "1.0.0",
-    "description": "Api for a Nuxt.js Cloud",
     "author": "exomia",
     "license": "MIT",
     "scripts": {
