@@ -9,7 +9,8 @@
         "ssr:fix": "vue-cli-service ssr:fix",
         "ssr:serve": "vue-cli-service ssr:serve",
         "ssr:start": "vue-cli-service ssr:start",
-        "ssr:static": "vue-cli-service ssr:static"
+        "ssr:static": "vue-cli-service ssr:static",
+        "update": "npm prune && npm-check -u --specials"
     },
     "dependencies": {
         "@uvue/core": "^0.1.0-alpha",
@@ -19,7 +20,7 @@
         "vue": "^2.5.16",
         "vue-i18n": "^8.3.1",
         "vue-meta": "^1.5.5",
-        "vue-router": "^3.0.1",
+        "vue-router": "^3.0.2",
         "vuelidate": "^0.7.4",
         "vuex": "^3.0.1"
     },
@@ -30,15 +31,15 @@
         "brotli-gzip-webpack-plugin": "^0.5.0",
         "copy-webpack-plugin": "^4.6.0",
         "iltorb": "^2.4.1",
-        "imagemin-gifsicle": "^5.2.0",
-        "imagemin-mozjpeg": "^7.0.0",
-        "imagemin-optipng": "^5.2.1",
+        "imagemin-gifsicle": "^6.0.1",
+        "imagemin-mozjpeg": "^8.0.0",
+        "imagemin-optipng": "^6.0.0",
         "imagemin-pngquant": "^6.0.0",
-        "imagemin-webpack": "^3.0.0",
+        "imagemin-webpack": "^4.0.1",
         "node-sass": "^4.10.0",
         "sass-loader": "^7.0.1",
         "vue-cli-plugin-i18n": "^0.5.1",
-        "vue-svg-loader": "^0.8.0",
+        "vue-svg-loader": "^0.11.0",
         "vue-template-compiler": "^2.5.16"
     },
     "browserslist": [
