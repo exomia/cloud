@@ -1,46 +1,45 @@
-const { ImageminWebpackPlugin } = require('imagemin-webpack');
-const imageminGifsicle = require('imagemin-gifsicle');
-const imageminMozjpeg = require('imagemin-mozjpeg');
-const imageminOptipng = require('imagemin-optipng');
+const ImageminPlugin = require("imagemin-webpack")
+const imageminGifsicle = require("imagemin-gifsicle")
+const imageminMozjpeg = require("imagemin-mozjpeg")
+const imageminOptipng = require("imagemin-optipng")
 //
-const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin');
+const BrotliGzipPlugin = require("brotli-gzip-webpack-plugin")
 //
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     chainWebpack: config => {
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV === "production") {
             /* Copy robots.txt */
             config
-                .plugin('copy')
+                .plugin("copy")
                 .use(CopyWebpackPlugin)
-                .tap(() => [['./src/robots.txt']]);
+                .tap(() => [["./src/robots.txt"]])
 
             /* Image Compression */
-            const imageRule = config.module.rule('images');
-            imageRule.uses.clear();
+            const imageRule = config.module.rule("images")
+            imageRule.uses.clear()
 
             config.module
-                .rule('images')
+                .rule("images")
                 .test(/\.(png|jpe?g|gif|webp)(\?.*)?$/)
-                .use('file-loader')
-                .loader('file-loader')
+                .use("file-loader")
+                .loader("file-loader")
                 .options({
                     rules: {
                         emitFile: true, // Don't forget emit images
-                        name: 'img/[name].[hash:8].[ext]',
+                        name: "img/[name].[hash:8].[ext]",
                     },
                 })
-                .end();
+                .end()
 
             config
-                .plugin('imagemin-webpack')
-                .use(ImageminWebpackPlugin)
+                .plugin("imagemin-webpack")
+                .use(ImageminPlugin)
                 .tap(() => {
                     return [
                         {
                             imageminOptions: {
-                                disable: process.env.NODE_ENV !== 'production',
                                 cache: true,
                                 bail: false, // Ignore errors on corrupted images
                                 loader: false,
@@ -49,7 +48,7 @@ module.exports = {
                                         interlaced: true,
                                     }),
                                     imageminMozjpeg({
-                                        quality: '75',
+                                        quality: "75",
                                         dcScanOpt: 2,
                                     }),
                                     imageminOptipng({
@@ -58,48 +57,48 @@ module.exports = {
                                 ],
                             },
                         },
-                    ];
-                });
+                    ]
+                })
 
             /* GZIP Compression */
             config
-                .plugin('gzip')
+                .plugin("gzip")
                 .use(BrotliGzipPlugin)
                 .tap(() => {
                     return [
                         {
-                            asset: '[path].gz[query]',
-                            algorithm: 'gzip',
+                            asset: "[path].gz[query]",
+                            algorithm: "gzip",
                             test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
                             threshold: 0,
                             minRatio: 0.8,
                         },
-                    ];
-                });
+                    ]
+                })
 
             /* Brotli Compression */
             config
-                .plugin('brotli')
+                .plugin("brotli")
                 .use(BrotliGzipPlugin)
                 .tap(() => {
                     return [
                         {
-                            asset: '[path].br[query]',
-                            algorithm: 'brotli',
+                            asset: "[path].br[query]",
+                            algorithm: "brotli",
                             test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
                             threshold: 0,
                             minRatio: 0.8,
                         },
-                    ];
-                });
+                    ]
+                })
         }
 
         /* Inline svg */
-        const svgRule = config.module.rule('svg');
-        svgRule.uses.clear();
+        const svgRule = config.module.rule("svg")
+        svgRule.uses.clear()
         svgRule
-            .use('vue-svg-loader')
-            .loader('vue-svg-loader')
+            .use("vue-svg-loader")
+            .loader("vue-svg-loader")
             .options({
                 limit: 10 * 1024,
                 noquotes: true,
@@ -110,20 +109,20 @@ module.exports = {
                         },
                     ],
                 },
-            });
+            })
     },
 
     configureWebpack: {
         resolve: {
-            extensions: ['.scss'],
+            extensions: [".scss"],
         },
     },
 
     pluginOptions: {
         i18n: {
-            locale: 'de',
-            fallbackLocale: 'en',
-            localeDir: 'locales',
+            locale: "de",
+            fallbackLocale: "en",
+            localeDir: "locales",
             enableInSFC: false,
         },
     },
@@ -131,8 +130,8 @@ module.exports = {
     pwa: {
         workboxOptions: {
             templatedUrls: {
-                '/': 'index.ssr.html',
+                "/": "index.ssr.html",
             },
         },
     },
-};
+}
