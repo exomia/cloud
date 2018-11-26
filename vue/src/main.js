@@ -4,14 +4,12 @@ import App from "./App.vue"
 import createRouter from "./router"
 import createStore from "./store"
 import createI18n from "./i18n"
-import "./registerServiceWorker"
 import VueMeta from "vue-meta"
+import "./registerServiceWorker"
+
+Vue.use(VueMeta)
 
 Vue.config.productionTip = false
-
-Vue.use(VueMeta, {
-    keyName: "head",
-})
 
 export default () => {
     const store = createStore()

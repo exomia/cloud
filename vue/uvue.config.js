@@ -17,6 +17,5 @@ export default {
         "@/plugins/math",
         "@/plugins/vuelidate",
         "@/plugins/http",
-        // "@/plugins/meta",
     ],
 }

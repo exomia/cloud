@@ -2,12 +2,13 @@ const ImageminPlugin = require("imagemin-webpack")
 const imageminGifsicle = require("imagemin-gifsicle")
 const imageminMozjpeg = require("imagemin-mozjpeg")
 const imageminOptipng = require("imagemin-optipng")
+const imageminSvgo = require("imagemin-svgo")
 //
 const BrotliGzipPlugin = require("brotli-gzip-webpack-plugin")
 
 module.exports = {
     chainWebpack: config => {
-        if (process.env.NODE_ENV === "production123") {
+        if (process.env.NODE_ENV === "production") {
             /* Image Compression */
             const imageRule = config.module.rule("images")
             imageRule.uses.clear()
@@ -34,7 +35,6 @@ module.exports = {
                             imageminOptions: {
                                 cache: true,
                                 bail: false, // Ignore errors on corrupted images
-                                loader: false,
                                 plugins: [
                                     imageminGifsicle({
                                         interlaced: true,
@@ -45,6 +45,9 @@ module.exports = {
                                     }),
                                     imageminOptipng({
                                         optimizationLevel: 5,
+                                    }),
+                                    imageminSvgo({
+                                        removeViewBox: true,
                                     }),
                                 ],
                             },
@@ -85,18 +88,6 @@ module.exports = {
                 })
         }
 
-        /* Load html */
-        config.module
-            .rule("html")
-            .test(/\.html$/)
-            .exclude.add([/index\.html/])
-            .end()
-            .use("html")
-            .loader("html-loader")
-            .options({
-                minimize: true,
-            })
-
         /* Inline svg */
         const svgRule = config.module.rule("svg")
         svgRule.uses.clear()
@@ -114,6 +105,18 @@ module.exports = {
                     ],
                 },
             })
+
+        /* Load html */
+        config.module
+            .rule("html")
+            .test(/\.html$/)
+            .exclude.add([/index\.html/])
+            .end()
+            .use("html")
+            .loader("html-loader")
+            .options({
+                minimize: true,
+            })
     },
 
     configureWebpack: {
@@ -128,14 +131,6 @@ module.exports = {
             fallbackLocale: "en",
             localeDir: "locales",
             enableInSFC: false,
-        },
-    },
-
-    pwa: {
-        workboxOptions: {
-            templatedUrls: {
-                "/": "index.ssr.html",
-            },
         },
     },
 }
