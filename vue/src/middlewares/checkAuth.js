@@ -3,7 +3,7 @@ export default async ({ store: { commit }, redirect, http }) => {
     if (!data.error) {
         commit("setUserInfo", data)
     } else {
-        redirect("/")
+        redirect({ name: "home" })
         //error('Forbidden', 403);
     }
 }

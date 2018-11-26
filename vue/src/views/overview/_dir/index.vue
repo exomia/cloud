@@ -27,12 +27,12 @@ import ListHeader from "@/components/UI/ListHeader"
 import OverviewNav from "@/components/partials/overview/Nav"
 import OverviewSidebar from "@/components/navigation/sidebar/Overview"
 //
-import checkPageAuth from "@/middlewares/checkPageAuth"
+import checkAuth from "@/middlewares/checkAuth"
 
 import { mapGetters } from "vuex"
 
 export default {
-    middlewares: [checkPageAuth],
+    middlewares: [checkAuth],
     async asyncData({ store, http, route }) {
         const { data } = await http.get(`/v1/directory/${route.params.dir || ""}`)
         if (data) {

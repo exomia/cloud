@@ -78,8 +78,11 @@ import LangSwitcher from "@/components/UI/LangSwitcher.vue"
 import LogoIcon from "@/assets/img/icon/login/logo.svg"
 import UserIcon from "@/assets/img/icon/login/user.svg"
 import LockIcon from "@/assets/img/icon/login/lock.svg"
+//
+import authRedirect from "@/middlewares/authRedirect"
 
 export default {
+    middlewares: [authRedirect],
     metaInfo() {
         return {
             title: this.$t("title.home")
