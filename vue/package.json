@@ -3,11 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "ssr:build": "vue-cli-service ssr:build",
-        "ssr:fix": "vue-cli-service ssr:fix",
-        "ssr:serve": "vue-cli-service ssr:serve",
-        "ssr:start": "vue-cli-service ssr:start",
-        "ssr:static": "vue-cli-service ssr:static",
+        "dev": "vue-cli-service ssr:serve",
+        "prod": "vue-cli-service ssr:build",
+        "start": "vue-cli-service ssr:start",
+        "static": "vue-cli-service ssr:static",
         "update": "npm prune && npm-check -u"
     },
     "dependencies": {
