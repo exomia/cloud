@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "vue-cli-service ssr:serve",
-        "prod": "vue-cli-service ssr:build",
+        "build": "vue-cli-service ssr:build",
         "start": "vue-cli-service ssr:start",
         "static": "vue-cli-service ssr:static",
         "update": "npm prune && npm-check -u"
@@ -14,8 +14,8 @@
         "@uvue/server": "^0.1.0-alpha",
         "axios": "^0.18.0",
         "js-cookie": "^2.2.0",
+        "register-service-worker": "^1.5.2",
         "vue": "^2.5.16",
-        "vue-i18n": "^8.3.1",
         "vue-meta": "^1.5.5",
         "vue-router": "^3.0.2",
         "vuelidate": "^0.7.4",
@@ -24,9 +24,10 @@
     "devDependencies": {
         "@uvue/vue-cli-plugin-ssr": "0.1.0-alpha.2",
         "@vue/cli-plugin-babel": "^3.1.1",
+        "@vue/cli-plugin-pwa": "^3.1.2",
         "@vue/cli-service": "^3.1.4",
         "brotli-gzip-webpack-plugin": "^0.5.0",
-        "copy-webpack-plugin": "^4.6.0",
+        "html-loader": "^0.5.5",
         "iltorb": "^2.4.1",
         "imagemin-gifsicle": "^6.0.1",
         "imagemin-mozjpeg": "^8.0.0",
@@ -38,9 +39,5 @@
         "vue-cli-plugin-i18n": "^0.5.1",
         "vue-svg-loader": "^0.11.0",
         "vue-template-compiler": "^2.5.16"
-    },
-    "browserslist": [
-        "> 1%",
-        "not ie <= 11"
-    ]
+    }
 }

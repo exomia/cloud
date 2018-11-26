@@ -4,18 +4,10 @@ const imageminMozjpeg = require("imagemin-mozjpeg")
 const imageminOptipng = require("imagemin-optipng")
 //
 const BrotliGzipPlugin = require("brotli-gzip-webpack-plugin")
-//
-const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     chainWebpack: config => {
-        if (process.env.NODE_ENV === "production") {
-            /* Copy robots.txt */
-            config
-                .plugin("copy")
-                .use(CopyWebpackPlugin)
-                .tap(() => [["./src/robots.txt"]])
-
+        if (process.env.NODE_ENV === "production123") {
             /* Image Compression */
             const imageRule = config.module.rule("images")
             imageRule.uses.clear()
@@ -92,6 +84,18 @@ module.exports = {
                     ]
                 })
         }
+
+        /* Load html */
+        config.module
+            .rule("html")
+            .test(/\.html$/)
+            .exclude.add([/index\.html/])
+            .end()
+            .use("html")
+            .loader("html-loader")
+            .options({
+                minimize: true,
+            })
 
         /* Inline svg */
         const svgRule = config.module.rule("svg")
