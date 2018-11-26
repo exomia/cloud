@@ -1,13 +1,11 @@
 <template>
-    <div id="app">
-        <router-view v-if="!$errorHandler.error"/>
-        <ErrorHandler v-else></ErrorHandler>
-    </div>
+  <div id="app">
+    <router-view v-if="!$errorHandler.error"/>
+    <ErrorHandler v-else></ErrorHandler>
+  </div>
 </template>
 
 <script>
-import TheHeader from "@/components/navigation/TheHeader"
-import TheFooter from "@/components/navigation/TheFooter"
 import ErrorHandler from "@/views/errorHandler"
 
 export default {
@@ -21,14 +19,7 @@ export default {
         link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
     },
     components: {
-        TheHeader,
-        TheFooter,
         ErrorHandler
-    },
-    computed: {
-        isAuthenticated() {
-            return this.$store.getters.isAuthenticated
-        }
     }
 }
 </script>

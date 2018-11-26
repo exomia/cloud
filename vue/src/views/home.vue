@@ -112,7 +112,7 @@ export default {
                     })
                     .then(({ data, error }) => {
                         if (!error) {
-                            this.$store.commit("setAuthUser", data)
+                            this.$store.commit("setUserInfo", data)
                             this.$router.push({ name: "overview-dir" })
                         }
                     })

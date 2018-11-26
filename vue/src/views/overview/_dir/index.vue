@@ -5,14 +5,16 @@
       <OverviewNav></OverviewNav>
       <ListHeader></ListHeader>
       <section class="list">
-        <ListRow v-for="el in getDirectoryData" 
-                :key="el.uuid"
-                :uuid="el.uuid"
-                :name="el.name"
-                :type="el.type"
-                :size="el.size"
-                :timestamp="el.timestamp"
-                :extension="el.extension"></ListRow>
+        <ListRow
+          v-for="el in getDirectoryData"
+          :key="el.uuid"
+          :uuid="el.uuid"
+          :name="el.name"
+          :type="el.type"
+          :size="el.size"
+          :timestamp="el.timestamp"
+          :extension="el.extension"
+        ></ListRow>
       </section>
     </div>
   </main>
