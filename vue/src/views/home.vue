@@ -108,8 +108,7 @@ export default {
                 this.$http
                     .post("/v1/auth/login", {
                         username: this.username,
-                        password: this.password,
-                        stayLoggedIn: false
+                        password: this.password
                     })
                     .then(({ data, error }) => {
                         if (!error) {
