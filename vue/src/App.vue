@@ -10,12 +10,22 @@ import ErrorHandler from "@/views/errorHandler"
 
 export default {
     metaInfo: {
-        title: "Default",
         titleTemplate: "Exomia Cloud - %s",
         htmlAttrs: {
             lang: "en"
         },
-        meta: [{ charset: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { name: "description", content: "My awesome application" }],
+        noscript: [
+            { innerHTML: 'This website requires JavaScript.' }
+        ],
+        meta: [
+            { charset: "utf-8" }, 
+            { name: "viewport", content: "width=device-width, initial-scale=1" }, 
+            { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
+            { name: "description", content: "" },
+            { name: "keywords", content: "" },
+            { name: "author", content: "exomia.com" },
+            { name: "copyright", content: "exomia.com" }
+            ],
         link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
     },
     components: {
