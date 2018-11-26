@@ -136,4 +136,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/pages/index" lang="scss" scoped></style>
+<style src="@/assets/css/pages/home" lang="scss" scoped></style>
