@@ -15,6 +15,7 @@ export default async ({ redirect, req }) => {
     }
 
     if (xTokenSet && xRefreshTokenSet) {
+        //TODO: redirect loop when not authenticated but cookies are still set
         redirect({ name: "overview-dir" })
     }
 }

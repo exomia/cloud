@@ -1,20 +1,20 @@
-@import '../../_variables.scss';
+@import "../../_variables.scss";
 
 /* Settings */
-.row-settings {
-    top: 55px;
-    &::before {
-        left: 2.5px;
-    }
-}
+// .row-settings {
+//     top: 55px;
+//     &::before {
+//         left: 2.5px;
+//     }
+// }
 
-.topbar-settings {
-    margin-top: 3px;
-    left: 1rem;
-    &::before {
-        left: 8px;
-    }
-}
+// .topbar-settings {
+//     margin-top: 3px;
+//     left: 1rem;
+//     &::before {
+//         left: 8px;
+//     }
+// }
 
 /* Style */
 div.option-display,
@@ -23,14 +23,16 @@ div.option-list-display {
     position: absolute;
     border: 1px solid #cccbcb;
     z-index: 1;
+    top: 100%;
     &::before {
         display: block;
-        content: '';
+        content: "";
         width: 1rem;
         height: 1rem;
         background-color: green;
         position: absolute;
         top: -8.7px;
+        left: 2.5px;
         border-top: 1px solid #cccbcb;
         border-left: 1px solid #cccbcb;
         transform: rotate(45deg);
@@ -46,7 +48,7 @@ div.option-list-display {
             text-decoration: none;
             padding: 0.5rem;
             &:hover {
-                i,
+                svg,
                 span {
                     opacity: 1;
                 }
@@ -60,32 +62,10 @@ div.option-list-display {
                 line-height: normal;
                 padding-left: 0.5rem;
             }
-            i {
+            svg {
                 width: 1rem;
                 height: 1rem;
                 opacity: 0.75;
-            }
-            i.info {
-                background: url('../../../img/icon/information.svg') no-repeat center;
-            }
-            i.share {
-                background: url('../../../img/icon/share.svg') no-repeat center;
-            }
-            i.upload {
-                background: url('../../../img/icon/upload.svg') no-repeat center;
-            }
-            i.directory {
-                background: url('../../../img/icon/directory.svg') no-repeat center;
-                background-size: 1.1rem;
-            }
-            i.download {
-                background: url('../../../img/icon/download.svg') no-repeat center;
-            }
-            i.edit {
-                background: url('../../../img/icon/edit.svg') no-repeat center;
-            }
-            i.remove {
-                background: url('../../../img/icon/trash.svg') no-repeat center;
             }
         }
     }

@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "vue-cli-service ssr:serve",
         "build": "vue-cli-service ssr:build",
-        "build:modern": "vue-cli-service ssr:build --modern",
+        "build:modern": "vue-cli-service ssr:build -- --modern",
         "start": "vue-cli-service ssr:start",
         "static": "vue-cli-service ssr:static",
         "update": "npm prune && npm-check -u"
@@ -40,7 +40,7 @@
         "postcss-clean": "^1.1.0",
         "sass-loader": "^7.0.1",
         "vue-cli-plugin-i18n": "^0.5.1",
-        "vue-svg-loader": "^0.11.0",
+        "vue-svg-loader": "^0.12.0-alpha.1",
         "vue-template-compiler": "^2.5.16"
     }
 }

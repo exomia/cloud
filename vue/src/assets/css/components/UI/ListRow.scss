@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../_variables.scss";
 
 div.list-row {
     display: flex;
@@ -6,6 +6,7 @@ div.list-row {
     height: 50px;
 
     div.list-item {
+        position: relative;
         display: flex;
         height: 100%;
         justify-content: flex-start;
@@ -13,15 +14,15 @@ div.list-row {
         cursor: pointer;
 
         span.ext {
-            opacity: .5;
+            opacity: 0.5;
         }
 
         svg.dropdown {
             width: 10px;
             height: 10px;
-            background-image: url('../../../img/icon/overview/dropdown.svg');
+            background-image: url("../../../img/icon/overview/dropdown.svg");
             background-repeat: no-repeat;
-            margin: .5rem;
+            margin: 0.5rem;
         }
 
         svg.type {
