@@ -60,14 +60,14 @@
 </template>
 
 <script>
-import SettingsSidebar from "@/components/navigation/sidebar/SettingsSidebar"
-import SettingsDataChangeForm from "@/components/UI/SettingsDataChangeForm"
+import SettingsSidebar from "@/components/navigation/sidebar/SettingsSidebar";
+import SettingsDataChangeForm from "@/components/UI/SettingsDataChangeForm";
 
 export default {
     metaInfo() {
         return {
             title: this.$t("title.settings")
-        }
+        };
     },
     data() {
         return {
@@ -78,11 +78,11 @@ export default {
             password: "",
             newPassword: "",
             changePasswordSubmit: false
-        }
+        };
     },
     components: {
         SettingsSidebar,
         SettingsDataChangeForm
     }
-}
+};
 </script>
