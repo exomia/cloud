@@ -5,7 +5,7 @@
         </router-link>
 
         <template v-for="(pi, idx) in pathInfo">
-            <PathArrowIcon class="path-arrow" :key="'pathInfo-' + idx"></PathArrowIcon>
+            <PathArrowIcon class="path-arrow" :key="'pathInfoArrow-' + idx"></PathArrowIcon>
             <router-link
                 :key="'pathInfo-' + idx"
                 class="path-item"
