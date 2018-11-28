@@ -21,26 +21,20 @@ div.option-display,
 div.option-list-display {
     border-radius: 1px;
     position: absolute;
-    border: 1px solid #cccbcb;
     z-index: 1;
     top: 100%;
+    left: -5.5px;
     &::before {
         display: block;
         content: "";
-        width: 1rem;
-        height: 1rem;
-        background-color: green;
         position: absolute;
-        top: -8.7px;
-        left: 2.5px;
-        border-top: 1px solid #cccbcb;
-        border-left: 1px solid #cccbcb;
-        transform: rotate(45deg);
-        background-color: #fafafa;
-        z-index: -1;
+        top: -1rem;
+        border-bottom: 1rem solid rgba(0, 0, 0, 0.8);
+        border-left: 1rem solid transparent;
+        border-right: 1rem solid transparent;
     }
     div.wrapper {
-        background-color: $background-color;
+        background-color: rgba(0, 0, 0, 0.8);
         a.option-item {
             display: flex;
             align-items: center;
@@ -54,18 +48,20 @@ div.option-list-display {
                 }
             }
             span {
+                color: white;
                 font-size: 14px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                opacity: 0.75;
+                opacity: 0.85;
                 line-height: normal;
                 padding-left: 0.5rem;
             }
             svg {
+                fill: white;
                 width: 1rem;
                 height: 1rem;
-                opacity: 0.75;
+                opacity: 0.85;
             }
         }
     }
