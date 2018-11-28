@@ -22,14 +22,9 @@
                     @click.stop="floatingMenuToggled = !floatingMenuToggled"
                 ></ExtendedMenuIcon>
                 <FloatingMenu
-                    v-if="floatingMenuToggled"
                     :items="floatingMenuItems"
-                    @clicked="floatingMenuToggled = false"
-                    @info="console.log()"
-                    @share="console.log()"
-                    @rename="console.log()"
-                    @download="console.log()"
-                    @remove="console.log()"
+                    :opened="floatingMenuToggled"
+                    @update:opened="floatingMenuToggled = false"
                 ></FloatingMenu>
             </div>
 

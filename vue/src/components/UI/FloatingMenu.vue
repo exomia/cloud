@@ -1,5 +1,5 @@
 <template>
-    <div class="option-list-display">
+    <div v-if="opened" class="option-list-display">
         <div class="wrapper">
             <a
                 v-for="(item, idx) of items"
@@ -31,12 +31,19 @@ export default {
     methods: {
         clickAction: function(emit) {
             this.$emit(emit);
-            this.$emit("clicked");
+            this.closeMenu();
+        },
+        closeMenu: function() {
+            this.$emit("update:opened", false);
         }
     },
     props: {
         items: {
             type: Array,
+            required: true
+        },
+        opened: {
+            type: Boolean,
             required: true
         }
     },
@@ -46,6 +53,12 @@ export default {
         EditIcon,
         DownloadIcon,
         RemoveIcon
+    },
+    mounted() {
+        let self = this;
+        document.body.addEventListener("click", function() {
+            self.closeMenu();
+        });
     }
 };
 </script>
