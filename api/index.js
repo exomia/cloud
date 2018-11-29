@@ -1,23 +1,14 @@
 import express from 'express'
-import {
-    endpoints
-} from './routes'
-import {
-    jwt_init
-} from './lib/jwt'
-import {
-    JERROR_NOT_FOUND,
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_FORBIDDEN,
-    JERROR_LOGIN_REQUIRED
-} from './lib/error'
+import { endpoints } from './routes'
+import { jwt_init } from './lib/jwt'
+import { JERROR_NOT_FOUND, JERROR_INTERNAL_SERVER_ERROR, JERROR_FORBIDDEN, JERROR_UNAUTHORIZED } from './lib/error'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 3001;
-(async function start() {
+const port = process.env.PORT || 3001
+;(async function start() {
     app.use(cors())
     app.use((req, res, next) => {
         console.log(`[DEBUG] ${req.protocol} | ${req.method} ${req.path}`)
@@ -25,7 +16,7 @@ const port = process.env.PORT || 3001;
             return next()
         }
         res.status(403)
-        res.json(JERROR_FORBIDDEN)
+        res.json(JERROR_FORBIDDEN('the used protocol is forbidden'))
     })
 
     app.all('/', (req, res) => {
@@ -49,14 +40,14 @@ const port = process.env.PORT || 3001;
         let scope = endpoints[s]
         for (let route of scope) {
             if (route.scope !== '') {
-                route.router.use(function (req, res, next) {
+                route.router.use(function(req, res, next) {
                     if (!req.jwt.valid) {
-                        return res.status(200).json(JERROR_LOGIN_REQUIRED)
+                        return JERROR_UNAUTHORIZED(res, 'the auth token is invalid or does not exist.')
                     }
                     if (route.access === 0 || (route.access & req.jwt.payload.scopes[route.scope]) === route.access) {
                         return next()
                     }
-                    return res.status(403).json(JERROR_FORBIDDEN)
+                    return JERROR_FORBIDDEN(res, 'invalid access to the resource.')
                 })
             }
             app.use(`/api/${route.path}`, route.router)
@@ -66,14 +57,12 @@ const port = process.env.PORT || 3001;
         }
     }
 
-    app.use((req, res, next) => {
-        res.status(404)
-        return res.json(JERROR_NOT_FOUND)
+    app.use((_, res) => {
+        return JERROR_NOT_FOUND(res, 'no resource found for this path.')
     })
 
-    app.use((err, req, res, next) => {
-        res.status(500)
-        return res.json(JERROR_INTERNAL_SERVER_ERROR)
+    app.use((err, _, res) => {
+        return JERROR_INTERNAL_SERVER_ERROR(res, err.message)
     })
 
     app.disable('x-powered-by')

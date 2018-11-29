@@ -1,8 +1,8 @@
-import { query, lb, lbjoin, e } from "../"
+import { query, lb, lbjoin, e } from '../'
 
 export async function addFile(usernameOrEmail, directory_uuid, name, extension, local_name, mimetype, size) {
     const result = await query`
-        INSERT INTO private."file" ("user_uuid","directory_uuid", "name", "extension", "local_name", "mimetype", "size")
+        INSERT INTO private."file" ("user_uuid", "directory_uuid", "name", "extension", "local_name", "mimetype", "size")
         VALUES ((SELECT "uuid"
                  FROM private."user"
                  WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),

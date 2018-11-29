@@ -1,6 +1,6 @@
 import express from 'express'
 import { addFile } from '../../../lib/pg/file'
-import { JERROR_INTERNAL_SERVER_ERROR, JERROR_API_USAGE_ERROR, JERROR_FILE_ALREADY_EXIST } from '../../../lib/error'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_BAD_REQUEST } from '../../../lib/error'
 import { STATUS_QUEUED } from '../../../lib/clamav'
 
 import path from 'path'
@@ -12,13 +12,13 @@ const upload = multer({
 
 const router = express.Router()
 
-router.put('/:directory_uuid', upload.single('upload-file'), async ({ jwt: { payload: { email } }, params: { directory_uuid }, body: { replace }, file }, res) => {
+router.put('/:directory_uuid?', upload.single('upload-file'), async ({ jwt: { payload: { email } }, params: { directory_uuid }, body: { replace }, file }, res) => {
     if (!replace) {
         const fi = path.parse(file.originalname)
         const result = await addFile(email, directory_uuid, fi.name, fi.ext, file.filename, file.mimetype, file.size)
         if (!result) {
             //TODO: CLEAR/REMOVE LOCAL FILE
-            return res.status(200).json(JERROR_FILE_ALREADY_EXIST)
+            return JERROR_BAD_REQUEST(res, "the file already exists! Set the 'replace' option in the payload to true to override it!")
         }
         return res.status(200).json({
             file: {
@@ -34,7 +34,7 @@ router.put('/:directory_uuid', upload.single('upload-file'), async ({ jwt: { pay
         })
     }
     //REPLACE FILE AND UPDATE
-    return res.json(JERROR_INTERNAL_SERVER_ERROR)
+    return JERROR_INTERNAL_SERVER_ERROR(res, "currently not supported. ('replace': true)")
 })
 
 export default {
