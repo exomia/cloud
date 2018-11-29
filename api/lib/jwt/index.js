@@ -1,12 +1,12 @@
-import jwt from "jsonwebtoken"
-import config from "../../.config/.jwt.config.json"
-import { getUserPassword } from "../pg/user/auth"
+import jwt from 'jsonwebtoken'
+import config from '../../.config/.jwt.config.json'
+import { getUserPassword } from '../pg/user/auth'
 
 export async function sign(res, { email, password, scopes }) {
-    res.setHeader("Access-Control-Expose-Headers", "x-token, x-refresh-token")
-    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-token')
+    res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader(
-        "x-token",
+        'x-token',
         jwt.sign(
             {
                 email,
@@ -16,7 +16,7 @@ export async function sign(res, { email, password, scopes }) {
             config.jwt_options_t
         )
     )
-    res.setHeader("x-refresh-token", jwt.sign({}, password + config.SECRET_RT, config.jwt_options_rt))
+    res.setHeader('x-refresh-token', jwt.sign({ email }, config.SECRET_RT + password, config.jwt_options_rt))
 }
 
 export async function jwt_init(req, res, next) {
@@ -25,7 +25,7 @@ export async function jwt_init(req, res, next) {
         payload: {},
     }
 
-    const token = req.headers["x-token"]
+    const token = req.headers['x-token']
     if (!token) {
         return next()
     }
@@ -45,19 +45,19 @@ export async function jwt_init(req, res, next) {
         req.jwt.valid = true
         return next()
     } catch (err) {
-        if (err.name !== "TokenExpiredError") {
+        if (err.name !== 'TokenExpiredError') {
             return next()
         }
     }
-    const refreshToken = req.headers["x-refresh-token"]
+
+    const refreshToken = req.headers['x-refresh-token']
     if (!refreshToken) {
         return next()
     }
 
     try {
-        //TODO: unused variable ?
-        let payload_rt = jwt.verify(refreshToken, password + config.SECRET_RT, config.jwt_verify_options)
-        sign(res, payload)
+        jwt.verify(refreshToken, config.SECRET_RT + password, config.jwt_verify_options)
+        sign(res, { ...payload, password })
         req.jwt.payload = payload
         req.jwt.valid = true
         return next()
