@@ -9,9 +9,9 @@ export default {
     metaInfo() {
         return {
             title: this.$t("title.imprint")
-        }
+        };
     }
-}
+};
 </script>
 
 <style src="@/assets/css/pages/legal" lang="scss" scoped></style>

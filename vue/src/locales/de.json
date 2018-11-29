@@ -1,56 +1,56 @@
 {
-  "index": {
-    "form": {
-      "forgotPassword": "Passwort vergessen?",
-      "nameOrEmail": "Name / E-Mail",
-      "password": "Passwort",
-      "signIn": "Anmelden"
-    }
-  },
-  "navigation": {
-    "TheFooter": {
-      "cookies": "Cookies",
-      "imprint": "Impressum",
-      "privacy": "Datenschutz"
-    }
-  },
-  "partials": {
-    "ListHeader": {
-      "date": "Datum",
-      "name": "Name",
-      "size": "Größe",
-      "status": "Status",
-      "type": "Typ"
+    "index": {
+        "form": {
+            "forgotPassword": "Passwort vergessen?",
+            "nameOrEmail": "Name / E-Mail",
+            "password": "Passwort",
+            "signIn": "Anmelden"
+        }
     },
-    "ListRow": {
-      "download": "Herunterladen",
-      "info": "Info",
-      "remove": "Löschen",
-      "rename": "Umbenennen",
-      "share": "Teilen"
+    "navigation": {
+        "TheFooter": {
+            "cookies": "Cookies",
+            "imprint": "Impressum",
+            "privacy": "Datenschutz"
+        }
     },
-    "OverviewPath": {
-      "newDirectory": "Neuer Ordner",
-      "uploadFile": "Datei Hochladen"
-    }
-  },
-  "sidebar": {
-    "overview": {
-      "allFiles": "Alle Dateien",
-      "settings": "Einstellungen",
-      "trash": "Papierkorb"
+    "partials": {
+        "ListHeader": {
+            "date": "Datum",
+            "name": "Name",
+            "size": "Größe",
+            "status": "Status",
+            "type": "Typ"
+        },
+        "ListRow": {
+            "download": "Herunterladen",
+            "info": "Info",
+            "remove": "Löschen",
+            "rename": "Umbenennen",
+            "share": "Teilen"
+        },
+        "OverviewPath": {
+            "newDirectory": "Neuer Ordner",
+            "uploadFile": "Datei Hochladen"
+        }
     },
-    "settings": {
-      "admin": "Administrator",
-      "profile": "Profil",
-      "rights": "Rechte"
+    "sidebar": {
+        "overview": {
+            "allFiles": "Alle Dateien",
+            "settings": "Einstellungen",
+            "trash": "Papierkorb"
+        },
+        "settings": {
+            "admin": "Administrator",
+            "profile": "Profil",
+            "rights": "Rechte"
+        }
+    },
+    "title": {
+        "home": "Login",
+        "imprint": "Impressum",
+        "overview": "Übersicht",
+        "privacy": "Datenschutz",
+        "settings": "Einstellungen"
     }
-  },
-  "title": {
-    "home": "Login",
-    "imprint": "Impressum",
-    "overview": "Übersicht",
-    "privacy": "Datenschutz",
-    "settings": "Einstellungen"
-  }
 }

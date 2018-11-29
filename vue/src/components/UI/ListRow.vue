@@ -1,6 +1,5 @@
 <template>
     <div class="list-row" @click="onClick()">
-
         <div class="list-item"></div>
 
         <!-- Type -->
@@ -16,10 +15,17 @@
         </div>
 
         <div class="dynamic-list-menu">
-
             <!-- Extended menu -->
             <div class="list-item">
-                <ExtendedMenuIcon class="extended-menu"></ExtendedMenuIcon>
+                <ExtendedMenuIcon
+                    class="extended-menu"
+                    @click.stop="floatingMenuToggled = !floatingMenuToggled"
+                ></ExtendedMenuIcon>
+                <FloatingMenu
+                    :items="floatingMenuItems"
+                    :opened="floatingMenuToggled"
+                    @update:opened="floatingMenuToggled = false"
+                ></FloatingMenu>
             </div>
 
             <!-- Size -->
@@ -31,62 +37,100 @@
             <div class="list-item">
                 <span>{{timestamp | toDatetime}}</span>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
 /* SVG */
-import FileIcon from "@/assets/img/icon/overview/file.svg"
-import DirectoryIcon from "@/assets/img/icon/overview/directory.svg"
-import ExtendedMenuIcon from "@/assets/img/icon/overview/extended-menu.svg"
+import FileIcon from "@/assets/img/icon/overview/file.svg";
+import DirectoryIcon from "@/assets/img/icon/overview/directory.svg";
+import ExtendedMenuIcon from "@/assets/img/icon/overview/extended-menu.svg";
+
+/* Components */
+import FloatingMenu from "@/components/UI/FloatingMenu";
 
 export default {
+    data() {
+        return {
+            floatingMenuToggled: false,
+            floatingMenuItems: [
+                {
+                    name: this.$i18n.t("partials.ListRow.info"),
+                    iconClass: "info",
+                    emit: "info"
+                },
+                {
+                    name: this.$i18n.t("partials.ListRow.share"),
+                    iconClass: "share",
+                    emit: "share"
+                },
+                {
+                    name: this.$i18n.t("partials.ListRow.rename"),
+                    iconClass: "edit",
+                    emit: "rename"
+                },
+                {
+                    name: this.$i18n.t("partials.ListRow.download"),
+                    iconClass: "download",
+                    emit: "download"
+                },
+                {
+                    name: this.$i18n.t("partials.ListRow.remove"),
+                    iconClass: "remove",
+                    emit: "remove"
+                }
+            ]
+        };
+    },
     props: {
         uuid: {
             type: String,
-            required: false,
+            required: false
         },
         name: {
             type: String,
-            required: false,
+            required: false
         },
         type: {
             type: String,
-            default: "File",
+            default: "File"
         },
         scanStatus: {
             type: Number,
-            default: 0,
+            default: 0
         },
         size: {
-            type: Number,
+            type: Number
         },
         timestamp: {
-            required: true,
+            required: true
         },
         isNewDirectory: {
             type: Boolean,
-            default: false,
+            default: false
         },
         extension: {
-            type: String,
-        },
+            type: String
+        }
     },
     components: {
         DirectoryIcon,
         FileIcon,
         ExtendedMenuIcon,
+        FloatingMenu
     },
     methods: {
         onClick: function() {
             if (this.type === "Directory") {
-                this.$router.push({ name: "overview-dir", params: { dir: this.uuid } })
+                this.$router.push({
+                    name: "overview-dir",
+                    params: { dir: this.uuid }
+                });
             }
-        },
-    },
-}
+        }
+    }
+};
 </script>
 
 <style src="@/assets/css/components/UI/ListRow" lang="scss"></style>
