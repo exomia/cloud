@@ -3,18 +3,27 @@
         <OverviewSidebar></OverviewSidebar>
         <div class="center">
             <OverviewNav></OverviewNav>
-            <ListHeader></ListHeader>
             <section class="list">
-                <ListRow
-                    v-for="el in getDirectoryData"
-                    :key="el.uuid"
-                    :uuid="el.uuid"
-                    :name="el.name"
-                    :type="el.type"
-                    :size="el.size"
-                    :timestamp="el.timestamp"
-                    :extension="el.extension"
-                ></ListRow>
+                <div class="side">
+                    <ListHeader :hideInformations="hideInformations"></ListHeader>
+                    <ListHeaderInfo v-if="hideInformations"></ListHeaderInfo>
+                </div>
+                <div class="side">
+                    <div class="row-wrapper">
+                        <ListRow
+                            v-for="el in getDirectoryData"
+                            :hideInformations="hideInformations"
+                            :key="el.uuid"
+                            :uuid="el.uuid"
+                            :name="el.name"
+                            :type="el.type"
+                            :size="el.size"
+                            :timestamp="el.timestamp"
+                            :extension="el.extension"
+                        ></ListRow>
+                    </div>
+                    <ListRowInfo v-if="hideInformations"></ListRowInfo>
+                </div>
             </section>
         </div>
     </main>
@@ -22,7 +31,9 @@
 
 <script>
 import ListRow from "@/components/UI/ListRow";
+import ListRowInfo from "@/components/UI/ListRowInfo";
 import ListHeader from "@/components/UI/ListHeader";
+import ListHeaderInfo from "@/components/UI/ListHeaderInfo";
 //
 import OverviewNav from "@/components/partials/overview/Nav";
 import OverviewSidebar from "@/components/navigation/sidebar/Overview";
@@ -46,6 +57,11 @@ export default {
             title: this.$t("title.overview")
         };
     },
+    data() {
+        return {
+            hideInformations: true
+        };
+    },
     computed: {
         ...mapGetters([
             "getDirectoryData",
@@ -56,7 +72,9 @@ export default {
     },
     components: {
         ListRow,
+        ListRowInfo,
         ListHeader,
+        ListHeaderInfo,
         OverviewNav,
         OverviewSidebar
     }

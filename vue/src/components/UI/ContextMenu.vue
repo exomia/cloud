@@ -63,5 +63,5 @@ export default {
 };
 </script>
 
-<style src="@/assets/css/components/extras/FloatingMenu" lang="scss" scoped>
+<style src="@/assets/css/components/extras/ContextMenu" lang="scss" scoped>
 </style>

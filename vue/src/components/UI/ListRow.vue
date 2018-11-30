@@ -1,5 +1,5 @@
 <template>
-    <div class="list-row" @click="onClick()">
+    <div class="list-row" :class="hideInformations ? 'space' : ''" @click="onClick()">
         <div class="list-item"></div>
 
         <!-- Type -->
@@ -9,32 +9,32 @@
         </div>
 
         <!-- Name -->
-        <div class="list-item stretch">
+        <div class="list-item" :class="hideInformations ? 'space' : 'stretch'">
             <span>{{name}}</span>
             <span class="ext">{{extension}}</span>
         </div>
 
-        <div class="dynamic-list-menu">
+        <div class="dynamic-list-menu" :style="hideInformations ? 'width: auto' : ''">
             <!-- Extended menu -->
             <div class="list-item">
                 <ExtendedMenuIcon
                     class="extended-menu"
-                    @click.stop="floatingMenuToggled = !floatingMenuToggled"
+                    @click.stop="contextMenuToggled = !contextMenuToggled"
                 ></ExtendedMenuIcon>
-                <FloatingMenu
-                    :items="floatingMenuItems"
-                    :opened="floatingMenuToggled"
-                    @update:opened="floatingMenuToggled = false"
-                ></FloatingMenu>
+                <ContextMenu
+                    :items="contextMenuItems"
+                    :opened="contextMenuToggled"
+                    @update:opened="contextMenuToggled = false"
+                ></ContextMenu>
             </div>
 
             <!-- Size -->
-            <div class="list-item">
+            <div v-if="!hideInformations" class="list-item">
                 <span v-if="type !== 'Directory'">{{size | toUnit}}</span>
             </div>
 
             <!-- Date -->
-            <div class="list-item">
+            <div v-if="!hideInformations" class="list-item">
                 <span>{{timestamp | toDatetime}}</span>
             </div>
         </div>
@@ -48,13 +48,13 @@ import DirectoryIcon from "@/assets/img/icon/overview/directory.svg";
 import ExtendedMenuIcon from "@/assets/img/icon/overview/extended-menu.svg";
 
 /* Components */
-import FloatingMenu from "@/components/UI/FloatingMenu";
+import ContextMenu from "@/components/UI/ContextMenu";
 
 export default {
     data() {
         return {
-            floatingMenuToggled: false,
-            floatingMenuItems: [
+            contextMenuToggled: false,
+            contextMenuItems: [
                 {
                     name: this.$i18n.t("partials.ListRow.info"),
                     iconClass: "info",
@@ -112,13 +112,17 @@ export default {
         },
         extension: {
             type: String
+        },
+        hideInformations: {
+            type: Boolean,
+            required: true
         }
     },
     components: {
         DirectoryIcon,
         FileIcon,
         ExtendedMenuIcon,
-        FloatingMenu
+        ContextMenu
     },
     methods: {
         onClick: function() {
