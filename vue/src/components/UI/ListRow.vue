@@ -25,6 +25,7 @@
                     :items="contextMenuItems"
                     :opened="contextMenuToggled"
                     @update:opened="contextMenuToggled = false"
+                    @info="triggerInfo()"
                 ></ContextMenu>
             </div>
 
@@ -125,6 +126,9 @@ export default {
         ContextMenu
     },
     methods: {
+        triggerInfo: function() {
+            this.$emit("info");
+        },
         onClick: function() {
             if (this.type === "Directory") {
                 this.$router.push({

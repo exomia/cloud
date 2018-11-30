@@ -6,23 +6,32 @@
             <section class="list">
                 <div class="side">
                     <ListHeader :hideInformations="hideInformations"></ListHeader>
-                    <ListHeaderInfo v-if="hideInformations"></ListHeaderInfo>
+                    <ListHeaderInfo v-if="hideInformations" @close="hideInformations = false"></ListHeaderInfo>
                 </div>
                 <div class="side">
                     <div class="row-wrapper">
                         <ListRow
                             v-for="el in getDirectoryData"
                             :hideInformations="hideInformations"
-                            :key="el.uuid"
+                            :key="'Element-' + el.uuid"
                             :uuid="el.uuid"
                             :name="el.name"
                             :type="el.type"
                             :size="el.size"
                             :timestamp="el.timestamp"
                             :extension="el.extension"
+                            @info="openInfo(el)"
                         ></ListRow>
                     </div>
-                    <ListRowInfo v-if="hideInformations"></ListRowInfo>
+                    <ListRowInfo
+                        v-if="hideInformations"
+                        :uuid="infoData.uuid"
+                        :name="infoData.name"
+                        :type="infoData.type"
+                        :size="infoData.size"
+                        :timestamp="infoData.timestamp"
+                        :extension="infoData.extension"
+                    ></ListRowInfo>
                 </div>
             </section>
         </div>
@@ -59,8 +68,21 @@ export default {
     },
     data() {
         return {
-            hideInformations: true
+            hideInformations: false,
+            infoData: {}
         };
+    },
+    methods: {
+        openInfo: function(data) {
+            // Assign
+            this.infoData = data;
+
+            // Open
+            const self = this;
+            this.$nextTick(function() {
+                self.hideInformations = true;
+            });
+        }
     },
     computed: {
         ...mapGetters([

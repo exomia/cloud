@@ -7,8 +7,8 @@
         </div>
         <!-- Title -->
         <div class="infobox titlebox">
-            <h2>Testdirectory</h2>
-            <span>25.2 MB, 30.11.2018</span>
+            <h2>{{name}}</h2>
+            <span>{{size | toUnit}},&nbsp;{{timestamp | toDatetime}}</span>
         </div>
         <!-- Menu -->
         <div class="infobox menu">
@@ -51,10 +51,28 @@ import EditIcon from "@/assets/img/icon/edit.svg";
 import RemoveIcon from "@/assets/img/icon/trash.svg";
 
 export default {
-    data() {
-        return {
-            type: "Directory"
-        };
+    props: {
+        uuid: {
+            type: String,
+            required: false
+        },
+        name: {
+            type: String,
+            required: false
+        },
+        type: {
+            type: String,
+            default: "File"
+        },
+        size: {
+            type: Number
+        },
+        timestamp: {
+            required: true
+        },
+        extension: {
+            type: String
+        }
     },
     components: {
         FileIcon,
