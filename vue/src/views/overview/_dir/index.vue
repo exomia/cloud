@@ -13,7 +13,7 @@
                         <ListRow
                             v-for="el in getDirectoryData"
                             :hideInformations="hideInformations"
-                            :key="'Element-' + el.uuid"
+                            :key="'El-' + el.uuid"
                             :uuid="el.uuid"
                             :name="el.name"
                             :type="el.type"
@@ -39,6 +39,10 @@
 </template>
 
 <script>
+/* Import */
+import { mapGetters } from "vuex";
+
+/* Components */
 import ListRow from "@/components/UI/ListRow";
 import ListRowInfo from "@/components/UI/ListRowInfo";
 import ListHeader from "@/components/UI/ListHeader";
@@ -46,10 +50,9 @@ import ListHeaderInfo from "@/components/UI/ListHeaderInfo";
 //
 import OverviewNav from "@/components/partials/overview/Nav";
 import OverviewSidebar from "@/components/navigation/sidebar/Overview";
-//
-import checkAuth from "@/middlewares/checkAuth";
 
-import { mapGetters } from "vuex";
+/* Middleware */
+import checkAuth from "@/middlewares/checkAuth";
 
 export default {
     middlewares: [checkAuth],
