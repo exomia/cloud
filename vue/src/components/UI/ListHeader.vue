@@ -1,5 +1,5 @@
 <template>
-    <div class="list-row header" :class="hideInformations ? 'space' : ''">
+    <div class="list-row header" :class="hideInformations ? 'info-active' : ''">
         <div class="list-item">
             <input type="checkbox">
         </div>
@@ -9,7 +9,7 @@
             <DropdownIcon class="dropdown"></DropdownIcon>
         </div>
 
-        <div class="list-item" :class="hideInformations ? 'space' : 'stretch'">
+        <div class="list-item" :class="hideInformations ? 'info-active' : 'stretch'">
             <span>Name</span>
             <DropdownIcon class="dropdown"></DropdownIcon>
         </div>

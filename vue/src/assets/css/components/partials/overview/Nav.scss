@@ -1,32 +1,50 @@
+@import '../../../_variables.scss';
+
 nav.path {
     display: flex;
     align-items: center;
     padding: 0 1rem;
     margin-bottom: 3rem;
+    height: 50px;
 
-    div.path-item {
+    a.path-item {
         display: flex;
-        height: 50px;
-        justify-content: center;
+        height: 100%;
         align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        overflow: hidden;
         cursor: pointer;
+
+        // @media screen and (max-width: $break-small) {
+        //     span:not(.placeholder):not(.last) {
+        //         display: none;
+        //     }
+
+        //     span.placeholder:not(.last) {
+        //         display: block;
+        //     }
+        // }
 
         &:first-of-type {
             width: 50px;
         }
 
-        svg {
+        svg{
             width: 14px;
             height: 14px;
         }
 
         span {
-            padding: 0 1rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 
     svg.path-arrow {
         width: 14px;
         height: 14px;
+        margin: 0 1rem;
     }
 }

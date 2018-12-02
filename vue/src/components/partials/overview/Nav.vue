@@ -1,6 +1,10 @@
 <template>
     <nav class="path">
-        <router-link class="path-item" tag="div" :to="{ name: 'overview-dir' }">
+        <router-link 
+            class="path-item" 
+            tag="a" 
+            :to="{ name: 'overview-dir' }" 
+            :title="this.$i18n.t('title.overview')">
             <HomeIcon></HomeIcon>
         </router-link>
 
@@ -9,10 +13,11 @@
             <router-link
                 :key="'pathInfo-' + idx"
                 class="path-item"
-                tag="div"
+                tag="a"
                 :to="{ name: 'overview-dir', params: {dir: pi.uuid} }"
+                :title="pi.name"
             >
-                <span>{{pi.name}}</span>
+                <span>{{formatName(pi.name)}}</span>
             </router-link>
         </template>
     </nav>
@@ -31,6 +36,13 @@ export default {
     computed: {
         pathInfo() {
             return this.$store.getters.pathInfo;
+        }
+    },
+    methods: {
+        formatName: (name) => {
+            if(name && name.length > 20)
+                return name.substring(0,20) + "..."
+            return name;
         }
     }
 };

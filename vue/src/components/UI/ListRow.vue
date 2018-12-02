@@ -1,5 +1,5 @@
 <template>
-    <div class="list-row" :class="hideInformations ? 'space' : ''" @click="onClick()">
+    <div class="list-row" :class="hideInformations ? 'info-active' : ''" @click="onClick()">
         <div class="list-item"></div>
 
         <!-- Type -->
@@ -9,7 +9,7 @@
         </div>
 
         <!-- Name -->
-        <div class="list-item" :class="hideInformations ? 'space' : 'stretch'">
+        <div class="list-item" :class="hideInformations ? 'info-active' : 'stretch'">
             <span>{{name}}</span>
             <span class="ext">{{extension}}</span>
         </div>

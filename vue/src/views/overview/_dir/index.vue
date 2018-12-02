@@ -9,7 +9,7 @@
                     <ListHeaderInfo v-if="hideInformations" @close="hideInformations = false"></ListHeaderInfo>
                 </div>
                 <div class="side">
-                    <div class="row-wrapper">
+                    <div class="row-wrapper" :class="!hideInformations ? 'info-active' : ''">
                         <ListRow
                             v-for="el in getDirectoryData"
                             :hideInformations="hideInformations"

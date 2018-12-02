@@ -32,17 +32,43 @@ div.list-row {
     display: flex;
     padding: 0 1rem;
     height: 50px;
-    width: calc(100vw - 270px);
+    width: 100%;
 
     &.info {
         display: flex;
-        width: 320px;
         padding: 0;
         border-left: 1px solid $contour-color;
+
+        @media screen and (max-width: $break-medium) {
+            width: 100% !important;
+        }
+
+        // < $break-large
+        @media screen and (max-width: $break-large) {
+            width: 200px;
+        }
+
+        // > $break-large
+        @media screen and (min-width: $break-large) {
+            width: 300px;
+        }
     }
 
-    &.space {
-        width: calc(100vw - 270px - 320px) !important;
+    &.info-active {
+        // Disable on info view
+        @media screen and (max-width: $break-medium) {
+            display: none;
+        }
+
+        // < $break-large
+        @media screen and (max-width: $break-large) {
+            width: calc(100vw - 270px - 200px);
+        }
+
+        // > $break-large
+        @media screen and (min-width: $break-large) {
+            width: calc(100vw - 270px - 300px);
+        }
     }
 
     div.list-item {
@@ -53,15 +79,19 @@ div.list-row {
         align-items: center;
         cursor: pointer;
 
+        span:not(.ext) {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
         span.ext {
             opacity: 0.5;
+            margin-right: 0.5rem;
         }
 
         svg.dropdown {
             width: 10px;
             height: 10px;
-            background-image: url('../../../img/icon/overview/dropdown.svg');
-            background-repeat: no-repeat;
             margin: 0.5rem;
         }
 
@@ -72,7 +102,6 @@ div.list-row {
 
         svg.extended-menu {
             width: 20px;
-            // height: 20px;
             height: 100%;
         }
     }
@@ -85,24 +114,53 @@ div.list-row {
         width: 100px;
     }
 
-    // div.list-item:nth-of-type(3):not(.stretch) {
-    //     width: 330px;
-    // }
-
-    div.list-item.space {
-        width: calc(100% - 50px - (100px * 4) - (1rem * 2) + 230px);
+    div.list-item.info-active {
+        // < $break-large
+        @media screen and (max-width: $break-large) {
+            width: calc(100% - 140px - (1rem * 2));
+        }
+        // > $break-large
+        @media screen and (min-width: $break-large) {
+            width: calc(100% - 220px - (1rem * 2));
+        }
     }
 
     div.list-item.stretch {
         width: calc(100% - 50px - (100px * 4) - (1rem * 2));
+
+        @media screen and (max-width: $break-small) {
+            width: calc(100% - 50px - 100px) !important;
+        }
+
+        @media screen and (max-width: $break-large) {
+            width: calc(100% - 50px - (100px * 4) - (1rem * 2) + 230px);
+        }
     }
 
     div.dynamic-list-menu {
         display: flex;
         width: 330px;
 
+        @media screen and (max-width: $break-small) {
+            display: none;
+        }
+
+        @media screen and (max-width: $break-large) {
+            width: auto;
+        }
+
         div.list-item {
             width: 100px;
+
+            &:not(:first-of-type) {
+                @media screen and (max-width: $break-large) {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: $break-large) {
+                width: 20px;
+            }
         }
 
         &-hide {

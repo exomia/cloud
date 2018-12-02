@@ -1,7 +1,17 @@
+@import "../../../_variables.scss";
+
 aside {
     position: relative;
     width: 270px;
     height: 100vh;
+
+    @media screen and (max-width: $break-small) {
+        width: 50px !important;
+    }
+
+    @media screen and (max-width: $break-medium) {
+        width: 66px;
+    }
 
     div.img {
         position: absolute;
@@ -50,11 +60,21 @@ aside {
                 margin-bottom: 8rem;
                 cursor: pointer;
 
+                @media screen and (max-width: $break-medium) {
+                    margin-top: 2rem;
+                    margin-bottom: 4rem;
+                }
+
                 svg.logo {
                     width: 58.5px;
                     height: 58.5px;
-                    margin-bottom: 12px;
+                    margin-bottom: 0.75rem;
                     user-select: none;
+
+                    @media screen and (max-width: $break-medium) {
+                        width: 36px;
+                        height: 36px;
+                    }
                 }
 
                 h1 {
@@ -63,6 +83,9 @@ aside {
                     font-size: 25pt;
                     font-weight: 300;
                     user-select: none;
+                    @media screen and (max-width: $break-medium) {
+                        display: none;
+                    }
                 }
             }
 
@@ -79,10 +102,25 @@ aside {
                     justify-content: flex-start;
                     align-items: center;
 
+                    @media screen and (max-width: $break-medium) {
+                        justify-content: center;
+                    }     
+
                     svg.icon {
                         width: 20px;
                         height: 20px;
                         margin-right: 1rem;
+                        @media screen and (max-width: $break-medium) {
+                            margin-right: 0;
+                            // width: 22px;
+                            // height: 22px;
+                        }        
+                    }
+
+                    span {
+                        @media screen and (max-width: $break-medium) {
+                            display: none;
+                        }
                     }
                 }
             }

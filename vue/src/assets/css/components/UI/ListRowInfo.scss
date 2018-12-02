@@ -1,3 +1,5 @@
+@import "../../_variables.scss";
+
 /* Root */
 div.info {
     flex-direction: column;
@@ -30,11 +32,22 @@ div.titlebox {
 
 div.menu {
     flex-direction: column;
+
+    @media screen and (max-width: $break-medium) {
+        display: flex;
+        align-items: center;
+    }
     div.option {
         display: flex;
         align-items: center;
         width: 100%;
         cursor: pointer;
+
+        @media screen and (max-width: $break-medium) {
+            width: auto;
+            margin: .5rem 0;
+            margin-right: 50px;
+        }
         div.icon-wrapper {
             display: flex;
             height: 50px;
