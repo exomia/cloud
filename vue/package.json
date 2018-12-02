@@ -1,7 +1,7 @@
 {
-    "name": "vue-cloud",
-    "version": "0.1.0",
-    "private": true,
+    "name": "vue",
+    "author": "exomia",
+    "license": "MIT",
     "scripts": {
         "dev": "vue-cli-service ssr:serve",
         "build": "vue-cli-service ssr:build",

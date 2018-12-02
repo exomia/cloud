@@ -1,6 +1,5 @@
 {
-    "name": "cloud-api",
-    "version": "1.0.0",
+    "name": "api",
     "author": "exomia",
     "license": "MIT",
     "scripts": {

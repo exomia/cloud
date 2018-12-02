@@ -1,10 +1,14 @@
 version: 2.1
 jobs:
     build:
-        working_directory: ~/tmp
+        working_directory: ~/repo
+
         docker:
-            - image: circleci/node:11
+            - image: circleci/node:10
+
         steps:
             - checkout
-            - run: npm install
-            - run: npm test
+            - run: cd vue && npm install
+            - run: cd vue && npm run build
+            # - run: cd vue && npm run start
+            # - run: npm test
