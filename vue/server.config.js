@@ -1,4 +1,7 @@
+import { ExpressAdapter } from '@uvue/server'
+
 export default {
+    adapter: ExpressAdapter,
     plugins: [
         // Parse cookies
         [
@@ -13,6 +16,11 @@ export default {
         '@uvue/server/plugins/static',
         // Compress responses
         '@uvue/server/plugins/gzip',
-        './src/api',
+        // Init api
+        './src/api/install',
     ],
+    // Watch for changes in these files to automatically reboot server
+    watch: ['src/server/**/*.js'],
+    // SPA paths: no SSR occur for these paths
+    spaPaths: ['/spa'],
 }

@@ -11,10 +11,11 @@
         "update": "npm prune && npm-check -u"
     },
     "dependencies": {
-        "@uvue/core": "^0.1.0-alpha",
-        "@uvue/server": "^0.1.0-alpha",
+        "@uvue/core": "^0.1.0-alpha.5",
+        "@uvue/server": "^0.1.0-alpha.5",
         "axios": "^0.18.0",
         "cors": "^2.8.5",
+        "express": "^4.16.4",
         "js-cookie": "^2.2.0",
         "jsonwebtoken": "^8.4.0",
         "multer": "^1.4.1",
