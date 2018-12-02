@@ -2,16 +2,17 @@ export default {
     plugins: [
         // Parse cookies
         [
-            "@uvue/server/plugins/cookie",
+            '@uvue/server/plugins/cookie',
             {
-                secret: "secret",
+                secret: 'secret',
             },
         ],
         // Modern build
-        "@uvue/server/plugins/modernBuild",
+        '@uvue/server/plugins/modernBuild',
         // Serve static files
-        "@uvue/server/plugins/static",
+        '@uvue/server/plugins/static',
         // Compress responses
-        "@uvue/server/plugins/gzip",
+        '@uvue/server/plugins/gzip',
+        './src/api',
     ],
 }
