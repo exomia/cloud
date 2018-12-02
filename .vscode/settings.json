@@ -1,9 +1,4 @@
 {
-    // Prettier
-    "prettier.tabWidth": 4,
-    "prettier.singleQuote": true,
-    "prettier.disableLanguages": [],
     "prettier.semi": false,
-    "prettier.printWidth": 120,
-    "git.ignoreLimitWarning": true
+    "prettier.printWidth": 200
 }

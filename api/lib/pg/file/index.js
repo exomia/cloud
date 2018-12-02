@@ -2,7 +2,7 @@ import { query, lb, lbjoin, e } from '../'
 
 export async function addFile(usernameOrEmail, directory_uuid, name, extension, local_name, mimetype, size) {
     const result = await query`
-        INSERT INTO private."file" ("user_uuid","directory_uuid", "name", "extension", "local_name", "mimetype", "size")
+        INSERT INTO private."file" ("user_uuid", "directory_uuid", "name", "extension", "local_name", "mimetype", "size")
         VALUES ((SELECT "uuid"
                  FROM private."user"
                  WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
@@ -94,7 +94,7 @@ export async function updateFile(usernameOrEmail, file_uuid, { new_name, new_dir
     if (new_clamav_status !== undefined) {
         updates.push(lb`"clamav_status" = ${new_clamav_status}`)
     }
-    if (updates.length <= 0) {
+    if (!updates.length) {
         return false
     }
     const result = await query`

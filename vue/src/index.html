@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html data-html-attrs>
+
+<head>
+  <ssr-head />
+</head>
+
+<body data-body-attrs>
+  <!-- Here we include a loader for SPA routes only -->
+  <% if (!uvue.ssr) { %>
+    <%= require('@/spa-loading.html') %>
+  <% } %>
+  <ssr-body />
+</body>
+
+</html>

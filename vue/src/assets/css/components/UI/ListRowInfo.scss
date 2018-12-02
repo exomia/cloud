@@ -1,0 +1,66 @@
+@import "../../_variables.scss";
+
+/* Root */
+div.info {
+    flex-direction: column;
+}
+
+div.infobox {
+    display: flex;
+    justify-content: center;
+}
+
+div.iconbox {
+    margin: 2rem 0;
+    svg {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+div.titlebox {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+    h2 {
+        margin-bottom: 1rem;
+    }
+    span {
+        font-size: 14px;
+    }
+}
+
+div.menu {
+    flex-direction: column;
+
+    @media screen and (max-width: $break-medium) {
+        display: flex;
+        align-items: center;
+    }
+    div.option {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+
+        @media screen and (max-width: $break-medium) {
+            width: auto;
+            margin: .5rem 0;
+            margin-right: 50px;
+        }
+        div.icon-wrapper {
+            display: flex;
+            height: 50px;
+            width: 50px;
+            justify-content: center;
+            align-items: center;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        span {
+            font-size: 14px;
+        }
+    }
+}

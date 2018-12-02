@@ -1,0 +1,56 @@
+{
+    "index": {
+        "form": {
+            "forgotPassword": "Forgot password?",
+            "nameOrEmail": "Name / E-Mail",
+            "password": "Password",
+            "signIn": "Sign in"
+        }
+    },
+    "navigation": {
+        "TheFooter": {
+            "cookies": "Cookies",
+            "imprint": "Imprint",
+            "privacy": "Privacy"
+        }
+    },
+    "partials": {
+        "ListHeader": {
+            "date": "Date",
+            "name": "Name",
+            "size": "Size",
+            "status": "Status",
+            "type": "Type"
+        },
+        "ListRow": {
+            "download": "Download",
+            "info": "Info",
+            "remove": "Remove",
+            "rename": "Rename",
+            "share": "Share"
+        },
+        "OverviewPath": {
+            "newDirectory": "New directory",
+            "uploadFile": "Upload file"
+        }
+    },
+    "sidebar": {
+        "overview": {
+            "allFiles": "All Files",
+            "settings": "Settings",
+            "trash": "Trash"
+        },
+        "settings": {
+            "admin": "Admin",
+            "profile": "Profile",
+            "rights": "Rights"
+        }
+    },
+    "title": {
+        "home": "Login",
+        "imprint": "Imprint",
+        "overview": "Overview",
+        "privacy": "Privacy",
+        "settings": "Settings"
+    }
+}

@@ -1,0 +1,32 @@
+@import '../../_variables.scss';
+
+main {
+    display: flex;
+
+    div.center {
+        width: calc(100vw - 270px);
+        background-color: white;
+
+        @media screen and (max-width: $break-small) {
+            width: calc(100vw - 50px) !important;
+        }
+
+        @media screen and (max-width: $break-medium) {
+            width: calc(100vw - 66px);
+        }     
+
+        section.list {
+            div.row-wrapper {
+                height: calc(100vh - 98px - 50px);
+                overflow-y: auto;
+                overflow-x: hidden;
+                &:not(.info).info-active {
+                    width: 100%;
+                }
+            }
+            div.side {
+                display: flex;
+            }
+        }
+    }
+}
