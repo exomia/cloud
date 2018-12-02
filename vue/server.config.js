@@ -20,7 +20,7 @@ export default {
         './src/api/install',
     ],
     // Watch for changes in these files to automatically reboot server
-    watch: ['src/server/**/*.js'],
+    watch: ['src/api/**/*.js'],
     // SPA paths: no SSR occur for these paths
     spaPaths: ['/spa'],
 }

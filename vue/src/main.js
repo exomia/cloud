@@ -5,7 +5,7 @@ import createRouter from './router'
 import createStore from './store'
 import createI18n from './i18n'
 import VueMeta from 'vue-meta'
-// import "./registerServiceWorker"
+import './registerServiceWorker'
 
 Vue.use(VueMeta)
 
