@@ -9,4 +9,6 @@ jobs:
         steps:
             - checkout
             - run: cd vue && npm install
+            - run: cd vue && npm run build
+            - run: cd vue && npm run start
             # - run: npm test
