@@ -1,4 +1,4 @@
-@import "../../_variables.scss";
+@import '../../_variables.scss';
 
 div.option-display,
 div.option-list-display {
@@ -9,7 +9,7 @@ div.option-list-display {
     left: -5.5px;
     &::before {
         display: block;
-        content: "";
+        content: '';
         position: absolute;
         top: -1rem;
         border-bottom: 1rem solid rgba(0, 0, 0, 0.8);
@@ -24,6 +24,7 @@ div.option-list-display {
             cursor: pointer;
             text-decoration: none;
             padding: 0.5rem;
+            user-select: none;
             &:hover {
                 svg,
                 span {
