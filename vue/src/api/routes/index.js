@@ -4,7 +4,7 @@ import path from 'path'
 const endpoints = {}
 
 function ep(dir) {
-    const files = fs.readdirSync(path.join('routes', dir), 'utf8')
+    const files = fs.readdirSync(path.join(__dirname, dir), 'utf8')
     for (let filename of files) {
         const matches = /^_(.+).js|(index|.+).js$/.exec(filename)
         if (!matches) {
@@ -26,12 +26,12 @@ function ep(dir) {
         endpoints[ar.scope].push({
             path: matches[1] ? `${p}/${matches[1]}` : p,
             ...ar,
-            filename
+            filename,
         })
     }
 }
 
-const versions = fs.readdirSync(path.join('routes'), 'utf8')
+const versions = fs.readdirSync(__dirname, 'utf8')
 for (let version of versions) {
     const matches = /^v(.+)$/.exec(version)
     if (matches) {

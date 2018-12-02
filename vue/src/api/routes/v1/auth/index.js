@@ -11,7 +11,7 @@ router.all('/', async ({ jwt: { payload: { email } } }, res) => {
             email: result.email,
             scopes: result.scopes,
             volume: result.volume,
-            usedVolume: result.used_volume
+            usedVolume: result.used_volume,
         })
     }
     return JERROR_BAD_REQUEST(res, 'invalid token payload, please log in again.')
@@ -19,5 +19,5 @@ router.all('/', async ({ jwt: { payload: { email } } }, res) => {
 
 export default {
     router,
-    access: 0
+    access: 0,
 }
