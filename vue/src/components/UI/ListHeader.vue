@@ -9,7 +9,7 @@
             <DropdownIcon class="dropdown"></DropdownIcon>
         </div>
 
-        <div class="list-item" :class="hideInformations ? 'info-active' : 'stretch'">
+        <div class="list-item" :class="hideInformations ? 'info-active' : 'relative'">
             <span>Name</span>
             <DropdownIcon class="dropdown"></DropdownIcon>
         </div>

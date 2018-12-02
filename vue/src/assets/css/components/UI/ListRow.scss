@@ -125,7 +125,7 @@ div.list-row {
         }
     }
 
-    div.list-item.stretch {
+    div.list-item.relative {
         width: calc(100% - 50px - (100px * 4) - (1rem * 2));
 
         @media screen and (max-width: $break-small) {

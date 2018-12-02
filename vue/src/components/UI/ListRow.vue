@@ -9,7 +9,7 @@
         </div>
 
         <!-- Name -->
-        <div class="list-item" :class="hideInformations ? 'info-active' : 'stretch'">
+        <div class="list-item" :class="hideInformations ? 'info-active' : 'relative'">
             <span>{{name}}</span>
             <span class="ext">{{extension}}</span>
         </div>
