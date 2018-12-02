@@ -1,10 +1,17 @@
 version: 2.1
 jobs:
     build:
-        working_directory: ~/tmp
+        branches:
+            only:
+                - master
+                - dev
+
+        working_directory: ~/repo
+
         docker:
-            - image: circleci/node:11
+            - image: circleci/node:10
+
         steps:
             - checkout
             - run: npm install
-            - run: npm test
+            # - run: npm test
