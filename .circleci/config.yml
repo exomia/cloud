@@ -7,6 +7,6 @@ jobs:
             - image: circleci/node:10
 
         steps:
-            - cd vue && checkout
+            - checkout
             - run: cd vue && npm install
             # - run: npm test
