@@ -2,10 +2,15 @@
  * Server plugin to install middlewares on server to create
  * and API
  */
-import expressApi from './index'
+import setup from './lib/setup'
 
 export default {
-    install(app) {
-        expressApi(app)
+    async install(app) {
+        // Running setup
+        setup()
+
+        // Dynamic import api
+        const module = await import('./index')
+        module.default(app)
     },
 }

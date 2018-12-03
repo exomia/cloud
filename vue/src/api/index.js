@@ -15,7 +15,7 @@ export default server => {
         return res.json(JERROR_FORBIDDEN('the used protocol is forbidden'))
     })
 
-    app.use('/api', (req, res) => {
+    app.all('/api', (req, res) => {
         return res.end('Welcome to the backend of exomia cloud')
     })
 

@@ -1,0 +1,9 @@
+{
+    "user": "root",
+    "database": "cloud",
+    "password": "root",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "max": 10,
+    "idleTimeoutMillis": 100000
+}

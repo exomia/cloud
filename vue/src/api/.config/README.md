@@ -4,10 +4,10 @@ create the following files with at least these attributes
 
 ```json
 {
-    "user": "xyz",
-    "database": "xyz",
-    "password": "xyz",
-    "host": "xyz",
+    "user": "root",
+    "database": "cloud",
+    "password": "root",
+    "host": "127.0.0.1",
     "port": 5432,
     "max": 10,
     "idleTimeoutMillis": 100000
@@ -18,14 +18,13 @@ create the following files with at least these attributes
 
 ```json
 {
-    "COOKIE": "jwt-cloud-api",
-    "SECRET_T": "xyz",
-    "SECRET_RT": "xyz",
+    "SECRET_T": "123456789",
+    "SECRET_RT": "987654321",
     "jwt_options_t": {
         "expiresIn": "15m"
     },
     "jwt_options_rt": {
-        "expiresIn": "3d"
+        "expiresIn": "7d"
     },
     "jwt_verify_options": {}
 }
