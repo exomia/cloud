@@ -1,0 +1,13 @@
+{
+    "host": "mail.xyz.de",
+    "port": 587,
+    "requireTLS": true,
+    "secure": false,
+    "auth": {
+        "user": "no-reply@xyz.de",
+        "pass": "xyz"
+    },
+    "tls": {
+        "rejectUnauthorized": false
+    }
+}

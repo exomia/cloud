@@ -1,0 +1,11 @@
+{
+    "SECRET_T": "123456789",
+    "SECRET_RT": "987654321",
+    "jwt_options_t": {
+        "expiresIn": "15m"
+    },
+    "jwt_options_rt": {
+        "expiresIn": "7d"
+    },
+    "jwt_verify_options": {}
+}
