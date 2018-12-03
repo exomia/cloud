@@ -42,7 +42,6 @@
         "imagemin-svgo": "^7.0.0",
         "imagemin-webpack": "^4.0.1",
         "node-sass": "^4.10.0",
-        "postcss-clean": "^1.1.0",
         "sass-loader": "^7.0.1",
         "vue-cli-plugin-i18n": "^0.5.1",
         "vue-svg-loader": "^0.12.0-alpha.1",
