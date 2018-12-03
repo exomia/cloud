@@ -14,11 +14,11 @@ jobs:
         steps:
             - checkout
             - restore_cache:
-                  key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+                  key: npm-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
             - run: cd vue && npm install
             - run: cd vue && npm run build
             - save_cache:
-                  key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+                  key: npm-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
                   paths:
                       - node_modules
             # - run: cd vue && npm run start
