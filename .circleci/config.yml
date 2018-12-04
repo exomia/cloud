@@ -14,13 +14,13 @@ jobs:
         steps:
             - checkout
             - run: sudo apt-get update && sudo apt-get install postgresql
-            - run: psql < /api/lib/setup/setup.sql
+            - run: psql < ~/repo/vue/api/lib/setup/setup.sql
             - restore_cache:
-                  key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+                  key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
             - run: npm install
             - run: npm run build
             - save_cache:
-                  key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+                  key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
                   paths:
                       - node_modules
             # - run: cd vue && npm run start
