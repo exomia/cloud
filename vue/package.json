@@ -11,8 +11,8 @@
         "update": "npm prune && npm-check -u"
     },
     "dependencies": {
-        "@uvue/core": "^0.1.0-alpha.5",
-        "@uvue/server": "^0.1.0-alpha.5",
+        "@uvue/core": "^0.1.0-alpha.7",
+        "@uvue/server": "^0.1.0-alpha.7",
         "axios": "^0.18.0",
         "cors": "^2.8.5",
         "express": "^4.16.4",
@@ -28,7 +28,7 @@
         "vuex": "^3.0.1"
     },
     "devDependencies": {
-        "@uvue/vue-cli-plugin-ssr": "0.1.0-alpha.5",
+        "@uvue/vue-cli-plugin-ssr": "0.1.0-alpha.7",
         "@vue/cli-plugin-babel": "^3.2.0",
         "@vue/cli-plugin-pwa": "^3.2.0",
         "@vue/cli-service": "^3.2.0",
