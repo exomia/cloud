@@ -21,6 +21,7 @@ jobs:
             - restore_cache:
                   key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
             - run: cd vue && npm install
+            - run: cd vue && npm run lint
             - run: cd vue && npm run build
             - save_cache:
                   key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
