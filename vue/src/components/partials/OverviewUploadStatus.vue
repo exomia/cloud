@@ -23,28 +23,28 @@
 export default {
     computed: {
         uploadCount() {
-            return this.$store.getters.uploadFileCount;
+            return this.$store.getters.uploadFileCount
         },
         uploadSize() {
-            return this.$store.getters.uploadSize;
+            return this.$store.getters.uploadSize
         },
         uploadProgress() {
-            return this.$store.getters.uploadProgress;
+            return this.$store.getters.uploadProgress
         },
         uploadRate() {
-            return this.$store.getters.uploadRate;
+            return this.$store.getters.uploadRate
         },
         uploadFilename() {
-            return this.$store.getters.uploadFilename;
+            return this.$store.getters.uploadFilename
         }
     },
     methods: {
         cancel: function() {
-            this.$store.commit("cancelUpload");
+            this.$store.commit('cancelUpload')
         },
         getFileCount: cnt => (cnt === 1 ? `${cnt} File` : `${cnt} Files`)
     }
-};
+}
 </script>
 
 <style src="@/assets/css/components/partials/OverviewUploadStatus" lang="scss" scoped>

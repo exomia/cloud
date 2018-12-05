@@ -42,38 +42,15 @@
 
 <script>
 /* SVG */
-import FileIcon from "@/assets/img/icon/overview/file.svg";
-import DirectoryIcon from "@/assets/img/icon/overview/directory.svg";
+import FileIcon from '@/assets/img/icon/overview/file.svg'
+import DirectoryIcon from '@/assets/img/icon/overview/directory.svg'
 //
-import DownloadIcon from "@/assets/img/icon/download.svg";
-import ShareIcon from "@/assets/img/icon/overview/share.svg";
-import EditIcon from "@/assets/img/icon/edit.svg";
-import RemoveIcon from "@/assets/img/icon/trash.svg";
+import DownloadIcon from '@/assets/img/icon/download.svg'
+import ShareIcon from '@/assets/img/icon/overview/share.svg'
+import EditIcon from '@/assets/img/icon/edit.svg'
+import RemoveIcon from '@/assets/img/icon/trash.svg'
 
 export default {
-    props: {
-        uuid: {
-            type: String,
-            required: false
-        },
-        name: {
-            type: String,
-            required: false
-        },
-        type: {
-            type: String,
-            default: "File"
-        },
-        size: {
-            type: Number
-        },
-        timestamp: {
-            required: true
-        },
-        extension: {
-            type: String
-        }
-    },
     components: {
         FileIcon,
         DirectoryIcon,
@@ -81,8 +58,37 @@ export default {
         EditIcon,
         DownloadIcon,
         RemoveIcon
+    },
+    props: {
+        uuid: {
+            type: String,
+            default: '',
+            required: false
+        },
+        name: {
+            type: String,
+            default: '',
+            required: false
+        },
+        type: {
+            type: String,
+            default: 'File'
+        },
+        size: {
+            type: Number,
+            default: 0
+        },
+        timestamp: {
+            type: Number,
+            required: true
+        },
+        extension: {
+            type: String,
+            default: ''
+        }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/components/UI/ListRowInfo" lang="scss" scoped></style>
+<style src="@/assets/css/components/UI/ListRowInfo" lang="scss" scoped>
+</style>

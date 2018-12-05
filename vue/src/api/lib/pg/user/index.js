@@ -1,4 +1,4 @@
-import { query, lb, lbjoin } from "../"
+import { query, lb, lbjoin } from '../'
 
 export async function addUser(username, email, password, scopes, volume) {
     const result = await query`
@@ -33,7 +33,10 @@ export async function listAllUsers() {
     return false
 }
 
-export async function updateUser(usernameOrEmail, { new_username, new_email, new_password, new_scopes, new_volume }) {
+export async function updateUser(
+    usernameOrEmail,
+    { new_username, new_email, new_password, new_scopes, new_volume }
+) {
     let updates = []
     if (new_username !== undefined) {
         updates.push(lb`"username" = ${new_username}`)

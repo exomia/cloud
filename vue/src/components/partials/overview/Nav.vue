@@ -1,16 +1,17 @@
 <template>
     <nav class="path">
-        <router-link 
-            class="path-item" 
-            tag="a" 
-            :to="{ name: 'overview-dir' }" 
-            :title="this.$i18n.t('title.overview')">
+        <RouterLink
+            class="path-item"
+            tag="a"
+            :to="{ name: 'overview-dir' }"
+            :title="this.$i18n.t('title.overview')"
+        >
             <HomeIcon></HomeIcon>
-        </router-link>
+        </RouterLink>
 
         <template v-for="(pi, idx) in pathInfo">
-            <PathArrowIcon class="path-arrow" :key="'pathInfoArrow-' + idx"></PathArrowIcon>
-            <router-link
+            <PathArrowIcon :key="'pathInfoArrow-' + idx" class="path-arrow"></PathArrowIcon>
+            <RouterLink
                 :key="'pathInfo-' + idx"
                 class="path-item"
                 tag="a"
@@ -18,15 +19,15 @@
                 :title="pi.name"
             >
                 <span>{{formatName(pi.name)}}</span>
-            </router-link>
+            </RouterLink>
         </template>
     </nav>
 </template>
 
 <script>
 /* SVG */
-import HomeIcon from "@/assets/img/icon/overview/home.svg";
-import PathArrowIcon from "@/assets/img/icon/overview/path-arrow.svg";
+import HomeIcon from '@/assets/img/icon/overview/home.svg'
+import PathArrowIcon from '@/assets/img/icon/overview/path-arrow.svg'
 
 export default {
     components: {
@@ -35,17 +36,17 @@ export default {
     },
     computed: {
         pathInfo() {
-            return this.$store.getters.pathInfo;
+            return this.$store.getters.pathInfo
         }
     },
     methods: {
-        formatName: (name) => {
-            if(name && name.length > 20)
-                return name.substring(0,20) + "..."
-            return name;
+        formatName: name => {
+            if (name && name.length > 20) return name.substring(0, 20) + '...'
+            return name
         }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/components/partials/overview/Nav" lang="scss" scoped></style>
+<style src="@/assets/css/components/partials/overview/Nav" lang="scss" scoped>
+</style>

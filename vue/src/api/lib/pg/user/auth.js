@@ -1,4 +1,4 @@
-import { query } from "../"
+import { query } from '../'
 
 export async function checkLoginData(usernameOrEmail, password) {
     const result = await query`

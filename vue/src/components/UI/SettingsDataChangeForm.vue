@@ -36,23 +36,24 @@ export default {
         },
         value: {
             type: String,
-            default: ""
+            default: ''
         },
         inputPlaceholder: {
             type: String,
-            default: ""
+            default: ''
         },
         buttonPlaceholder: {
             type: String,
-            default: ""
+            default: ''
         },
         disclaimer: {
             type: String,
             required: true
         },
         iconClass: {
-            type: String
+            type: String,
+            default: ''
         }
     }
-};
+}
 </script>

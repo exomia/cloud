@@ -5,9 +5,13 @@ const CONFIG_PATH = path.resolve(__dirname, '../../', '.config')
 const TEMPLATE_PATH = path.join(__dirname, 'config')
 
 function createConfig(srcName, destName) {
-    fs.copyFile(path.join(TEMPLATE_PATH, srcName), path.join(CONFIG_PATH, destName), err => {
-        if (err) throw err
-    })
+    fs.copyFile(
+        path.join(TEMPLATE_PATH, srcName),
+        path.join(CONFIG_PATH, destName),
+        err => {
+            if (err) throw err
+        }
+    )
 }
 
 export default () => {
@@ -23,7 +27,7 @@ export default () => {
 
         // Check if config exists
         if (
-            fs.stat(path.join(CONFIG_PATH, destFilename), (err, stats) => {
+            fs.stat(path.join(CONFIG_PATH, destFilename), err => {
                 if (err) {
                     console.log(`Creating config file '${destFilename}'`)
                     createConfig(srcFilename, destFilename)

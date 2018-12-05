@@ -10,19 +10,22 @@ export async function sign(res, { email, password, scopes }) {
         jwt.sign(
             {
                 email,
-                scopes,
+                scopes
             },
             config.SECRET_T + password,
             config.jwt_options_t
         )
     )
-    res.setHeader('x-refresh-token', jwt.sign({ email }, config.SECRET_RT + password, config.jwt_options_rt))
+    res.setHeader(
+        'x-refresh-token',
+        jwt.sign({ email }, config.SECRET_RT + password, config.jwt_options_rt)
+    )
 }
 
 export async function jwt_init(req, res, next) {
     req.jwt = {
         valid: false,
-        payload: {},
+        payload: {}
     }
 
     const token = req.headers['x-token']
@@ -41,7 +44,11 @@ export async function jwt_init(req, res, next) {
     }
 
     try {
-        req.jwt.payload = jwt.verify(token, config.SECRET_T + password, config.jwt_verify_options)
+        req.jwt.payload = jwt.verify(
+            token,
+            config.SECRET_T + password,
+            config.jwt_verify_options
+        )
         req.jwt.valid = true
         return next()
     } catch (err) {
@@ -56,7 +63,11 @@ export async function jwt_init(req, res, next) {
     }
 
     try {
-        jwt.verify(refreshToken, config.SECRET_RT + password, config.jwt_verify_options)
+        jwt.verify(
+            refreshToken,
+            config.SECRET_RT + password,
+            config.jwt_verify_options
+        )
         sign(res, { ...payload, password })
         req.jwt.payload = payload
         req.jwt.valid = true

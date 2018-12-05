@@ -1,6 +1,6 @@
 <template>
     <div class="list-row header info">
-        <div @click="$emit('close')" class="icon-wrapper">
+        <div class="icon-wrapper" @click="$emit('close')">
             <CrossIcon></CrossIcon>
         </div>
     </div>
@@ -8,11 +8,11 @@
 
 <script>
 /* SVG */
-import CrossIcon from "@/assets/img/icon/cross.svg";
+import CrossIcon from '@/assets/img/icon/cross.svg'
 
 export default {
     components: {
         CrossIcon
     }
-};
+}
 </script>

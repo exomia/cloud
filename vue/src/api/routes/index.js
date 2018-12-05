@@ -26,7 +26,7 @@ function ep(dir) {
         endpoints[ar.scope].push({
             path: matches[1] ? `${p}/${matches[1]}` : p,
             ...ar,
-            filename,
+            filename
         })
     }
 }

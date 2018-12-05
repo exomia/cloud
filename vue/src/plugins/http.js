@@ -12,7 +12,7 @@ export default {
         // Create axios client
         const http = axios.create({
             //baseURL: process.client ? '/' : process.env.VUE_APP_API_URL,
-            baseURL: process.env.VUE_APP_API_URL,
+            baseURL: process.env.VUE_APP_API_URL
         })
 
         // Use request interceptors
@@ -84,7 +84,7 @@ export default {
         Vue.use({
             install(Vue) {
                 Vue.http = Vue.prototype.$http = http
-            },
+            }
         })
-    },
+    }
 }
