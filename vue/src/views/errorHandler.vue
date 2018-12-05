@@ -13,37 +13,33 @@
 export default {
     metaInfo() {
         return {
-            title: this.$t("title.error")
-        };
+            title: this.$t('title.error')
+        }
+    },
+    props: {
+        code: {
+            type: Number,
+            required: true
+        }
     },
     data: () => ({
         isProduction: process.prod
     }),
-
-    mounted() {
-        console.log(this.$errorHandler.error);
-    },
-
-    props: {
-        code: {
-            type: Number
-            // required: true
-        }
-    },
-
     computed: {
         // current() {
         //     return this.$store.state.errorHandler
         // },
         error() {
-            if (this.current && this.current.error) return this.current.error;
-            return null;
+            if (this.current && this.current.error) return this.current.error
+            return null
         }
         // haveHistory() {
         //     return process.client && window.history.length > 0
         // }
+    },
+    mounted() {
+        console.log(this.$errorHandler.error)
     }
-
     // methods: {
     //     gotoHome() {
     //         this.$store.commit("errorHandler/CLEAR")
@@ -52,5 +48,5 @@ export default {
     //         }
     //     }
     // }
-};
+}
 </script>

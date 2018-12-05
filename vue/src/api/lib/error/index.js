@@ -24,10 +24,17 @@ export const SUCCESS = 0
 export const ERROR = 1
  *************************************************************************/
 
-export const JERROR_NO_CONTENT = (res, description) => res.status(204).json(je('no content', description))
-export const JERROR_BAD_REQUEST = (res, description) => res.status(400).json(je('bad request', description))
-export const JERROR_UNAUTHORIZED = (res, description) => res.status(401).json(je('unauthorized', description))
-export const JERROR_FORBIDDEN = (res, description) => res.status(403).json(je('forbidden', description))
-export const JERROR_NOT_FOUND = (res, description) => res.status(404).json(je('not found', description))
-export const JERROR_METHOD_NOT_ALLOWED = (res, description) => res.status(405).json(je('method not allowed', description))
-export const JERROR_INTERNAL_SERVER_ERROR = (res, description) => res.status(500).json(je('internal server error', description))
+export const JERROR_NO_CONTENT = (res, description) =>
+    res.status(204).json(je('no content', description))
+export const JERROR_BAD_REQUEST = (res, description) =>
+    res.status(400).json(je('bad request', description))
+export const JERROR_UNAUTHORIZED = (res, description) =>
+    res.status(401).json(je('unauthorized', description))
+export const JERROR_FORBIDDEN = (res, description) =>
+    res.status(403).json(je('forbidden', description))
+export const JERROR_NOT_FOUND = (res, description) =>
+    res.status(404).json(je('not found', description))
+export const JERROR_METHOD_NOT_ALLOWED = (res, description) =>
+    res.status(405).json(je('method not allowed', description))
+export const JERROR_INTERNAL_SERVER_ERROR = (res, description) =>
+    res.status(500).json(je('internal server error', description))

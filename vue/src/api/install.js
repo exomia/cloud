@@ -12,5 +12,5 @@ export default {
         // Dynamic import api
         const module = await import('./index')
         module.default(app)
-    },
+    }
 }

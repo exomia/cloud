@@ -1,7 +1,12 @@
 import { urlencoded, json } from 'express'
 import { endpoints } from './routes'
 import { jwt_init } from './lib/jwt'
-import { JERROR_NOT_FOUND, JERROR_INTERNAL_SERVER_ERROR, JERROR_FORBIDDEN, JERROR_UNAUTHORIZED } from './lib/error'
+import {
+    JERROR_NOT_FOUND,
+    JERROR_INTERNAL_SERVER_ERROR,
+    JERROR_FORBIDDEN,
+    JERROR_UNAUTHORIZED
+} from './lib/error'
 
 export default server => {
     const app = server.getApp()
@@ -21,7 +26,7 @@ export default server => {
 
     app.use(
         urlencoded({
-            extended: true,
+            extended: true
         })
     )
     app.use(json())
@@ -34,17 +39,32 @@ export default server => {
             if (route.scope !== '') {
                 route.router.use('/api/*', function(req, res, next) {
                     if (!req.jwt.valid) {
-                        return JERROR_UNAUTHORIZED(res, 'the auth token is invalid or does not exist.')
+                        return JERROR_UNAUTHORIZED(
+                            res,
+                            'the auth token is invalid or does not exist.'
+                        )
                     }
-                    if (route.access === 0 || (route.access & req.jwt.payload.scopes[route.scope]) === route.access) {
+                    if (
+                        route.access === 0 ||
+                        (route.access & req.jwt.payload.scopes[route.scope]) ===
+                            route.access
+                    ) {
                         return next()
                     }
-                    return JERROR_FORBIDDEN(res, 'invalid access to the resource.')
+                    return JERROR_FORBIDDEN(
+                        res,
+                        'invalid access to the resource.'
+                    )
                 })
             }
             app.use(`/api/${route.path}`, route.router)
             console.log(
-                `${route.filename.padEnd(20, ' ')} - [${`${`scope ${route.scope}`.padEnd(20, ' ')} - access ${`${route.access}`.padStart(4, ' ')}]`.padEnd(35, ' ')} +route 'api/${route.path}'`
+                `${route.filename.padEnd(20, ' ')} - [${`${`scope ${
+                    route.scope
+                }`.padEnd(20, ' ')} - access ${`${route.access}`.padStart(
+                    4,
+                    ' '
+                )}]`.padEnd(35, ' ')} +route 'api/${route.path}'`
             )
         }
     }
@@ -53,7 +73,7 @@ export default server => {
         return JERROR_NOT_FOUND(res, 'no resource found for this path.')
     })
 
-    app.use('/api/*', (err, req, res, next) => {
+    app.use('/api/*', (err, req, res) => {
         return JERROR_INTERNAL_SERVER_ERROR(res, err.message)
     })
 

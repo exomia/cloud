@@ -7,8 +7,8 @@ export default {
         [
             '@uvue/server/plugins/cookie',
             {
-                secret: 'secret',
-            },
+                secret: 'secret'
+            }
         ],
         // Modern build
         '@uvue/server/plugins/modernBuild',
@@ -17,10 +17,10 @@ export default {
         // Compress responses
         '@uvue/server/plugins/gzip',
         // Init api
-        './src/api/install',
+        './src/api/install'
     ],
     // Watch for changes in these files to automatically reboot server
     watch: ['src/api/**/*.js'],
     // SPA paths: no SSR occur for these paths
-    spaPaths: ['/spa'],
+    spaPaths: ['/spa']
 }

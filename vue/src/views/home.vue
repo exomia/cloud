@@ -19,11 +19,11 @@
                                 <UserIcon class="input-icon"/>
                             </div>
                             <input
-                                type="text"
                                 v-model="username"
+                                type="text"
+                                :placeholder="[usernameFocused ? '' : usernamePH]"
                                 @focus="usernameFocused = true"
                                 @blur="usernameFocused = false"
-                                :placeholder="[usernameFocused ? '' : usernamePH]"
                                 @keydown.enter="signIn()"
                             >
                         </div>
@@ -35,11 +35,11 @@
                                 <LockIcon class="input-icon"/>
                             </div>
                             <input
-                                type="password"
                                 v-model="password"
+                                type="password"
+                                :placeholder="[passwordFocused ? '' : passwordPH]"
                                 @focus="passwordFocused = true"
                                 @blur="passwordFocused = false"
-                                :placeholder="[passwordFocused ? '' : passwordPH]"
                                 @keydown.enter="signIn()"
                             >
                         </div>
@@ -64,12 +64,12 @@
                     <span>© 2018 Exomia.com</span>
                 </div>
                 <div class="footer-section">
-                    <router-link :to="{ name: 'imprint' }" tag="a">
+                    <RouterLink :to="{ name: 'imprint' }" tag="a">
                         <span>{{$t('navigation.TheFooter.imprint')}}</span>
-                    </router-link>
-                    <router-link :to="{ name: 'privacy' }" tag="a">
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'privacy' }" tag="a">
                         <span>{{$t('navigation.TheFooter.privacy')}}</span>
-                    </router-link>
+                    </RouterLink>
                 </div>
             </div>
         </div>
@@ -77,32 +77,22 @@
 </template>
 
 <script>
-import { required, minLength, maxLength } from "vuelidate/lib/validators";
-import LangSwitcher from "@/components/UI/LangSwitcher.vue";
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import LangSwitcher from '@/components/UI/LangSwitcher.vue'
 
 /* SVG */
-import LogoIcon from "@/assets/img/icon/login/logo.svg";
-import UserIcon from "@/assets/img/icon/login/user.svg";
-import LockIcon from "@/assets/img/icon/login/lock.svg";
+import LogoIcon from '@/assets/img/icon/login/logo.svg'
+import UserIcon from '@/assets/img/icon/login/user.svg'
+import LockIcon from '@/assets/img/icon/login/lock.svg'
 //
-import authRedirect from "@/middlewares/authRedirect";
+import authRedirect from '@/middlewares/authRedirect'
 
 export default {
     middlewares: [authRedirect],
     metaInfo() {
         return {
-            title: this.$t("title.home")
-        };
-    },
-    data() {
-        return {
-            username: "",
-            usernamePH: this.$t("index.form.nameOrEmail"),
-            usernameFocused: false,
-            password: "",
-            passwordPH: this.$t("index.form.password"),
-            passwordFocused: false
-        };
+            title: this.$t('title.home')
+        }
     },
     components: {
         LogoIcon,
@@ -110,23 +100,33 @@ export default {
         LockIcon,
         LangSwitcher
     },
+    data() {
+        return {
+            username: '',
+            usernamePH: this.$t('index.form.nameOrEmail'),
+            usernameFocused: false,
+            password: '',
+            passwordPH: this.$t('index.form.password'),
+            passwordFocused: false
+        }
+    },
     methods: {
         signIn: async function() {
-            this.$v.$touch();
+            this.$v.$touch()
             if (!this.$v.$error) {
                 this.$http
-                    .post("/v1/auth/login", {
+                    .post('/v1/auth/login', {
                         username: this.username,
                         password: this.password
                     })
                     .then(({ data, error }) => {
                         if (!error) {
-                            this.$store.commit("setUserInfo", data);
-                            this.$router.push({ name: "overview-dir" });
+                            this.$store.commit('setUserInfo', data)
+                            this.$router.push({ name: 'overview-dir' })
                         }
-                    });
+                    })
             } else {
-                console.error("Input error");
+                console.error('Input error')
             }
         }
     },
@@ -142,7 +142,8 @@ export default {
             maxLength: maxLength(72)
         }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/pages/home" lang="scss" scoped></style>
+<style src="@/assets/css/pages/home" lang="scss" scoped>
+</style>

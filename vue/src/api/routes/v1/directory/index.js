@@ -5,39 +5,56 @@ import { JERROR_INTERNAL_SERVER_ERROR } from '../../../lib/error'
 
 const router = express.Router()
 
-router.get('/:directory_uuid?', async ({ jwt: { payload: { email } }, params: { directory_uuid } }, res) => {
-    const directories = await listAllDirectories(email, directory_uuid)
-    if (!directories) {
-        return JERROR_INTERNAL_SERVER_ERROR(res, "check the 'directory_uuid' parameter.")
-    }
+router.get(
+    '/:directory_uuid?',
+    async (
+        {
+            jwt: {
+                payload: { email }
+            },
+            params: { directory_uuid }
+        },
+        res
+    ) => {
+        const directories = await listAllDirectories(email, directory_uuid)
+        if (!directories) {
+            return JERROR_INTERNAL_SERVER_ERROR(
+                res,
+                "check the 'directory_uuid' parameter."
+            )
+        }
 
-    const files = await listAllFiles(email, directory_uuid)
-    if (!files) {
-        return JERROR_INTERNAL_SERVER_ERROR(res, "check the 'directory_uuid' parameter.")
-    }
+        const files = await listAllFiles(email, directory_uuid)
+        if (!files) {
+            return JERROR_INTERNAL_SERVER_ERROR(
+                res,
+                "check the 'directory_uuid' parameter."
+            )
+        }
 
-    const dires = await getDirectoryInfo(email, directory_uuid)
-    let path_info = []
-    if (dires) {
-        for (let path of dires.path_info_json) {
+        const dires = await getDirectoryInfo(email, directory_uuid)
+        let path_info = []
+        if (dires) {
+            for (let path of dires.path_info_json) {
+                path_info.push({
+                    name: path.name,
+                    uuid: path.uuid
+                })
+            }
             path_info.push({
-                name: path.name,
-                uuid: path.uuid
+                name: dires.name,
+                uuid: dires.uuid
             })
         }
-        path_info.push({
-            name: dires.name,
-            uuid: dires.uuid
+
+        return res.status(200).json({
+            directory_uuid,
+            directories,
+            files,
+            path_info
         })
     }
-
-    return res.status(200).json({
-        directory_uuid,
-        directories,
-        files,
-        path_info
-    })
-})
+)
 
 export default {
     router,

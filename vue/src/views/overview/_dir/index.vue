@@ -5,15 +5,15 @@
             <OverviewNav></OverviewNav>
             <section class="list">
                 <div class="side">
-                    <ListHeader :hideInformations="hideInformations"></ListHeader>
+                    <ListHeader :hide-informations="hideInformations"></ListHeader>
                     <ListHeaderInfo v-if="hideInformations" @close="hideInformations = false"></ListHeaderInfo>
                 </div>
                 <div class="side">
                     <div class="row-wrapper" :class="!hideInformations ? 'info-active' : ''">
                         <ListRow
                             v-for="el in getDirectoryData"
-                            :hideInformations="hideInformations"
                             :key="'El-' + el.uuid"
+                            :hide-informations="hideInformations"
                             :uuid="el.uuid"
                             :name="el.name"
                             :type="el.type"
@@ -40,60 +40,34 @@
 
 <script>
 /* Import */
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 
 /* Components */
-import ListRow from "@/components/UI/ListRow";
-import ListRowInfo from "@/components/UI/ListRowInfo";
-import ListHeader from "@/components/UI/ListHeader";
-import ListHeaderInfo from "@/components/UI/ListHeaderInfo";
+import ListRow from '@/components/UI/ListRow'
+import ListRowInfo from '@/components/UI/ListRowInfo'
+import ListHeader from '@/components/UI/ListHeader'
+import ListHeaderInfo from '@/components/UI/ListHeaderInfo'
 //
-import OverviewNav from "@/components/partials/overview/Nav";
-import OverviewSidebar from "@/components/navigation/sidebar/Overview";
+import OverviewNav from '@/components/partials/overview/Nav'
+import OverviewSidebar from '@/components/navigation/sidebar/Overview'
 
 /* Middleware */
-import checkAuth from "@/middlewares/checkAuth";
+import checkAuth from '@/middlewares/checkAuth'
 
 export default {
     middlewares: [checkAuth],
     async asyncData({ store, http, route }) {
         const { data } = await http.get(
-            `/v1/directory/${route.params.dir || ""}`
-        );
+            `/v1/directory/${route.params.dir || ''}`
+        )
         if (data) {
-            await store.commit("setDirectoryData", data);
+            await store.commit('setDirectoryData', data)
         }
     },
     metaInfo() {
         return {
-            title: this.$t("title.overview")
-        };
-    },
-    data() {
-        return {
-            hideInformations: false,
-            infoData: {}
-        };
-    },
-    methods: {
-        openInfo: function(data) {
-            // Assign
-            this.infoData = data;
-
-            // Open
-            const self = this;
-            this.$nextTick(function() {
-                self.hideInformations = true;
-            });
+            title: this.$t('title.overview')
         }
-    },
-    computed: {
-        ...mapGetters([
-            "getDirectoryData",
-            "getDirectoryCount",
-            "getFileCount",
-            "sizeSum"
-        ])
     },
     components: {
         ListRow,
@@ -102,8 +76,35 @@ export default {
         ListHeaderInfo,
         OverviewNav,
         OverviewSidebar
+    },
+    data() {
+        return {
+            hideInformations: false,
+            infoData: {}
+        }
+    },
+    computed: {
+        ...mapGetters([
+            'getDirectoryData',
+            'getDirectoryCount',
+            'getFileCount',
+            'sizeSum'
+        ])
+    },
+    methods: {
+        openInfo: function(data) {
+            // Assign
+            this.infoData = data
+
+            // Open
+            const self = this
+            this.$nextTick(function() {
+                self.hideInformations = true
+            })
+        }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/pages/overview/index" lang="scss" scoped></style>
+<style src="@/assets/css/pages/overview/index" lang="scss" scoped>
+</style>

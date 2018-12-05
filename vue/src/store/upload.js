@@ -1,11 +1,11 @@
-import { CancelToken } from "axios"
+import { CancelToken } from 'axios'
 
 export const state = () => ({
     canceled: false,
     active: false,
     fileInfos: [],
-    currentFileName: "",
-    currentFileRate: 0,
+    currentFileName: '',
+    currentFileRate: 0
 })
 
 export const getters = {
@@ -29,7 +29,7 @@ export const getters = {
         return 0
     },
     uploadFileCount: state => state.fileInfos.length,
-    uploadRate: state => state.currentFileRate,
+    uploadRate: state => state.currentFileRate
 }
 
 export const mutations = {
@@ -41,7 +41,7 @@ export const mutations = {
             file,
             progress: 0,
             start: 0,
-            _cancelTokenSource: CancelToken.source(),
+            _cancelTokenSource: CancelToken.source()
         }
         fi.cancel = msg => {
             fi._cancelTokenSource.cancel(msg)
@@ -56,7 +56,7 @@ export const mutations = {
     },
     setCurrentFileRate(state, rate) {
         state.currentFileRate = rate
-    },
+    }
 }
 
 // export const actions = {

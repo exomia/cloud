@@ -1,6 +1,14 @@
 import { query, lb, lbjoin, e } from '../'
 
-export async function addFile(usernameOrEmail, directory_uuid, name, extension, local_name, mimetype, size) {
+export async function addFile(
+    usernameOrEmail,
+    directory_uuid,
+    name,
+    extension,
+    local_name,
+    mimetype,
+    size
+) {
     const result = await query`
         INSERT INTO private."file" ("user_uuid", "directory_uuid", "name", "extension", "local_name", "mimetype", "size")
         VALUES ((SELECT "uuid"
@@ -52,7 +60,9 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
-              AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
+              AND f."directory_uuid" ${
+                  directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`
+              }
         AND f."delete_timestamp" IS NULL;`
     if (result) {
         return result.rows
@@ -83,7 +93,11 @@ export async function getFileInfo(usernameOrEmail, file_uuid) {
     return false
 }
 
-export async function updateFile(usernameOrEmail, file_uuid, { new_name, new_directory_uuid, new_clamav_status }) {
+export async function updateFile(
+    usernameOrEmail,
+    file_uuid,
+    { new_name, new_directory_uuid, new_clamav_status }
+) {
     let updates = []
     if (new_name !== undefined) {
         updates.push(lb`"name" = ${new_name}`)

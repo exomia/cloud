@@ -9,7 +9,7 @@ export const state = () => ({
     orderSizeDesc: true,
     //
     orderDateActive: false,
-    orderDateDesc: true,
+    orderDateDesc: true
 })
 
 export const getters = {
@@ -23,7 +23,7 @@ export const getters = {
     orderSizeDesc: state => state.orderSizeDesc,
     //
     isOrderDateActive: state => state.orderDateActive,
-    orderDateDesc: state => state.orderDateDesc,
+    orderDateDesc: state => state.orderDateDesc
 }
 
 export const mutations = {
@@ -31,19 +31,19 @@ export const mutations = {
         let method = undefined
         let desc = undefined
         if (state.orderTypeActive === true) {
-            method = "type"
+            method = 'type'
             desc = state.orderTypeDesc
         } else if (state.orderNameActive === true) {
-            method = "name"
+            method = 'name'
             desc = state.orderNameDesc
         } else if (state.orderSizeActive === true) {
-            method = "size"
+            method = 'size'
             desc = state.orderSizeDesc
         } else if (state.orderDateActive === true) {
-            method = "timestamp"
+            method = 'timestamp'
             desc = state.orderDateDesc
         }
-        this.commit("sortByX", { val: method, desc })
+        this.commit('sortByX', { val: method, desc })
     },
     //
     setOrderTypeActive(state, active = true) {
@@ -56,7 +56,7 @@ export const mutations = {
     },
     setOrderTypeDesc(state, toggle) {
         state.orderTypeDesc = toggle
-        this.commit("sortByActiveMethod")
+        this.commit('sortByActiveMethod')
     },
     //
     setOrderNameActive(state, active = true) {
@@ -69,7 +69,7 @@ export const mutations = {
     },
     setOrderNameDesc(state, toggle) {
         state.orderNameDesc = toggle
-        this.commit("sortByActiveMethod")
+        this.commit('sortByActiveMethod')
     },
     //
     setOrderSizeActive(state, active = true) {
@@ -82,7 +82,7 @@ export const mutations = {
     },
     setOrderSizeDesc(state, toggle) {
         state.orderSizeDesc = toggle
-        this.commit("sortByActiveMethod")
+        this.commit('sortByActiveMethod')
     },
     //
     setOrderDateActive(state, active = true) {
@@ -95,6 +95,6 @@ export const mutations = {
     },
     setOrderDateDesc(state, toggle) {
         state.orderDateDesc = toggle
-        this.commit("sortByActiveMethod")
-    },
+        this.commit('sortByActiveMethod')
+    }
 }

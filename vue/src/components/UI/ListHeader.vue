@@ -32,7 +32,7 @@
 
 <script>
 /* SVG */
-import DropdownIcon from "@/assets/img/icon/overview/dropdown.svg";
+import DropdownIcon from '@/assets/img/icon/overview/dropdown.svg'
 
 export default {
     components: {
@@ -44,7 +44,8 @@ export default {
             required: true
         }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/components/UI/ListRow" lang="scss"></style>
+<style src="@/assets/css/components/UI/ListRow" lang="scss">
+</style>

@@ -109,7 +109,11 @@ export function lbjoin(...args) {
             values.push(...args[i]._values)
         }
     }
-    if (args.length > 0 && args[args.length - 1] && args[args.length - 1] instanceof _LB) {
+    if (
+        args.length > 0 &&
+        args[args.length - 1] &&
+        args[args.length - 1] instanceof _LB
+    ) {
         qp[qp.length - 1] += args[args.length - 1]._qp[0]
         for (let k = 1; k < args[args.length - 1]._qp.length; ++k) {
             qp.push(args[args.length - 1]._qp[k])

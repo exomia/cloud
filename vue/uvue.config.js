@@ -6,8 +6,8 @@ export default {
             '@uvue/core/plugins/vuex',
             {
                 onHttpRequest: true,
-                fetch: true,
-            },
+                fetch: true
+            }
         ],
         '@uvue/core/plugins/middlewares',
         '@uvue/core/plugins/errorHandler',
@@ -16,6 +16,6 @@ export default {
         '@/plugins/file-size',
         '@/plugins/math',
         '@/plugins/vuelidate',
-        '@/plugins/http',
-    ],
+        '@/plugins/http'
+    ]
 }

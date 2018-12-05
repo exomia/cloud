@@ -44,67 +44,45 @@
 
 <script>
 /* SVG */
-import FileIcon from "@/assets/img/icon/overview/file.svg";
-import DirectoryIcon from "@/assets/img/icon/overview/directory.svg";
-import ExtendedMenuIcon from "@/assets/img/icon/overview/extended-menu.svg";
+import FileIcon from '@/assets/img/icon/overview/file.svg'
+import DirectoryIcon from '@/assets/img/icon/overview/directory.svg'
+import ExtendedMenuIcon from '@/assets/img/icon/overview/extended-menu.svg'
 
 /* Components */
-import ContextMenu from "@/components/UI/ContextMenu";
+import ContextMenu from '@/components/UI/ContextMenu'
 
 export default {
-    data() {
-        return {
-            contextMenuToggled: false,
-            contextMenuItems: [
-                {
-                    name: this.$i18n.t("partials.ListRow.info"),
-                    iconClass: "info",
-                    emit: "info"
-                },
-                {
-                    name: this.$i18n.t("partials.ListRow.share"),
-                    iconClass: "share",
-                    emit: "share"
-                },
-                {
-                    name: this.$i18n.t("partials.ListRow.rename"),
-                    iconClass: "edit",
-                    emit: "rename"
-                },
-                {
-                    name: this.$i18n.t("partials.ListRow.download"),
-                    iconClass: "download",
-                    emit: "download"
-                },
-                {
-                    name: this.$i18n.t("partials.ListRow.remove"),
-                    iconClass: "remove",
-                    emit: "remove"
-                }
-            ]
-        };
+    components: {
+        DirectoryIcon,
+        FileIcon,
+        ExtendedMenuIcon,
+        ContextMenu
     },
     props: {
         uuid: {
             type: String,
+            default: '',
             required: false
         },
         name: {
             type: String,
+            default: '',
             required: false
         },
         type: {
             type: String,
-            default: "File"
+            default: 'File'
         },
         scanStatus: {
             type: Number,
             default: 0
         },
         size: {
-            type: Number
+            type: Number,
+            default: 0
         },
         timestamp: {
+            type: Number,
             required: true
         },
         isNewDirectory: {
@@ -112,33 +90,61 @@ export default {
             default: false
         },
         extension: {
-            type: String
+            type: String,
+            default: ''
         },
         hideInformations: {
             type: Boolean,
             required: true
         }
     },
-    components: {
-        DirectoryIcon,
-        FileIcon,
-        ExtendedMenuIcon,
-        ContextMenu
+    data() {
+        return {
+            contextMenuToggled: false,
+            contextMenuItems: [
+                {
+                    name: this.$i18n.t('partials.ListRow.info'),
+                    iconClass: 'info',
+                    emit: 'info'
+                },
+                {
+                    name: this.$i18n.t('partials.ListRow.share'),
+                    iconClass: 'share',
+                    emit: 'share'
+                },
+                {
+                    name: this.$i18n.t('partials.ListRow.rename'),
+                    iconClass: 'edit',
+                    emit: 'rename'
+                },
+                {
+                    name: this.$i18n.t('partials.ListRow.download'),
+                    iconClass: 'download',
+                    emit: 'download'
+                },
+                {
+                    name: this.$i18n.t('partials.ListRow.remove'),
+                    iconClass: 'remove',
+                    emit: 'remove'
+                }
+            ]
+        }
     },
     methods: {
         triggerInfo: function() {
-            this.$emit("info");
+            this.$emit('info')
         },
         onClick: function() {
-            if (this.type === "Directory") {
+            if (this.type === 'Directory') {
                 this.$router.push({
-                    name: "overview-dir",
+                    name: 'overview-dir',
                     params: { dir: this.uuid }
-                });
+                })
             }
         }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/components/UI/ListRow" lang="scss"></style>
+<style src="@/assets/css/components/UI/ListRow" lang="scss">
+</style>

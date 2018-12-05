@@ -4,15 +4,15 @@
             <a
                 v-for="(item, idx) of items"
                 :key="'list-option' + idx"
-                @click.stop="clickAction(item.emit)"
                 class="option-item"
+                @click.stop="clickAction(item.emit)"
             >
                 <!-- Choose icon -->
-                <info-icon v-if="item.iconClass === 'info'"></info-icon>
-                <share-icon v-if="item.iconClass === 'share'"></share-icon>
-                <edit-icon v-if="item.iconClass === 'edit'"></edit-icon>
-                <download-icon v-if="item.iconClass === 'download'"></download-icon>
-                <remove-icon v-if="item.iconClass === 'remove'"></remove-icon>
+                <InfoIcon v-if="item.iconClass === 'info'"></InfoIcon>
+                <ShareIcon v-if="item.iconClass === 'share'"></ShareIcon>
+                <EditIcon v-if="item.iconClass === 'edit'"></EditIcon>
+                <DownloadIcon v-if="item.iconClass === 'download'"></DownloadIcon>
+                <RemoveIcon v-if="item.iconClass === 'remove'"></RemoveIcon>
                 <span>{{item.name}}</span>
             </a>
         </div>
@@ -21,21 +21,19 @@
 
 <script>
 /* SVG */
-import InfoIcon from "@/assets/img/icon/information.svg";
-import ShareIcon from "@/assets/img/icon/overview/share.svg";
-import EditIcon from "@/assets/img/icon/edit.svg";
-import DownloadIcon from "@/assets/img/icon/download.svg";
-import RemoveIcon from "@/assets/img/icon/trash.svg";
+import InfoIcon from '@/assets/img/icon/information.svg'
+import ShareIcon from '@/assets/img/icon/overview/share.svg'
+import EditIcon from '@/assets/img/icon/edit.svg'
+import DownloadIcon from '@/assets/img/icon/download.svg'
+import RemoveIcon from '@/assets/img/icon/trash.svg'
 
 export default {
-    methods: {
-        clickAction: function(emit) {
-            this.$emit(emit);
-            this.closeMenu();
-        },
-        closeMenu: function() {
-            this.$emit("update:opened", false);
-        }
+    components: {
+        InfoIcon,
+        ShareIcon,
+        EditIcon,
+        DownloadIcon,
+        RemoveIcon
     },
     props: {
         items: {
@@ -47,20 +45,22 @@ export default {
             required: true
         }
     },
-    components: {
-        InfoIcon,
-        ShareIcon,
-        EditIcon,
-        DownloadIcon,
-        RemoveIcon
-    },
     mounted() {
-        let self = this;
-        document.body.addEventListener("click", function() {
-            self.closeMenu();
-        });
+        let self = this
+        document.body.addEventListener('click', function() {
+            self.closeMenu()
+        })
+    },
+    methods: {
+        clickAction: function(emit) {
+            this.$emit(emit)
+            this.closeMenu()
+        },
+        closeMenu: function() {
+            this.$emit('update:opened', false)
+        }
     }
-};
+}
 </script>
 
 <style src="@/assets/css/components/extras/ContextMenu" lang="scss" scoped>

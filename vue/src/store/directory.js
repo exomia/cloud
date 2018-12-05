@@ -5,7 +5,7 @@ export const state = () => ({
     fileCount: 0,
     sizeSum: 0,
     createDirectoryShown: false,
-    checkAll: false,
+    checkAll: false
 })
 
 export const getters = {
@@ -22,7 +22,7 @@ export const getters = {
     isCreateDirectoryShown: state => state.createDirectoryShown,
     isCheckAll: state => state.checkAll,
     getDirectoryCount: state => state.directoryCount,
-    getFileCount: state => state.fileCount,
+    getFileCount: state => state.fileCount
 }
 
 export const mutations = {
@@ -30,32 +30,32 @@ export const mutations = {
         state.data.push({
             ...file,
             size: file.size || 0,
-            type: "File",
-            checked: false,
+            type: 'File',
+            checked: false
         })
-        this.commit("updateDirectorySummary")
-        this.commit("sortByActiveMethod")
+        this.commit('updateDirectorySummary')
+        this.commit('sortByActiveMethod')
     },
     addDirectory(state, directory) {
         state.data.push({
             ...directory,
             size: directory.size || 0,
-            type: "Directory",
-            checked: false,
+            type: 'Directory',
+            checked: false
         })
-        this.commit("updateDirectorySummary")
-        this.commit("sortByActiveMethod")
+        this.commit('updateDirectorySummary')
+        this.commit('sortByActiveMethod')
     },
     setDirectoryData(state, { directories, files, path_info }) {
         state.data = []
         if (directories) {
             for (let directory of directories) {
-                this.commit("addDirectory", directory)
+                this.commit('addDirectory', directory)
             }
         }
         if (files) {
             for (let file of files) {
-                this.commit("addFile", file)
+                this.commit('addFile', file)
             }
         }
         state.pathInfo = path_info
@@ -70,12 +70,12 @@ export const mutations = {
         state.data.sort((a, b) => {
             const sort = new Intl.Collator(undefined, {
                 numeric: true,
-                sensitivity: "base",
+                sensitivity: 'base'
             }).compare(a[val], b[val])
             return desc ? sort * -1 : sort
         })
         /* Switch on type Directory/File */
-        if (val === "type") {
+        if (val === 'type') {
             state.data.reverse()
         }
     },
@@ -87,8 +87,10 @@ export const mutations = {
         }
         state.sizeSum = sum
         /* Directory Count */
-        state.directoryCount = state.data.filter(e => e.type === "Directory").length
+        state.directoryCount = state.data.filter(
+            e => e.type === 'Directory'
+        ).length
         /* File Count */
-        state.fileCount = state.data.filter(e => e.type === "File").length
-    },
+        state.fileCount = state.data.filter(e => e.type === 'File').length
+    }
 }

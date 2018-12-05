@@ -1,9 +1,16 @@
-import { query, lb, lbjoin, e } from "../"
+import { query, lb, lbjoin, e } from '../'
 
-export async function addDirectory(usernameOrEmail, name, parent_directory_uuid) {
+export async function addDirectory(
+    usernameOrEmail,
+    name,
+    parent_directory_uuid
+) {
     let result = false
     if (parent_directory_uuid) {
-        const dires = await getDirectoryInfo(usernameOrEmail, parent_directory_uuid)
+        const dires = await getDirectoryInfo(
+            usernameOrEmail,
+            parent_directory_uuid
+        )
         if (!dires) {
             return false
         }
@@ -14,7 +21,7 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
         }
         dires.path_info_json.push({
             name: dires.name,
-            uuid: dires.uuid,
+            uuid: dires.uuid
         })
         result = await query`
             INSERT INTO private."directory" ("user_uuid", "name", "parent_directory_uuid", "path_info_json")
@@ -40,7 +47,11 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
     return false
 }
 
-export async function deleteDirectory(usernameOrEmail, directory_uuid, force_delete) {
+export async function deleteDirectory(
+    usernameOrEmail,
+    directory_uuid,
+    force_delete
+) {
     const result = force_delete
         ? await query`
             DELETE FROM private."directory" d
@@ -58,7 +69,10 @@ export async function deleteDirectory(usernameOrEmail, directory_uuid, force_del
     return result && result.rowCount > 0
 }
 
-export async function listAllDirectories(usernameOrEmail, parent_directory_uuid) {
+export async function listAllDirectories(
+    usernameOrEmail,
+    parent_directory_uuid
+) {
     const result = await query`
         SELECT
           d."uuid",
@@ -71,7 +85,9 @@ export async function listAllDirectories(usernameOrEmail, parent_directory_uuid)
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")
           LEFT JOIN private."file" f ON (d."uuid" = f."directory_uuid")
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
-        AND d."parent_directory_uuid" ${parent_directory_uuid ? lb`= ${parent_directory_uuid}` : e`IS NULL`}
+        AND d."parent_directory_uuid" ${
+            parent_directory_uuid ? lb`= ${parent_directory_uuid}` : e`IS NULL`
+        }
         AND d."delete_timestamp" IS NULL
         GROUP BY d."uuid";`
     if (result) {
@@ -107,14 +123,21 @@ export async function getDirectoryInfo(usernameOrEmail, directory_uuid) {
     return false
 }
 
-export async function updateDirectory(usernameOrEmail, directory_uuid, { new_name, new_parent_directory_uuid }) {
+export async function updateDirectory(
+    usernameOrEmail,
+    directory_uuid,
+    { new_name, new_parent_directory_uuid }
+) {
     let updates = []
     if (new_name !== undefined) {
         updates.push(lb`"name" = ${new_name}`)
     }
     if (new_parent_directory_uuid !== undefined) {
-        if (new_parent_directory_uuid !== "NULL") {
-            const dires = getDirectoryInfo(usernameOrEmail, new_parent_directory_uuid)
+        if (new_parent_directory_uuid !== 'NULL') {
+            const dires = getDirectoryInfo(
+                usernameOrEmail,
+                new_parent_directory_uuid
+            )
             if (!dires) {
                 return false
             }
@@ -125,11 +148,17 @@ export async function updateDirectory(usernameOrEmail, directory_uuid, { new_nam
             }
             dires.path_info_json.push({
                 name: dires.name,
-                uuid: dires.uuid,
+                uuid: dires.uuid
             })
-            updates.push(lb`"parent_directory_uuid" = ${new_parent_directory_uuid}, "path_info_json" = ${dires.path_info_json}`)
+            updates.push(
+                lb`"parent_directory_uuid" = ${new_parent_directory_uuid}, "path_info_json" = ${
+                    dires.path_info_json
+                }`
+            )
         } else {
-            updates.push(lb`"parent_directory_uuid" = NULL, "path_info_json" = '[]'`)
+            updates.push(
+                lb`"parent_directory_uuid" = NULL, "path_info_json" = '[]'`
+            )
         }
     }
     if (!updates.length) {

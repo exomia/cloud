@@ -1,28 +1,28 @@
 <template>
     <main>
-        <settings-sidebar></settings-sidebar>
+        <SettingsSidebar></SettingsSidebar>
         <div class="overview">
             <div class="center-container" style="align-items: center;height: 100%">
-                <settings-data-change-form
+                <SettingsDataChangeForm
                     v-model="changeName"
-                    @click="changeNameSubmit = true"
                     label="Name"
-                    inputValue="??"
-                    inputPlaceholder="Name"
-                    buttonPlaceholder="Name ändern"
+                    input-value="??"
+                    input-placeholder="Name"
+                    button-placeholder="Name ändern"
                     disclaimer="Dieser Name ist öffentlich für andere Nutzer sichtbar."
-                    iconClass="public"
-                ></settings-data-change-form>
-                <settings-data-change-form
+                    icon-class="public"
+                    @click="changeNameSubmit = true"
+                ></SettingsDataChangeForm>
+                <SettingsDataChangeForm
                     v-model="changeEmail"
-                    @click="changeEmailSubmit = true"
                     label="E-Mail"
-                    inputValue="??"
-                    inputPlaceholder="E-Mail"
-                    buttonPlaceholder="E-Mail ändern"
+                    input-value="??"
+                    input-placeholder="E-Mail"
+                    button-placeholder="E-Mail ändern"
                     disclaimer="Ihre E-Mail benötigen Sie um sich mit Ihrem Account anzumelden.<br>Sie ist nur unter bestimmen Umständen für andere Nutzer sichtbar."
-                    iconClass="public"
-                ></settings-data-change-form>
+                    icon-class="public"
+                    @click="changeEmailSubmit = true"
+                ></SettingsDataChangeForm>
                 <div class="spacer-container">
                     <h2 class="form-header">
                         Passwort
@@ -47,11 +47,11 @@
                         <b>Geben Sie dieses Passwort niemals an Dritte weiter!</b>
                     </span>
                     <input
-                        @click="changePasswordSubmit = true"
                         class="confirm-button"
                         style="width: 100%"
                         type="button"
                         value="Passwort ändern"
+                        @click="changePasswordSubmit = true"
                     >
                 </div>
             </div>
@@ -60,29 +60,29 @@
 </template>
 
 <script>
-import SettingsSidebar from "@/components/navigation/sidebar/SettingsSidebar";
-import SettingsDataChangeForm from "@/components/UI/SettingsDataChangeForm";
+import SettingsSidebar from '@/components/navigation/sidebar/SettingsSidebar'
+import SettingsDataChangeForm from '@/components/UI/SettingsDataChangeForm'
 
 export default {
     metaInfo() {
         return {
-            title: this.$t("title.settings")
-        };
-    },
-    data() {
-        return {
-            changeName: "",
-            changeNameSubmit: false,
-            changeEmail: "",
-            changeEmailSubmit: false,
-            password: "",
-            newPassword: "",
-            changePasswordSubmit: false
-        };
+            title: this.$t('title.settings')
+        }
     },
     components: {
         SettingsSidebar,
         SettingsDataChangeForm
+    },
+    data() {
+        return {
+            changeName: '',
+            changeNameSubmit: false,
+            changeEmail: '',
+            changeEmailSubmit: false,
+            password: '',
+            newPassword: '',
+            changePasswordSubmit: false
+        }
     }
-};
+}
 </script>

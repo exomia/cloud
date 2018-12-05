@@ -3,7 +3,6 @@
         <div class="img"></div>
         <div class="overlay"></div>
         <div class="wrapper">
-
             <section class="menu">
                 <div class="sidebar-header">
                     <LogoIcon class="logo"></LogoIcon>
@@ -16,7 +15,7 @@
                         <span>Alle Dateien</span>
                     </div>
                 </a>
-
+                
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <ShareIcon class="icon"></ShareIcon>
@@ -32,7 +31,7 @@
                         <span>Settings</span>
                     </div>
                 </a>
-
+                
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <LogoutIcon class="icon"></LogoutIcon>
@@ -46,11 +45,11 @@
 
 <script>
 /* SVG */
-import LogoIcon from "@/assets/img/icon/overview/logo.svg"
-import ShareIcon from "@/assets/img/icon/overview/share.svg"
-import SettingsIcon from "@/assets/img/icon/overview/settings.svg"
-import LogoutIcon from "@/assets/img/icon/overview/logout.svg"
-import FileIcon from "@/assets/img/icon/overview/file.svg"
+import LogoIcon from '@/assets/img/icon/overview/logo.svg'
+import ShareIcon from '@/assets/img/icon/overview/share.svg'
+import SettingsIcon from '@/assets/img/icon/overview/settings.svg'
+import LogoutIcon from '@/assets/img/icon/overview/logout.svg'
+import FileIcon from '@/assets/img/icon/overview/file.svg'
 
 export default {
     components: {
@@ -63,4 +62,5 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/components/navigation/sidebar/sidebar" lang="scss" scoped></style>
+<style src="@/assets/css/components/navigation/sidebar/sidebar" lang="scss" scoped>
+</style>

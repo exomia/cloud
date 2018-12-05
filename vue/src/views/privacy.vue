@@ -8,10 +8,11 @@
 export default {
     metaInfo() {
         return {
-            title: this.$t("title.privacy")
-        };
+            title: this.$t('title.privacy')
+        }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/pages/legal" lang="scss" scoped></style>
+<style src="@/assets/css/pages/legal" lang="scss" scoped>
+</style>

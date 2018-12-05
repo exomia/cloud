@@ -8,44 +8,45 @@
 
 <script>
 /* SVG */
-import FlagEN from "@/assets/img/icon/login/lang_en.svg";
-import FlagDE from "@/assets/img/icon/login/lang_de.svg";
+import FlagEN from '@/assets/img/icon/login/lang_en.svg'
+import FlagDE from '@/assets/img/icon/login/lang_de.svg'
 
 export default {
-    data() {
-        return {
-            langs: ["de", "en"]
-        };
-    },
     components: {
         FlagEN,
         FlagDE
     },
-    methods: {
-        switchLang: function() {
-            /* Lock context */
-            const self = this;
-
-            const idx = self.langs.findIndex(function(el) {
-                return el === self.$i18n.locale;
-            });
-
-            /* Dont continue if only one language is given */
-            if (self.langs.length <= 1) return;
-
-            if (idx + 1 < self.langs.length) {
-                self.$i18n.locale = self.langs[idx + 1];
-            } else {
-                self.$i18n.locale = self.langs[0];
-            }
+    data() {
+        return {
+            langs: ['de', 'en']
         }
     },
     computed: {
         upperLang: function() {
-            return this.$i18n.locale.toUpperCase();
+            return this.$i18n.locale.toUpperCase()
+        }
+    },
+    methods: {
+        switchLang: function() {
+            /* Lock context */
+            const self = this
+
+            const idx = self.langs.findIndex(function(el) {
+                return el === self.$i18n.locale
+            })
+
+            /* Dont continue if only one language is given */
+            if (self.langs.length <= 1) return
+
+            if (idx + 1 < self.langs.length) {
+                self.$i18n.locale = self.langs[idx + 1]
+            } else {
+                self.$i18n.locale = self.langs[0]
+            }
         }
     }
-};
+}
 </script>
 
-<style src="@/assets/css/components/UI/LangSwitcher" lang="scss" scoped></style>
+<style src="@/assets/css/components/UI/LangSwitcher" lang="scss" scoped>
+</style>
