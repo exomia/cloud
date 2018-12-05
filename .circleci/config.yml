@@ -13,9 +13,12 @@ jobs:
 
         steps:
             - checkout
-            - run: ls
+            - run: ls vue
+            - run: ls vue/api
+            - run: ls vue/api/lib
+            - run: ls vue/api/lib/setup
             - run: sudo apt-get update && sudo apt-get install postgresql
-            - run: psql < src/api/lib/setup/setup.sql
+            - run: psql < vue/api/lib/setup/setup.sql
             - restore_cache:
                   key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
             - run: npm install
