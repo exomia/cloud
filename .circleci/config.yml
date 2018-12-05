@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
     build:
-        working_directory: ~/repo/vue
+        working_directory: ~/repo
 
         docker:
             - image: circleci/node:10
@@ -19,11 +19,11 @@ jobs:
             - run: sudo apt-get update && sudo apt-get install postgresql
             - run: psql < vue/src/api/lib/setup/setup.sql
             - restore_cache:
-                  key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
-            - run: npm install
-            - run: npm run build
+                  key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
+            - run: cd vue && npm install
+            - run: cd vue && npm run build
             - save_cache:
-                  key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+                  key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
                   paths:
                       - node_modules
             # - run: npm test
