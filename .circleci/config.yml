@@ -12,7 +12,7 @@ jobs:
               environment:
                   POSTGRES_USER: root
                   POSTGRES_PASSWORD: root
-                  POSTGRES_DB: cloud
+                  POSTGRES_DB: root
 
         steps:
             - checkout
