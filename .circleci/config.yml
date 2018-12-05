@@ -13,6 +13,7 @@ jobs:
 
         steps:
             - checkout
+            - run: ls
             - run: sudo apt-get update && sudo apt-get install postgresql
             - run: psql < src/api/lib/setup/setup.sql
             - restore_cache:
