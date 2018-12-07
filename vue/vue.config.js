@@ -1,3 +1,4 @@
+/* Includes */
 const ImageminPlugin = require('imagemin-webpack')
 const imageminGifsicle = require('imagemin-gifsicle')
 const imageminMozjpeg = require('imagemin-mozjpeg')
@@ -104,18 +105,6 @@ module.exports = {
                         }
                     ]
                 }
-            })
-
-        /* Load html */
-        config.module
-            .rule('html')
-            .test(/\.html$/)
-            .exclude.add([/index\.html/])
-            .end()
-            .use('html')
-            .loader('html-loader')
-            .options({
-                minimize: true
             })
     },
 

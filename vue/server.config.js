@@ -21,6 +21,23 @@ export default {
     ],
     // Watch for changes in these files to automatically reboot server
     watch: ['src/api/**/*.js'],
-    // SPA paths: no SSR occur for these paths
-    spaPaths: ['/spa']
+    // Activating prefetch & preload
+    renderer: {
+        // shouldPrefetch: null,
+        shouldPreload: (file, type) => {
+            // type is inferred based on the file extension.
+            // https://fetch.spec.whatwg.org/#concept-request-destination
+            if (type === 'script' || type === 'style') {
+                return true
+            }
+            if (type === 'font') {
+                // only preload woff2 fonts
+                return /\.woff2$/.test(file)
+            }
+            if (type === 'image') {
+                // only preload important images
+                return file === 'login_bg.jpg'
+            }
+        }
+    }
 }
