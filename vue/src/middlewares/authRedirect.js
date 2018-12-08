@@ -1,6 +1,6 @@
 import { get as getCookie } from 'js-cookie'
 
-export default ({ req, route, redirect }) => {
+export default ({ req, route }) => {
     let xTokenSet = false
     let xRefreshTokenSet = false
 

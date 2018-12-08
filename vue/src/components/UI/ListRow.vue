@@ -82,7 +82,7 @@ export default {
             default: 0
         },
         timestamp: {
-            type: Number,
+            type: String,
             required: true
         },
         isNewDirectory: {

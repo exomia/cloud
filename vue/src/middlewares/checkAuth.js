@@ -1,6 +1,6 @@
 import { remove as removeCookie } from 'js-cookie'
 
-export default async ({ store: { commit }, http, route, redirect }) => {
+export default async ({ store: { commit }, http, route }) => {
     try {
         const { data } = await http.get('/v1/auth')
         if (!data.error) {
@@ -14,6 +14,6 @@ export default async ({ store: { commit }, http, route, redirect }) => {
             removeCookie('x-token')
             removeCookie('x-refresh-token')
         }
-        return redirect({ name: 'home' })
+        // return redirect({ name: 'home' })
     }
 }
