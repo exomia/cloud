@@ -27,7 +27,7 @@ export default () => {
 
         // Check if config exists
         if (
-            fs.stat(path.join(CONFIG_PATH, destFilename), (err, stats) => {
+            fs.stat(path.join(CONFIG_PATH, destFilename), err => {
                 if (err) {
                     console.log(`Creating config file '${destFilename}'`)
                     createConfig(srcFilename, destFilename)
