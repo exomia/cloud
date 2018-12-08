@@ -38,19 +38,22 @@ export default {
                 rel: 'preload',
                 as: 'font',
                 href: '/assets/fonts/Roboto-Light.woff2',
-                type: 'font/woff2'
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
             },
             {
                 rel: 'preload',
                 as: 'font',
                 href: '/assets/fonts/Roboto-Regular.woff2',
-                type: 'font/woff2'
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
             },
             {
                 rel: 'preload',
                 as: 'font',
                 href: '/assets/fonts/Roboto-Condensed.woff2',
-                type: 'font/woff2'
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
             }
         ]
     },
