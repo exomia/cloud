@@ -2,21 +2,20 @@
 import koaBodyparser from 'koa-bodyparser'
 import koaJson from 'koa-json'
 import Router from 'koa-router'
+import koaCors from 'koa2-cors'
 
 /* Imports */
-import { endpoints } from './routes'
+import { initialize } from './routes'
 import { jwt_init } from './lib/jwt'
 import {
     JERROR_NOT_FOUND,
     JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_FORBIDDEN,
-    JERROR_UNAUTHORIZED
+    JERROR_FORBIDDEN
 } from './lib/error'
-
-const router = new Router()
 
 export default server => {
     const app = server.getApp()
+    const router = new Router()
 
     router.use('/api/*', (ctx, next) => {
         console.log(`[DEBUG] ${ctx.protocol} | ${ctx.method} ${ctx.path}`)
@@ -40,51 +39,13 @@ export default server => {
         }
     })
 
-    for (let s in endpoints) {
-        let scope = endpoints[s]
-        for (let route of scope) {
-            if (route.scope !== '') {
-                route.router.use(`/api/${route.path}`, (ctx, next) => {
-                    if (!ctx.jwt.valid) {
-                        return JERROR_UNAUTHORIZED(
-                            ctx,
-                            'the auth token is invalid or does not exist.'
-                        )
-                    }
-                    if (
-                        route.access === 0 ||
-                        (route.access & ctx.jwt.payload.scopes[route.scope]) ===
-                            route.access
-                    ) {
-                        return next()
-                    }
-                    return JERROR_FORBIDDEN(
-                        ctx,
-                        'invalid access to the resource.'
-                    )
-                })
-            }
-            router.use(
-                `/api/${route.path}`,
-                route.router.routes(),
-                route.router.allowedMethods()
-            )
-            console.log(
-                `${route.filename.padEnd(20, ' ')} - [${`${`scope ${
-                    route.scope
-                }`.padEnd(20, ' ')} - access ${`${route.access}`.padStart(
-                    4,
-                    ' '
-                )}]`.padEnd(35, ' ')} +route 'api/${route.path}'`
-            )
-        }
-    }
+    initialize(router)
 
-    router.use('/api/*', ctx => {
+    router.all('/api/*', ctx => {
         return JERROR_NOT_FOUND(ctx, 'no resource found for this path.')
     })
-
-    app.use(koaBodyparser())
+    app.use(koaCors())
+        .use(koaBodyparser())
         .use(koaJson({ pretty: false, param: 'pretty' }))
         .use(router.routes())
         .use(router.allowedMethods())
