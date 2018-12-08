@@ -1,3 +1,9 @@
+/* Libs */
+import koaBodyparser from 'koa-bodyparser'
+import koaJson from 'koa-json'
+import Router from 'koa-router'
+
+/* Imports */
 import { endpoints } from './routes'
 import { jwt_init } from './lib/jwt'
 import {
@@ -6,9 +12,6 @@ import {
     JERROR_FORBIDDEN,
     JERROR_UNAUTHORIZED
 } from './lib/error'
-import koaBodyparser from 'koa-bodyparser'
-import koaJson from 'koa-json'
-import Router from 'koa-router'
 
 const router = new Router()
 
@@ -28,6 +31,7 @@ export default server => {
     })
 
     router.use('/api/*', jwt_init)
+
     router.use(async (ctx, next) => {
         try {
             await next()
@@ -35,6 +39,7 @@ export default server => {
             return JERROR_INTERNAL_SERVER_ERROR(ctx, err.message)
         }
     })
+
     for (let s in endpoints) {
         let scope = endpoints[s]
         for (let route of scope) {
