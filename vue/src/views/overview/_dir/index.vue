@@ -51,11 +51,7 @@ import ListHeaderInfo from '@/components/UI/ListHeaderInfo'
 import OverviewNav from '@/components/partials/overview/Nav'
 import OverviewSidebar from '@/components/navigation/sidebar/Overview'
 
-/* Middleware */
-import checkAuth from '@/middlewares/checkAuth'
-
 export default {
-    middlewares: [checkAuth],
     async asyncData({ store, http, route }) {
         const { data } = await http.get(
             `/v1/directory/${route.params.dir || ''}`

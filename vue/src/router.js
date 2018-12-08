@@ -4,6 +4,10 @@ import Router from 'vue-router'
 /* Views */
 import Home from '@/views/home'
 
+/* Middleware */
+import checkAuth from '@/middlewares/checkAuth'
+import authRedirect from '@/middlewares/authRedirect'
+
 Vue.use(Router)
 
 export default () => {
@@ -14,18 +18,27 @@ export default () => {
             {
                 path: '/',
                 name: 'home',
-                component: Home
+                component: Home,
+                meta: {
+                    middlewares: [authRedirect]
+                }
             },
             {
                 path: '/trash',
                 name: 'trash',
-                component: () => import('@/views/home')
+                component: () => import('@/views/home'),
+                meta: {
+                    middlewares: [checkAuth]
+                }
             },
             /* Overview */
             {
                 path: '/overview/:dir?',
                 name: 'overview-dir',
-                component: () => import('@/views/overview/_dir/index')
+                component: () => import('@/views/overview/_dir/index'),
+                meta: {
+                    middlewares: [checkAuth]
+                }
             },
             /* Legal */
             {
