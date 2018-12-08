@@ -36,10 +36,10 @@ export default {
         // haveHistory() {
         //     return process.client && window.history.length > 0
         // }
-    },
-    mounted() {
-        console.log(this.$errorHandler.error)
     }
+    // mounted() {
+    //     console.log(this.$errorHandler.error)
+    // }
     // methods: {
     //     gotoHome() {
     //         this.$store.commit("errorHandler/CLEAR")

@@ -122,8 +122,6 @@ export default {
                             this.$router.push({ name: 'overview-dir' })
                         }
                     })
-            } else {
-                console.error('Input error')
             }
         }
     },
