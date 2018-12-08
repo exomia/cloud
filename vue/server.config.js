@@ -3,6 +3,8 @@ import { ExpressAdapter } from '@uvue/server'
 export default {
     adapter: ExpressAdapter,
     plugins: [
+        // Compress responses
+        '@uvue/server/plugins/gzip',
         // Parse cookies
         [
             '@uvue/server/plugins/cookie',
@@ -14,8 +16,6 @@ export default {
         '@uvue/server/plugins/modernBuild',
         // Serve static files
         '@uvue/server/plugins/static',
-        // Compress responses
-        '@uvue/server/plugins/gzip',
         // Init api
         './src/api/install'
     ],
