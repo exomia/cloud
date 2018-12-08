@@ -1,4 +1,3 @@
-import { urlencoded, json } from 'express'
 import { endpoints } from './routes'
 import { jwt_init } from './lib/jwt'
 import {
@@ -7,57 +6,64 @@ import {
     JERROR_FORBIDDEN,
     JERROR_UNAUTHORIZED
 } from './lib/error'
+import koaBodyParser from 'koa-bodyparser'
+import koaJson from 'koa-json'
+import Router from 'koa-router'
+
+const router = new Router()
 
 export default server => {
     const app = server.getApp()
 
-    app.use('/api/*', (req, res, next) => {
-        console.log(`[DEBUG] ${req.protocol} | ${req.method} ${req.path}`)
-        if (req.protocol === 'https' || req.protocol === 'http') {
+    router.use('/api/*', (ctx, next) => {
+        console.log(`[DEBUG] ${ctx.protocol} | ${ctx.method} ${ctx.path}`)
+        if (ctx.protocol === 'https' || ctx.protocol === 'http') {
             return next()
         }
-        res.status(403)
-        return res.json(JERROR_FORBIDDEN('the used protocol is forbidden'))
+        return JERROR_FORBIDDEN(ctx, 'the used protocol is forbidden')
     })
 
-    app.all('/api', (req, res) => {
-        return res.end('Welcome to the backend of exomia cloud')
+    router.all('/api', ctx => {
+        ctx.body = 'Welcome to the backend of exomia cloud'
     })
 
-    app.use(
-        urlencoded({
-            extended: true
-        })
-    )
-    app.use(json())
-
-    app.use('/api/*', jwt_init)
-
+    router.use('/api/*', jwt_init)
+    router.use(async (ctx, next) => {
+        try {
+            await next()
+        } catch (err) {
+            return JERROR_INTERNAL_SERVER_ERROR(ctx, err.message)
+        }
+    })
     for (let s in endpoints) {
         let scope = endpoints[s]
         for (let route of scope) {
             if (route.scope !== '') {
-                route.router.use('/api/*', function(req, res, next) {
-                    if (!req.jwt.valid) {
+                route.router.use(`/api/${route.path}`, (ctx, next) => {
+                    if (!ctx.jwt.valid) {
                         return JERROR_UNAUTHORIZED(
-                            res,
+                            ctx,
                             'the auth token is invalid or does not exist.'
                         )
                     }
                     if (
                         route.access === 0 ||
-                        (route.access & req.jwt.payload.scopes[route.scope]) ===
+                        (route.access & ctx.jwt.payload.scopes[route.scope]) ===
                             route.access
                     ) {
                         return next()
                     }
                     return JERROR_FORBIDDEN(
-                        res,
+                        ctx,
                         'invalid access to the resource.'
                     )
                 })
             }
-            app.use(`/api/${route.path}`, route.router)
+            router.use(
+                `/api/${route.path}`,
+                route.router.routes(),
+                route.router.allowedMethods()
+            )
             console.log(
                 `${route.filename.padEnd(20, ' ')} - [${`${`scope ${
                     route.scope
@@ -69,13 +75,12 @@ export default server => {
         }
     }
 
-    app.use('/api/*', (req, res) => {
-        return JERROR_NOT_FOUND(res, 'no resource found for this path.')
+    router.use('/api/*', ctx => {
+        return JERROR_NOT_FOUND(ctx, 'no resource found for this path.')
     })
 
-    app.use('/api/*', (err, req, res) => {
-        return JERROR_INTERNAL_SERVER_ERROR(res, err.message)
-    })
-
-    app.disable('x-powered-by')
+    app.use(koaBodyParser())
+        .use(koaJson({ pretty: false, param: 'pretty' }))
+        .use(router.routes())
+        .use(router.allowedMethods())
 }

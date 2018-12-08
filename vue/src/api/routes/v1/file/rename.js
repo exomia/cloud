@@ -1,54 +1,37 @@
-import express from 'express'
+import Router from 'koa-router'
 import { updateFile } from '../../../lib/pg/file'
 import {
     JERROR_INTERNAL_SERVER_ERROR,
     JERROR_BAD_REQUEST
 } from '../../../lib/error'
 
-const router = express.Router()
+const router = new Router()
 
-router.post(
-    '/:file_uuid/rename',
-    async (
-        {
-            jwt: {
-                payload: { email }
-            },
-            params: { file_uuid },
-            body: { new_name }
-        },
-        res
-    ) => {
-        if (!file_uuid) {
-            return JERROR_BAD_REQUEST(
-                res,
-                "no 'file_uuid' specified in the params"
-            )
-        }
-
-        if (!new_name || new_name.length <= 0) {
-            return JERROR_BAD_REQUEST(res, "invalid payload see 'new_name'")
-        }
-
-        let result = await updateFile(email, file_uuid, {
-            new_name
-        })
-        if (!result) {
-            return JERROR_INTERNAL_SERVER_ERROR(
-                res,
-                "check the 'file_uuid' parameter."
-            )
-        }
-
-        return res.status(200).json({
-            file: {
-                uuid: file_uuid,
-                new_name
-            },
-            error: false
-        })
+router.post('/:file_uuid/rename', async ctx => {
+    if (!ctx.params.file_uuid) {
+        return JERROR_BAD_REQUEST(ctx, "no 'file_uuid' specified in the params")
     }
-)
+
+    if (!ctx.request.body.new_name || ctx.request.body.new_name.length <= 0) {
+        return JERROR_BAD_REQUEST(ctx, "invalid payload see 'new_name'")
+    }
+
+    let result = await updateFile(ctx.jwt.payload.email, ctx.params.file_uuid, {
+        new_name: ctx.request.body.new_name
+    })
+    if (!result) {
+        return JERROR_INTERNAL_SERVER_ERROR(
+            ctx,
+            "check the 'file_uuid' parameter."
+        )
+    }
+
+    ctx.status = 200
+    ctx.body = {
+        file: { uuid: ctx.params.file_uuid, name: ctx.request.body.new_name },
+        error: false
+    }
+})
 
 export default {
     router,
