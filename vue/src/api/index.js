@@ -6,7 +6,7 @@ import {
     JERROR_FORBIDDEN,
     JERROR_UNAUTHORIZED
 } from './lib/error'
-import koaBodyParser from 'koa-bodyparser'
+import koaBodyparser from 'koa-bodyparser'
 import koaJson from 'koa-json'
 import Router from 'koa-router'
 
@@ -79,7 +79,7 @@ export default server => {
         return JERROR_NOT_FOUND(ctx, 'no resource found for this path.')
     })
 
-    app.use(koaBodyParser())
+    app.use(koaBodyparser())
         .use(koaJson({ pretty: false, param: 'pretty' }))
         .use(router.routes())
         .use(router.allowedMethods())
