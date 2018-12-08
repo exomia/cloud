@@ -21,6 +21,10 @@ export default {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1'
             },
+            {
+                'http-equiv': 'Content-Type',
+                content: 'text/html; charset=utf-8'
+            },
             { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
             { name: 'description', content: '' },
             { name: 'keywords', content: '' },
