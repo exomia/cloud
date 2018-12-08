@@ -22,10 +22,8 @@ export default {
 
             // Get current token in cookies
             if (process.server) {
-                if (context.req.cookies) {
-                    xToken = context.req.cookies['x-token']
-                    xRefreshToken = context.req.cookies['x-refresh-token']
-                }
+                xToken = context.ctx.cookies.get('x-token')
+                xRefreshToken = context.ctx.cookies.get('x-refresh-token')
             } else {
                 xToken = getCookie('x-token')
                 xRefreshToken = getCookie('x-refresh-token')

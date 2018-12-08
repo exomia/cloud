@@ -10,15 +10,18 @@
         </RouterLink>
 
         <template v-for="(pi, idx) in pathInfo">
-            <PathArrowIcon :key="'pathInfoArrow-' + idx" class="path-arrow"></PathArrowIcon>
+            <PathArrowIcon
+                :key="'pathInfoArrow-' + idx"
+                class="path-arrow"
+            ></PathArrowIcon>
             <RouterLink
                 :key="'pathInfo-' + idx"
                 class="path-item"
                 tag="a"
-                :to="{ name: 'overview-dir', params: {dir: pi.uuid} }"
+                :to="{ name: 'overview-dir', params: { dir: pi.uuid } }"
                 :title="pi.name"
             >
-                <span>{{formatName(pi.name)}}</span>
+                <span>{{ formatName(pi.name) }}</span>
             </RouterLink>
         </template>
     </nav>
@@ -48,5 +51,8 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/components/partials/overview/Nav" lang="scss" scoped>
-</style>
+<style
+    src="@/assets/css/components/partials/overview/Nav"
+    lang="scss"
+    scoped
+></style>

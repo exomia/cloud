@@ -1,11 +1,13 @@
 <template>
     <main>
         <h1>Error - {{ $errorHandler.error.statusCode }}</h1>
-        <br>
+        <br />
         <p>{{ $errorHandler.error.message }}</p>
         <!-- <a v-if="!haveHistory" href="/" class="button" @click.prevent="gotoHome">Go to home</a>
         <a v-else href="#" class="button" @click.prevent="$router.back()">Go back</a>-->
-        <pre v-if="$errorHandler.error && !isProduction">{{ $errorHandler.error.stack || $errorHandler.error }}</pre>
+        <pre v-if="$errorHandler.error && !isProduction">{{
+            $errorHandler.error.stack || $errorHandler.error
+        }}</pre>
     </main>
 </template>
 

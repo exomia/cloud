@@ -1,8 +1,8 @@
 <template>
     <a @click="switchLang()">
-        <FlagEN v-if="$i18n.locale === 'en'" class="flag"/>
-        <FlagDE v-if="$i18n.locale === 'de'" class="flag"/>
-        <span class="lang">{{upperLang}}</span>
+        <FlagEN v-if="$i18n.locale === 'en'" class="flag" />
+        <FlagDE v-if="$i18n.locale === 'de'" class="flag" />
+        <span class="lang">{{ upperLang }}</span>
     </a>
 </template>
 
@@ -48,5 +48,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/components/UI/LangSwitcher" lang="scss" scoped>
-</style>
+<style src="@/assets/css/components/UI/LangSwitcher" lang="scss" scoped></style>

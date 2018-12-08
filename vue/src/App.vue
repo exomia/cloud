@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <RouterView v-if="!$errorHandler.error"/>
+        <RouterView v-if="!$errorHandler.error" />
         <ErrorHandler v-else></ErrorHandler>
     </div>
 </template>
@@ -63,5 +63,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/_global" lang="scss">
-</style>
+<style src="@/assets/css/_global" lang="scss"></style>

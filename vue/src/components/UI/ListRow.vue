@@ -1,20 +1,32 @@
 <template>
-    <div class="list-row" :class="hideInformations ? 'info-active' : ''" @click="onClick()">
+    <div
+        class="list-row"
+        :class="hideInformations ? 'info-active' : ''"
+        @click="onClick()"
+    >
         <div class="list-item"></div>
 
         <!-- Type -->
         <div class="list-item">
-            <DirectoryIcon v-if="type === 'Directory'" class="type"></DirectoryIcon>
+            <DirectoryIcon
+                v-if="type === 'Directory'"
+                class="type"
+            ></DirectoryIcon>
             <FileIcon v-else-if="type === 'File'" class="type"></FileIcon>
         </div>
 
         <!-- Name -->
-        <div class="list-item" :class="hideInformations ? 'info-active' : 'relative'">
-            <span>{{name}}</span>
-            <span class="ext">{{extension}}</span>
+        <div
+            class="list-item"
+            :class="hideInformations ? 'info-active' : 'relative'"
+        >
+            <span>{{ name }}</span> <span class="ext">{{ extension }}</span>
         </div>
 
-        <div class="dynamic-list-menu" :style="hideInformations ? 'width: auto' : ''">
+        <div
+            class="dynamic-list-menu"
+            :style="hideInformations ? 'width: auto' : ''"
+        >
             <!-- Extended menu -->
             <div class="list-item">
                 <ExtendedMenuIcon
@@ -31,12 +43,12 @@
 
             <!-- Size -->
             <div v-if="!hideInformations" class="list-item">
-                <span v-if="type !== 'Directory'">{{size | toUnit}}</span>
+                <span v-if="type !== 'Directory'">{{ size | toUnit }}</span>
             </div>
 
             <!-- Date -->
             <div v-if="!hideInformations" class="list-item">
-                <span>{{timestamp | toDatetime}}</span>
+                <span>{{ timestamp | toDatetime }}</span>
             </div>
         </div>
     </div>
@@ -146,5 +158,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/components/UI/ListRow" lang="scss">
-</style>
+<style src="@/assets/css/components/UI/ListRow" lang="scss"></style>

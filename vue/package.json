@@ -32,7 +32,6 @@
         "multer": "^1.4.1",
         "pg": "^7.7.1",
         "register-service-worker": "^1.5.2",
-        "vue": "^2.5.18",
         "vue-i18n": "^8.0.0",
         "vue-meta": "^1.5.6",
         "vue-router": "^3.0.2",
@@ -63,8 +62,7 @@
         "node-sass": "^4.10.0",
         "sass-loader": "^7.0.1",
         "vue-cli-plugin-i18n": "^0.5.1",
-        "vue-svg-loader": "^0.12.0-alpha.1",
-        "vue-template-compiler": "^2.5.18"
+        "vue-svg-loader": "^0.12.0-alpha.1"
     },
     "gitHooks": {
         "pre-commit": "lint-staged"

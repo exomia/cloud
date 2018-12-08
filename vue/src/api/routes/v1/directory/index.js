@@ -7,7 +7,7 @@ const router = new Router()
 
 router.get('/:directory_uuid?', async ctx => {
     const directories = await listAllDirectories(
-        ctx.jwt.payload.emailemail,
+        ctx.jwt.payload.email,
         ctx.params.directory_uuid
     )
     if (!directories) {

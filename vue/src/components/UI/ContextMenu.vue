@@ -11,9 +11,11 @@
                 <InfoIcon v-if="item.iconClass === 'info'"></InfoIcon>
                 <ShareIcon v-if="item.iconClass === 'share'"></ShareIcon>
                 <EditIcon v-if="item.iconClass === 'edit'"></EditIcon>
-                <DownloadIcon v-if="item.iconClass === 'download'"></DownloadIcon>
+                <DownloadIcon
+                    v-if="item.iconClass === 'download'"
+                ></DownloadIcon>
                 <RemoveIcon v-if="item.iconClass === 'remove'"></RemoveIcon>
-                <span>{{item.name}}</span>
+                <span>{{ item.name }}</span>
             </a>
         </div>
     </div>
@@ -63,5 +65,8 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/components/extras/ContextMenu" lang="scss" scoped>
-</style>
+<style
+    src="@/assets/css/components/extras/ContextMenu"
+    lang="scss"
+    scoped
+></style>
