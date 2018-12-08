@@ -40,9 +40,9 @@ jobs:
                   name: Linting code
                   command: cd vue && npm run lint
 
-            # - run:
-            #       name: Building server
-            #       command: cd vue && npm run build
+            - run:
+                  name: Building server
+                  command: cd vue && npm run build
 
             - save_cache:
                   key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
