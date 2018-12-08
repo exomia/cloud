@@ -15,6 +15,6 @@ export default ({ req, route, redirect }) => {
     }
 
     if (xTokenSet && xRefreshTokenSet && route.name !== 'overview-dir') {
-        return redirect({ name: 'overview-dir' })
+        // return redirect({ name: 'overview-dir' })
     }
 }
