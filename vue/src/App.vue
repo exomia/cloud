@@ -27,7 +27,28 @@ export default {
             { name: 'author', content: 'exomia.com' },
             { name: 'copyright', content: 'exomia.com' }
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            // Fonts
+            {
+                rel: 'preload',
+                as: 'font',
+                href: '/assets/fonts/Roboto-Light.woff2',
+                type: 'font/woff2'
+            },
+            {
+                rel: 'preload',
+                as: 'font',
+                href: '/assets/fonts/Roboto-Regular.woff2',
+                type: 'font/woff2'
+            },
+            {
+                rel: 'preload',
+                as: 'font',
+                href: '/assets/fonts/Roboto-Condensed.woff2',
+                type: 'font/woff2'
+            }
+        ]
     },
     components: {
         ErrorHandler
