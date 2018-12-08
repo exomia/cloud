@@ -16,15 +16,40 @@ jobs:
 
         steps:
             - checkout
-            - run: sudo apt-get update && sudo apt-get install postgresql
-            - run: psql < vue/src/api/lib/setup/setup.sql
+
+            - run:
+                  name: Updating linux & installing postgresql
+                  command: sudo apt-get update && sudo apt-get install postgresql
+
+            - run:
+                  name: Importing database
+                  command: psql < vue/src/api/lib/setup/setup.sql
+
             - restore_cache:
                   key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
-            - run: cd vue && npm install
-            - run: cd vue && npm run lint
-            - run: cd vue && npm run build
+
+            - run:
+                  name: Installing NPM packages
+                  command: cd vue && npm install
+
+            - run:
+                  name: Linting code
+                  command: cd vue && npm run lint
+
+            - run:
+                  name: Building server
+                  command: cd vue && npm run build
+
             - save_cache:
                   key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
                   paths:
                       - node_modules
-            # - run: npm test
+            - run:
+                  name: Running cypress
+                  command: cd vue && npm run test:headless
+
+            - store_artifacts:
+                  path: vue/tests/e2e/videos
+
+            - store_artifacts:
+                  path: vue/tests/e2e/screenshots

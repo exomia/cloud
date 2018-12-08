@@ -1,5 +1,13 @@
 create the following files with at least these attributes
 
+> .cypress.config.json
+
+```json
+{
+    "key": ""
+}
+```
+
 > .db.config.json
 
 ```json

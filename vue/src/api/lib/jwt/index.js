@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import config from '../../.config/.jwt.config.json'
+import config from '../../../.config/.jwt.config.json'
 import { getUserPassword } from '../pg/user/auth'
 
 export async function sign(res, { email, password, scopes }) {

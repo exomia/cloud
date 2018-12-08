@@ -1,6 +1,10 @@
 uploads/
 .vs
 
+# Cypress
+screenshots/
+videos/
+
 # Nuxt build
 .nuxt
 
