@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 import { getFileInfo } from '../../../lib/pg/file'
 import { JERROR_NO_CONTENT } from '../../../lib/error'
-import { fs } from 'fs'
+import fs from 'fs'
 
 const router = new Router()
 
