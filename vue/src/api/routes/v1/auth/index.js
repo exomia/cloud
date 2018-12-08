@@ -1,21 +1,23 @@
-import express from 'express'
+import Router from 'koa-router'
 import { getUserInformation } from '../../../lib/pg/user'
 import { JERROR_BAD_REQUEST } from '../../../lib/error'
 
-const router = express.Router()
+const router = new Router()
 
-router.all('/', async ({ jwt: { payload: { email } } }, res) => {
-    const result = await getUserInformation(email)
+router.all('/', async ctx => {
+    const result = await getUserInformation(ctx.jwt.payload.email)
     if (result) {
-        return res.status(200).json({
+        ctx.status = 200
+        ctx.body = {
             email: result.email,
             scopes: result.scopes,
             volume: result.volume,
             usedVolume: result.used_volume
-        })
+        }
+        return
     }
     return JERROR_BAD_REQUEST(
-        res,
+        ctx,
         'invalid token payload, please log in again.'
     )
 })

@@ -1,7 +1,7 @@
-import { ExpressAdapter } from '@uvue/server'
+import { KoaAdapter } from '@uvue/server'
 
 export default {
-    adapter: ExpressAdapter,
+    adapter: KoaAdapter,
     plugins: [
         // Compress responses
         '@uvue/server/plugins/gzip',
