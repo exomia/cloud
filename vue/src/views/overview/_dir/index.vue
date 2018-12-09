@@ -5,19 +5,11 @@
             <OverviewNav></OverviewNav>
             <section class="list">
                 <div class="side">
-                    <ListHeader
-                        :hide-informations="hideInformations"
-                    ></ListHeader>
-                    <ListHeaderInfo
-                        v-if="hideInformations"
-                        @close="hideInformations = false"
-                    ></ListHeaderInfo>
+                    <ListHeader :hide-informations="hideInformations"></ListHeader>
+                    <ListHeaderInfo v-if="hideInformations" @close="hideInformations = false"></ListHeaderInfo>
                 </div>
                 <div class="side">
-                    <div
-                        class="row-wrapper"
-                        :class="!hideInformations ? 'info-active' : ''"
-                    >
+                    <div class="row-wrapper" :class="!hideInformations ? 'info-active' : ''">
                         <ListRow
                             v-for="el in getDirectoryData"
                             :key="'El-' + el.uuid"
@@ -64,7 +56,6 @@ export default {
         const { data } = await http.get(
             `/v1/directory/${route.params.dir || ''}`
         )
-        console.log(data)
         if (data) {
             await store.commit('setDirectoryData', data)
         }
