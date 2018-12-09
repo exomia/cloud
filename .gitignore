@@ -1,15 +1,16 @@
+*.nosync
+/dist
+
+# local env files
+.env.local
+.env.*.local
+
 uploads/
 .vs
 
 # Cypress
 screenshots/
 videos/
-
-# Nuxt build
-.nuxt
-
-# Nuxt generate
-dist
 
 # Configs
 *.config.json

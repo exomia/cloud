@@ -14,7 +14,6 @@ export default {
         /* Custom plugins */
         '@/plugins/date',
         '@/plugins/file-size',
-        '@/plugins/math',
         '@/plugins/vuelidate',
         '@/plugins/http'
     ]

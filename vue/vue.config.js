@@ -116,10 +116,10 @@ module.exports = {
 
     pluginOptions: {
         i18n: {
-            locale: 'de',
-            fallbackLocale: 'en',
+            locale: 'en',
+            fallbackLocale: 'de',
             enableInSFC: false,
-            localeDir: 'locales'
+            localeDir: 'i18n/locales'
         }
     }
 }

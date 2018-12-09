@@ -1,0 +1,50 @@
+@import '~@/assets/scss/_variables.scss';
+
+nav.path {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    margin-bottom: 3rem;
+    height: 50px;
+
+    a.path-item {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        overflow: hidden;
+        cursor: pointer;
+
+        // @media screen and (max-width: $break-small) {
+        //     span:not(.placeholder):not(.last) {
+        //         display: none;
+        //     }
+
+        //     span.placeholder:not(.last) {
+        //         display: block;
+        //     }
+        // }
+
+        &:first-of-type {
+            width: 50px;
+        }
+
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    svg.path-arrow {
+        width: 14px;
+        height: 14px;
+        margin: 0 1rem;
+    }
+}

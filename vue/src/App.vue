@@ -63,4 +63,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/_global" lang="scss"></style>
+<style src="@/assets/scss/_global" lang="scss"></style>
