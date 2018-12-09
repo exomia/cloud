@@ -30,7 +30,10 @@ jobs:
                   command: psql < vue/src/api/lib/setup/setup.sql
 
             - restore_cache:
-                  key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
+                  keys:
+                      - dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
+                      # fallback to using the latest cache if no exact match is found
+                      - dependency-cache-{{ .Branch }}-
 
             - run:
                   name: Installing NPM packages
