@@ -1,8 +1,16 @@
-# Exomia Cloud
+<p align="center" style="text-align: center;">
+  <img src="https://avatars3.githubusercontent.com/u/37782223?s=200&v=4" alt="UVue" width="128" height="128">
+</p>
 
-> A fast allround solution to a modern private cloud that aims to be super fast, slim and serves a crisp user experience.
+<h1 align="center">Exomia Cloud</h1>
+<p align="center">A fast allround solution to a modern private cloud that aims to be super fast, slim and serves a crisp user experience.</p>
 
-![](https://img.shields.io/github/issues-pr/exomia/cloud.svg) ![](https://img.shields.io/github/issues/exomia/cloud.svg) ![](https://img.shields.io/github/last-commit/exomia/cloud.svg) ![](https://img.shields.io/github/contributors/exomia/cloud.svg) ![](https://img.shields.io/github/commit-activity/y/exomia/cloud.svg) ![](https://img.shields.io/github/languages/top/exomia/cloud.svg) ![](https://img.shields.io/github/languages/count/exomia/cloud.svg) ![](https://img.shields.io/github/license/exomia/cloud.svg)
+![](https://img.shields.io/circleci/project/github/exomia/cloud.svg?logo=circleci)
+![](https://img.shields.io/github/contributors/exomia/cloud.svg)
+![](https://img.shields.io/github/last-commit/exomia/cloud.svg)
+![](https://img.shields.io/github/commit-activity/y/exomia/cloud.svg)
+![](https://img.shields.io/github/languages/count/exomia/cloud.svg)
+![](https://img.shields.io/github/license/exomia/cloud.svg)
 
 ## Introduction
 
