@@ -55,7 +55,7 @@ jobs:
 
             - run:
                   name: Running cypress
-                  command: cd vue && npm run test:headless
+                  command: cd vue && npm run test
 
             - store_artifacts:
                   path: vue/tests/e2e/videos
