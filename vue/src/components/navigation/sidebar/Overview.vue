@@ -15,7 +15,7 @@
                         <span>Alle Dateien</span>
                     </div>
                 </a>
-
+                
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <ShareIcon class="icon"></ShareIcon>
@@ -31,8 +31,8 @@
                         <span>Settings</span>
                     </div>
                 </a>
-
-                <a class="sidebar-item">
+                
+                <a class="sidebar-item" @click="logout()">
                     <div class="sidebar-item-inner">
                         <LogoutIcon class="icon"></LogoutIcon>
                         <span>Logout</span>
@@ -44,6 +44,9 @@
 </template>
 
 <script>
+/* Import */
+import { remove as removeCookie } from 'js-cookie'
+
 /* SVG */
 import LogoIcon from '@/assets/img/icon/overview/logo.svg'
 import ShareIcon from '@/assets/img/icon/overview/share.svg'
@@ -58,6 +61,21 @@ export default {
         SettingsIcon,
         LogoutIcon,
         FileIcon
+    },
+    methods: {
+        logout() {
+            // Remove cookies
+            removeCookie('x-token')
+            removeCookie('x-refresh-token')
+
+            // Redirect
+            const self = this
+            this.$nextTick(function() {
+                self.$router.push({
+                    name: 'home'
+                })
+            })
+        }
     }
 }
 </script>

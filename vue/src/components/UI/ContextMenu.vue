@@ -11,9 +11,7 @@
                 <InfoIcon v-if="item.iconClass === 'info'"></InfoIcon>
                 <ShareIcon v-if="item.iconClass === 'share'"></ShareIcon>
                 <EditIcon v-if="item.iconClass === 'edit'"></EditIcon>
-                <DownloadIcon
-                    v-if="item.iconClass === 'download'"
-                ></DownloadIcon>
+                <DownloadIcon v-if="item.iconClass === 'download'"></DownloadIcon>
                 <RemoveIcon v-if="item.iconClass === 'remove'"></RemoveIcon>
                 <span>{{ item.name }}</span>
             </a>
@@ -48,7 +46,7 @@ export default {
         }
     },
     mounted() {
-        let self = this
+        const self = this
         document.body.addEventListener('click', function() {
             self.closeMenu()
         })
