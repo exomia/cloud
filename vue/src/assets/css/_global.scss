@@ -1,37 +1,43 @@
 /* Imports */
-@import "_reset";
-@import "_variables";
+@import '_reset';
+@import '_variables';
 
 /* Fonts */
 @font-face {
-    font-family: "Roboto Condensed";
+    font-family: 'Roboto Condensed';
     font-display: swap;
-    src: url("../fonts/RobotoCondensed-Light.woff2") format("woff2"), url("../fonts/RobotoCondensed-Light.woff") format("woff"), url("../fonts/RobotoCondensed-Light.ttf") format("truetype");
+    src: url('../fonts/RobotoCondensed-Light.woff2') format('woff2'),
+        url('../fonts/RobotoCondensed-Light.woff') format('woff'),
+        url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: "Roboto";
+    font-family: 'Roboto';
     font-display: swap;
-    src: url("../fonts/Roboto-Light.woff2") format("woff2"), url("../fonts/Roboto-Light.woff") format("woff"), url("../fonts/Roboto-Light.ttf") format("truetype");
+    src: url('../fonts/Roboto-Light.woff2') format('woff2'),
+        url('../fonts/Roboto-Light.woff') format('woff'),
+        url('../fonts/Roboto-Light.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Roboto";
+    font-family: 'Roboto';
     font-display: swap;
-    src: url("../fonts/Roboto-Regular.woff2") format("woff2"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype");
+    src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
+        url('../fonts/Roboto-Regular.woff') format('woff'),
+        url('../fonts/Roboto-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 /* Global */
 html * {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-    background-color: $background-color;
+    // background-color: $background-color;
     font-weight: 300;
     font-size: 100%;
 }
@@ -49,7 +55,7 @@ main {
 }
 
 /* Global definition */
-input[type="checkbox"] {
+input[type='checkbox'] {
     display: inline-block;
     width: 1rem;
     height: 1rem;
@@ -69,7 +75,7 @@ input[type="checkbox"] {
 
     &:checked {
         display: inline-block !important;
-        background-image: url("../img/icon/checked.svg");
+        background-image: url('../img/icon/checked.svg');
         background-size: 92%;
         background-repeat: no-repeat;
         background-position: 50% 50%;
@@ -159,7 +165,7 @@ input.confirm-button {
     &::before {
         display: block;
         position: absolute;
-        content: "";
+        content: '';
         top: 0;
         left: 0;
         right: 0;

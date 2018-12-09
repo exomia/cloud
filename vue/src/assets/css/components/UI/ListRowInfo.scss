@@ -1,4 +1,4 @@
-@import "../../_variables.scss";
+@import '../../_variables.scss';
 
 /* Root */
 div.info {
@@ -23,6 +23,10 @@ div.titlebox {
     align-items: center;
     margin-bottom: 4rem;
     h2 {
+        max-width: 100%;
+        padding: 0 0.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
         margin-bottom: 1rem;
     }
     span {
@@ -45,7 +49,7 @@ div.menu {
 
         @media screen and (max-width: $break-medium) {
             width: auto;
-            margin: .5rem 0;
+            margin: 0.5rem 0;
             margin-right: 50px;
         }
         div.icon-wrapper {
