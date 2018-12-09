@@ -50,7 +50,7 @@ export default () => {
                 path: '/privacy',
                 name: 'privacy',
                 component: () => import('@/views/privacy')
-            },
+            }
             /* Settings */
             // {
             //     path: '/settings',
@@ -64,15 +64,6 @@ export default () => {
             //     component: () =>
             //         import('@/views/settings/admin/index')
             // },
-            /**
-             * 404 - Not found error page
-             * Need to be the last defined route!
-             */
-            {
-                path: '*',
-                name: 'not-found',
-                component: () => import('@/views/error/404.vue')
-            }
         ]
     })
 }
