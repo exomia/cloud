@@ -85,4 +85,8 @@ export default {
 }
 </script>
 
-<style src="@/assets/scss/components/ListRowInfo" lang="scss" scoped></style>
+<style
+    src="@/assets/scss/components/ListRowInfo.scss"
+    lang="scss"
+    scoped
+></style>

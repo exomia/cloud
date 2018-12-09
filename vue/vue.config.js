@@ -99,19 +99,9 @@ module.exports = {
                 limit: 10 * 1024,
                 noquotes: true,
                 svgo: {
-                    plugins: [
-                        {
-                            removeXMLNS: true
-                        }
-                    ]
+                    plugins: [{ prefixIds: true, removeXMLNS: true }]
                 }
             })
-    },
-
-    configureWebpack: {
-        resolve: {
-            extensions: ['.scss']
-        }
     },
 
     pluginOptions: {

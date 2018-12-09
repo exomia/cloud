@@ -1,13 +1,11 @@
 <template>
     <main>
         <div class="page-wrapper">
-            <div class="header">
-                <LangSwitcher/>
-            </div>
+            <div class="header"><LangSwitcher /></div>
             <div class="center">
                 <form class="login-form">
                     <div class="form-section">
-                        <LogoIcon class="logo"/>
+                        <LogoIcon class="logo" />
                         <h1>Exomia Cloud</h1>
                     </div>
                     <div class="form-section" style="margin-top: 96px">
@@ -18,7 +16,7 @@
                             }"
                         >
                             <div class="icon-wrapper">
-                                <UserIcon class="input-icon"/>
+                                <UserIcon class="input-icon" />
                             </div>
                             <input
                                 v-model="username"
@@ -29,7 +27,7 @@
                                 @focus="usernameFocused = true"
                                 @blur="usernameFocused = false"
                                 @keydown.enter="signIn()"
-                            >
+                            />
                         </div>
                         <div
                             class="input-wrapper"
@@ -38,7 +36,7 @@
                             }"
                         >
                             <div class="icon-wrapper">
-                                <LockIcon class="input-icon"/>
+                                <LockIcon class="input-icon" />
                             </div>
                             <input
                                 v-model="password"
@@ -49,7 +47,7 @@
                                 @focus="passwordFocused = true"
                                 @blur="passwordFocused = false"
                                 @keydown.enter="signIn()"
-                            >
+                            />
                         </div>
                     </div>
                     <div class="form-section">
@@ -58,19 +56,17 @@
                             type="button"
                             :value="this.$i18n.t('index.form.signIn')"
                             @click="signIn()"
-                        >
+                        />
                         <input
                             class="forgotPw"
                             type="button"
                             :value="this.$i18n.t('index.form.forgotPassword')"
-                        >
+                        />
                     </div>
                 </form>
             </div>
             <div class="footer">
-                <div class="footer-section">
-                    <span>© 2018 Exomia.com</span>
-                </div>
+                <div class="footer-section"><span>© 2018 Exomia.com</span></div>
                 <div class="footer-section">
                     <RouterLink :to="{ name: 'imprint' }" tag="a">
                         <span>{{ $t('navigation.TheFooter.imprint') }}</span>

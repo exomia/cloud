@@ -2,10 +2,10 @@
     "name": "exomia-cloud",
     "author": "exomia",
     "scripts": {
-        "build": "vue-cli-service ssr:build",
+        "build": "npm run lint && vue-cli-service ssr:build",
         "lint": "vue-cli-service lint",
-        "build:modern": "vue-cli-service ssr:build -- --modern",
-        "dev": "vue-cli-service ssr:serve",
+        "build:modern": "npm run lint && vue-cli-service ssr:build -- --modern",
+        "dev": "npm run lint && vue-cli-service ssr:serve",
         "fix": "vue-cli-service ssr:fix",
         "start": "vue-cli-service ssr:start",
         "static": "vue-cli-service ssr:static",

@@ -1,7 +1,7 @@
 import koaBodyparser from 'koa-bodyparser'
 import koaJson from 'koa-json'
 import Router from 'koa-router'
-import koaCors from 'koa2-cors'
+// import koaCors from 'koa2-cors'
 
 import { initialize } from './routes'
 import { jwt_init } from './lib/jwt'
@@ -16,7 +16,7 @@ export default server => {
     const router = new Router()
 
     router
-        .use(koaCors())
+        // .use(koaCors())
         .use(koaBodyparser())
         .use(koaJson({ pretty: false, param: 'pretty' }))
     router.use('/api/*', (ctx, next) => {

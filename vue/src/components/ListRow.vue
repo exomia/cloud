@@ -158,4 +158,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/scss/components/ListRow" lang="scss"></style>
+<style src="@/assets/scss/components/ListRow.scss" lang="scss"></style>
