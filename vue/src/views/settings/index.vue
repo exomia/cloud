@@ -42,13 +42,12 @@
                         type="password"
                         placeholder="Neues Passwort"
                     />
-                    <span class="disclaimer"
-                        >Ihr Passwort stellt den Hauptschlüssel für Ihren
-                        Account dar. <br />
-                        <b
-                            >Geben Sie dieses Passwort niemals an Dritte
-                            weiter!</b
-                        >
+                    <span class="disclaimer">
+                        Ihr Passwort stellt den Hauptschlüssel für Ihren Account
+                        dar. <br />
+                        <b>
+                            Geben Sie dieses Passwort niemals an Dritte weiter!
+                        </b>
                     </span>
                     <input
                         class="confirm-button"
@@ -65,7 +64,7 @@
 
 <script>
 import SettingsSidebar from '@/components/navigation/sidebar/SettingsSidebar'
-import SettingsDataChangeForm from '@/components/UI/SettingsDataChangeForm'
+import SettingsDataChangeForm from '@/components/SettingsDataChangeForm'
 
 export default {
     metaInfo() {

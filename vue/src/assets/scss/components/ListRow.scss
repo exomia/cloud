@@ -1,0 +1,170 @@
+@import '~@/assets/scss/_variables.scss';
+
+div.list-row.header {
+    border-top: 1px solid $contour-color;
+    border-bottom: 1px solid $contour-color;
+
+    div.list-item {
+        span {
+            font-weight: 400;
+        }
+    }
+
+    &.info {
+        border-bottom: none;
+        flex-direction: row-reverse;
+        div.icon-wrapper {
+            display: flex;
+            height: 50px;
+            width: 50px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}
+
+div.list-row {
+    display: flex;
+    padding: 0 1rem;
+    height: 50px;
+    width: 100%;
+
+    &.info {
+        display: flex;
+        padding: 0;
+        border-left: 1px solid $contour-color;
+
+        @media screen and (max-width: $break-medium) {
+            width: 100% !important;
+        }
+
+        // < $break-large
+        @media screen and (max-width: $break-large) {
+            width: 200px;
+        }
+
+        // > $break-large
+        @media screen and (min-width: $break-large) {
+            width: 300px;
+        }
+    }
+
+    &.info-active {
+        // Disable on info view
+        @media screen and (max-width: $break-medium) {
+            display: none;
+        }
+
+        // < $break-large
+        @media screen and (max-width: $break-large) {
+            width: calc(100vw - 270px - 200px);
+        }
+
+        // > $break-large
+        @media screen and (min-width: $break-large) {
+            width: calc(100vw - 270px - 300px);
+        }
+    }
+
+    div.list-item {
+        position: relative;
+        display: flex;
+        height: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+
+        span:not(.ext) {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        span.ext {
+            opacity: 0.5;
+            margin-right: 0.5rem;
+        }
+
+        svg.dropdown {
+            width: 10px;
+            height: 10px;
+            margin: 0.5rem;
+        }
+
+        svg.type {
+            width: 30px;
+            height: 30px;
+        }
+
+        svg.extended-menu {
+            width: 20px;
+            height: 100%;
+        }
+    }
+
+    div.list-item:first-of-type {
+        width: 50px;
+    }
+
+    div.list-item:nth-of-type(2) {
+        width: 100px;
+    }
+
+    div.list-item.info-active {
+        // < $break-large
+        @media screen and (max-width: $break-large) {
+            width: calc(100% - 140px - (1rem * 2));
+        }
+        // > $break-large
+        @media screen and (min-width: $break-large) {
+            width: calc(100% - 220px - (1rem * 2));
+        }
+    }
+
+    div.list-item.relative {
+        width: calc(100% - 50px - (100px * 4) - (1rem * 2));
+
+        @media screen and (max-width: $break-small) {
+            width: calc(100% - 50px - 100px) !important;
+        }
+
+        @media screen and (max-width: $break-large) {
+            width: calc(100% - 50px - (100px * 4) - (1rem * 2) + 230px);
+        }
+    }
+
+    div.dynamic-list-menu {
+        display: flex;
+        width: 330px;
+
+        @media screen and (max-width: $break-small) {
+            display: none;
+        }
+
+        @media screen and (max-width: $break-large) {
+            width: auto;
+        }
+
+        div.list-item {
+            width: 100px;
+
+            &:not(:first-of-type) {
+                @media screen and (max-width: $break-large) {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: $break-large) {
+                width: 20px;
+            }
+        }
+
+        &-hide {
+            width: 100px;
+        }
+    }
+}
