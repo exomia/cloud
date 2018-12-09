@@ -1,34 +1,28 @@
 import jwt from 'jsonwebtoken'
-import config from '../../.config/.jwt.config.json'
+import config from '../../../.config/.jwt.config.json'
 import { getUserPassword } from '../pg/user/auth'
 
-export async function sign(res, { email, password, scopes }) {
-    res.setHeader('Access-Control-Expose-Headers', 'x-token, x-refresh-token')
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader(
+export async function sign(ctx, { email, password, scopes }) {
+    ctx.set('Access-Control-Expose-Headers', 'x-token, x-refresh-token')
+    ctx.set('Access-Control-Allow-Origin', '*')
+    ctx.set(
         'x-token',
         jwt.sign(
-            {
-                email,
-                scopes
-            },
+            { email, scopes },
             config.SECRET_T + password,
             config.jwt_options_t
         )
     )
-    res.setHeader(
+    ctx.set(
         'x-refresh-token',
         jwt.sign({ email }, config.SECRET_RT + password, config.jwt_options_rt)
     )
 }
 
-export async function jwt_init(req, res, next) {
-    req.jwt = {
-        valid: false,
-        payload: {}
-    }
+export async function jwt_init(ctx, next) {
+    ctx.jwt = { valid: false, payload: {} }
 
-    const token = req.headers['x-token']
+    const token = ctx.get('x-token')
     if (!token) {
         return next()
     }
@@ -44,12 +38,12 @@ export async function jwt_init(req, res, next) {
     }
 
     try {
-        req.jwt.payload = jwt.verify(
+        ctx.jwt.payload = jwt.verify(
             token,
             config.SECRET_T + password,
             config.jwt_verify_options
         )
-        req.jwt.valid = true
+        ctx.jwt.valid = true
         return next()
     } catch (err) {
         if (err.name !== 'TokenExpiredError') {
@@ -57,7 +51,7 @@ export async function jwt_init(req, res, next) {
         }
     }
 
-    const refreshToken = req.headers['x-refresh-token']
+    const refreshToken = ctx.get('x-refresh-token')
     if (!refreshToken) {
         return next()
     }
@@ -68,9 +62,9 @@ export async function jwt_init(req, res, next) {
             config.SECRET_RT + password,
             config.jwt_verify_options
         )
-        sign(res, { ...payload, password })
-        req.jwt.payload = payload
-        req.jwt.valid = true
+        sign(ctx, { ...payload, password })
+        ctx.jwt.payload = payload
+        ctx.jwt.valid = true
         return next()
     } catch (err) {
         return next()

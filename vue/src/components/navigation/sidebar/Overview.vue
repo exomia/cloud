@@ -15,7 +15,7 @@
                         <span>Alle Dateien</span>
                     </div>
                 </a>
-                
+
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <ShareIcon class="icon"></ShareIcon>
@@ -31,7 +31,7 @@
                         <span>Settings</span>
                     </div>
                 </a>
-                
+
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <LogoutIcon class="icon"></LogoutIcon>
@@ -62,5 +62,8 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/components/navigation/sidebar/sidebar" lang="scss" scoped>
-</style>
+<style
+    src="@/assets/css/components/navigation/sidebar/sidebar"
+    lang="scss"
+    scoped
+></style>

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-const CONFIG_PATH = path.resolve(__dirname, '../../', '.config')
+const CONFIG_PATH = path.resolve(__dirname, '../../../', '.config')
 const TEMPLATE_PATH = path.join(__dirname, 'config')
 
 function createConfig(srcName, destName) {

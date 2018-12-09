@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <RouterView v-if="!$errorHandler.error"/>
+        <RouterView v-if="!$errorHandler.error" />
         <ErrorHandler v-else></ErrorHandler>
     </div>
 </template>
@@ -21,13 +21,41 @@ export default {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1'
             },
+            {
+                'http-equiv': 'Content-Type',
+                content: 'text/html; charset=utf-8'
+            },
             { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
             { name: 'description', content: '' },
             { name: 'keywords', content: '' },
             { name: 'author', content: 'exomia.com' },
             { name: 'copyright', content: 'exomia.com' }
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            // Fonts
+            {
+                rel: 'preload',
+                as: 'font',
+                href: '/assets/fonts/Roboto-Light.woff2',
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
+            },
+            {
+                rel: 'preload',
+                as: 'font',
+                href: '/assets/fonts/Roboto-Regular.woff2',
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
+            },
+            {
+                rel: 'preload',
+                as: 'font',
+                href: '/assets/fonts/Roboto-Condensed.woff2',
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
+            }
+        ]
     },
     components: {
         ErrorHandler
@@ -35,5 +63,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/_global" lang="scss">
-</style>
+<style src="@/assets/css/_global" lang="scss"></style>

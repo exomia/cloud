@@ -1,6 +1,6 @@
 import { get as getCookie } from 'js-cookie'
 
-export default async ({ redirect, req }) => {
+export default ({ req, route }) => {
     let xTokenSet = false
     let xRefreshTokenSet = false
 
@@ -14,8 +14,7 @@ export default async ({ redirect, req }) => {
         xRefreshTokenSet = !!getCookie('x-refresh-token')
     }
 
-    if (xTokenSet && xRefreshTokenSet) {
-        //TODO: redirect loop when not authenticated but cookies are still set
-        redirect({ name: 'overview-dir' })
+    if (xTokenSet && xRefreshTokenSet && route.name !== 'overview-dir') {
+        // return redirect({ name: 'overview-dir' })
     }
 }

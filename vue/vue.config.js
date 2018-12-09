@@ -119,7 +119,6 @@ module.exports = {
             locale: 'de',
             fallbackLocale: 'en',
             enableInSFC: false,
-
             localeDir: 'locales'
         }
     }
