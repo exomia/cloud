@@ -1,6 +1,21 @@
 // https://docs.cypress.io/api/introduction/api.html
 // https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Is-Simple
 
+// Cypress.on('uncaught:exception', (err, runnable) => {
+//     // returning false here prevents Cypress from
+//     // failing the test
+//     return false
+// })
+
+// // this would be the last step
+// cy.getConsoleLog().should(function(log) {
+//     console.log(log)
+//     // log = [['warn', 'warning message'], ['log', 'regular log message'] ['warn', 'another warning message']]
+//     // check that log does not contain any 'warn' or 'error' entry
+//     const disallowedLevels = new Set(['warn', 'error'])
+//     expect(log.some(([level]) => disallowedLevels.has(level)).false)
+// })
+
 describe('Home', () => {
     it('Visits the app root url', () => {
         cy.visit('/')
