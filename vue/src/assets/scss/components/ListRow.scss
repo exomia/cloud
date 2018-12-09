@@ -78,6 +78,11 @@ div.list-row {
         justify-content: flex-start;
         align-items: center;
         cursor: pointer;
+        &:hover{
+            svg.dropdown {
+                opacity: .5;
+            }
+        }
 
         span:not(.ext) {
             text-overflow: ellipsis;
@@ -93,6 +98,17 @@ div.list-row {
             width: 10px;
             height: 10px;
             margin: 0.5rem;
+            opacity: 0;
+            transition: transform 1s ease-in-out;
+            &:hover {
+                opacity: .5;
+            }
+            &.shown {
+                opacity: 1;
+            }
+            &.active {
+                transform: rotate(180deg);
+            }
         }
 
         svg.type {
