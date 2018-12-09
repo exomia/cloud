@@ -1,0 +1,42 @@
+@import '~@/assets/scss/_variables.scss';
+
+footer {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: $break-small) {
+        height: 90px;
+        flex-direction: column;
+    }
+
+    div.footer-section {
+        display: flex;
+        align-items: center;
+
+        @media screen and (max-width: $break-small) {
+            height: 45px;
+            justify-content: center;
+
+            &:first-of-type {
+                order: 1;
+            }
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 1rem;
+            cursor: pointer;
+            text-decoration: none;
+
+            span {
+                color: black;
+            }
+
+            &:hover > span {
+                text-decoration: underline;
+            }
+        }
+    }
+}
