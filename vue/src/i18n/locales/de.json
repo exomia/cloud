@@ -16,7 +16,7 @@
         "overview": {
             "allFiles": "Alle Dateien",
             "sharedFiles": "Freigabe",
-            "logout": "Ausloggen"
+            "logout": "Abmelden"
         },
         "error": "Fehler"
     },
@@ -29,9 +29,9 @@
         "ListRow": {
             "download": "Download",
             "info": "Info",
-            "remove": "Remove",
-            "rename": "Rename",
-            "share": "Share"
+            "remove": "Entfernen",
+            "rename": "Umbenennen",
+            "share": "Freigeben"
         },
         "ListRowInfo": {
             "download": "Download",
