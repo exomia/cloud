@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style
-    src="@/assets/scss/components/NotificationGroup.scss"
+    src="@/assets/scss/components/NotificationList.scss"
     lang="scss"
     scoped
 ></style>
