@@ -1,0 +1,52 @@
+{
+    "title": {
+        "home": "Anmelden",
+        "imprint": "Impressum",
+        "overview": "Übersicht",
+        "privacy": "Privatsphäre",
+        "settings": "Einstellungen"
+    },
+    "views": {
+        "home": {
+            "nameOrEmail": "Name / E-Mail",
+            "signIn": "Anmelden",
+            "forgotPassword": "Passwort vergessen ?",
+            "password": "Passwort"
+        },
+        "overview": {
+            "allFiles": "Alle Dateien",
+            "sharedFiles": "Freigabe",
+            "logout": "Ausloggen"
+        },
+        "error": "Fehler"
+    },
+    "components": {
+        "ListHeader": {
+            "name": "Name",
+            "size": "Größe",
+            "date": "Datum"
+        },
+        "ListRow": {
+            "download": "Download",
+            "info": "Info",
+            "remove": "Remove",
+            "rename": "Rename",
+            "share": "Share"
+        },
+        "ListRowInfo": {
+            "download": "Download",
+            "share": "Freigeben",
+            "edit": "Editieren",
+            "remove": "Löschen"
+        },
+        "Notification": {
+            "success": "Erfolgreich",
+            "warning": "Warnung",
+            "error": "Fehler",
+            "notification": "Benachrichtigung"
+        }
+    },
+    "misc": {
+        "noscript": "Diese Website benötigt Javascript."
+    }
+}
