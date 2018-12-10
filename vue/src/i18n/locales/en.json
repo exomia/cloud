@@ -1,26 +1,30 @@
 {
-    "index": {
-        "form": {
-            "forgotPassword": "Forgot password?",
+    "title": {
+        "home": "Login",
+        "imprint": "Imprint",
+        "overview": "Overview",
+        "privacy": "Privacy",
+        "settings": "Settings"
+    },
+    "views": {
+        "home": {
             "nameOrEmail": "Name / E-Mail",
-            "password": "Password",
-            "signIn": "Sign in"
-        }
+            "signIn": "Sign in",
+            "forgotPassword": "Forgot password?",
+            "password": "Password"
+        },
+        "overview": {
+            "allFiles": "All files",
+            "sharedFiles": "Shared files",
+            "logout": "Logout"
+        },
+        "error": "Error"
     },
-    "navigation": {
-        "TheFooter": {
-            "cookies": "Cookies",
-            "imprint": "Imprint",
-            "privacy": "Privacy"
-        }
-    },
-    "partials": {
+    "components": {
         "ListHeader": {
-            "date": "Date",
             "name": "Name",
             "size": "Size",
-            "status": "Status",
-            "type": "Type"
+            "date": "Date"
         },
         "ListRow": {
             "download": "Download",
@@ -29,28 +33,20 @@
             "rename": "Rename",
             "share": "Share"
         },
-        "OverviewPath": {
-            "newDirectory": "New directory",
-            "uploadFile": "Upload file"
-        }
-    },
-    "sidebar": {
-        "overview": {
-            "allFiles": "All Files",
-            "settings": "Settings",
-            "trash": "Trash"
+        "ListRowInfo": {
+            "download": "Download",
+            "share": "Share",
+            "edit": "Edit",
+            "remove": "Remove"
         },
-        "settings": {
-            "admin": "Admin",
-            "profile": "Profile",
-            "rights": "Rights"
+        "Notification": {
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error",
+            "notification": "Notification"
         }
     },
-    "title": {
-        "home": "Login",
-        "imprint": "Imprint",
-        "overview": "Overview",
-        "privacy": "Privacy",
-        "settings": "Settings"
+    "misc": {
+        "noscript": "This website requires javascript."
     }
 }

@@ -47,13 +47,13 @@
                 <input
                     class="signIn"
                     type="button"
-                    :value="this.$i18n.t('index.form.signIn')"
+                    :value="this.$i18n.t('views.home.signIn')"
                     @click="signIn()"
                 />
                 <input
                     class="forgotPw"
                     type="button"
-                    :value="this.$i18n.t('index.form.forgotPassword')"
+                    :value="this.$i18n.t('views.home.forgotPassword')"
                 />
             </div>
         </form>
@@ -78,10 +78,10 @@ export default {
     data() {
         return {
             username: '',
-            usernamePH: this.$t('index.form.nameOrEmail'),
+            usernamePH: this.$t('views.home.nameOrEmail'),
             usernameFocused: false,
             password: '',
-            passwordPH: this.$t('index.form.password'),
+            passwordPH: this.$t('views.home.password'),
             passwordFocused: false
         }
     },

@@ -115,27 +115,27 @@ export default {
             contextMenuToggled: false,
             contextMenuItems: [
                 {
-                    name: this.$i18n.t('partials.ListRow.info'),
+                    name: this.$i18n.t('component.ListRow.info'),
                     iconClass: 'info',
                     emit: 'info'
                 },
                 {
-                    name: this.$i18n.t('partials.ListRow.share'),
+                    name: this.$i18n.t('component.ListRow.share'),
                     iconClass: 'share',
                     emit: 'share'
                 },
                 {
-                    name: this.$i18n.t('partials.ListRow.rename'),
+                    name: this.$i18n.t('component.ListRow.rename'),
                     iconClass: 'edit',
                     emit: 'rename'
                 },
                 {
-                    name: this.$i18n.t('partials.ListRow.download'),
+                    name: this.$i18n.t('component.ListRow.download'),
                     iconClass: 'download',
                     emit: 'download'
                 },
                 {
-                    name: this.$i18n.t('partials.ListRow.remove'),
+                    name: this.$i18n.t('component.ListRow.remove'),
                     iconClass: 'remove',
                     emit: 'remove'
                 }

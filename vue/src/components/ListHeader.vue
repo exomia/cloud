@@ -21,7 +21,7 @@
             :class="hideInformations ? 'info-active' : 'relative'"
             @click="toggleOrderName()"
         >
-            <span>Name</span>
+            <span>{{ $t('components.ListHeader.name') }}</span>
             <DropdownIcon
                 class="dropdown"
                 :class="[
@@ -45,7 +45,7 @@
                 class="list-item"
                 @click="toggleOrderSize()"
             >
-                <span>Größe</span>
+                <span>{{ $t('components.ListHeader.size') }}</span>
                 <DropdownIcon
                     class="dropdown"
                     :class="[
@@ -63,7 +63,7 @@
                 class="list-item"
                 @click="toggleOrderDate()"
             >
-                <span>Datum</span>
+                <span>{{ $t('components.ListHeader.date') }}</span>
                 <DropdownIcon
                     class="dropdown"
                     :class="[

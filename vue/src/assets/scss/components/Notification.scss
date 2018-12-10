@@ -1,0 +1,28 @@
+div.notification {
+    font-size: 12px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    color: white;
+    border-left: 0.25rem solid;
+    background: #4d82ff;
+    border-left-color: #1a5eff;
+    &.success {
+        background: #39ac5c;
+        border-left-color: #2d8647;
+    }
+    &.warning {
+        background: #ffa31a;
+        border-left-color: #e68a00;
+    }
+    &.error {
+        background: #e5343a;
+        border-left-color: #cb1a20;
+    }
+    h1 {
+        font-weight: 600;
+    }
+    h1,
+    span {
+        line-height: 1.25;
+    }
+}
