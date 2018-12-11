@@ -1,6 +1,8 @@
 <template>
     <footer>
-        <div class="footer-section"><span>© 2018 Exomia.com</span></div>
+        <div class="footer-section">
+            <span>© 2018 Exomia.com</span>
+        </div>
         <div class="footer-section">
             <RouterLink :to="{ name: 'imprint' }" tag="a">
                 <span>{{ $t('title.imprint') }}</span>
@@ -12,4 +14,4 @@
     </footer>
 </template>
 
-<style src="@/views/home/components/TheFooter.scss" lang="scss" scoped></style>
+<style src="@/assets/scss/components/TheFooter.scss" lang="scss" scoped></style>
