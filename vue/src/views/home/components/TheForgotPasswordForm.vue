@@ -1,14 +1,13 @@
 <template>
     <div class="center">
         <form class="login-form">
-            <div class="form-section">
-                <LogoIcon class="logo" />
-                <h1>Exomia Cloud</h1>
-            </div>
+            <TheLogo></TheLogo>
+
             <div class="form-section" style="margin-top: 35px">
                 <h2>{{ this.$i18n.t('views.home.passwordReset') }}</h2>
             </div>
-            <div class="form-section" style="margin-top: 25px">
+
+            <div class="form-section" style="margin-top: 35px">
                 <h3>{{ this.$i18n.t('views.home.passwordResetText') }}</h3>
             </div>
 
@@ -22,6 +21,7 @@
                     <div class="icon-wrapper">
                         <UserIcon class="input-icon" />
                     </div>
+
                     <input
                         v-model="username"
                         type="text"
@@ -31,15 +31,15 @@
                     />
                 </div>
             </div>
-            <div class="form-section" style="margin-top: 33px">
+            <div class="form-section" style="margin-top: 32px">
                 <input
-                    class="send"
+                    class="confirm"
                     type="button"
                     :value="this.$i18n.t('views.home.send')"
                     @click="send()"
                 />
                 <input
-                    class="goBack"
+                    class="subConfirm"
                     type="button"
                     :value="this.$i18n.t('views.home.back')"
                     @click="$parent.login = 'login'"
@@ -52,15 +52,15 @@
 <script>
 /* Imports */
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import TheLogo from '@/views/home/components/TheLogo'
 
 /* SVG */
-import LogoIcon from '@/assets/img/icon/login/logo.svg'
 import UserIcon from '@/assets/img/icon/login/user.svg'
 
 export default {
     components: {
-        LogoIcon,
-        UserIcon
+        UserIcon,
+        TheLogo
     },
     data() {
         return {
@@ -70,7 +70,7 @@ export default {
     },
     computed: {
         usernamePH: function() {
-            return this.$t('views.home.passwordResetUsernameEmail')
+            return this.$t('views.home.nameOrEmail')
         }
     },
     methods: {
@@ -88,8 +88,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/views/home/components/TheForgotPasswordForm.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/views/home/components/Forms.scss" lang="scss" scoped></style>

@@ -1,10 +1,7 @@
 <template>
     <div class="center">
         <form class="login-form">
-            <div class="form-section">
-                <LogoIcon class="logo" />
-                <h1>Exomia Cloud</h1>
-            </div>
+            <TheLogo></TheLogo>
             <div class="form-section" style="margin-top: 96px">
                 <div
                     class="input-wrapper"
@@ -45,13 +42,13 @@
             </div>
             <div class="form-section">
                 <input
-                    class="signIn"
+                    class="confirm"
                     type="button"
                     :value="this.$i18n.t('views.home.signIn')"
                     @click="signIn()"
                 />
                 <input
-                    class="forgotPw"
+                    class="subConfirm"
                     type="button"
                     :value="this.$i18n.t('views.home.forgotPassword')"
                     @click="$parent.login = 'pw_reset'"
@@ -64,17 +61,17 @@
 <script>
 /* Imports */
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import TheLogo from '@/views/home/components/TheLogo'
 
 /* SVG */
-import LogoIcon from '@/assets/img/icon/login/logo.svg'
 import UserIcon from '@/assets/img/icon/login/user.svg'
 import LockIcon from '@/assets/img/icon/login/lock.svg'
 
 export default {
     components: {
-        LogoIcon,
         UserIcon,
-        LockIcon
+        LockIcon,
+        TheLogo
     },
     data() {
         return {
@@ -125,8 +122,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/views/home/components/TheLoginForm.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/views/home/components/Forms.scss" lang="scss" scoped></style>

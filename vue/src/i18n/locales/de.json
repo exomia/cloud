@@ -8,14 +8,13 @@
     },
     "views": {
         "home": {
-            "nameOrEmail": "Name / E-Mail ...",
+            "nameOrEmail": "Benutzer / E-Mail",
             "signIn": "Anmelden",
             "forgotPassword": "Passwort vergessen ?",
             "password": "Passwort",
-            "passwordReset": "Password Zurücksetzen",
-            "passwordResetText": "Bitte geben Sie Ihren Benutzernamen oder E-Mail ein.", 
+            "passwordReset": "Password zurücksetzen",
+            "passwordResetText": "Bitte geben Sie Ihren Benutzernamen oder E-Mail ein.",
             "passwordResetSuccessText": "Ihnen wurde eine E-Mail für das Zurücksetzen ihres Passwortes zugesendet. Bitte überprüfen Sie Ihren Posteingang. Wenn die E-mail nicht im Posteingang erscheint überprüfen Sie bitte auch ihren Spam-Ordner.",
-            "passwordResetUsernameEmail": "Benutzer oder E-Mail",
             "send": "Senden",
             "back": "Zurück",
             "backToLogin": "Zurück zum Login"

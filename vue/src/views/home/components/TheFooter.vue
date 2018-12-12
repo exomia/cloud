@@ -12,4 +12,4 @@
     </footer>
 </template>
 
-<style src="@/assets/scss/components/TheFooter.scss" lang="scss" scoped></style>
+<style src="@/views/home/components/TheFooter.scss" lang="scss" scoped></style>

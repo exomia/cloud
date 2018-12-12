@@ -1,15 +1,19 @@
 <template>
     <main>
         <div class="page-wrapper">
+            <!-- Header -->
             <header><LangSwitcher /></header>
-
-            <TheLoginForm v-show="login === 'login'"></TheLoginForm>
+            <!-- Default form -->
+            <TheLoginForm v-if="login === 'login'"></TheLoginForm>
+            <!-- Forgot password step 1 -->
             <TheForgotPasswordForm
-                v-show="login === 'pw_reset'"
+                v-if="login === 'pw_reset'"
             ></TheForgotPasswordForm>
+            <!-- Forgot password step 2 -->
             <TheForgotPasswordFormSuccess
-                v-show="login === 'pw_reset_success'"
+                v-if="login === 'pw_reset_success'"
             ></TheForgotPasswordFormSuccess>
+            <!-- Footer -->
             <TheFooter></TheFooter>
         </div>
     </main>
@@ -44,4 +48,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/scss/views/home.scss" lang="scss" scoped></style>
+<style src="@/views/home/index.scss" lang="scss" scoped></style>
