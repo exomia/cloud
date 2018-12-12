@@ -18,3 +18,9 @@
 The exomia cloud solution is a web based private cloud like [ownCloud](https://owncloud.org/) or [Nextcloud](https://nextcloud.com/).
 It aims to implement all the features you know and implement them in our own responsive and modern style.
 So its like a fusion of multiple cool cloud projects with a special spice and modern techniques i. e. modern frameworks like [Vue.js](https://vuejs.org/) with server side rendering (SSR) to serve the best user experience we can.
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2017-present, exomia
