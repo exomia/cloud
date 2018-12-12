@@ -5,7 +5,7 @@
 <p align="center">
 <a href="https://circleci.com/gh/exomia/cloud/tree/master"><img src="https://img.shields.io/circleci/project/github/exomia/cloud.svg?logo=circleci" alt="Build Status"></a>
 <a href="https://github.com/exomia/cloud/commits/dev"><img src="https://img.shields.io/github/last-commit/exomia/cloud/dev.svg" alt="Last Commit"></a>
-<a href="https://github.com/exomia/cloud/graphs/commit-activity"><img src="https://img.shields.io/github/commit-activity/y/exomia/cloud.svg" alt="Commit Activity"></a>
+<a href="https://discord.gg/wBZ5amZ"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat"></a>
 <a><img src="https://img.shields.io/github/license/exomia/cloud.svg" alt="License"></a>
 
 </p>
