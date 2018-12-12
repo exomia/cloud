@@ -2,7 +2,13 @@
     <main>
         <div class="page-wrapper">
             <header><LangSwitcher /></header>
-            <TheLoginForm></TheLoginForm>
+            <TheLoginForm v-show="login === 'login'"></TheLoginForm>
+            <TheForgotPasswordForm
+                v-show="login === 'pw_reset'"
+            ></TheForgotPasswordForm>
+            <TheForgotPasswordFormSuccess
+                v-show="login === 'pw_reset_success'"
+            ></TheForgotPasswordFormSuccess>
             <TheFooter></TheFooter>
         </div>
     </main>
@@ -12,9 +18,16 @@
 /* Components */
 import LangSwitcher from '@/components/LangSwitcher.vue'
 import TheLoginForm from '@/views/home/components/TheLoginForm'
+import TheForgotPasswordForm from '@/views/home/components/TheForgotPasswordForm'
+import TheForgotPasswordFormSuccess from '@/views/home/components/TheForgotPasswordFormSuccess'
 import TheFooter from '@/views/home/components/TheFooter'
 
 export default {
+    data() {
+        return {
+            login: 'login'
+        }
+    },
     metaInfo() {
         return {
             title: this.$t('title.home')
@@ -23,7 +36,9 @@ export default {
     components: {
         LangSwitcher,
         TheFooter,
-        TheLoginForm
+        TheLoginForm,
+        TheForgotPasswordForm,
+        TheForgotPasswordFormSuccess
     }
 }
 </script>

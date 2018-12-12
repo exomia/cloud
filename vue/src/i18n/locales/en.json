@@ -11,7 +11,14 @@
             "nameOrEmail": "Name / E-Mail",
             "signIn": "Sign in",
             "forgotPassword": "Forgot password?",
-            "password": "Password"
+            "password": "Password",
+            "passwordReset": "Password Reset",
+            "passwordResetText": "Enter the email or username below and we will send you further instructions",
+            "passwordResetSuccessText": "An email to reset your Password has been send to you. Please check your inbox. If it doesn't show up don't forget to check the Spam folder.",
+            "passwordResetUsernameEmail": "Username or Email",
+            "send": "Send",
+            "back": "Go back",
+            "backToLogin": "Back to Login"
         },
         "overview": {
             "allFiles": "All files",

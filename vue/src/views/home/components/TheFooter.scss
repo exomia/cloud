@@ -35,9 +35,11 @@ footer {
                 color: black;
             }
 
-            &:hover > span {
+            &:hover {
+                span {
                 text-decoration: underline;
             }
+            } 
         }
     }
 }

@@ -54,6 +54,7 @@
                     class="forgotPw"
                     type="button"
                     :value="this.$i18n.t('views.home.forgotPassword')"
+                    @click="$parent.login = 'pw_reset'"
                 />
             </div>
         </form>
@@ -78,11 +79,17 @@ export default {
     data() {
         return {
             username: '',
-            usernamePH: this.$t('views.home.nameOrEmail'),
             usernameFocused: false,
             password: '',
-            passwordPH: this.$t('views.home.password'),
             passwordFocused: false
+        }
+    },
+    computed: {
+        usernamePH: function() {
+            return this.$t('views.home.nameOrEmail')
+        },
+        passwordPH: function() {
+            return this.$t('views.home.password')
         }
     },
     methods: {
