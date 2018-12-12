@@ -2,6 +2,7 @@
     <main>
         <div class="page-wrapper">
             <header><LangSwitcher /></header>
+
             <TheLoginForm v-show="login === 'login'"></TheLoginForm>
             <TheForgotPasswordForm
                 v-show="login === 'pw_reset'"
@@ -23,6 +24,13 @@ import TheForgotPasswordFormSuccess from '@/views/home/components/TheForgotPassw
 import TheFooter from '@/views/home/components/TheFooter'
 
 export default {
+    components: {
+        LangSwitcher,
+        TheFooter,
+        TheLoginForm,
+        TheForgotPasswordForm,
+        TheForgotPasswordFormSuccess
+    },
     data() {
         return {
             login: 'login'
@@ -32,13 +40,6 @@ export default {
         return {
             title: this.$t('title.home')
         }
-    },
-    components: {
-        LangSwitcher,
-        TheFooter,
-        TheLoginForm,
-        TheForgotPasswordForm,
-        TheForgotPasswordFormSuccess
     }
 }
 </script>
