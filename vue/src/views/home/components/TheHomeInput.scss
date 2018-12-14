@@ -1,0 +1,58 @@
+div.input-wrapper {
+    display: flex;
+    width: 100%;
+    height: 45px;
+    border-bottom: 1px solid black;
+    align-items: center;
+    margin-bottom: 45px;
+
+
+    // &:first-of-type {
+    //     margin-bottom: 32px;
+    // }
+
+    // &:not(:first-of-type) {
+    // }
+
+    div.icon-wrapper {
+        margin: 0 16px;
+
+        svg.input-icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    input[type='text'],
+    input[type='password'] {
+        border: none;
+        background-color: transparent;
+        font-size: 15pt;
+        font-weight: 300;
+        outline: none;
+        height: 100%;
+        width: 100%;
+
+        &::placeholder {
+            font-weight: 300;
+            color: black;
+            opacity: 1;
+        }
+    }
+
+    &-error {
+        border-bottom: 1px solid red;
+
+        svg.input-icon {
+            fill: red;
+        }
+
+        input {
+            color: red;
+
+            &::placeholder {
+                color: red !important;
+            }
+        }
+    }
+}

@@ -40,10 +40,8 @@
         "vuex": "^3.0.1"
     },
     "devDependencies": {
-        "@cypress/webpack-preprocessor": "^4.0.2",
         "@uvue/vue-cli-plugin-ssr": "0.1.0-alpha.8",
         "@vue/cli-plugin-babel": "^3.2.0",
-        "@vue/cli-plugin-e2e-cypress": "^3.2.0",
         "@vue/cli-plugin-eslint": "^3.2.1",
         "@vue/cli-plugin-pwa": "^3.2.0",
         "@vue/cli-service": "^3.2.0",
@@ -64,6 +62,10 @@
         "sass-loader": "^7.0.1",
         "vue-cli-plugin-i18n": "^0.5.1",
         "vue-svg-loader": "^0.12.0-alpha.1"
+    },
+    "peerDependencies": {
+        "@cypress/webpack-preprocessor": "^4.0.2",
+        "@vue/cli-plugin-e2e-cypress": "^3.2.0"
     },
     "gitHooks": {
         "pre-commit": "lint-staged"

@@ -2,44 +2,22 @@
     <div class="center">
         <form class="login-form">
             <TheLogo></TheLogo>
-            <div class="form-section" style="margin-top: 96px">
-                <div
-                    class="input-wrapper"
-                    :class="{
-                        'input-wrapper-error': $v.username.$error
-                    }"
-                >
-                    <div class="icon-wrapper">
-                        <UserIcon class="input-icon" />
-                    </div>
-                    <input
-                        v-model="username"
-                        type="text"
-                        :placeholder="[usernameFocused ? '' : usernamePH]"
-                        @focus="usernameFocused = true"
-                        @blur="usernameFocused = false"
-                        @keydown.enter="signIn()"
-                    />
-                </div>
-                <div
-                    class="input-wrapper"
-                    :class="{
-                        'input-wrapper-error': $v.password.$error
-                    }"
-                >
-                    <div class="icon-wrapper">
-                        <LockIcon class="input-icon" />
-                    </div>
-                    <input
-                        v-model="password"
-                        type="password"
-                        :placeholder="[passwordFocused ? '' : passwordPH]"
-                        @focus="passwordFocused = true"
-                        @blur="passwordFocused = false"
-                        @keydown.enter="signIn()"
-                    />
-                </div>
-            </div>
+            <TheHomeInput
+                style="margin-top: 96px"
+                :placeholder="usernamePH"
+                :error="$v.username.$error"
+                :icon="'user'"
+                @update:value="username = $event"
+                @enterPress="signIn()"
+            ></TheHomeInput>
+            <TheHomeInput
+                :placeholder="passwordPH"
+                :error="$v.password.$error"
+                :icon="'lock'"
+                :type="'password'"
+                @update:value="password = $event"
+                @enterPress="signIn()"
+            ></TheHomeInput>
             <div class="form-section">
                 <input
                     class="confirm"
@@ -62,23 +40,17 @@
 /* Imports */
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 import TheLogo from '@/views/home/components/TheLogo'
-
-/* SVG */
-import UserIcon from '@/assets/img/icon/login/user.svg'
-import LockIcon from '@/assets/img/icon/login/lock.svg'
+import TheHomeInput from '@/views/home/components/TheHomeInput'
 
 export default {
     components: {
-        UserIcon,
-        LockIcon,
-        TheLogo
+        TheLogo,
+        TheHomeInput
     },
     data() {
         return {
             username: '',
-            usernameFocused: false,
-            password: '',
-            passwordFocused: false
+            password: ''
         }
     },
     computed: {

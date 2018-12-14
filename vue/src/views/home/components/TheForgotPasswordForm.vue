@@ -12,24 +12,12 @@
             </div>
 
             <div class="form-section" style="margin-top: 25px">
-                <div
-                    class="input-wrapper"
-                    :class="{
-                        'input-wrapper-error': $v.username.$error
-                    }"
-                >
-                    <div class="icon-wrapper">
-                        <UserIcon class="input-icon" />
-                    </div>
-
-                    <input
-                        v-model="username"
-                        type="text"
-                        :placeholder="[usernameFocused ? '' : usernamePH]"
-                        @focus="usernameFocused = true"
-                        @blur="usernameFocused = false"
-                    />
-                </div>
+                <TheHomeInput
+                    :placeholder="usernamePH"
+                    :error="$v.username.$error"
+                    :icon="'user'"
+                    @update:value="username = $event"
+                ></TheHomeInput>
             </div>
             <div class="form-section" style="margin-top: 32px">
                 <input
@@ -53,14 +41,12 @@
 /* Imports */
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 import TheLogo from '@/views/home/components/TheLogo'
-
-/* SVG */
-import UserIcon from '@/assets/img/icon/login/user.svg'
+import TheHomeInput from '@/views/home/components/TheHomeInput'
 
 export default {
     components: {
-        UserIcon,
-        TheLogo
+        TheLogo,
+        TheHomeInput
     },
     data() {
         return {
