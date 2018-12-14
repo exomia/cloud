@@ -10,6 +10,7 @@ main {
     background-position: 50% 75%;
 
     div.page-wrapper {
+        height: 100%;
         width: 1200px;
 
         @media screen and (max-width: $break-large) {
@@ -18,12 +19,12 @@ main {
 
         header,
         footer {
-            height: 45px;
             display: flex;
-            padding: 0 16px 0 32px;
+            padding: 0 16px;
         }
 
         header {
+            height: 45px;
             justify-content: flex-end;
         }
     }
