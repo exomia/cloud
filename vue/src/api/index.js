@@ -1,7 +1,6 @@
 import koaBodyparser from 'koa-bodyparser'
 import koaJson from 'koa-json'
 import Router from 'koa-router'
-// import koaCors from 'koa2-cors'
 
 import { initialize } from './routes'
 import { jwt_init } from './lib/jwt'
