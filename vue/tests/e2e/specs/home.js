@@ -30,29 +30,29 @@ describe('Home', () => {
         //Buttons
         cy.get('input[type="text"]')
         cy.get('input[type="password"]')
-        cy.get('input[class="signIn"]')
-        cy.get('input[class="forgotPw"]')
+        cy.get('input[class="confirm"]')
+        cy.get('input[class="subConfirm"]')
     })
 
     it('Language change test', () => {
         //Language Tests
+        //English
+        cy.contains('span', 'Imprint')
+        cy.contains('span', 'Privacy')
+        cy.get('input[class="confirm"]').should('have.value', 'Sign in')
+        cy.get('input[class="subConfirm"]').should(
+            'have.value',
+            'Forgot password?'
+        )
+        cy.get('span.lang').click()
         //German
         cy.contains('span', '©')
         cy.contains('span', 'Impressum')
         cy.contains('span', 'Datenschutz')
-        cy.get('input[class="signIn"]').should('have.value', 'Anmelden')
-        cy.get('input[class="forgotPw"]').should(
+        cy.get('input[class="confirm"]').should('have.value', 'Anmelden')
+        cy.get('input[class="subConfirm"]').should(
             'have.value',
-            'Passwort vergessen?'
-        )
-        cy.get('span.lang').click()
-        //English
-        cy.contains('span', 'Imprint')
-        cy.contains('span', 'Privacy')
-        cy.get('input[class="signIn"]').should('have.value', 'Sign in')
-        cy.get('input[class="forgotPw"]').should(
-            'have.value',
-            'Forgot password?'
+            'Passwort vergessen ?'
         )
     })
 
@@ -60,7 +60,7 @@ describe('Home', () => {
         //Login
         cy.get('input[type="text"]').type('admin')
         cy.get('input[type="password"]').type('1234')
-        cy.get('input[class="signIn"]').click()
+        cy.get('input[class="confirm"]').click()
         cy.url().should('include', '/overview')
     })
 })
