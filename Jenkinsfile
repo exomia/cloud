@@ -3,7 +3,6 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'vue'
-            label 'Executing Dockerfile'
         }
     }
     stages {
