@@ -1,11 +1,9 @@
-pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-                sh 'svn --version'
-            }
-        }
+agent {
+    dockerfile {
+        filename 'Dockerfile'
+        dir 'vue'
+        label 'Executing Dockerfile'
+        additionalBuildArgs  '--build-arg version=1.0.2'
+        args '-v /tmp:/tmp'
     }
 }
