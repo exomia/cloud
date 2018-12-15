@@ -14,10 +14,8 @@
         "update": "npm prune && npm-check -u"
     },
     "dependencies": {
-        "@cypress/webpack-preprocessor": "^4.0.2",
         "@uvue/core": "^0.1.0-alpha.9",
         "@uvue/server": "^0.1.0-alpha.9",
-        "@vue/cli-plugin-e2e-cypress": "^3.2.0",
         "axios": "^0.18.0",
         "js-cookie": "^2.2.0",
         "jsonwebtoken": "^8.4.0",
