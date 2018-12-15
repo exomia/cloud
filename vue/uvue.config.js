@@ -1,7 +1,5 @@
 export default {
     plugins: [
-        // Add middlewares system
-        '@uvue/core/plugins/middlewares',
         // Add asyncData() process to page components
         '@uvue/core/plugins/asyncData',
         [
@@ -11,10 +9,12 @@ export default {
                 fetch: true
             }
         ],
+        // Add middlewares system
+        '@uvue/core/plugins/middlewares',
         // Catch errors
         '@uvue/core/plugins/errorHandler',
         // Clear errors on routes changes
-        '@/plugins/errorClear',
+        // '@/plugins/errorClear',
         /* Custom plugins */
         '@/plugins/http',
         '@/plugins/date',
