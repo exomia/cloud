@@ -6,7 +6,7 @@ RUN mkdir -p /home/node/exomia-cloud
 WORKDIR /home/node/exomia-cloud
 
 COPY package.json /home/node/exomia-cloud
-RUN yarn --production=false
+RUN yarn --production=false --ignore-optional
 
 COPY . /home/node/exomia-cloud
 
