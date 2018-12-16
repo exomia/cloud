@@ -19,7 +19,6 @@ export default {
         '@/plugins/http',
         '@/plugins/date',
         '@/plugins/fileSize',
-        '@/plugins/vuelidate',
-        '@/plugins/authRedirect'
+        '@/plugins/vuelidate'
     ]
 }
