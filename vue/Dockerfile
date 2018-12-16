@@ -10,15 +10,17 @@ RUN npm run install:prod
 
 COPY . /home/node/exomia-cloud
 
-RUN npm run build && \
-  rm -rf /home/node/exomia-cloud/src && \
-  rm -rf /home/node/exomia-cloud/public
+COPY /src/.config/.db.config-default.json /src/.config/.db.config.json
+COPY /src/.config/.jwt.config-default.json /src/.config/.jwt.config.json
+COPY /src/.config/.mail.config-default.json /src/.config/.mail.config.json
+
+RUN npm run build
 
 FROM node:10-alpine
 
 ENV NODE_ENV production
 ENV HOST 0.0.0.0
-ENV PORT 8080
+ENV PORT 8000
 
 COPY --from=builder /home/node/exomia-cloud /home/node/exomia-cloud
 
