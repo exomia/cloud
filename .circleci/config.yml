@@ -37,7 +37,11 @@ jobs:
 
             - run:
                   name: Installing NPM packages
-                  command: cd vue && npm install
+                  command: cd vue && npm i
+
+            - run:
+                  name: Installing peer NPM packages
+                  command: cd vue && npm i @vue/cli-plugin-e2e-cypress @vue/cli-plugin-eslint
 
             - run:
                   name: Linting code
