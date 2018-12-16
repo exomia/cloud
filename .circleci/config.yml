@@ -27,7 +27,14 @@ jobs:
 
             - run:
                   name: Importing database
-                  command: psql < vue/src/api/lib/setup/setup.sql
+                  command: psql < vue/setup.sql
+
+            - run:
+                  name: Setting up config files
+                  commands:
+                        - mv vue/src/.config/db.config-default.json vue/src/.config/db.config.json
+                        - mv vue/src/.config/jwt.config-default.json vue/src/.config/jwt.config.json
+                        - mv vue/src/.config/mail.config-default.json vue/src/.config/mail.config.json
 
             - restore_cache:
                   keys:
