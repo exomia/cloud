@@ -6,13 +6,11 @@ RUN mkdir -p /home/node/exomia-cloud
 WORKDIR /home/node/exomia-cloud
 
 COPY package.json /home/node/exomia-cloud
-RUN yarn --production=false --ignore-optional
+RUN npm run install:prod
 
 COPY . /home/node/exomia-cloud
 
-RUN yarn ssr:build && \
-  yarn --production && \
-  yarn cache clean && \
+RUN npm run build && \
   rm -rf /home/node/exomia-cloud/src && \
   rm -rf /home/node/exomia-cloud/public
 
