@@ -11,6 +11,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 let BrotliPlugin = undefined
 try {
     BrotliPlugin = require('brotli-webpack-plugin')
+    // eslint-disable-next-line no-empty
 } catch (e) {}
 
 module.exports = {
@@ -41,57 +42,56 @@ module.exports = {
                 .plugin('imagemin-webpack')
                 .use(ImageminPlugin)
                 .tap(() => [
-                        {
-                            imageminOptions: {
-                                cache: true,
-                                bail: false, // Ignore errors on corrupted images
-                                plugins: [
-                                    imageminGifsicle({
-                                        interlaced: true
-                                    }),
-                                    imageminMozjpeg({
-                                        quality: '75',
-                                        dcScanOpt: 2
-                                    }),
-                                    imageminOptipng({
-                                        optimizationLevel: 5
-                                    }),
-                                    imageminSvgo({
-                                        removeViewBox: true
-                                    })
-                                ]
-                            }
+                    {
+                        imageminOptions: {
+                            cache: true,
+                            bail: false, // Ignore errors on corrupted images
+                            plugins: [
+                                imageminGifsicle({
+                                    interlaced: true
+                                }),
+                                imageminMozjpeg({
+                                    quality: '75',
+                                    dcScanOpt: 2
+                                }),
+                                imageminOptipng({
+                                    optimizationLevel: 5
+                                }),
+                                imageminSvgo({
+                                    removeViewBox: true
+                                })
+                            ]
                         }
-                    ])
+                    }
+                ])
 
             /* GZIP Compression */
             config
                 .plugin('gzip')
                 .use(CompressionPlugin)
                 .tap(() => [
+                    {
+                        filename: '[path].gz[query]',
+                        algorithm: 'gzip',
+                        test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
+                        threshold: 0,
+                        minRatio: 0.8
+                    }
+                ])
+
+            /* Brotli Compression */
+            if (BrotliPlugin) {
+                config
+                    .plugin('brotli')
+                    .use(BrotliPlugin)
+                    .tap(() => [
                         {
-                            filename: '[path].gz[query]',
-                            algorithm: 'gzip',
+                            asset: '[path].br[query]',
                             test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
                             threshold: 0,
                             minRatio: 0.8
                         }
                     ])
-
-            /* Brotli Compression */
-            if(BrotliPlugin) {
-                config
-                    .plugin('brotli')
-                    .use(BrotliPlugin)
-                    .tap(() => [
-                            {
-                                asset: '[path].br[query]',
-                                test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
-                                threshold: 0,
-                                minRatio: 0.8
-                            }
-                        ]
-                    )
             }
         }
 

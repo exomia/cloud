@@ -14,9 +14,7 @@ export default server => {
     const app = server.getApp()
     const router = new Router()
 
-    router
-        .use(koaBodyparser())
-        .use(koaJson({ pretty: false, param: 'pretty' }))
+    router.use(koaBodyparser()).use(koaJson({ pretty: false, param: 'pretty' }))
     router.use('/api/*', (ctx, next) => {
         console.log(`[DEBUG] ${ctx.protocol} | ${ctx.method} ${ctx.path}`)
         if (ctx.protocol === 'https' || ctx.protocol === 'http') {
