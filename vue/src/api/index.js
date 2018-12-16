@@ -15,7 +15,6 @@ export default server => {
     const router = new Router()
 
     router
-        // .use(koaCors())
         .use(koaBodyparser())
         .use(koaJson({ pretty: false, param: 'pretty' }))
     router.use('/api/*', (ctx, next) => {

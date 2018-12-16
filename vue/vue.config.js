@@ -5,9 +5,19 @@ const imageminMozjpeg = require('imagemin-mozjpeg')
 const imageminOptipng = require('imagemin-optipng')
 const imageminSvgo = require('imagemin-svgo')
 //
-const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+
+// Optional
+let BrotliPlugin = undefined
+try {
+    BrotliPlugin = require('brotli-webpack-plugin')
+} catch (e) {}
 
 module.exports = {
+    /* Workaround uvue */
+    transpileDependencies: [/register-service-worker/],
+
+    /* Chaining webpack options */
     chainWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
             /* Image Compression */
@@ -30,8 +40,7 @@ module.exports = {
             config
                 .plugin('imagemin-webpack')
                 .use(ImageminPlugin)
-                .tap(() => {
-                    return [
+                .tap(() => [
                         {
                             imageminOptions: {
                                 cache: true,
@@ -53,40 +62,37 @@ module.exports = {
                                 ]
                             }
                         }
-                    ]
-                })
+                    ])
 
             /* GZIP Compression */
             config
                 .plugin('gzip')
-                .use(BrotliGzipPlugin)
-                .tap(() => {
-                    return [
+                .use(CompressionPlugin)
+                .tap(() => [
                         {
-                            asset: '[path].gz[query]',
+                            filename: '[path].gz[query]',
                             algorithm: 'gzip',
                             test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
                             threshold: 0,
                             minRatio: 0.8
                         }
-                    ]
-                })
+                    ])
 
             /* Brotli Compression */
-            config
-                .plugin('brotli')
-                .use(BrotliGzipPlugin)
-                .tap(() => {
-                    return [
-                        {
-                            asset: '[path].br[query]',
-                            algorithm: 'brotli',
-                            test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
-                            threshold: 0,
-                            minRatio: 0.8
-                        }
-                    ]
-                })
+            if(BrotliPlugin) {
+                config
+                    .plugin('brotli')
+                    .use(BrotliPlugin)
+                    .tap(() => [
+                            {
+                                asset: '[path].br[query]',
+                                test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
+                                threshold: 0,
+                                minRatio: 0.8
+                            }
+                        ]
+                    )
+            }
         }
 
         /* Inline svg */
@@ -103,12 +109,8 @@ module.exports = {
                 }
             })
     },
-
     pluginOptions: {
         i18n: {
-            locale: 'en',
-            fallbackLocale: 'de',
-            enableInSFC: false,
             localeDir: 'i18n/locales'
         }
     }
