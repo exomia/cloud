@@ -28,8 +28,8 @@ export const getters = {
 
 export const mutations = {
     sortByActiveMethod(state) {
-        let method = undefined
-        let desc = undefined
+        let method
+        let desc
         if (state.orderTypeActive === true) {
             method = 'type'
             desc = state.orderTypeDesc

@@ -15,7 +15,7 @@ export default ({ req, router }) => {
     }
 
     if (xTokenSet && xRefreshTokenSet) {
-        //TODO: Doing redirect on server instead of client side
+        // TODO: Doing redirect on server instead of client side
         process.nextTick(() => {
             router.push({ name: 'overview-dir' })
         })

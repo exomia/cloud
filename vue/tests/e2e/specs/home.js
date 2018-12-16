@@ -16,6 +16,9 @@
 //     expect(log.some(([level]) => disallowedLevels.has(level)).false)
 // })
 
+/* Mount vue */
+require('cypress-vue-unit-test')
+
 describe('Home', () => {
     it('Visits the app root url', () => {
         cy.visit('/')
@@ -27,7 +30,7 @@ describe('Home', () => {
         cy.get('form.login-form')
         cy.contains('h1', 'Exomia Cloud')
         cy.get('svg') // Check if Logo is there
-        //Buttons
+        // Buttons
         cy.get('input[type="text"]')
         cy.get('input[type="password"]')
         cy.get('input[class="confirm"]')
@@ -35,8 +38,8 @@ describe('Home', () => {
     })
 
     it('Language change test', () => {
-        //Language Tests
-        //English
+        // Language Tests
+        // English
         cy.contains('span', 'Imprint')
         cy.contains('span', 'Privacy')
         cy.get('input[class="confirm"]').should('have.value', 'Sign in')
@@ -45,7 +48,7 @@ describe('Home', () => {
             'Forgot password?'
         )
         cy.get('span.lang').click()
-        //German
+        // German
         cy.contains('span', '©')
         cy.contains('span', 'Impressum')
         cy.contains('span', 'Datenschutz')
@@ -57,7 +60,7 @@ describe('Home', () => {
     })
 
     it('Check Login', () => {
-        //Login
+        // Login
         cy.get('input[type="text"]').type('admin')
         cy.get('input[type="password"]').type('1234')
         cy.get('input[class="confirm"]').click()

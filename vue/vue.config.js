@@ -8,13 +8,16 @@ const imageminSvgo = require('imagemin-svgo')
 const CompressionPlugin = require('compression-webpack-plugin')
 
 // Optional
-let BrotliPlugin = undefined
+let BrotliPlugin
 try {
     BrotliPlugin = require('brotli-webpack-plugin')
     // eslint-disable-next-line no-empty
 } catch (e) {}
 
 module.exports = {
+    /* Disabled linting in production to prevent devDeps. error */
+    lintOnSave: process.env.NODE_ENV !== 'production',
+
     /* Workaround uvue */
     transpileDependencies: [/register-service-worker/],
 

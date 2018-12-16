@@ -11,14 +11,14 @@ export default {
     beforeCreate(context) {
         // Create axios client
         const http = axios.create({
-            //baseURL: process.client ? '/' : process.env.VUE_APP_API_URL,
+            // baseURL: process.client ? '/' : process.env.VUE_APP_API_URL,
             baseURL: process.env.VUE_APP_API_URL
         })
 
         // Use request interceptors
         http.interceptors.request.use(config => {
-            let xToken = undefined
-            let xRefreshToken = undefined
+            let xToken
+            let xRefreshToken
 
             // Get current token in cookies
             if (process.server) {
