@@ -31,10 +31,9 @@ jobs:
 
             - run:
                   name: Setting up config files
-                  command:
-                        - mv vue/src/.config/db.config-default.json vue/src/.config/db.config.json
-                        - mv vue/src/.config/jwt.config-default.json vue/src/.config/jwt.config.json
-                        - mv vue/src/.config/mail.config-default.json vue/src/.config/mail.config.json
+                  command: mv vue/src/.config/db.config-default.json vue/src/.config/db.config.json && 
+                           mv vue/src/.config/jwt.config-default.json vue/src/.config/jwt.config.json && 
+                           mv vue/src/.config/mail.config-default.json vue/src/.config/mail.config.json
 
             - restore_cache:
                   keys:
