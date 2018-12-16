@@ -10,10 +10,6 @@ import {
     JERROR_FORBIDDEN
 } from './lib/error'
 
-// Running setup
-import setup from './lib/setup'
-setup()
-
 export default server => {
     const app = server.getApp()
     const router = new Router()
