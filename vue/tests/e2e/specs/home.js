@@ -16,9 +16,6 @@
 //     expect(log.some(([level]) => disallowedLevels.has(level)).false)
 // })
 
-/* Mount vue */
-require('cypress-vue-unit-test')
-
 describe('Home', () => {
     it('Visits the app root url', () => {
         cy.visit('/')

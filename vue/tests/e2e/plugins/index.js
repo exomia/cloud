@@ -6,17 +6,17 @@
 // https://docs.cypress.io/api/plugins/preprocessors-api.html#Examples
 
 // webpack import
-const webpack = require('@cypress/webpack-preprocessor')
+// const webpack = require('@cypress/webpack-preprocessor')
 
 module.exports = (on, config) => {
     // file:processor event
-    on(
-        'file:preprocessor',
-        webpack({
-            webpackOptions: require('@vue/cli-service/webpack.config'),
-            watchOptions: {}
-        })
-    )
+    // on(
+    //     'file:preprocessor',
+    //     webpack({
+    //         webpackOptions: require('@vue/cli-service/webpack.config'),
+    //         watchOptions: {}
+    //     })
+    // )
 
     return Object.assign({}, config, {
         fixturesFolder: 'tests/e2e/fixtures',
