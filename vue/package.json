@@ -11,7 +11,8 @@
         "static": "vue-cli-service ssr:static",
         "test": "vue-cli-service test:e2e",
         "test:headless": "vue-cli-service test:e2e --headless",
-        "update": "npm prune && npm-check -u"
+        "update": "npm prune && npm-check -u",
+        "install:production": "npm i --only=prod --no-optional"
     },
     "dependencies": {
         "@uvue/core": "0.1.0-alpha.10",

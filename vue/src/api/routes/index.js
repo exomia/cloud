@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { JERROR_FORBIDDEN, JERROR_UNAUTHORIZED } from '../lib/error'
 
-function initialize(router) {
+export function initialize(router) {
     function ep(dir) {
         const files = fs.readdirSync(path.join(__dirname, dir), 'utf8')
         for (let filename of files) {
@@ -69,5 +69,3 @@ function initialize(router) {
         }
     }
 }
-
-export { initialize }

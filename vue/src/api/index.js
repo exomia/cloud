@@ -10,6 +10,10 @@ import {
     JERROR_FORBIDDEN
 } from './lib/error'
 
+// Running setup
+import setup from './lib/setup'
+setup()
+
 export default server => {
     const app = server.getApp()
     const router = new Router()
@@ -42,5 +46,7 @@ export default server => {
     router.all('/api/*', ctx => {
         return JERROR_NOT_FOUND(ctx, 'no resource found for this path.')
     })
-    app.use(router.routes()).use(router.allowedMethods())
+
+    app.use(router.routes())
+    app.use(router.allowedMethods())
 }
