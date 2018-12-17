@@ -5,14 +5,18 @@
 // as explained in the cypress docs
 // https://docs.cypress.io/api/plugins/preprocessors-api.html#Examples
 
+// webpack import
 // const webpack = require('@cypress/webpack-preprocessor')
 
 module.exports = (on, config) => {
-    // const options = webpack.defaultOptions
-    // options.webpackOptions.module.rules[0].use[0].options.presets.push(
-    //     '@babel/preset-es2015'
+    // file:processor event
+    // on(
+    //     'file:preprocessor',
+    //     webpack({
+    //         webpackOptions: require('@vue/cli-service/webpack.config'),
+    //         watchOptions: {}
+    //     })
     // )
-    // on('file:preprocessor', webpack(options))
 
     return Object.assign({}, config, {
         fixturesFolder: 'tests/e2e/fixtures',

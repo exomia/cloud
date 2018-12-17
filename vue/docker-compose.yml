@@ -6,8 +6,11 @@ volumes:
 services:
     app:
         build: .
+        ports:
+            - '8000:8000'
         volumes:
             - app-dist:/home/node/app/dist
+            - ./src/.config/:/home/node/app/src/.config/:ro
 
     nginx:
         image: nginx:1.15-alpine

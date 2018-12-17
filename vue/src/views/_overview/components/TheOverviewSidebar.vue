@@ -12,14 +12,14 @@
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <FileIcon class="icon"></FileIcon>
-                        <span>Alle Dateien</span>
+                        <span>{{ $t('views.overview.allFiles') }}</span>
                     </div>
                 </a>
 
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <ShareIcon class="icon"></ShareIcon>
-                        <span>Freigegebene Inhalte</span>
+                        <span>{{ $t('views.overview.sharedFiles') }}</span>
                     </div>
                 </a>
             </section>
@@ -28,14 +28,14 @@
                 <a class="sidebar-item">
                     <div class="sidebar-item-inner">
                         <SettingsIcon class="icon"></SettingsIcon>
-                        <span>Settings</span>
+                        <span>{{ $t('title.settings') }}</span>
                     </div>
                 </a>
 
                 <a class="sidebar-item" @click="logout()">
                     <div class="sidebar-item-inner">
                         <LogoutIcon class="icon"></LogoutIcon>
-                        <span>Logout</span>
+                        <span>{{ $t('views.overview.logout') }}</span>
                     </div>
                 </a>
             </section>
@@ -80,4 +80,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/scss/components/sidebar" lang="scss" scoped></style>
+<style src="@/assets/scss/components/sidebar.scss" lang="scss" scoped></style>

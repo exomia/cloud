@@ -65,4 +65,8 @@ export default {
 }
 </script>
 
-<style src="@/assets/scss/components/ContextMenu" lang="scss" scoped></style>
+<style
+    src="@/assets/scss/components/ContextMenu.scss"
+    lang="scss"
+    scoped
+></style>

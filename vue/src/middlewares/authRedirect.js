@@ -1,6 +1,6 @@
 import { get as getCookie } from 'js-cookie'
 
-export default ({ req, route }) => {
+export default ({ req, router }) => {
     let xTokenSet = false
     let xRefreshTokenSet = false
 
@@ -14,7 +14,10 @@ export default ({ req, route }) => {
         xRefreshTokenSet = !!getCookie('x-refresh-token')
     }
 
-    if (xTokenSet && xRefreshTokenSet && route.name !== 'overview-dir') {
-        // return redirect({ name: 'overview-dir' })
+    if (xTokenSet && xRefreshTokenSet) {
+        // TODO: Doing redirect on server instead of client side
+        process.nextTick(() => {
+            router.push({ name: 'overview-dir' })
+        })
     }
 }

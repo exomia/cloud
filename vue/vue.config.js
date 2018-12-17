@@ -5,9 +5,23 @@ const imageminMozjpeg = require('imagemin-mozjpeg')
 const imageminOptipng = require('imagemin-optipng')
 const imageminSvgo = require('imagemin-svgo')
 //
-const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+
+// Optional
+let BrotliPlugin
+try {
+    BrotliPlugin = require('brotli-webpack-plugin')
+    // eslint-disable-next-line no-empty
+} catch (e) {}
 
 module.exports = {
+    /* Disabled linting in production to prevent devDeps. error */
+    lintOnSave: process.env.NODE_ENV !== 'production',
+
+    /* Workaround uvue */
+    transpileDependencies: [/register-service-worker/],
+
+    /* Chaining webpack options */
     chainWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
             /* Image Compression */
@@ -30,63 +44,58 @@ module.exports = {
             config
                 .plugin('imagemin-webpack')
                 .use(ImageminPlugin)
-                .tap(() => {
-                    return [
-                        {
-                            imageminOptions: {
-                                cache: true,
-                                bail: false, // Ignore errors on corrupted images
-                                plugins: [
-                                    imageminGifsicle({
-                                        interlaced: true
-                                    }),
-                                    imageminMozjpeg({
-                                        quality: '75',
-                                        dcScanOpt: 2
-                                    }),
-                                    imageminOptipng({
-                                        optimizationLevel: 5
-                                    }),
-                                    imageminSvgo({
-                                        removeViewBox: true
-                                    })
-                                ]
-                            }
+                .tap(() => [
+                    {
+                        imageminOptions: {
+                            cache: true,
+                            bail: false, // Ignore errors on corrupted images
+                            plugins: [
+                                imageminGifsicle({
+                                    interlaced: true
+                                }),
+                                imageminMozjpeg({
+                                    quality: '75',
+                                    dcScanOpt: 2
+                                }),
+                                imageminOptipng({
+                                    optimizationLevel: 5
+                                }),
+                                imageminSvgo({
+                                    removeViewBox: true
+                                })
+                            ]
                         }
-                    ]
-                })
+                    }
+                ])
 
             /* GZIP Compression */
             config
                 .plugin('gzip')
-                .use(BrotliGzipPlugin)
-                .tap(() => {
-                    return [
-                        {
-                            asset: '[path].gz[query]',
-                            algorithm: 'gzip',
-                            test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
-                            threshold: 0,
-                            minRatio: 0.8
-                        }
-                    ]
-                })
+                .use(CompressionPlugin)
+                .tap(() => [
+                    {
+                        filename: '[path].gz[query]',
+                        algorithm: 'gzip',
+                        test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
+                        threshold: 0,
+                        minRatio: 0.8
+                    }
+                ])
 
             /* Brotli Compression */
-            config
-                .plugin('brotli')
-                .use(BrotliGzipPlugin)
-                .tap(() => {
-                    return [
+            if (BrotliPlugin) {
+                config
+                    .plugin('brotli')
+                    .use(BrotliPlugin)
+                    .tap(() => [
                         {
                             asset: '[path].br[query]',
-                            algorithm: 'brotli',
                             test: /\.(txt|js|css|html|png|jpe?g|gif|webp|tff|woff|woff2|otf)$/,
                             threshold: 0,
                             minRatio: 0.8
                         }
-                    ]
-                })
+                    ])
+            }
         }
 
         /* Inline svg */
@@ -99,26 +108,12 @@ module.exports = {
                 limit: 10 * 1024,
                 noquotes: true,
                 svgo: {
-                    plugins: [
-                        {
-                            removeXMLNS: true
-                        }
-                    ]
+                    plugins: [{ prefixIds: true, removeXMLNS: true }]
                 }
             })
     },
-
-    configureWebpack: {
-        resolve: {
-            extensions: ['.scss']
-        }
-    },
-
     pluginOptions: {
         i18n: {
-            locale: 'en',
-            fallbackLocale: 'de',
-            enableInSFC: false,
             localeDir: 'i18n/locales'
         }
     }

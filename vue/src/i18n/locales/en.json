@@ -1,26 +1,36 @@
 {
-    "index": {
-        "form": {
+    "title": {
+        "home": "Login",
+        "imprint": "Imprint",
+        "overview": "Overview",
+        "privacy": "Privacy",
+        "settings": "Settings"
+    },
+    "views": {
+        "home": {
+            "nameOrEmail": "Username / Email",
+            "signIn": "Sign in",
             "forgotPassword": "Forgot password?",
-            "nameOrEmail": "Name / E-Mail",
             "password": "Password",
-            "signIn": "Sign in"
-        }
+            "passwordReset": "Password Reset",
+            "passwordResetText": "Enter the email or username below and we will send you further instructions",
+            "passwordResetSuccessText": "An email to reset your Password has been send to you. Please check your inbox. If it doesn't show up don't forget to check the Spam folder.",
+            "send": "Send",
+            "back": "Go back",
+            "backToLogin": "Back to Login"
+        },
+        "overview": {
+            "allFiles": "All files",
+            "sharedFiles": "Shared files",
+            "logout": "Logout"
+        },
+        "error": "Error"
     },
-    "navigation": {
-        "TheFooter": {
-            "cookies": "Cookies",
-            "imprint": "Imprint",
-            "privacy": "Privacy"
-        }
-    },
-    "partials": {
+    "components": {
         "ListHeader": {
-            "date": "Date",
             "name": "Name",
             "size": "Size",
-            "status": "Status",
-            "type": "Type"
+            "date": "Date"
         },
         "ListRow": {
             "download": "Download",
@@ -29,28 +39,20 @@
             "rename": "Rename",
             "share": "Share"
         },
-        "OverviewPath": {
-            "newDirectory": "New directory",
-            "uploadFile": "Upload file"
-        }
-    },
-    "sidebar": {
-        "overview": {
-            "allFiles": "All Files",
-            "settings": "Settings",
-            "trash": "Trash"
+        "ListRowInfo": {
+            "download": "Download",
+            "share": "Share",
+            "edit": "Edit",
+            "remove": "Remove"
         },
-        "settings": {
-            "admin": "Admin",
-            "profile": "Profile",
-            "rights": "Rights"
+        "Notification": {
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error",
+            "notification": "Notification"
         }
     },
-    "title": {
-        "home": "Login",
-        "imprint": "Imprint",
-        "overview": "Overview",
-        "privacy": "Privacy",
-        "settings": "Settings"
+    "misc": {
+        "noscript": "This website requires Javascript."
     }
 }

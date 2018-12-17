@@ -27,7 +27,14 @@ jobs:
 
             - run:
                   name: Importing database
-                  command: psql < vue/src/api/lib/setup/setup.sql
+                  command: psql < vue/setup.sql
+
+            - run:
+                  name: Setting up config files
+                  command: cd vue/src/.config && 
+                           cp .db.config-default.json .db.config.json && 
+                           cp .jwt.config-default.json .jwt.config.json && 
+                           cp .mail.config-default.json .mail.config.json
 
             - restore_cache:
                   keys:
@@ -37,7 +44,11 @@ jobs:
 
             - run:
                   name: Installing NPM packages
-                  command: cd vue && npm install
+                  command: cd vue && npm i
+
+            - run:
+                  name: Installing peer NPM packages
+                  command: cd vue && npm i @vue/cli-plugin-e2e-cypress @vue/cli-plugin-eslint
 
             - run:
                   name: Linting code

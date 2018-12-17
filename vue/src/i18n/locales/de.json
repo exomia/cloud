@@ -1,56 +1,58 @@
 {
-    "index": {
-        "form": {
-            "forgotPassword": "Passwort vergessen?",
-            "nameOrEmail": "Name / E-Mail",
-            "password": "Passwort",
-            "signIn": "Anmelden"
-        }
-    },
-    "navigation": {
-        "TheFooter": {
-            "cookies": "Cookies",
-            "imprint": "Impressum",
-            "privacy": "Datenschutz"
-        }
-    },
-    "partials": {
-        "ListHeader": {
-            "date": "Datum",
-            "name": "Name",
-            "size": "Größe",
-            "status": "Status",
-            "type": "Typ"
-        },
-        "ListRow": {
-            "download": "Herunterladen",
-            "info": "Info",
-            "remove": "Löschen",
-            "rename": "Umbenennen",
-            "share": "Teilen"
-        },
-        "OverviewPath": {
-            "newDirectory": "Neuer Ordner",
-            "uploadFile": "Datei Hochladen"
-        }
-    },
-    "sidebar": {
-        "overview": {
-            "allFiles": "Alle Dateien",
-            "settings": "Einstellungen",
-            "trash": "Papierkorb"
-        },
-        "settings": {
-            "admin": "Administrator",
-            "profile": "Profil",
-            "rights": "Rechte"
-        }
-    },
     "title": {
-        "home": "Login",
+        "home": "Anmelden",
         "imprint": "Impressum",
         "overview": "Übersicht",
         "privacy": "Datenschutz",
         "settings": "Einstellungen"
+    },
+    "views": {
+        "home": {
+            "nameOrEmail": "Benutzer / E-Mail",
+            "signIn": "Anmelden",
+            "forgotPassword": "Passwort vergessen ?",
+            "password": "Passwort",
+            "passwordReset": "Password zurücksetzen",
+            "passwordResetText": "Bitte geben Sie Ihren Benutzernamen oder E-Mail ein.",
+            "passwordResetSuccessText": "Ihnen wurde eine E-Mail für das Zurücksetzen ihres Passwortes zugesendet. Bitte überprüfen Sie Ihren Posteingang. Wenn die E-mail nicht im Posteingang erscheint überprüfen Sie bitte auch ihren Spam-Ordner.",
+            "send": "Senden",
+            "back": "Zurück",
+            "backToLogin": "Zurück zum Login"
+        },
+        "overview": {
+            "allFiles": "Alle Dateien",
+            "sharedFiles": "Freigabe",
+            "logout": "Abmelden"
+        },
+        "error": "Fehler"
+    },
+    "components": {
+        "ListHeader": {
+            "name": "Name",
+            "size": "Größe",
+            "date": "Datum"
+        },
+        "ListRow": {
+            "download": "Download",
+            "info": "Info",
+            "remove": "Entfernen",
+            "rename": "Umbenennen",
+            "share": "Freigeben"
+        },
+        "ListRowInfo": {
+            "download": "Download",
+            "share": "Freigeben",
+            "edit": "Editieren",
+            "remove": "Löschen"
+        },
+        "Notification": {
+            "success": "Erfolgreich",
+            "warning": "Warnung",
+            "error": "Fehler",
+            "notification": "Benachrichtigung"
+        }
+    },
+    "misc": {
+        "noscript": "Diese Website benötigt Javascript."
     }
 }

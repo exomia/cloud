@@ -2,31 +2,31 @@ FROM node:10 as builder
 
 ENV NODE_ENV production
 
-RUN mkdir -p /home/node/app
-WORKDIR /home/node/app
+RUN mkdir -p /home/node/exomia-cloud
+WORKDIR /home/node/exomia-cloud
 
-COPY package.json /home/node/app
-RUN yarn --production=false
+COPY package.json /home/node/exomia-cloud
+RUN npm run install:prod
 
-COPY . /home/node/app
+COPY . /home/node/exomia-cloud
 
-RUN yarn ssr:build && \
-  yarn --production && \
-  yarn cache clean && \
-  rm -rf /home/node/app/src && \
-  rm -rf /home/node/app/public
+COPY /src/.config/.db.config-default.json /src/.config/.db.config.json
+COPY /src/.config/.jwt.config-default.json /src/.config/.jwt.config.json
+COPY /src/.config/.mail.config-default.json /src/.config/.mail.config.json
+
+RUN npm run build
 
 FROM node:10-alpine
 
 ENV NODE_ENV production
 ENV HOST 0.0.0.0
-ENV PORT 8080
+ENV PORT 8000
 
-COPY --from=builder /home/node/app /home/node/app
+COPY --from=builder /home/node/exomia-cloud /home/node/exomia-cloud
 
-RUN chown -R node:node /home/node/app
+RUN chown -R node:node /home/node/exomia-cloud
 
 USER node
-WORKDIR /home/node/app
+WORKDIR /home/node/exomia-cloud
 
 CMD ["./node_modules/@uvue/server/start.js"]

@@ -1,7 +1,6 @@
 import koaBodyparser from 'koa-bodyparser'
 import koaJson from 'koa-json'
 import Router from 'koa-router'
-import koaCors from 'koa2-cors'
 
 import { initialize } from './routes'
 import { jwt_init } from './lib/jwt'
@@ -15,10 +14,7 @@ export default server => {
     const app = server.getApp()
     const router = new Router()
 
-    router
-        .use(koaCors())
-        .use(koaBodyparser())
-        .use(koaJson({ pretty: false, param: 'pretty' }))
+    router.use(koaBodyparser()).use(koaJson({ pretty: false, param: 'pretty' }))
     router.use('/api/*', (ctx, next) => {
         console.log(`[DEBUG] ${ctx.protocol} | ${ctx.method} ${ctx.path}`)
         if (ctx.protocol === 'https' || ctx.protocol === 'http') {
@@ -46,5 +42,7 @@ export default server => {
     router.all('/api/*', ctx => {
         return JERROR_NOT_FOUND(ctx, 'no resource found for this path.')
     })
-    app.use(router.routes()).use(router.allowedMethods())
+
+    app.use(router.routes())
+    app.use(router.allowedMethods())
 }

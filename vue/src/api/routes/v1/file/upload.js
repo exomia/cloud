@@ -28,7 +28,7 @@ router.put('/:directory_uuid?', upload.single('upload-file'), async ctx => {
             ctx.file.size
         )
         if (!result) {
-            //TODO: CLEAR/REMOVE LOCAL FILE
+            // TODO: CLEAR/REMOVE LOCAL FILE
             return JERROR_BAD_REQUEST(
                 ctx,
                 "the file already exists! Set the 'replace' option in the payload to true to override it!"
@@ -48,7 +48,7 @@ router.put('/:directory_uuid?', upload.single('upload-file'), async ctx => {
             error: false
         }
     }
-    //REPLACE FILE AND UPDATE
+    // REPLACE FILE AND UPDATE
     return JERROR_INTERNAL_SERVER_ERROR(
         ctx,
         "currently not supported. ('replace': true)"

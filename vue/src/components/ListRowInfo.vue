@@ -17,19 +17,19 @@
         <div class="infobox menu">
             <div class="option">
                 <div class="icon-wrapper"><DownloadIcon></DownloadIcon></div>
-                <span>Download</span>
+                <span>{{ $t('components.ListRowInfo.download') }}</span>
             </div>
             <div class="option">
                 <div class="icon-wrapper"><ShareIcon></ShareIcon></div>
-                <span>Share</span>
+                <span>{{ $t('components.ListRowInfo.share') }}</span>
             </div>
             <div class="option">
                 <div class="icon-wrapper"><EditIcon></EditIcon></div>
-                <span>Edit</span>
+                <span>{{ $t('components.ListRowInfo.edit') }}</span>
             </div>
             <div class="option">
                 <div class="icon-wrapper"><RemoveIcon></RemoveIcon></div>
-                <span>Remove</span>
+                <span>{{ $t('components.ListRowInfo.remove') }}</span>
             </div>
         </div>
     </div>
@@ -85,4 +85,8 @@ export default {
 }
 </script>
 
-<style src="@/assets/scss/components/ListRowInfo" lang="scss" scoped></style>
+<style
+    src="@/assets/scss/components/ListRowInfo.scss"
+    lang="scss"
+    scoped
+></style>
