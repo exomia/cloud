@@ -18,9 +18,6 @@ module.exports = {
     /* Disabled linting in production to prevent devDeps. error */
     lintOnSave: process.env.NODE_ENV !== 'production',
 
-    /* Workaround uvue */
-    transpileDependencies: [/register-service-worker/],
-
     /* Chaining webpack options */
     chainWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
