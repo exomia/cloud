@@ -19,19 +19,20 @@
                     @update:value="username = $event"
                 ></TheHomeInput>
             </div>
+
             <div class="form-section" style="margin-top: 32px">
                 <input
                     class="confirm"
                     type="button"
                     :value="this.$i18n.t('views.home.send')"
                     @click="send()"
-                />
+                >
                 <input
                     class="subConfirm"
                     type="button"
                     :value="this.$i18n.t('views.home.back')"
                     @click="$parent.login = 'login'"
-                />
+                >
             </div>
         </form>
     </div>
@@ -61,7 +62,21 @@ export default {
     },
     methods: {
         send: function() {
-            this.$parent.login = 'pw_reset_success'
+            this.$v.$touch()
+            if (!this.$v.$error) {
+                this.$http
+                    .post('/v1/auth/forgotPassword', {
+                        usernameOrEmail: this.username
+                    })
+                    .then(({ error }) => {
+                        if (error) {
+                            //TODO: Output error
+                            console.log(error)
+                            return
+                        }
+                        this.$parent.login = 'pw_reset_success'
+                    })
+            }
         }
     },
     validations: {
