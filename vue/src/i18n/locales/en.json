@@ -1,6 +1,7 @@
 {
     "title": {
         "home": "Login",
+        "resetPassword": "Password Reset",
         "imprint": "Imprint",
         "overview": "Overview",
         "privacy": "Privacy",
@@ -18,6 +19,13 @@
             "send": "Send",
             "back": "Go back",
             "backToLogin": "Back to Login"
+        },
+        "resetPassword": {
+            "resetPassword": "Password Reset",
+            "newPassword": "Please enter your new Password below and verify it.",
+            "yourNewPassword": "New Password",
+            "enterPasswordAgainPH": "Retype Password",
+            "send": "Change"
         },
         "overview": {
             "allFiles": "All files",
