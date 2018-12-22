@@ -3,9 +3,11 @@ const ImageminPlugin = require('imagemin-webpack')
 const imageminGifsicle = require('imagemin-gifsicle')
 const imageminMozjpeg = require('imagemin-mozjpeg')
 const imageminOptipng = require('imagemin-optipng')
-const imageminSvgo = require('imagemin-svgo')
 //
+const WebPWebpackPlugin = require('webp-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+//
+const svgoConfig = require('./config/svgo.config.json')
 
 // Optional
 let BrotliPlugin
@@ -32,8 +34,8 @@ module.exports = {
                 .loader('file-loader')
                 .options({
                     rules: {
-                        emitFile: true, // Don't forget emit images
-                        name: 'img/[name].[hash:8].[ext]'
+                        emitFile: true // Don't forget emit images
+                        // name: 'img/[name].[hash:8].[ext]'
                     }
                 })
                 .end()
@@ -43,7 +45,9 @@ module.exports = {
                 .use(ImageminPlugin)
                 .tap(() => [
                     {
+                        // name: '/img/[name].[hash:8].[ext]',
                         imageminOptions: {
+                            loader: false,
                             cache: true,
                             bail: false, // Ignore errors on corrupted images
                             plugins: [
@@ -56,11 +60,22 @@ module.exports = {
                                 }),
                                 imageminOptipng({
                                     optimizationLevel: 5
-                                }),
-                                imageminSvgo({
-                                    removeViewBox: true
                                 })
                             ]
+                        }
+                    }
+                ])
+
+            /* Generate webp fallback */
+            config
+                .plugin('webp')
+                .use(WebPWebpackPlugin)
+                .tap(() => [
+                    {
+                        match: /(jpe?g|png)$/,
+                        webp: {
+                            quality: 80,
+                            inject: true
                         }
                     }
                 ])
@@ -105,7 +120,7 @@ module.exports = {
                 limit: 10 * 1024,
                 noquotes: true,
                 svgo: {
-                    plugins: [{ prefixIds: true, removeXMLNS: true }]
+                    plugins: svgoConfig
                 }
             })
     },

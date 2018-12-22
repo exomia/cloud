@@ -31,10 +31,11 @@ jobs:
 
             - run:
                   name: Setting up config files
-                  command: cd vue/src/.config && 
-                           cp .db.config-default.json .db.config.json && 
-                           cp .jwt.config-default.json .jwt.config.json && 
-                           cp .mail.config-default.json .mail.config.json
+                  command: cd vue/config &&
+                      cp db.config-default.json db.config.json &&
+                      cp jwt.config-default.json jwt.config.json &&
+                      cp mail.config-default.json mail.config.json &&
+                      cp svgo.config-default.json svgo.config.json
 
             - restore_cache:
                   keys:
