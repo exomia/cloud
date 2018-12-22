@@ -1,4 +1,4 @@
-FROM node:10 as builder
+FROM node:10.14.2-alpine as builder
 
 ENV NODE_ENV production
 
@@ -10,13 +10,9 @@ RUN npm run install:prod
 
 COPY . /home/node/exomia-cloud
 
-# COPY /src/.config/.db.config-default.json /src/.config/.db.config.json
-# COPY /src/.config/.jwt.config-default.json /src/.config/.jwt.config.json
-# COPY /src/.config/.mail.config-default.json /src/.config/.mail.config.json
-
 RUN npm run build
 
-FROM node:10-alpine
+FROM node:10.14.2-alpine
 
 ENV NODE_ENV production
 ENV HOST 0.0.0.0
