@@ -1,6 +1,7 @@
 {
     "title": {
         "home": "Anmelden",
+        "resetPassword": "Passwort Zurücksetzen",
         "imprint": "Impressum",
         "overview": "Übersicht",
         "privacy": "Datenschutz",
@@ -18,6 +19,13 @@
             "send": "Senden",
             "back": "Zurück",
             "backToLogin": "Zurück zum Login"
+        },
+        "resetPassword": {
+            "resetPassword": "Password Zurücksetzen",
+            "newPassword": "Bitte geben Sie Ihr neues Passwort ein, und bestätigen Sie dieses.",
+            "yourNewPassword": "Neues Passwort",
+            "enterPasswordAgainPH": "Passwort erneut eingeben",
+            "send": "Zurücksetzen"
         },
         "overview": {
             "allFiles": "Alle Dateien",

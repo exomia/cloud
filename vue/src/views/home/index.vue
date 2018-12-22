@@ -25,7 +25,7 @@ import LangSwitcher from '@/components/LangSwitcher.vue'
 import TheLoginForm from '@/views/home/components/TheLoginForm'
 import TheForgotPasswordForm from '@/views/home/components/TheForgotPasswordForm'
 import TheForgotPasswordFormSuccess from '@/views/home/components/TheForgotPasswordFormSuccess'
-import TheFooter from '@/views/home/components/TheFooter'
+import TheFooter from '@/components/TheFooter'
 
 export default {
     components: {

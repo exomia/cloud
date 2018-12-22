@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 /* Views */
 import Home from '@/views/home/'
+import resetPassword from '@/views/resetPassword/'
 
 /* Middleware */
 import checkAuth from '@/middlewares/checkAuth'
@@ -29,6 +30,12 @@ export default () => {
                 meta: {
                     middlewares: [checkAuth]
                 }
+            },
+            /* Password Reset */
+            {
+                path: '/resetPassword/:token',
+                name: 'resetPassword',
+                component: resetPassword
             },
             /* Overview */
             {
