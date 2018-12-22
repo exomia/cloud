@@ -1,6 +1,6 @@
 <template>
     <div class="center">
-        <form class="reset-form">
+        <form>
             <TheLogo></TheLogo>
 
             <div class="form-section" style="margin-top: 35px">
@@ -12,22 +12,22 @@
             </div>
 
             <div class="form-section" style="margin-top: 25px">
-                <ThePasswordInput
+                <LandingInput
+                    :icon="'lock'"
                     :placeholder="newPasswordPH"
                     :error="$v.password.$error"
                     @update:value="password = $event"
-                ></ThePasswordInput>
-                <ThePasswordInput
-                    v-if="firstPasswordOK"
+                ></LandingInput>
+                <LandingInput
+                    :icon="'lock'"
                     :placeholder="enterPasswordAgainPH"
                     :error="$v.passwordReType.$error"
                     @update:value="passwordReType = $event"
-                ></ThePasswordInput>
+                ></LandingInput>
             </div>
 
             <div class="form-section" style="margin-top: 32px">
                 <input
-                    v-if="bothPasswordsOK"
                     class="confirm"
                     type="button"
                     :value="this.$i18n.t('views.resetPassword.send')"
@@ -42,12 +42,12 @@
 /* Imports */
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 import TheLogo from '@/views/home/components/TheLogo'
-import ThePasswordInput from '@/views/resetPassword/components/ThePasswordInput'
+import LandingInput from '@/components/LandingInput.vue'
 
 export default {
     components: {
         TheLogo,
-        ThePasswordInput
+        LandingInput
     },
     data() {
         return {
@@ -61,27 +61,6 @@ export default {
         },
         enterPasswordAgainPH: function() {
             return this.$t('views.resetPassword.enterPasswordAgainPH')
-        },
-        firstPasswordOK: function() {
-            if (
-                this.$v.password.required &&
-                this.$v.password.minLength &&
-                this.$v.password.maxLength
-            ) {
-                return true
-            }
-            return false
-        },
-        bothPasswordsOK: function() {
-            if (
-                this.$v.passwordReType.required &&
-                this.$v.passwordReType.minLength &&
-                this.$v.passwordReType.maxLength &&
-                this.password === this.passwordReType
-            ) {
-                return true
-            }
-            return false
         }
     },
     methods: {
@@ -119,7 +98,7 @@ export default {
 </script>
 
 <style
-    src="@/views/resetPassword/components/Forms.scss"
+    src="@/assets/scss/components/LandingForm.scss"
     lang="scss"
     scoped
 ></style>

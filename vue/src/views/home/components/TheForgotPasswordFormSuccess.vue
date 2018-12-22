@@ -1,6 +1,6 @@
 <template>
     <div class="center">
-        <form class="login-form">
+        <form>
             <TheLogo></TheLogo>
 
             <div class="form-section" style="margin-top: 35px">
@@ -36,4 +36,8 @@ export default {
 }
 </script>
 
-<style src="@/views/home/components/Forms.scss" lang="scss" scoped></style>
+<style
+    src="@/assets/scss/components/LandingForm.scss"
+    lang="scss"
+    scoped
+></style>

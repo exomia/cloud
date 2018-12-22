@@ -36,4 +36,4 @@ export default {
 }
 </script>
 
-<style src="@/views/resetPassword/index.scss" lang="scss" scoped></style>
+<style src="@/assets/scss/views/home.scss" lang="scss" scoped></style>

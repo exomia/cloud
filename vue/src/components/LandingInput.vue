@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style
-    src="@/views/home/components/TheHomeInput.scss"
+    src="@/assets/scss/components/LandingInput.scss"
     lang="scss"
     scoped
 ></style>
