@@ -2,22 +2,23 @@
     <div class="center">
         <form>
             <TheLogo></TheLogo>
-            <LandingInput
-                style="margin-top: 96px"
-                :placeholder="usernamePH"
-                :error="$v.username.$error"
-                :icon="'user'"
-                @update:value="username = $event"
-                @enterPress="signIn()"
-            ></LandingInput>
-            <LandingInput
-                :placeholder="passwordPH"
-                :error="$v.password.$error"
-                :icon="'lock'"
-                :type="'password'"
-                @update:value="password = $event"
-                @enterPress="signIn()"
-            ></LandingInput>
+            <div class="form-section">
+                <LandingInput
+                    :placeholder="usernamePH"
+                    :error="$v.username.$error"
+                    :icon="'user'"
+                    @update:value="username = $event"
+                    @enterPress="signIn()"
+                ></LandingInput>
+                <LandingInput
+                    :placeholder="passwordPH"
+                    :error="$v.password.$error"
+                    :icon="'lock'"
+                    :type="'password'"
+                    @update:value="password = $event"
+                    @enterPress="signIn()"
+                ></LandingInput>
+            </div>
             <div class="form-section">
                 <input
                     class="confirm"
@@ -94,8 +95,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/LandingForm.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/LandingForm.scss" lang="scss" scoped></style>

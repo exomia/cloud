@@ -3,15 +3,12 @@
         <form>
             <TheLogo></TheLogo>
 
-            <div class="form-section" style="margin-top: 35px">
+            <div class="form-section">
                 <h2>{{ this.$i18n.t('views.resetPassword.resetPassword') }}</h2>
+                <span class="subtitle">{{ this.$i18n.t('views.resetPassword.newPassword') }}</span>
             </div>
 
-            <div class="form-section" style="margin-top: 35px">
-                <h3>{{ this.$i18n.t('views.resetPassword.newPassword') }}</h3>
-            </div>
-
-            <div class="form-section" style="margin-top: 25px">
+            <div class="form-section">
                 <LandingInput
                     :icon="'lock'"
                     :placeholder="newPasswordPH"
@@ -26,13 +23,14 @@
                 ></LandingInput>
             </div>
 
-            <div class="form-section" style="margin-top: 32px">
+            <div class="form-section">
                 <input
                     class="confirm"
                     type="button"
                     :value="this.$i18n.t('views.resetPassword.send')"
                     @click="send()"
                 />
+                <input class="subConfirm" style="visibility: hidden;" type="button" />
             </div>
         </form>
     </div>
@@ -97,8 +95,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/LandingForm.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/LandingForm.scss" lang="scss" scoped></style>

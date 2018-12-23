@@ -7,13 +7,14 @@ module.exports = {
     extends: [
         'plugin:cypress/recommended',
         'plugin:vue/recommended',
-        '@vue/prettier'
+        '@vue/prettier',
+        'plugin:css-modules/recommended'
     ],
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
     },
-    plugins: ['cypress'],
+    plugins: ['cypress', 'css-modules'],
     parserOptions: {
         parser: 'babel-eslint',
         ecmaVersion: 2019,

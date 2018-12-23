@@ -3,23 +3,22 @@
         <form>
             <TheLogo></TheLogo>
 
-            <div class="form-section" style="margin-top: 35px">
+            <div class="form-section">
                 <h2>{{ this.$i18n.t('views.home.passwordReset') }}</h2>
+                <span class="subtitle">{{
+                    this.$i18n.t('views.home.passwordResetSuccessText')
+                }}</span>
             </div>
 
-            <div class="form-section" style="margin-top: 35px">
-                <h3>
-                    {{ this.$i18n.t('views.home.passwordResetSuccessText') }}
-                </h3>
-            </div>
-
-            <div class="form-section" style="margin-top: 98px">
+            <div class="form-section">
                 <input
                     class="confirm"
                     type="button"
                     :value="this.$i18n.t('views.home.backToLogin')"
                     @click="$parent.login = 'login'"
                 />
+
+                <input class="subConfirm" style="visibility: hidden;" type="button" />
             </div>
         </form>
     </div>
@@ -36,8 +35,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/LandingForm.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/LandingForm.scss" lang="scss" scoped></style>

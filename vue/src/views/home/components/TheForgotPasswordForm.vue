@@ -3,24 +3,19 @@
         <form>
             <TheLogo></TheLogo>
 
-            <div class="form-section" style="margin-top: 35px">
+            <div class="form-section">
                 <h2>{{ this.$i18n.t('views.home.passwordReset') }}</h2>
+                <span class="subtitle">{{ this.$i18n.t('views.home.passwordResetText') }}</span>
             </div>
 
-            <div class="form-section" style="margin-top: 35px">
-                <h3>{{ this.$i18n.t('views.home.passwordResetText') }}</h3>
-            </div>
+            <LandingInput
+                :placeholder="usernamePH"
+                :error="$v.username.$error"
+                :icon="'user'"
+                @update:value="username = $event"
+            ></LandingInput>
 
-            <div class="form-section" style="margin-top: 25px">
-                <LandingInput
-                    :placeholder="usernamePH"
-                    :error="$v.username.$error"
-                    :icon="'user'"
-                    @update:value="username = $event"
-                ></LandingInput>
-            </div>
-
-            <div class="form-section" style="margin-top: 32px">
+            <div class="form-section">
                 <input
                     class="confirm"
                     type="button"
@@ -89,8 +84,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/LandingForm.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/LandingForm.scss" lang="scss" scoped></style>
