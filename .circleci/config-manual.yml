@@ -8,7 +8,6 @@ jobs:
               environment:
                   PGHOST: 127.0.0.1
                   PGUSER: root
-
             - image: circleci/postgres:11.1-alpine-ram
               environment:
                   POSTGRES_USER: root
@@ -45,36 +44,29 @@ jobs:
                       - dependency-cache-{{ .Branch }}-
 
             - run:
-                  name: Docker compose
-                  command: |
-                      cd vue
-                      set -x
-                      docker-compose up --build -d
+                  name: Installing NPM packages
+                  command: cd vue && npm i
 
-            # - run:
-            #       name: Installing NPM packages
-            #       command: cd vue && npm i
+            - run:
+                  name: Installing peer NPM packages
+                  command: cd vue && npm i @vue/cli-plugin-e2e-cypress @vue/cli-plugin-eslint
 
-            # - run:
-            #       name: Installing peer NPM packages
-            #       command: cd vue && npm i @vue/cli-plugin-e2e-cypress @vue/cli-plugin-eslint
+            - run:
+                  name: Linting code
+                  command: cd vue && npm run lint
 
-            # - run:
-            #       name: Linting code
-            #       command: cd vue && npm run lint
-
-            # - run:
-            #       name: Building server
-            #       command: cd vue && npm run build
+            - run:
+                  name: Building server
+                  command: cd vue && npm run build
 
             - save_cache:
                   key: dependency-cache-{{ .Branch }}-{{ checksum "vue/package.json" }}
                   paths:
                       - node_modules
 
-            # - run:
-            #       name: Installing cypress dependencies
-            #       command: sudo apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+            - run:
+                  name: Installing cypress dependencies
+                  command: sudo apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
 
             # - run:
             #       name: Running cypress
