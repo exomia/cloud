@@ -4,9 +4,6 @@ jobs:
         working_directory: ~/repo
 
         docker:
-            environment:
-                DOCKER_HOST: vue
-
             - image: circleci/node:10
               environment:
                   PGHOST: 127.0.0.1
@@ -17,6 +14,9 @@ jobs:
                   POSTGRES_USER: root
                   POSTGRES_PASSWORD: root
                   POSTGRES_DB: root
+
+        environment:
+            DOCKER_HOST: /vue
 
         steps:
             - checkout
