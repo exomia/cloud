@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-/* Views */
-import Home from '@/views/home/'
-import resetPassword from '@/views/resetPassword/'
-
 /* Middleware */
 import checkAuth from '@/middlewares/checkAuth'
 import authRedirect from '@/middlewares/authRedirect'
@@ -19,23 +15,19 @@ export default () => {
             {
                 path: '/',
                 name: 'home',
-                component: Home,
+                component: () => import(/* webpackChunkName: "home" */ '@/views/home/'),
                 meta: {
                     middlewares: [authRedirect]
-                }
-            },
-            {
-                path: '/trash',
-                name: 'trash',
-                meta: {
-                    middlewares: [checkAuth]
                 }
             },
             /* Password Reset */
             {
                 path: '/resetPassword/:token',
                 name: 'resetPassword',
-                component: resetPassword
+                component: () => import(/* webpackChunkName: "home" */ '@/views/resetPassword/'),
+                meta: {
+                    middlewares: [authRedirect]
+                }
             },
             /* Overview */
             {
