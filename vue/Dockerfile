@@ -10,7 +10,8 @@ RUN npm run install:prod
 
 COPY . /home/node/exomia-cloud
 
-RUN npm run build
+RUN npm run build && \
+    rm -rf /home/node/exomia-cloud/public
 
 FROM node:10-alpine
 
