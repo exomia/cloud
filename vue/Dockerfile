@@ -1,4 +1,4 @@
-FROM node:10.14.2-alpine as builder
+FROM node:10 as builder
 
 ENV NODE_ENV production
 
@@ -12,7 +12,7 @@ COPY . /home/node/exomia-cloud
 
 RUN npm run build
 
-FROM node:10.14.2-alpine
+FROM node:10-alpine
 
 ENV NODE_ENV production
 ENV HOST 0.0.0.0
