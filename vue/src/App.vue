@@ -29,6 +29,7 @@ export default {
                     content: 'text/html; charset=utf-8'
                 },
                 { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+                // { 'http-equiv': 'Accept-CH', content: 'DPR, Viewport-Width, Width' },
                 { name: 'description', content: '' },
                 { name: 'keywords', content: '' },
                 { name: 'author', content: 'exomia.com' },
@@ -36,7 +37,6 @@ export default {
             ],
             link: [
                 { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-                // Fonts
                 {
                     rel: 'preload',
                     as: 'font',
