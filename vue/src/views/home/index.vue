@@ -6,9 +6,7 @@
             <!-- Default form -->
             <TheLoginForm v-if="login === 'login'"></TheLoginForm>
             <!-- Forgot password step 1 -->
-            <TheForgotPasswordForm
-                v-if="login === 'pw_reset'"
-            ></TheForgotPasswordForm>
+            <TheForgotPasswordForm v-if="login === 'pw_reset'"></TheForgotPasswordForm>
             <!-- Forgot password step 2 -->
             <TheForgotPasswordFormSuccess
                 v-if="login === 'pw_reset_success'"
@@ -25,7 +23,7 @@ import LangSwitcher from '@/components/LangSwitcher.vue'
 import TheLoginForm from '@/views/home/components/TheLoginForm'
 import TheForgotPasswordForm from '@/views/home/components/TheForgotPasswordForm'
 import TheForgotPasswordFormSuccess from '@/views/home/components/TheForgotPasswordFormSuccess'
-import TheFooter from '@/views/home/components/TheFooter'
+import TheFooter from '@/components/TheFooter'
 
 export default {
     components: {
@@ -48,4 +46,4 @@ export default {
 }
 </script>
 
-<style src="@/views/home/index.scss" lang="scss" scoped></style>
+<style src="@/assets/scss/views/home.scss" lang="scss" scoped></style>

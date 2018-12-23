@@ -87,9 +87,7 @@ export const mutations = {
         }
         state.sizeSum = sum
         /* Directory Count */
-        state.directoryCount = state.data.filter(
-            e => e.type === 'Directory'
-        ).length
+        state.directoryCount = state.data.filter(e => e.type === 'Directory').length
         /* File Count */
         state.fileCount = state.data.filter(e => e.type === 'File').length
     }

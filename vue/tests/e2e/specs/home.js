@@ -40,20 +40,14 @@ describe('Home', () => {
         cy.contains('span', 'Imprint')
         cy.contains('span', 'Privacy')
         cy.get('input[class="confirm"]').should('have.value', 'Sign in')
-        cy.get('input[class="subConfirm"]').should(
-            'have.value',
-            'Forgot password?'
-        )
+        cy.get('input[class="subConfirm"]').should('have.value', 'Forgot password?')
         cy.get('span.lang').click()
         // German
         cy.contains('span', '©')
         cy.contains('span', 'Impressum')
         cy.contains('span', 'Datenschutz')
         cy.get('input[class="confirm"]').should('have.value', 'Anmelden')
-        cy.get('input[class="subConfirm"]').should(
-            'have.value',
-            'Passwort vergessen ?'
-        )
+        cy.get('input[class="subConfirm"]').should('have.value', 'Passwort vergessen ?')
     })
 
     it('Check Login', () => {

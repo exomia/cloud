@@ -5,28 +5,30 @@ div.center {
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: calc(100vh - 90px);
 
     @media screen and (max-width: $break-small) {
         height: calc(100vh - 135px);
     }
 
-    height: calc(100vh - 90px);
-
-    form.login-form {
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: 250px;
-        height: 470px;
-        
+        height: 425px;
+
         div.form-section {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
 
-            h2, h3 {
+            h2,
+            h3 {
                 font-family: 'Roboto Condensed', sans-serif;
                 font-weight: 200;
                 user-select: none;
-
             }
 
             h2 {
@@ -35,7 +37,8 @@ div.center {
                 white-space: nowrap;
             }
 
-            h3 {
+            span.subtitle {
+                margin-top: 0.5rem;
                 font-size: 18px;
                 text-align: center;
                 white-space: wrap;

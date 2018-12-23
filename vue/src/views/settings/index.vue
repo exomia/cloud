@@ -2,10 +2,7 @@
     <main>
         <SettingsSidebar></SettingsSidebar>
         <div class="overview">
-            <div
-                class="center-container"
-                style="align-items: center;height: 100%"
-            >
+            <div class="center-container" style="align-items: center;height: 100%">
                 <SettingsDataChangeForm
                     v-model="changeName"
                     label="Name"
@@ -27,9 +24,7 @@
                     @click="changeEmailSubmit = true"
                 ></SettingsDataChangeForm>
                 <div class="spacer-container">
-                    <h2 class="form-header">
-                        Passwort <i class="private"></i>
-                    </h2>
+                    <h2 class="form-header">Passwort <i class="private"></i></h2>
                     <input
                         v-model="password"
                         class="text-input"
@@ -43,11 +38,8 @@
                         placeholder="Neues Passwort"
                     />
                     <span class="disclaimer">
-                        Ihr Passwort stellt den Hauptschlüssel für Ihren Account
-                        dar. <br />
-                        <b>
-                            Geben Sie dieses Passwort niemals an Dritte weiter!
-                        </b>
+                        Ihr Passwort stellt den Hauptschlüssel für Ihren Account dar. <br />
+                        <b> Geben Sie dieses Passwort niemals an Dritte weiter! </b>
                     </span>
                     <input
                         class="confirm-button"

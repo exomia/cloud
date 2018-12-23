@@ -8,17 +8,10 @@
                 <button class="cancel" @click="cancel()"></button>
             </div>
             <div class="bar">
-                <div
-                    class="bar-progress"
-                    :style="{ width: uploadProgress * 100 + '%' }"
-                ></div>
+                <div class="bar-progress" :style="{ width: uploadProgress * 100 + '%' }"></div>
             </div>
             <div class="status">
-                <span>
-                    {{ getFileCount(uploadCount) }},&nbsp;{{
-                        uploadSize | toUnit
-                    }}
-                </span>
+                <span> {{ getFileCount(uploadCount) }},&nbsp;{{ uploadSize | toUnit }} </span>
                 <span>{{ uploadRate | toUnit }}/s</span>
             </div>
         </div>
@@ -53,8 +46,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/OverviewUploadStatus"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/OverviewUploadStatus" lang="scss" scoped></style>

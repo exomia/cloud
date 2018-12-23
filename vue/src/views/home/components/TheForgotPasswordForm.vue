@@ -1,38 +1,33 @@
 <template>
     <div class="center">
-        <form class="login-form">
+        <form>
             <TheLogo></TheLogo>
 
-            <div class="form-section" style="margin-top: 35px">
+            <div class="form-section">
                 <h2>{{ this.$i18n.t('views.home.passwordReset') }}</h2>
+                <span class="subtitle">{{ this.$i18n.t('views.home.passwordResetText') }}</span>
             </div>
 
-            <div class="form-section" style="margin-top: 35px">
-                <h3>{{ this.$i18n.t('views.home.passwordResetText') }}</h3>
-            </div>
+            <LandingInput
+                :placeholder="usernamePH"
+                :error="$v.username.$error"
+                :icon="'user'"
+                @update:value="username = $event"
+            ></LandingInput>
 
-            <div class="form-section" style="margin-top: 25px">
-                <TheHomeInput
-                    :placeholder="usernamePH"
-                    :error="$v.username.$error"
-                    :icon="'user'"
-                    @update:value="username = $event"
-                ></TheHomeInput>
-            </div>
-
-            <div class="form-section" style="margin-top: 32px">
+            <div class="form-section">
                 <input
                     class="confirm"
                     type="button"
                     :value="this.$i18n.t('views.home.send')"
                     @click="send()"
-                >
+                />
                 <input
                     class="subConfirm"
                     type="button"
                     :value="this.$i18n.t('views.home.back')"
                     @click="$parent.login = 'login'"
-                >
+                />
             </div>
         </form>
     </div>
@@ -42,12 +37,12 @@
 /* Imports */
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 import TheLogo from '@/views/home/components/TheLogo'
-import TheHomeInput from '@/views/home/components/TheHomeInput'
+import LandingInput from '@/components/LandingInput.vue'
 
 export default {
     components: {
         TheLogo,
-        TheHomeInput
+        LandingInput
     },
     data() {
         return {
@@ -89,4 +84,4 @@ export default {
 }
 </script>
 
-<style src="@/views/home/components/Forms.scss" lang="scss" scoped></style>
+<style src="@/assets/scss/components/LandingForm.scss" lang="scss" scoped></style>

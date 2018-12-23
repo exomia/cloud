@@ -1,18 +1,12 @@
 import Router from 'koa-router'
 import { deleteDirectory } from '../../../lib/pg/directory'
-import {
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_BAD_REQUEST
-} from '../../../lib/error'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_BAD_REQUEST } from '../../../lib/error'
 
 const router = new Router()
 
 router.delete('/:directory_uuid', async ctx => {
     if (!ctx.params.directory_uuid) {
-        return JERROR_BAD_REQUEST(
-            ctx,
-            "no 'directory_uuid' specified in the params"
-        )
+        return JERROR_BAD_REQUEST(ctx, "no 'directory_uuid' specified in the params")
     }
 
     let result = await deleteDirectory(

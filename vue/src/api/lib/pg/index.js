@@ -1,5 +1,5 @@
 import pg from 'pg'
-import db_config from '../../../.config/.db.config.json'
+import db_config from '../../../../config/db.config.json'
 
 pg.types.setTypeParser(20, 'text', parseInt)
 pg.types.setTypeParser(1700, 'text', parseInt)
@@ -109,11 +109,7 @@ export function lbjoin(...args) {
             values.push(...args[i]._values)
         }
     }
-    if (
-        args.length > 0 &&
-        args[args.length - 1] &&
-        args[args.length - 1] instanceof _LB
-    ) {
+    if (args.length > 0 && args[args.length - 1] && args[args.length - 1] instanceof _LB) {
         qp[qp.length - 1] += args[args.length - 1]._qp[0]
         for (let k = 1; k < args[args.length - 1]._qp.length; ++k) {
             qp.push(args[args.length - 1]._qp[k])

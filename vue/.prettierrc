@@ -1,1 +1,10 @@
-{ "singleQuote": true, "semi": false, "trailingComma": "none" }
+{
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "none",
+    "eslintIntegration": true,
+    "jsxBracketSameLine": true,
+    "jsxSingleQuote": true,
+    "printWidth": 100,
+    "tabWidth": 4
+}

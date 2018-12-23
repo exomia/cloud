@@ -1,8 +1,6 @@
 <template>
     <div class="list-row header info">
-        <div class="icon-wrapper" @click="$emit('close')">
-            <CrossIcon></CrossIcon>
-        </div>
+        <div class="icon-wrapper" @click="$emit('close')"><CrossIcon></CrossIcon></div>
     </div>
 </template>
 

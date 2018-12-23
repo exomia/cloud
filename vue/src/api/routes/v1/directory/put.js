@@ -1,9 +1,6 @@
 import Router from 'koa-router'
 import { addDirectory } from '../../../lib/pg/directory'
-import {
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_BAD_REQUEST
-} from '../../../lib/error'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_BAD_REQUEST } from '../../../lib/error'
 
 const router = new Router()
 
@@ -18,10 +15,7 @@ router.put('/:parent_directory_uuid?', async ctx => {
         ctx.params.parent_directory_uuid
     )
     if (!result) {
-        return JERROR_INTERNAL_SERVER_ERROR(
-            ctx,
-            "check the 'parent_directory_uuid' parameter."
-        )
+        return JERROR_INTERNAL_SERVER_ERROR(ctx, "check the 'parent_directory_uuid' parameter.")
     }
 
     ctx.status = 200

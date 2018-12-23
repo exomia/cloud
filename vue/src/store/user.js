@@ -14,10 +14,7 @@ export const getters = {
 }
 
 export const mutations = {
-    setUserInfo(
-        state,
-        { email = '', scopes = {}, volume = 0, usedVolume = 0 }
-    ) {
+    setUserInfo(state, { email = '', scopes = {}, volume = 0, usedVolume = 0 }) {
         state.email = email
         state.scopes = scopes
         state.volume = Number(volume)

@@ -4,7 +4,10 @@ div.input-wrapper {
     height: 45px;
     border-bottom: 1px solid black;
     align-items: center;
-    margin-bottom: 45px;
+
+    &:first-of-type {
+        margin-bottom: 2rem;
+    }
 
     div.icon-wrapper {
         margin: 0 16px;

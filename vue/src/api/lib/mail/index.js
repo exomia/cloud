@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import cfg from '../../../.config/.mail.config.json'
+import cfg from '../../../../config/mail.config.json'
 
 const transporter = nodemailer.createTransport(cfg)
 

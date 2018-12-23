@@ -57,10 +57,7 @@ export default {
                 if (notify.active) {
                     this.$set(notify, 'active', false)
                     // Reset when its the last item in array
-                    if (
-                        notify ===
-                        this.notifications[this.notifications.length - 1]
-                    ) {
+                    if (notify === this.notifications[this.notifications.length - 1]) {
                         inactive = true
                     }
                     break
@@ -76,8 +73,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/NotificationList.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/NotificationList.scss" lang="scss" scoped></style>

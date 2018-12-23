@@ -48,8 +48,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/LangSwitcher.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/LangSwitcher.scss" lang="scss" scoped></style>

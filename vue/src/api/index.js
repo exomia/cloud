@@ -4,11 +4,7 @@ import Router from 'koa-router'
 
 import { initialize } from './routes'
 import { jwt_init } from './lib/jwt'
-import {
-    JERROR_NOT_FOUND,
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_FORBIDDEN
-} from './lib/error'
+import { JERROR_NOT_FOUND, JERROR_INTERNAL_SERVER_ERROR, JERROR_FORBIDDEN } from './lib/error'
 
 export default server => {
     const app = server.getApp()

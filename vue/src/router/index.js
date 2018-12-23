@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-/* Views */
-import Home from '@/views/home/'
-
 /* Middleware */
 import checkAuth from '@/middlewares/checkAuth'
 import authRedirect from '@/middlewares/authRedirect'
@@ -18,16 +15,18 @@ export default () => {
             {
                 path: '/',
                 name: 'home',
-                component: Home,
+                component: () => import(/* webpackChunkName: "home" */ '@/views/home/'),
                 meta: {
                     middlewares: [authRedirect]
                 }
             },
+            /* Password Reset */
             {
-                path: '/trash',
-                name: 'trash',
+                path: '/resetPassword/:token',
+                name: 'resetPassword',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/resetPassword/'),
                 meta: {
-                    middlewares: [checkAuth]
+                    middlewares: [authRedirect]
                 }
             },
             /* Overview */
@@ -43,14 +42,12 @@ export default () => {
             {
                 path: '/imprint',
                 name: 'imprint',
-                component: () =>
-                    import(/* webpackChunkName: "legal" */ '@/views/imprint/')
+                component: () => import(/* webpackChunkName: "legal" */ '@/views/imprint/')
             },
             {
                 path: '/privacy',
                 name: 'privacy',
-                component: () =>
-                    import(/* webpackChunkName: "legal" */ '@/views/privacy/')
+                component: () => import(/* webpackChunkName: "legal" */ '@/views/privacy/')
             }
         ]
     })

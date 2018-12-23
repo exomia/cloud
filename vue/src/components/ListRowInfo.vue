@@ -2,10 +2,7 @@
     <div class="list-row row-wrapper info">
         <!-- Type -->
         <div class="infobox iconbox">
-            <DirectoryIcon
-                v-if="type === 'Directory'"
-                class="type"
-            ></DirectoryIcon>
+            <DirectoryIcon v-if="type === 'Directory'" class="type"></DirectoryIcon>
             <FileIcon v-else-if="type === 'File'" class="type"></FileIcon>
         </div>
         <!-- Title -->
@@ -85,8 +82,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/ListRowInfo.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/ListRowInfo.scss" lang="scss" scoped></style>
