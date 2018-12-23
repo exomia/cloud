@@ -7,10 +7,7 @@ const router = new Router()
 
 router.post('/', async ctx => {
     if (!ctx.request.body.usernameOrEmail) {
-        return JERROR_BAD_REQUEST(
-            ctx,
-            'no username and or no email specified in the request.'
-        )
+        return JERROR_BAD_REQUEST(ctx, 'no username and or no email specified in the request.')
     }
     const res = await getUserInformation(ctx.request.body.usernameOrEmail)
     if (res) {

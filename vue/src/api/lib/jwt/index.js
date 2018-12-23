@@ -7,11 +7,7 @@ export async function sign(ctx, { email, password, scopes }) {
     ctx.set('Access-Control-Allow-Origin', '*')
     ctx.set(
         'x-token',
-        jwt.sign(
-            { email, scopes },
-            config.SECRET_T + password,
-            config.jwt_options_t
-        )
+        jwt.sign({ email, scopes }, config.SECRET_T + password, config.jwt_options_t)
     )
     ctx.set(
         'x-refresh-token',
@@ -38,11 +34,7 @@ export async function jwt_init(ctx, next) {
     }
 
     try {
-        ctx.jwt.payload = jwt.verify(
-            token,
-            config.SECRET_T + password,
-            config.jwt_verify_options
-        )
+        ctx.jwt.payload = jwt.verify(token, config.SECRET_T + password, config.jwt_verify_options)
         ctx.jwt.valid = true
         return next()
     } catch (err) {
@@ -57,11 +49,7 @@ export async function jwt_init(ctx, next) {
     }
 
     try {
-        jwt.verify(
-            refreshToken,
-            config.SECRET_RT + password,
-            config.jwt_verify_options
-        )
+        jwt.verify(refreshToken, config.SECRET_RT + password, config.jwt_verify_options)
         sign(ctx, { ...payload, password })
         ctx.jwt.payload = payload
         ctx.jwt.valid = true

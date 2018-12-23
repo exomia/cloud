@@ -1,16 +1,9 @@
 import { query, lb, lbjoin, e } from '../'
 
-export async function addDirectory(
-    usernameOrEmail,
-    name,
-    parent_directory_uuid
-) {
+export async function addDirectory(usernameOrEmail, name, parent_directory_uuid) {
     let result = false
     if (parent_directory_uuid) {
-        const dires = await getDirectoryInfo(
-            usernameOrEmail,
-            parent_directory_uuid
-        )
+        const dires = await getDirectoryInfo(usernameOrEmail, parent_directory_uuid)
         if (!dires) {
             return false
         }
@@ -47,11 +40,7 @@ export async function addDirectory(
     return false
 }
 
-export async function deleteDirectory(
-    usernameOrEmail,
-    directory_uuid,
-    force_delete
-) {
+export async function deleteDirectory(usernameOrEmail, directory_uuid, force_delete) {
     const result = force_delete
         ? await query`
             DELETE FROM private."directory" d
@@ -69,10 +58,7 @@ export async function deleteDirectory(
     return result && result.rowCount > 0
 }
 
-export async function listAllDirectories(
-    usernameOrEmail,
-    parent_directory_uuid
-) {
+export async function listAllDirectories(usernameOrEmail, parent_directory_uuid) {
     const result = await query`
         SELECT
           d."uuid",
@@ -134,10 +120,7 @@ export async function updateDirectory(
     }
     if (new_parent_directory_uuid !== undefined) {
         if (new_parent_directory_uuid !== 'NULL') {
-            const dires = getDirectoryInfo(
-                usernameOrEmail,
-                new_parent_directory_uuid
-            )
+            const dires = getDirectoryInfo(usernameOrEmail, new_parent_directory_uuid)
             if (!dires) {
                 return false
             }
@@ -156,9 +139,7 @@ export async function updateDirectory(
                 }`
             )
         } else {
-            updates.push(
-                lb`"parent_directory_uuid" = NULL, "path_info_json" = '[]'`
-            )
+            updates.push(lb`"parent_directory_uuid" = NULL, "path_info_json" = '[]'`)
         }
     }
     if (!updates.length) {

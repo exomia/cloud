@@ -33,22 +33,14 @@ export function initialize(router) {
                     }
                     if (
                         ar.access === 0 ||
-                        (ar.access & ctx.jwt.payload.scopes[ar.scope]) ===
-                            ar.access
+                        (ar.access & ctx.jwt.payload.scopes[ar.scope]) === ar.access
                     ) {
                         return next()
                     }
-                    return JERROR_FORBIDDEN(
-                        ctx,
-                        'invalid access to the resource.'
-                    )
+                    return JERROR_FORBIDDEN(ctx, 'invalid access to the resource.')
                 })
             }
-            router.use(
-                `/api/${rpath}`,
-                ar.router.routes(),
-                ar.router.allowedMethods()
-            )
+            router.use(`/api/${rpath}`, ar.router.routes(), ar.router.allowedMethods())
             console.log(
                 `${filename.padEnd(20, ' ')} - [${`${`scope ${ar.scope}`.padEnd(
                     20,

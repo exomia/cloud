@@ -40,8 +40,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/Notification.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/Notification.scss" lang="scss" scoped></style>

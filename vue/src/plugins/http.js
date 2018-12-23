@@ -11,9 +11,7 @@ export default {
     beforeCreate(context) {
         // Create axios client
         const http = axios.create({
-            baseURL: process.env.VUE_APP_API_URL
-                ? process.env.VUE_APP_API_URL
-                : '/api'
+            baseURL: process.env.VUE_APP_API_URL ? process.env.VUE_APP_API_URL : '/api'
         })
 
         // Use request interceptors

@@ -50,14 +50,12 @@ export default () => {
             {
                 path: '/imprint',
                 name: 'imprint',
-                component: () =>
-                    import(/* webpackChunkName: "legal" */ '@/views/imprint/')
+                component: () => import(/* webpackChunkName: "legal" */ '@/views/imprint/')
             },
             {
                 path: '/privacy',
                 name: 'privacy',
-                component: () =>
-                    import(/* webpackChunkName: "legal" */ '@/views/privacy/')
+                component: () => import(/* webpackChunkName: "legal" */ '@/views/privacy/')
             }
         ]
     })

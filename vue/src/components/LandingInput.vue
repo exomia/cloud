@@ -64,8 +64,4 @@ export default {
 }
 </script>
 
-<style
-    src="@/assets/scss/components/LandingInput.scss"
-    lang="scss"
-    scoped
-></style>
+<style src="@/assets/scss/components/LandingInput.scss" lang="scss" scoped></style>

@@ -5,19 +5,14 @@
             <TheOverviewNavigation></TheOverviewNavigation>
             <section class="list">
                 <div class="side">
-                    <ListHeader
-                        :hide-informations="hideInformations"
-                    ></ListHeader>
+                    <ListHeader :hide-informations="hideInformations"></ListHeader>
                     <ListHeaderInfo
                         v-if="hideInformations"
                         @close="hideInformations = false"
                     ></ListHeaderInfo>
                 </div>
                 <div class="side">
-                    <div
-                        class="row-wrapper"
-                        :class="!hideInformations ? 'info-active' : ''"
-                    >
+                    <div class="row-wrapper" :class="!hideInformations ? 'info-active' : ''">
                         <ListRow
                             v-for="el in getDirectoryData"
                             :key="'El-' + el.uuid"
@@ -61,9 +56,7 @@ import TheOverviewSidebar from '@/views/_overview/components/TheOverviewSidebar'
 
 export default {
     async asyncData({ store, http, route }) {
-        const { data } = await http.get(
-            `/v1/directory/${route.params.dir || ''}`
-        )
+        const { data } = await http.get(`/v1/directory/${route.params.dir || ''}`)
         if (data) {
             await store.commit('setDirectoryData', data)
         }
@@ -88,12 +81,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters([
-            'getDirectoryData',
-            'getDirectoryCount',
-            'getFileCount',
-            'sizeSum'
-        ])
+        ...mapGetters(['getDirectoryData', 'getDirectoryCount', 'getFileCount', 'sizeSum'])
     },
     methods: {
         openInfo: function(data) {

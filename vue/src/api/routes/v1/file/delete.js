@@ -1,9 +1,6 @@
 import Router from 'koa-router'
 import { deleteFile } from '../../../lib/pg/file'
-import {
-    JERROR_INTERNAL_SERVER_ERROR,
-    JERROR_BAD_REQUEST
-} from '../../../lib/error'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_BAD_REQUEST } from '../../../lib/error'
 
 const router = new Router()
 

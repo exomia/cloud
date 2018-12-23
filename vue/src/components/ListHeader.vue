@@ -6,13 +6,7 @@
             <span>Typ</span>
             <DropdownIcon
                 class="dropdown"
-                :class="[
-                    isOrderTypeActive
-                        ? orderTypeDesc
-                            ? 'shown'
-                            : 'shown active'
-                        : ''
-                ]"
+                :class="[isOrderTypeActive ? (orderTypeDesc ? 'shown' : 'shown active') : '']"
             ></DropdownIcon>
         </div>
 
@@ -24,55 +18,26 @@
             <span>{{ $t('components.ListHeader.name') }}</span>
             <DropdownIcon
                 class="dropdown"
-                :class="[
-                    isOrderNameActive
-                        ? orderNameDesc
-                            ? 'shown'
-                            : 'shown active'
-                        : ''
-                ]"
+                :class="[isOrderNameActive ? (orderNameDesc ? 'shown' : 'shown active') : '']"
             ></DropdownIcon>
         </div>
 
-        <div
-            class="dynamic-list-menu"
-            :style="hideInformations ? 'width: auto' : ''"
-        >
+        <div class="dynamic-list-menu" :style="hideInformations ? 'width: auto' : ''">
             <div class="list-item"></div>
 
-            <div
-                v-if="!hideInformations"
-                class="list-item"
-                @click="toggleOrderSize()"
-            >
+            <div v-if="!hideInformations" class="list-item" @click="toggleOrderSize()">
                 <span>{{ $t('components.ListHeader.size') }}</span>
                 <DropdownIcon
                     class="dropdown"
-                    :class="[
-                        isOrderSizeActive
-                            ? orderSizeDesc
-                                ? 'shown'
-                                : 'shown active'
-                            : ''
-                    ]"
+                    :class="[isOrderSizeActive ? (orderSizeDesc ? 'shown' : 'shown active') : '']"
                 ></DropdownIcon>
             </div>
 
-            <div
-                v-if="!hideInformations"
-                class="list-item"
-                @click="toggleOrderDate()"
-            >
+            <div v-if="!hideInformations" class="list-item" @click="toggleOrderDate()">
                 <span>{{ $t('components.ListHeader.date') }}</span>
                 <DropdownIcon
                     class="dropdown"
-                    :class="[
-                        isOrderDateActive
-                            ? orderDateDesc
-                                ? 'shown'
-                                : 'shown active'
-                            : ''
-                    ]"
+                    :class="[isOrderDateActive ? (orderDateDesc ? 'shown' : 'shown active') : '']"
                 ></DropdownIcon>
             </div>
         </div>

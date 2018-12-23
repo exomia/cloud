@@ -10,10 +10,7 @@ router.get('/:file_uuid', async ctx => {
         return JERROR_NO_CONTENT(ctx, "no 'file_uuid' specified in the params")
     }
 
-    const result = await getFileInfo(
-        ctx.jwt.payload.email,
-        ctx.params.file_uuid
-    )
+    const result = await getFileInfo(ctx.jwt.payload.email, ctx.params.file_uuid)
     if (!result) {
         return JERROR_NO_CONTENT(ctx, "check the 'file_uuid' parameter.")
     }

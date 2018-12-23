@@ -7,10 +7,7 @@ const router = new Router()
 
 router.post('/', async ctx => {
     if (ctx.request.body.username && ctx.request.body.password) {
-        const result = await checkLoginData(
-            ctx.request.body.username,
-            ctx.request.body.password
-        )
+        const result = await checkLoginData(ctx.request.body.username, ctx.request.body.password)
         if (result) {
             sign(ctx, result)
             ctx.status = 200
@@ -25,10 +22,7 @@ router.post('/', async ctx => {
         }
         return JERROR_BAD_REQUEST(ctx, 'username or password is wrong.')
     }
-    return JERROR_BAD_REQUEST(
-        ctx,
-        'no username and or no password specified in the request.'
-    )
+    return JERROR_BAD_REQUEST(ctx, 'no username and or no password specified in the request.')
 })
 
 export default { router, access: 0 }

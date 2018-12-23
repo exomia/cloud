@@ -6,9 +6,7 @@
             <!-- Default form -->
             <TheLoginForm v-if="login === 'login'"></TheLoginForm>
             <!-- Forgot password step 1 -->
-            <TheForgotPasswordForm
-                v-if="login === 'pw_reset'"
-            ></TheForgotPasswordForm>
+            <TheForgotPasswordForm v-if="login === 'pw_reset'"></TheForgotPasswordForm>
             <!-- Forgot password step 2 -->
             <TheForgotPasswordFormSuccess
                 v-if="login === 'pw_reset_success'"
