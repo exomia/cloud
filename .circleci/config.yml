@@ -16,7 +16,7 @@ jobs:
                   POSTGRES_DB: root
 
         environment:
-            DOCKER_HOST: 127.0.0.1:8080:8080
+            DOCKER_HOST: http://127.0.0.1:8080:8080
 
         steps:
             - checkout
