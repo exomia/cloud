@@ -124,9 +124,14 @@ module.exports = {
                 }
             })
     },
+
     pluginOptions: {
         i18n: {
             localeDir: 'i18n/locales'
         }
+    },
+
+    pwa: {
+        name: 'Exomia Cloud'
     }
 }
