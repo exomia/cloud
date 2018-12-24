@@ -49,11 +49,11 @@ module.exports = {
                             bail: false, // Ignore errors on corrupted images
                             plugins: [
                                 imageminMozjpeg({
-                                    quality: '75',
+                                    quality: 75,
                                     dcScanOpt: 2
                                 }),
                                 imageminPngquant({
-                                    quality: '75',
+                                    quality: 75,
                                     strip: true
                                 })
                             ]
@@ -69,7 +69,7 @@ module.exports = {
                     {
                         match: /(jpe?g|png)$/,
                         webp: {
-                            quality: 80,
+                            quality: 75,
                             inject: true
                         }
                     }
