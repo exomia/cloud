@@ -1,8 +1,7 @@
 /* Includes */
 const ImageminPlugin = require('imagemin-webpack')
-const imageminGifsicle = require('imagemin-gifsicle')
 const imageminMozjpeg = require('imagemin-mozjpeg')
-const imageminOptipng = require('imagemin-optipng')
+const imageminPngquant = require('imagemin-pngquant')
 //
 const WebPWebpackPlugin = require('webp-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
@@ -35,7 +34,6 @@ module.exports = {
                 .options({
                     rules: {
                         emitFile: true // Don't forget emit images
-                        // name: 'img/[name].[hash:8].[ext]'
                     }
                 })
                 .end()
@@ -45,21 +43,18 @@ module.exports = {
                 .use(ImageminPlugin)
                 .tap(() => [
                     {
-                        // name: '/img/[name].[hash:8].[ext]',
                         imageminOptions: {
                             loader: false,
                             cache: true,
                             bail: false, // Ignore errors on corrupted images
                             plugins: [
-                                imageminGifsicle({
-                                    interlaced: true
-                                }),
                                 imageminMozjpeg({
                                     quality: '75',
                                     dcScanOpt: 2
                                 }),
-                                imageminOptipng({
-                                    optimizationLevel: 5
+                                imageminPngquant({
+                                    quality: '75',
+                                    strip: true
                                 })
                             ]
                         }
