@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <RouterView v-if="!$errorHandler.error" />
+        <RouterView v-if="!$errorHandler.error"/>
         <ErrorHandler v-else></ErrorHandler>
         <NotificationList></NotificationList>
     </div>
@@ -29,14 +29,56 @@ export default {
                     content: 'text/html; charset=utf-8'
                 },
                 { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
-                // { 'http-equiv': 'Accept-CH', content: 'DPR, Viewport-Width, Width' },
-                { name: 'description', content: '' },
+
+                {
+                    name: 'description',
+                    content:
+                        'A fast allround solution to a modern self-hosted cloud that aims to be super fast, slim and serves a crisp user experience.'
+                },
                 { name: 'keywords', content: '' },
                 { name: 'author', content: 'exomia.com' },
-                { name: 'copyright', content: 'exomia.com' }
+                { name: 'copyright', content: 'exomia.com' },
+                // PWA
+                {
+                    name: 'apple-mobile-web-app-title',
+                    content: 'Exomia Cloud'
+                },
+                {
+                    name: 'application-name',
+                    content: 'Exomia Cloud'
+                },
+                {
+                    name: 'msapplication-TileColor',
+                    content: '#ffffff'
+                },
+                {
+                    name: 'theme-color',
+                    content: '#ffffff'
+                }
             ],
             link: [
-                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+                // PWA & Favicons
+                { rel: 'manifest', href: './favicons/site.webmanifest' },
+                { rel: 'mask-icon', href: './favicons/safari-pinned-tab.svg' },
+                {
+                    rel: 'apple-touch-icon',
+                    sizes: '180x180',
+                    href: './favicons/apple-touch-icon.png'
+                },
+                {
+                    rel: 'icon',
+                    type: 'image/png',
+                    sizes: '32x32',
+                    href: './favicons/favicon-32x32.png'
+                },
+                {
+                    rel: 'icon',
+                    type: 'image/png',
+                    sizes: '16x16',
+                    href: './favicons/favicon-16x16.png'
+                },
+                { rel: 'icon', type: 'image/x-icon', href: './favicons/favicon.ico' },
+                // Fonts
                 {
                     rel: 'preload',
                     as: 'font',

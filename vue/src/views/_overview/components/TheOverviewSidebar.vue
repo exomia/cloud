@@ -48,7 +48,7 @@
 import { remove as removeCookie } from 'js-cookie'
 
 /* SVG */
-import LogoIcon from '@/assets/img/icon/overview/logo.svg'
+import LogoIcon from '@/assets/img/logo.svg'
 import ShareIcon from '@/assets/img/icon/overview/share.svg'
 import SettingsIcon from '@/assets/img/icon/overview/settings.svg'
 import LogoutIcon from '@/assets/img/icon/overview/logout.svg'

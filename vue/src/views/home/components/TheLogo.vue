@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import LogoIcon from '@/assets/img/icon/login/logo.svg'
+import LogoIcon from '@/assets/img/logo.svg'
 
 export default {
     components: {
