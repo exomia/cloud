@@ -3,8 +3,10 @@ import { KoaAdapter } from '@uvue/server'
 export default {
     adapter: KoaAdapter,
     plugins: [
+        // Serve static files
+        '@uvue/server/plugins/static',
         // Compress responses
-        '@uvue/server/plugins/gzip',
+        // '@uvue/server/plugins/gzip',
         // Parse cookies
         [
             '@uvue/server/plugins/cookie',
@@ -14,8 +16,6 @@ export default {
         ],
         // Modern build
         '@uvue/server/plugins/modernBuild',
-        // Serve static files
-        '@uvue/server/plugins/static',
         // Init api
         './src/api/install'
     ],

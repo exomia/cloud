@@ -28,13 +28,11 @@ module.exports = {
 
             config.module
                 .rule('images')
-                .test(/\.(png|jpe?g|gif|webp)(\?.*)?$/)
+                .test(/\.(png|jpe?g|webp)(\?.*)?$/)
                 .use('file-loader')
                 .loader('file-loader')
                 .options({
-                    rules: {
-                        emitFile: true // Don't forget emit images
-                    }
+                    name: 'images/[hash].[ext]'
                 })
                 .end()
 
@@ -43,10 +41,10 @@ module.exports = {
                 .use(ImageminPlugin)
                 .tap(() => [
                     {
+                        name: '[path][name].[ext]',
+                        cache: true,
+                        bail: false, // Ignore errors on corrupted images
                         imageminOptions: {
-                            loader: false,
-                            cache: true,
-                            bail: false, // Ignore errors on corrupted images
                             plugins: [
                                 imageminMozjpeg({
                                     quality: 75,
@@ -127,6 +125,10 @@ module.exports = {
     },
 
     pwa: {
-        name: 'Exomia Cloud'
+        workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+            swSrc: './public/sw.js',
+            importWorkboxFrom: 'local'
+        }
     }
 }

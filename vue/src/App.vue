@@ -40,8 +40,16 @@ export default {
                 { name: 'copyright', content: 'exomia.com' },
                 // PWA
                 {
+                    name: 'apple-mobile-web-app-capable',
+                    content: 'yes'
+                },
+                {
                     name: 'apple-mobile-web-app-title',
                     content: 'Exomia Cloud'
+                },
+                {
+                    name: 'apple-mobile-web-app-status-bar-style',
+                    content: 'black'
                 },
                 {
                     name: 'application-name',
@@ -58,7 +66,7 @@ export default {
             ],
             link: [
                 // PWA & Favicons
-                { rel: 'manifest', href: './favicons/site.webmanifest' },
+                { rel: 'manifest', href: './manifest.json' },
                 { rel: 'mask-icon', href: './favicons/safari-pinned-tab.svg' },
                 {
                     rel: 'apple-touch-icon',
@@ -78,28 +86,29 @@ export default {
                     href: './favicons/favicon-16x16.png'
                 },
                 { rel: 'icon', type: 'image/x-icon', href: './favicons/favicon.ico' },
-                // Fonts
-                {
-                    rel: 'preload',
-                    as: 'font',
-                    href: '/assets/fonts/Roboto-Light.woff2',
-                    type: 'font/woff2',
-                    crossorigin: 'anonymous'
-                },
-                {
-                    rel: 'preload',
-                    as: 'font',
-                    href: '/assets/fonts/Roboto-Regular.woff2',
-                    type: 'font/woff2',
-                    crossorigin: 'anonymous'
-                },
-                {
-                    rel: 'preload',
-                    as: 'font',
-                    href: '/assets/fonts/Roboto-Condensed.woff2',
-                    type: 'font/woff2',
-                    crossorigin: 'anonymous'
-                }
+                { rel: 'shortcut icon', type: 'image/x-icon', href: './favicons/favicon.ico' }
+                // // Fonts
+                // {
+                //     rel: 'preload',
+                //     as: 'font',
+                //     href: '/assets/fonts/Roboto-Light.woff2',
+                //     type: 'font/woff2',
+                //     crossorigin: 'anonymous'
+                // },
+                // {
+                //     rel: 'preload',
+                //     as: 'font',
+                //     href: '/assets/fonts/Roboto-Regular.woff2',
+                //     type: 'font/woff2',
+                //     crossorigin: 'anonymous'
+                // },
+                // {
+                //     rel: 'preload',
+                //     as: 'font',
+                //     href: '/assets/fonts/Roboto-Condensed.woff2',
+                //     type: 'font/woff2',
+                //     crossorigin: 'anonymous'
+                // }
             ]
         }
     },
