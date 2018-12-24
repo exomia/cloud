@@ -11,7 +11,7 @@
 </p>
 
 <h1 align="center">Exomia Cloud</h1>
-<p align="center">A fast allround solution to a modern private cloud that aims to be super fast, slim and serves a crisp user experience.</p>
+<p align="center">A fast allround solution to a modern self-hosted cloud that aims to be super fast, slim and serves a crisp user experience.</p>
 
 ## Introduction
 
