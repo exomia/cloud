@@ -10,7 +10,7 @@ self.addEventListener('fetch', function(e) {
     )
 })
 
-workbox.core.setCacheNameDetails({ prefix: 'exomia-cloud' })
+// workbox.core.setCacheNameDetails({ prefix: 'exomia-cloud' })
 
 // Cache images
 workbox.routing.registerRoute(
