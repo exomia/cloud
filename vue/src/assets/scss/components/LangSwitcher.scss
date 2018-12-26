@@ -2,12 +2,16 @@ a {
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 0 16px;
+    padding: 0 1rem;
     z-index: 1;
+
     svg.flag {
-        height: 15px;
+        position: relative;
+        height: 1rem;
         margin-right: 0.5rem;
+        top: -1px;
     }
+
     span.lang {
         user-select: none;
     }

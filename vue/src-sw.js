@@ -1,22 +1,24 @@
-self.addEventListener('fetch', function(e) {
-    e.respondWith(
-        caches.match(e.request).then(function(res) {
-            if (res) {
-                return res
-            } else {
-                return fetch(e.request)
-            }
-        })
-    )
-})
+// self.addEventListener('fetch', function(e) {
+//     e.respondWith(
+//         caches.match(e.request).then(function(res) {
+//             if (res) {
+//                 return res
+//             } else {
+//                 return fetch(e.request)
+//             }
+//         })
+//     )
+// })
 
-// workbox.core.setCacheNameDetails({ prefix: 'exomia-cloud' })
+// Force production builds
+workbox.setConfig({ debug: true })
+workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug)
 
 // Cache images
 workbox.routing.registerRoute(
     /.*\.(?:png|jpe?g|webp|svg)/,
     workbox.strategies.cacheFirst({
-        // cacheName: 'images',
+        cacheName: 'images',
         plugins: [
             new workbox.expiration.Plugin({
                 // Cache only 20 images
@@ -32,7 +34,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
     /.*\.css/,
     workbox.strategies.staleWhileRevalidate({
-        // cacheName: 'css'
+        cacheName: 'css'
     })
 )
 
@@ -40,7 +42,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
     /.*\.js/,
     workbox.strategies.networkFirst({
-        // cacheName: 'js'
+        cacheName: 'js'
     })
 )
 

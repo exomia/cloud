@@ -18,6 +18,10 @@ div.center {
         width: 250px;
         height: 425px;
 
+        @media screen and (max-width: $break-small) {
+            height: 395px;
+        }
+
         div.form-section {
             display: flex;
             flex-direction: column;
