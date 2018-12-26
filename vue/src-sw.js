@@ -1,15 +1,3 @@
-// self.addEventListener('fetch', function(e) {
-//     e.respondWith(
-//         caches.match(e.request).then(function(res) {
-//             if (res) {
-//                 return res
-//             } else {
-//                 return fetch(e.request)
-//             }
-//         })
-//     )
-// })
-
 // Force production builds
 workbox.setConfig({ debug: true })
 workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug)
@@ -22,7 +10,7 @@ workbox.routing.registerRoute(
         plugins: [
             new workbox.expiration.Plugin({
                 // Cache only 20 images
-                maxEntries: 40,
+                maxEntries: 20,
                 // Cache for a maximum of a week
                 maxAgeSeconds: 7 * 24 * 60 * 60
             })
