@@ -1,3 +1,6 @@
+/*global workbox*/
+/*eslint no-undef: "error"*/
+
 // Force production builds
 workbox.setConfig({ debug: true })
 workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug)
