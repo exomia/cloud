@@ -49,10 +49,10 @@ import { remove as removeCookie } from 'js-cookie'
 
 /* SVG */
 import LogoIcon from '@/assets/img/logo.svg'
-import ShareIcon from '@/assets/img/icon/overview/share.svg'
-import SettingsIcon from '@/assets/img/icon/overview/settings.svg'
-import LogoutIcon from '@/assets/img/icon/overview/logout.svg'
-import FileIcon from '@/assets/img/icon/overview/file.svg'
+import ShareIcon from '@/assets/img/icon/share.svg'
+import SettingsIcon from '@/assets/img/icon/settings.svg'
+import LogoutIcon from '@/assets/img/icon/logout.svg'
+import FileIcon from '@/assets/img/icon/file.svg'
 
 export default {
     components: {

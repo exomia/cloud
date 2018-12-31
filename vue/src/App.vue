@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <RouterView v-if="!$errorHandler.error"/>
+        <RouterView v-if="!$errorHandler.error" />
         <ErrorHandler v-else></ErrorHandler>
         <NotificationList></NotificationList>
     </div>

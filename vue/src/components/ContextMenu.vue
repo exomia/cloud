@@ -22,7 +22,7 @@
 <script>
 /* SVG */
 import InfoIcon from '@/assets/img/icon/information.svg'
-import ShareIcon from '@/assets/img/icon/overview/share.svg'
+import ShareIcon from '@/assets/img/icon/share.svg'
 import EditIcon from '@/assets/img/icon/edit.svg'
 import DownloadIcon from '@/assets/img/icon/download.svg'
 import RemoveIcon from '@/assets/img/icon/trash.svg'

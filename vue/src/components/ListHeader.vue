@@ -49,7 +49,7 @@
 import { mapGetters } from 'vuex'
 
 /* SVG */
-import DropdownIcon from '@/assets/img/icon/overview/dropdown.svg'
+import DropdownIcon from '@/assets/img/icon/dropdown.svg'
 
 export default {
     components: {

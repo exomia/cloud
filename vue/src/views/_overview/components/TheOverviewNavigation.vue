@@ -26,8 +26,8 @@
 
 <script>
 /* SVG */
-import HomeIcon from '@/assets/img/icon/overview/home.svg'
-import PathArrowIcon from '@/assets/img/icon/overview/path-arrow.svg'
+import HomeIcon from '@/assets/img/icon/home.svg'
+import PathArrowIcon from '@/assets/img/icon/path-arrow.svg'
 
 export default {
     components: {

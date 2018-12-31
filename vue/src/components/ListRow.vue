@@ -43,9 +43,9 @@
 
 <script>
 /* SVG */
-import FileIcon from '@/assets/img/icon/overview/file.svg'
-import DirectoryIcon from '@/assets/img/icon/overview/directory.svg'
-import ExtendedMenuIcon from '@/assets/img/icon/overview/extended-menu.svg'
+import FileIcon from '@/assets/img/icon/file.svg'
+import DirectoryIcon from '@/assets/img/icon/directory.svg'
+import ExtendedMenuIcon from '@/assets/img/icon/extended-menu.svg'
 
 /* Components */
 import ContextMenu from '@/components/ContextMenu'

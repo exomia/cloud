@@ -34,11 +34,11 @@
 
 <script>
 /* SVG */
-import FileIcon from '@/assets/img/icon/overview/file.svg'
-import DirectoryIcon from '@/assets/img/icon/overview/directory.svg'
+import FileIcon from '@/assets/img/icon/file.svg'
+import DirectoryIcon from '@/assets/img/icon/directory.svg'
 //
 import DownloadIcon from '@/assets/img/icon/download.svg'
-import ShareIcon from '@/assets/img/icon/overview/share.svg'
+import ShareIcon from '@/assets/img/icon/share.svg'
 import EditIcon from '@/assets/img/icon/edit.svg'
 import RemoveIcon from '@/assets/img/icon/trash.svg'
 

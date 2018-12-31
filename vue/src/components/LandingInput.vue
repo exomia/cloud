@@ -18,8 +18,8 @@
 
 <script>
 /* SVG */
-import UserIcon from '@/assets/img/icon/login/user.svg'
-import LockIcon from '@/assets/img/icon/login/lock.svg'
+import UserIcon from '@/assets/img/icon/user.svg'
+import LockIcon from '@/assets/img/icon/lock.svg'
 
 export default {
     components: {

@@ -1,20 +1,20 @@
 <template>
     <a @click="switchLang()">
-        <FlagEN v-if="$i18n.locale === 'en'" class="flag" />
-        <FlagDE v-if="$i18n.locale === 'de'" class="flag" />
+        <AmericanFlag v-if="$i18n.locale === 'en'" class="flag" />
+        <GermanFlag v-if="$i18n.locale === 'de'" class="flag" />
         <span class="lang">{{ upperLang }}</span>
     </a>
 </template>
 
 <script>
 /* SVG */
-import FlagEN from '@/assets/img/icon/login/lang_en.svg'
-import FlagDE from '@/assets/img/icon/login/lang_de.svg'
+import AmericanFlag from '@/assets/img/icon/american_flag.svg'
+import GermanFlag from '@/assets/img/icon/german_flag.svg'
 
 export default {
     components: {
-        FlagEN,
-        FlagDE
+        AmericanFlag,
+        GermanFlag
     },
     data() {
         return {
