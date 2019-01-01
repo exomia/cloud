@@ -135,10 +135,18 @@ export default {
         },
         onClick: function() {
             if (this.type === 'Directory') {
+                /* Open directory */
                 this.$router.push({
                     name: 'overview-dir',
                     params: { dir: this.uuid }
                 })
+            } else if (this.type === 'File') {
+                /* Starts file download */
+                const downloadFrame = document.createElement('iframe')
+                downloadFrame.style = 'display: none;'
+                downloadFrame.src = `${process.env.VUE_APP_API_URL}/v1/file/${this.uuid}`
+                document.querySelector('body').appendChild(downloadFrame)
+                setTimeout(() => document.querySelector('body').removeChild(downloadFrame), 1000)
             }
         }
     }

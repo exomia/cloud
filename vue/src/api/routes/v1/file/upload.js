@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import { addFile } from '../../../lib/pg/file'
-import { JERROR_INTERNAL_SERVER_ERROR, JERROR_BAD_REQUEST } from '../../../lib/error'
+import { /*JERROR_INTERNAL_SERVER_ERROR,*/ JERROR_BAD_REQUEST } from '../../../lib/error'
 import { STATUS_QUEUED } from '../../../lib/clamav'
 
 import path from 'path'

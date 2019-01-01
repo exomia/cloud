@@ -18,7 +18,7 @@ export async function sign(ctx, { email, password, scopes }) {
 export async function jwt_init(ctx, next) {
     ctx.jwt = { valid: false, payload: {} }
 
-    const token = ctx.get('x-token')
+    const token = ctx.get('x-token') || ctx.cookies.get('x-token')
     if (!token) {
         return next()
     }
@@ -43,7 +43,7 @@ export async function jwt_init(ctx, next) {
         }
     }
 
-    const refreshToken = ctx.get('x-refresh-token')
+    const refreshToken = ctx.get('x-refresh-token') || ctx.cookies.get('x-refresh-token')
     if (!refreshToken) {
         return next()
     }

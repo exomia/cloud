@@ -6,9 +6,7 @@
                     <UploadIcon></UploadIcon>
                     <span>{{ uploadFilename }}</span>
                 </div>
-                <button @click="cancel()">
-                    <CrossIcon></CrossIcon>
-                </button>
+                <button @click="cancel()"><CrossIcon></CrossIcon></button>
             </div>
             <div class="bar">
                 <div class="bar-progress" :style="{ width: uploadProgress * 100 + '%' }"></div>
