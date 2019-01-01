@@ -15,12 +15,12 @@ const router = new Router()
 router.put('/:directory_uuid?', upload.single('upload-file'), async ctx => {
     // if (ctx.req.body.replace) {
     const file = ctx.req.file
-    const fi = path.parse(file.originalname)
+    const origFile = path.parse(file.originalname)
     const result = await addFile(
         ctx.jwt.payload.email,
         ctx.params.directory_uuid,
-        fi.name,
-        fi.ext,
+        origFile.name,
+        origFile.ext,
         file.filename,
         file.mimetype,
         file.size
