@@ -5,14 +5,14 @@ export async function addUser(username, email, password, scopes, volume) {
         INSERT INTO private.
         "user"("username", "email", "password", "scopes", "volume")
         VALUES (${username}, ${email}, crypt(${password}, gen_salt('bf', 8)), ${scopes}, ${volume});`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }
 
 export async function deleteUser(usernameOrEmail) {
     const result = await query`
         DELETE FROM private."user"
         WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail});`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }
 
 export async function listAllUsers() {
@@ -27,7 +27,7 @@ export async function listAllUsers() {
         FROM private."user" u
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
         GROUP BY u."uuid";`
-    if (result && result.rowCount > 0) {
+    if (result && result.rowCount) {
         return result
     }
     return false
@@ -60,7 +60,7 @@ export async function updateUser(
         UPDATE private."user"
         SET ${lbjoin(...updates)}
         WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail});`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }
 
 export async function usedVolume(usernameOrEmail) {
@@ -72,7 +72,7 @@ export async function usedVolume(usernameOrEmail) {
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
         GROUP BY u."uuid";`
-    if (result && result.rowCount > 0) {
+    if (result && result.rowCount) {
         return result.rows[0]
     }
     return false
@@ -91,7 +91,7 @@ export async function getUserInformation(usernameOrEmail) {
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
         GROUP BY u."uuid";`
-    if (result && result.rowCount > 0) {
+    if (result && result.rowCount) {
         return result.rows[0]
     }
     return false

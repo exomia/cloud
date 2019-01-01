@@ -59,77 +59,83 @@ export const mutations = {
     }
 }
 
-// export const actions = {
-//     async startFileUpload({ commit, state, getters }, dataTransfer) {
-//         //TODO: Ask api if file already exsists
+export const actions = {
+    async startFileUpload({ commit, state, getters }, { dataTransfer, vm }) {
+        //TODO: Ask api if file already exsists
 
-//         // Return when no dataTransfer is given
-//         if (!dataTransfer) {
-//             return
-//         }
+        // Return when no dataTransfer is given
+        if (!dataTransfer) {
+            return
+        }
 
-//         // Adds file to upload list
-//         for (const file of dataTransfer.files) {
-//             commit('addFileInfo', file)
-//         }
+        // Adds file to upload list
+        for (const file of dataTransfer.files) {
+            commit('addFileInfo', file)
+        }
 
-//         // Checks if queue is already in progress
-//         if (state.active === false) {
-//             state.active = true
+        // Checks if queue is already in progress
+        if (state.active === false) {
+            state.active = true
 
-//             // Starts the upload
-//             for (let i = 0; i < state.fileInfos.length; i++) {
-//                 let fi = state.fileInfos[i]
+            // Starts the upload
+            for (let i = 0; i < state.fileInfos.length; i++) {
+                let fi = state.fileInfos[i]
 
-//                 // Creates form data & appends file
-//                 const fd = new FormData()
-//                 fd.append('upload-file', fi.file)
+                // Creates form data & appends file
+                const formData = new FormData()
+                formData.append('upload-file', fi.file)
+                // TODO: Const state, set to dynamic in the future
+                formData.append('replace', false)
 
-//                 // Axios config
-//                 const config = {
-//                     onUploadProgress: ({ loaded, total }) => {
-//                         // Check if action got canceled
-//                         if (state.canceled) {
-//                             fi.cancel('Canceled via cancel button')
-//                         }
+                // Axios config
+                const config = {
+                    onUploadProgress: ({ loaded, total }) => {
+                        // Check if action got canceled
+                        if (state.canceled) {
+                            fi.cancel('Canceled via cancel button')
+                        }
 
-//                         fi.progress = loaded / total
-//                         commit('setCurrentFileRate', (loaded / (Date.now() - fi.start)) * 1000)
-//                     },
-//                     cancelToken: fi._cancelTokenSource.token
-//                 }
+                        fi.progress = loaded / total
+                        commit('setCurrentFileRate', (loaded / (Date.now() - fi.start)) * 1000)
+                    },
+                    cancelToken: fi._cancelTokenSource.token
+                }
 
-//                 // Sets file to upload and writes the filename to display
-//                 commit('setCurrentFileName', fi.file.name)
+                // Sets file to upload and writes the filename to display
+                commit('setCurrentFileName', fi.file.name)
 
-//                 try {
-//                     // Set upload start time
-//                     fi.start = Date.now()
+                try {
+                    // Set upload start time
+                    fi.start = Date.now()
 
-//                     // Start uploading to server
-//                     const res = await this.$axios.$put(`/v1/file/${getters.currentDirectoryUuid}`, fd, config)
+                    // Start uploading to server
+                    const { data } = await vm.$http.put(
+                        `/v1/file/${getters.currentDirectoryUuid || ''}`,
+                        formData,
+                        config
+                    )
 
-//                     if (res.error) {
-//                         console.error(res.error)
-//                     }
+                    if (data.error) {
+                        console.error(data.error)
+                    }
 
-//                     if (!res.error && res.file) {
-//                         commit('addFile', res.file)
-//                     }
-//                 } catch (e) {
-//                     console.error(e)
-//                     break
-//                 }
-//             }
+                    if (!data.error && data.file) {
+                        commit('addFile', data.file)
+                    }
+                } catch (e) {
+                    console.error(e)
+                    break
+                }
+            }
 
-//             // Sets upload action to inactive
-//             state.active = false
+            // Sets upload action to inactive
+            state.active = false
 
-//             // Clear file array
-//             commit('resetFileInfos')
+            // Clear file array
+            commit('resetFileInfos')
 
-//             // Reset cancel action
-//             commit('cancelUpload', true)
-//         }
-//     }
-// }
+            // Reset cancel action
+            commit('cancelUpload', true)
+        }
+    }
+}

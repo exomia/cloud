@@ -21,7 +21,7 @@ export async function addFile(
                 ${mimetype},
                 ${size})
         RETURNING "uuid", "name", "extension", "mimetype", "size", "timestamp";`
-    if (result && result.rowCount > 0) {
+    if (result && result.rowCount) {
         return result.rows[0]
     }
     return false
@@ -42,7 +42,7 @@ export async function deleteFile(usernameOrEmail, file_uuid, force_delete) {
             WHERE u."uuid" = f."user_uuid"
                   AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
                   AND f."uuid" = ${file_uuid};`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }
 
 export async function listAllFiles(usernameOrEmail, directory_uuid) {
@@ -85,7 +85,7 @@ export async function getFileInfo(usernameOrEmail, file_uuid) {
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
         WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND f."uuid" = ${file_uuid};`
-    if (result && result.rowCount > 0) {
+    if (result && result.rowCount) {
         return result.rows[0]
     }
     return false
@@ -116,7 +116,7 @@ export async function updateFile(
         WHERE u."uuid" = f."user_uuid"
               AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND f."uuid" = ${file_uuid};`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }
 
 export async function increaseDownloadFileCount(file_uuid) {
@@ -124,5 +124,5 @@ export async function increaseDownloadFileCount(file_uuid) {
         UPDATE private."file"
         SET "download_count" = "download_count" + 1
         WHERE "uuid" = ${file_uuid};`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }

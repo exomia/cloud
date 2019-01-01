@@ -16,6 +16,7 @@ router.post('/:file_uuid/move', async ctx => {
     let result = await updateFile(ctx.jwt.payload.email, ctx.params.file_uuid, {
         new_directory_uuid: ctx.request.body.new_directory_uuid
     })
+
     if (!result) {
         return JERROR_INTERNAL_SERVER_ERROR(
             ctx,

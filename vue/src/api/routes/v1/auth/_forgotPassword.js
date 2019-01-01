@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 import { JERROR_BAD_REQUEST } from '../../../lib/error'
 import { getUserInformation } from '../../../lib/pg/user/index'
-import { sendMail, TestMail } from '../../../lib/mail/'
+// import { sendMail, TestMail } from '../../../lib/mail/'
 
 const router = new Router()
 

@@ -3,15 +3,18 @@
         <div class="center">
             <div class="status">
                 <div>
-                    <i class="upload"></i> <span>{{ uploadFilename }}</span>
+                    <UploadIcon></UploadIcon>
+                    <span>{{ uploadFilename }}</span>
                 </div>
-                <button class="cancel" @click="cancel()"></button>
+                <button @click="cancel()">
+                    <CrossIcon></CrossIcon>
+                </button>
             </div>
             <div class="bar">
                 <div class="bar-progress" :style="{ width: uploadProgress * 100 + '%' }"></div>
             </div>
             <div class="status">
-                <span> {{ getFileCount(uploadCount) }},&nbsp;{{ uploadSize | toUnit }} </span>
+                <span>{{ getFileCount(uploadCount) }},&nbsp;{{ uploadSize | toUnit }}</span>
                 <span>{{ uploadRate | toUnit }}/s</span>
             </div>
         </div>
@@ -19,7 +22,15 @@
 </template>
 
 <script>
+/* SVG */
+import CrossIcon from '@/assets/img/icon/cross.svg'
+import UploadIcon from '@/assets/img/icon/upload.svg'
+
 export default {
+    components: {
+        CrossIcon,
+        UploadIcon
+    },
     computed: {
         uploadCount() {
             return this.$store.getters.uploadFileCount
@@ -41,9 +52,10 @@ export default {
         cancel: function() {
             this.$store.commit('cancelUpload')
         },
+        // TODO: i18n Plural?
         getFileCount: cnt => (cnt === 1 ? `${cnt} File` : `${cnt} Files`)
     }
 }
 </script>
 
-<style src="@/assets/scss/components/OverviewUploadStatus" lang="scss" scoped></style>
+<style src="@/views/_overview/components/TheUploadStatus.scss" lang="scss" scoped></style>

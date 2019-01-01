@@ -38,7 +38,7 @@ div.upload-container {
                 height: 100%;
                 width: 100%;
                 background-color: $progress-color;
-                transition: ease-in-out 0.25s;
+                transition: width ease-in-out 1s;
             }
         }
         div.status {
@@ -49,27 +49,37 @@ div.upload-container {
             span {
                 font-size: 14px;
             }
-            button.cancel {
+            button {
                 width: 1.25rem;
                 height: 1.25rem;
-                background-color: black;
-                outline: none;
+                background-color: transparent;
                 border: none;
                 align-self: flex-end;
                 user-select: none;
-                background: url('~@/assets/img/icon/cross.svg') no-repeat center;
-                background-size: 75% 75%;
+                appearance: none;
                 padding: 0;
                 cursor: pointer;
-                opacity: 0.75;
+                svg {
+                    opacity: 0.75;
+                    user-select: none;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                &:hover,
+                &:active {
+                    outline: none;
+                }
                 &:hover {
-                    opacity: 1;
+                    svg {
+                        opacity: 1;
+                    }
                 }
             }
             div {
                 display: flex;
                 align-items: center;
-                i {
+                svg {
                     display: inline-block;
                     background-repeat: no-repeat;
                     background-position: 50% 50%;
@@ -77,12 +87,6 @@ div.upload-container {
                     height: 1rem;
                     opacity: 0.75;
                     margin-right: 0.5rem;
-                }
-                i.upload {
-                    background-image: url('~@/assets/img/icon/upload.svg');
-                }
-                i.download {
-                    background-image: url('~@/assets/img/icon/download.svg');
                 }
             }
         }

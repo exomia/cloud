@@ -34,7 +34,7 @@ export async function addDirectory(usernameOrEmail, name, parent_directory_uuid)
                     ${name})
             RETURNING "uuid", "name", "timestamp";`
     }
-    if (result && result.rowCount > 0) {
+    if (result && result.rowCount) {
         return result.rows[0]
     }
     return false
@@ -55,7 +55,7 @@ export async function deleteDirectory(usernameOrEmail, directory_uuid, force_del
             WHERE u."uuid" = d."user_uuid"
                   AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
                   AND d."uuid" = ${directory_uuid};`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }
 
 export async function listAllDirectories(usernameOrEmail, parent_directory_uuid) {
@@ -103,7 +103,7 @@ export async function getDirectoryInfo(usernameOrEmail, directory_uuid) {
               AND d."uuid" = ${directory_uuid}
               AND d."delete_timestamp" IS NULL
         GROUP BY d."uuid";`
-    if (result && result.rowCount > 0) {
+    if (result && result.rowCount) {
         return result.rows[0]
     }
     return false
@@ -152,5 +152,5 @@ export async function updateDirectory(
         WHERE u."uuid" = d."user_uuid"
               AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
               AND d."uuid" = ${directory_uuid};`
-    return result && result.rowCount > 0
+    return result && result.rowCount
 }

@@ -4,6 +4,7 @@ main {
     display: flex;
 
     div.center {
+        position: relative;
         width: calc(100vw - 270px);
         background-color: white;
 

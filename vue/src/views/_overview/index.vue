@@ -1,15 +1,12 @@
 <template>
     <main>
         <TheOverviewSidebar></TheOverviewSidebar>
-        <div class="center">
+        <div class="center" dropzone="copy" @dragover.prevent @drop.prevent.stop="onDrop">
             <TheOverviewNavigation></TheOverviewNavigation>
             <section class="list">
                 <div class="side">
                     <ListHeader :hide-informations="hideInformations"></ListHeader>
-                    <ListHeaderInfo
-                        v-if="hideInformations"
-                        @close="hideInformations = false"
-                    ></ListHeaderInfo>
+                    <ListHeaderInfo v-if="hideInformations" @close="hideInformations = false"></ListHeaderInfo>
                 </div>
                 <div class="side">
                     <div class="row-wrapper" :class="!hideInformations ? 'info-active' : ''">
@@ -37,6 +34,7 @@
                     ></ListRowInfo>
                 </div>
             </section>
+            <TheUploadStatus v-if="uploadActive"></TheUploadStatus>
         </div>
     </main>
 </template>
@@ -51,6 +49,7 @@ import ListRowInfo from '@/components/ListRowInfo'
 import ListHeader from '@/components/ListHeader'
 import ListHeaderInfo from '@/components/ListHeaderInfo'
 //
+import TheUploadStatus from '@/views/_overview/components/TheUploadStatus'
 import TheOverviewNavigation from '@/views/_overview/components/TheOverviewNavigation'
 import TheOverviewSidebar from '@/views/_overview/components/TheOverviewSidebar'
 
@@ -71,6 +70,7 @@ export default {
         ListRowInfo,
         ListHeader,
         ListHeaderInfo,
+        TheUploadStatus,
         TheOverviewNavigation,
         TheOverviewSidebar
     },
@@ -81,7 +81,13 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getDirectoryData', 'getDirectoryCount', 'getFileCount', 'sizeSum'])
+        ...mapGetters([
+            'getDirectoryData',
+            'getDirectoryCount',
+            'getFileCount',
+            'sizeSum',
+            'uploadActive'
+        ])
     },
     methods: {
         openInfo: function(data) {
@@ -93,6 +99,12 @@ export default {
             this.$nextTick(function() {
                 self.hideInformations = true
             })
+        },
+        onDrop({ dataTransfer }) {
+            if (dataTransfer) {
+                // TODO: Check if user has enough upload size left
+                this.$store.dispatch('startFileUpload', { dataTransfer, vm: this })
+            }
         }
     }
 }

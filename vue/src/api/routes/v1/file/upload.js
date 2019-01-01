@@ -13,40 +13,41 @@ const upload = multer({
 const router = new Router()
 
 router.put('/:directory_uuid?', upload.single('upload-file'), async ctx => {
-    if (!ctx.request.body.replace) {
-        const fi = path.parse(ctx.file.originalname)
-        const result = await addFile(
-            ctx.jwt.payload.email,
-            ctx.params.directory_uuid,
-            fi.name,
-            fi.ext,
-            ctx.file.filename,
-            ctx.file.mimetype,
-            ctx.file.size
+    // if (ctx.req.body.replace) {
+    const file = ctx.req.file
+    const fi = path.parse(file.originalname)
+    const result = await addFile(
+        ctx.jwt.payload.email,
+        ctx.params.directory_uuid,
+        fi.name,
+        fi.ext,
+        file.filename,
+        file.mimetype,
+        file.size
+    )
+    if (!result) {
+        // TODO: CLEAR/REMOVE LOCAL FILE
+        return JERROR_BAD_REQUEST(
+            ctx,
+            "the file already exists! Set the 'replace' option in the payload to true to override it!"
         )
-        if (!result) {
-            // TODO: CLEAR/REMOVE LOCAL FILE
-            return JERROR_BAD_REQUEST(
-                ctx,
-                "the file already exists! Set the 'replace' option in the payload to true to override it!"
-            )
-        }
-        ctx.status = 200
-        ctx.body = {
-            file: {
-                uuid: result.uuid,
-                name: result.name,
-                extension: result.extension,
-                mimetype: result.mimetype,
-                status: STATUS_QUEUED,
-                size: result.size,
-                timestamp: result.timestamp
-            },
-            error: false
-        }
     }
+    ctx.status = 200
+    ctx.body = {
+        file: {
+            uuid: result.uuid,
+            name: result.name,
+            extension: result.extension,
+            mimetype: result.mimetype,
+            status: STATUS_QUEUED,
+            size: result.size,
+            timestamp: result.timestamp
+        },
+        error: false
+    }
+    // }
     // REPLACE FILE AND UPDATE
-    return JERROR_INTERNAL_SERVER_ERROR(ctx, "currently not supported. ('replace': true)")
+    // return JERROR_INTERNAL_SERVER_ERROR(ctx, "currently not supported. ('replace': true)")
 })
 
 export default {
