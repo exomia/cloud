@@ -42,3 +42,16 @@ export function sendForgotPasswordMail(origin, { uuid, email, name }, forgotpass
             ${settings['from-host']} - Team`
     })
 }
+
+export function sendForgotPasswordInfoMail(origin, { email, name }) {
+    return sendMail({
+        to: email,
+        subject: `${settings['from-host']} - Forgot password`,
+        text: `
+            ${name},\n
+            your password was changed successfully.\n
+            If you didn't requested a password change, please contact the support or site-owner immediately!\n\n
+            Best regards,\n
+            ${settings['from-host']} - Team`
+    })
+}
