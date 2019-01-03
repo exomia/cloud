@@ -113,10 +113,24 @@ CREATE TABLE IF NOT EXISTS private."user"
 
 ALTER TABLE private."user" OWNER TO postgres;
 
-CREATE UNIQUE INDEX user_email_uindex  ON private."user" 
+CREATE UNIQUE INDEX user_email_uindex ON private."user" 
 	USING btree (email);
 CREATE UNIQUE INDEX user_name_uindex ON private."user" 
 	USING btree (name);
+
+CREATE TABLE IF NOT EXISTS private."forgotpassword"
+(
+	"uuid" UUID NOT NULL DEFAULT public.uuid_generate_v4(),
+	"user_uuid" UUID NOT NULL,
+	"timestamp" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("uuid", "user_uuid")
+);
+
+ALTER TABLE private."forgotpassword" OWNER TO postgres;
+
+CREATE UNIQUE INDEX forgotpassword_user_uuid_uindex ON private."forgotpassword" 
+	USING btree (user_uuid);
+
 
 ALTER TABLE ONLY private."directory" 
 	ADD CONSTRAINT directory_directory_uuid_fk 
@@ -157,3 +171,13 @@ ALTER TABLE ONLY private."shared_file"
     ADD CONSTRAINT shared_file_user_uuid_fk 
 	FOREIGN KEY (user_uuid) REFERENCES private."user"(uuid) 
 	ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY private."forgotpassword"
+    ADD CONSTRAINT forgotpassword_user_uuid_fk 
+	FOREIGN KEY (user_uuid) REFERENCES private."user"(uuid) 
+	ON UPDATE CASCADE ON DELETE CASCADE;
+
+--\c database
+--GRANT CONNECT ON DATABASE "database" TO "user";
+--GRANT USAGE ON SCHEMA "private" TO "user"; 
+--GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA "private" TO "user";

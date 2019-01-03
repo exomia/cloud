@@ -1,7 +1,7 @@
 import { query, lb, lbjoin, e } from '../'
 
 export async function addFile(
-    nameOrEmail,
+    emailOrName,
     directory_uuid,
     name,
     extension,
@@ -13,7 +13,7 @@ export async function addFile(
         INSERT INTO private."file" ("user_uuid", "directory_uuid", "name", "extension", "local_name", "mimetype", "size")
         VALUES ((SELECT "uuid"
                  FROM private."user"
-                 WHERE ("email" = ${nameOrEmail} OR "name" = ${nameOrEmail})),
+                 WHERE ("email" = ${emailOrName} OR "name" = ${emailOrName})),
                 ${directory_uuid || null},
                 ${name},
                 ${extension},
@@ -27,25 +27,25 @@ export async function addFile(
     return false
 }
 
-export async function deleteFile(nameOrEmail, file_uuid, force_delete) {
+export async function deleteFile(emailOrName, file_uuid, force_delete) {
     const result = force_delete
         ? await query`
             DELETE FROM private."file" f
             USING private."user" u
             WHERE u."uuid" = f."user_uuid"
-                  AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+                  AND (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
                   AND f."uuid" = ${file_uuid};`
         : await query`
             UPDATE private."file" f
             SET f."delete_timestamp" = now()
             FROM private."user" u
             WHERE u."uuid" = f."user_uuid"
-                  AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+                  AND (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
                   AND f."uuid" = ${file_uuid};`
     return result && result.rowCount
 }
 
-export async function listAllFiles(nameOrEmail, directory_uuid) {
+export async function listAllFiles(emailOrName, directory_uuid) {
     const result = await query`
         SELECT
           f."uuid",
@@ -59,7 +59,7 @@ export async function listAllFiles(nameOrEmail, directory_uuid) {
           f."download_count"
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
-        WHERE (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+        WHERE (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
               AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
         AND f."delete_timestamp" IS NULL;`
     if (result) {
@@ -68,7 +68,7 @@ export async function listAllFiles(nameOrEmail, directory_uuid) {
     return false
 }
 
-export async function getFileInfo(nameOrEmail, file_uuid) {
+export async function getFileInfo(emailOrName, file_uuid) {
     const result = await query`
         SELECT
           f."uuid",
@@ -83,7 +83,7 @@ export async function getFileInfo(nameOrEmail, file_uuid) {
           f."delete_timestamp"
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
-        WHERE (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+        WHERE (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
               AND f."uuid" = ${file_uuid};`
     if (result && result.rowCount) {
         return result.rows[0]
@@ -92,7 +92,7 @@ export async function getFileInfo(nameOrEmail, file_uuid) {
 }
 
 export async function updateFile(
-    nameOrEmail,
+    emailOrName,
     file_uuid,
     { new_directory_uuid, new_name, new_local_name, new_size, new_clamav_status }
 ) {
@@ -120,7 +120,7 @@ export async function updateFile(
         SET ${lbjoin(...updates)}
         FROM private."user" u
         WHERE u."uuid" = f."user_uuid"
-              AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+              AND (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
               AND f."uuid" = ${file_uuid}
         RETURNING "uuid", "name", "extension", "mimetype", "size", "timestamp";`
     if (result && result.rowCount) {
@@ -130,7 +130,7 @@ export async function updateFile(
 }
 
 export async function replaceFile(
-    nameOrEmail,
+    emailOrName,
     directory_uuid,
     name,
     extension,
@@ -143,7 +143,7 @@ export async function replaceFile(
         SET "local_name" = ${new_local_name}, "size" = ${new_size}, "new_mimetype" = ${new_mimetype}
         FROM private."user" u
         WHERE u."uuid" = f."user_uuid"
-              AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+              AND (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
               AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
               AND f."name" = ${name}
               AND f."extension" = ${extension}

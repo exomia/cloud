@@ -1,9 +1,9 @@
 import { query, lb, lbjoin, e } from '../'
 
-export async function addDirectory(nameOrEmail, name, parent_directory_uuid) {
+export async function addDirectory(emailOrName, name, parent_directory_uuid) {
     let result = false
     if (parent_directory_uuid) {
-        const dires = await getDirectoryInfo(nameOrEmail, parent_directory_uuid)
+        const dires = await getDirectoryInfo(emailOrName, parent_directory_uuid)
         if (!dires) {
             return false
         }
@@ -20,7 +20,7 @@ export async function addDirectory(nameOrEmail, name, parent_directory_uuid) {
             INSERT INTO private."directory" ("user_uuid", "name", "parent_directory_uuid", "path_info_json")
             VALUES ((SELECT "uuid"
                      FROM private."user"
-                     WHERE ("email" = ${nameOrEmail} OR "name" = ${nameOrEmail})),
+                     WHERE ("email" = ${emailOrName} OR "name" = ${emailOrName})),
                     ${name},
                     ${parent_directory_uuid},
                     ${JSON.stringify(dires.path_info_json)})
@@ -30,7 +30,7 @@ export async function addDirectory(nameOrEmail, name, parent_directory_uuid) {
             INSERT INTO private."directory" ("user_uuid", "name")
             VALUES ((SELECT "uuid"
                      FROM private."user"
-                     WHERE ("email" = ${nameOrEmail} OR "name" = ${nameOrEmail})),
+                     WHERE ("email" = ${emailOrName} OR "name" = ${emailOrName})),
                     ${name})
             RETURNING "uuid", "name", "timestamp";`
     }
@@ -40,25 +40,25 @@ export async function addDirectory(nameOrEmail, name, parent_directory_uuid) {
     return false
 }
 
-export async function deleteDirectory(nameOrEmail, directory_uuid, force_delete) {
+export async function deleteDirectory(emailOrName, directory_uuid, force_delete) {
     const result = force_delete
         ? await query`
             DELETE FROM private."directory" d
             USING private."user" u
             WHERE u."uuid" = d."user_uuid"
-                  AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+                  AND (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
                   AND d."uuid" = ${directory_uuid};`
         : await query`
             UPDATE private."directory" d
             SET d."delete_timestamp" = now()
             FROM private."user" u
             WHERE u."uuid" = d."user_uuid"
-                  AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+                  AND (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
                   AND d."uuid" = ${directory_uuid};`
     return result && result.rowCount
 }
 
-export async function listAllDirectories(nameOrEmail, parent_directory_uuid) {
+export async function listAllDirectories(emailOrName, parent_directory_uuid) {
     const result = await query`
         SELECT
           d."uuid",
@@ -70,7 +70,7 @@ export async function listAllDirectories(nameOrEmail, parent_directory_uuid) {
         FROM private."directory" d
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")
           LEFT JOIN private."file" f ON (d."uuid" = f."directory_uuid")
-        WHERE (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+        WHERE (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
         AND d."parent_directory_uuid" ${
             parent_directory_uuid ? lb`= ${parent_directory_uuid}` : e`IS NULL`
         }
@@ -82,7 +82,7 @@ export async function listAllDirectories(nameOrEmail, parent_directory_uuid) {
     return false
 }
 
-export async function getDirectoryInfo(nameOrEmail, directory_uuid) {
+export async function getDirectoryInfo(emailOrName, directory_uuid) {
     if (!directory_uuid) {
         return false
     }
@@ -99,7 +99,7 @@ export async function getDirectoryInfo(nameOrEmail, directory_uuid) {
         FROM private."directory" d
           LEFT JOIN private."user" u ON (u."uuid" = d."user_uuid")
           LEFT JOIN private."file" f ON (d."uuid" = f."directory_uuid")
-        WHERE (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+        WHERE (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
               AND d."uuid" = ${directory_uuid}
               AND d."delete_timestamp" IS NULL
         GROUP BY d."uuid";`
@@ -110,7 +110,7 @@ export async function getDirectoryInfo(nameOrEmail, directory_uuid) {
 }
 
 export async function updateDirectory(
-    nameOrEmail,
+    emailOrName,
     directory_uuid,
     { new_name, new_parent_directory_uuid }
 ) {
@@ -120,7 +120,7 @@ export async function updateDirectory(
     }
     if (new_parent_directory_uuid !== undefined) {
         if (new_parent_directory_uuid !== 'NULL') {
-            const dires = getDirectoryInfo(nameOrEmail, new_parent_directory_uuid)
+            const dires = getDirectoryInfo(emailOrName, new_parent_directory_uuid)
             if (!dires) {
                 return false
             }
@@ -150,7 +150,7 @@ export async function updateDirectory(
         SET ${lbjoin(...updates)}
         FROM private."user" u
         WHERE u."uuid" = d."user_uuid"
-              AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+              AND (u."email" = ${emailOrName} OR u."name" = ${emailOrName})
               AND d."uuid" = ${directory_uuid};`
     return result && result.rowCount
 }
