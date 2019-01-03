@@ -1,7 +1,7 @@
 import { query, lb, lbjoin, e } from '../'
 
 export async function addFile(
-    usernameOrEmail,
+    nameOrEmail,
     directory_uuid,
     name,
     extension,
@@ -13,7 +13,7 @@ export async function addFile(
         INSERT INTO private."file" ("user_uuid", "directory_uuid", "name", "extension", "local_name", "mimetype", "size")
         VALUES ((SELECT "uuid"
                  FROM private."user"
-                 WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail})),
+                 WHERE ("email" = ${nameOrEmail} OR "name" = ${nameOrEmail})),
                 ${directory_uuid || null},
                 ${name},
                 ${extension},
@@ -27,25 +27,25 @@ export async function addFile(
     return false
 }
 
-export async function deleteFile(usernameOrEmail, file_uuid, force_delete) {
+export async function deleteFile(nameOrEmail, file_uuid, force_delete) {
     const result = force_delete
         ? await query`
             DELETE FROM private."file" f
             USING private."user" u
             WHERE u."uuid" = f."user_uuid"
-                  AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+                  AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
                   AND f."uuid" = ${file_uuid};`
         : await query`
             UPDATE private."file" f
             SET f."delete_timestamp" = now()
             FROM private."user" u
             WHERE u."uuid" = f."user_uuid"
-                  AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+                  AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
                   AND f."uuid" = ${file_uuid};`
     return result && result.rowCount
 }
 
-export async function listAllFiles(usernameOrEmail, directory_uuid) {
+export async function listAllFiles(nameOrEmail, directory_uuid) {
     const result = await query`
         SELECT
           f."uuid",
@@ -59,7 +59,7 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
           f."download_count"
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
-        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+        WHERE (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
               AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
         AND f."delete_timestamp" IS NULL;`
     if (result) {
@@ -68,7 +68,7 @@ export async function listAllFiles(usernameOrEmail, directory_uuid) {
     return false
 }
 
-export async function getFileInfo(usernameOrEmail, file_uuid) {
+export async function getFileInfo(nameOrEmail, file_uuid) {
     const result = await query`
         SELECT
           f."uuid",
@@ -83,7 +83,7 @@ export async function getFileInfo(usernameOrEmail, file_uuid) {
           f."delete_timestamp"
         FROM private."file" f
           LEFT JOIN private."user" u ON (u."uuid" = f."user_uuid")
-        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+        WHERE (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
               AND f."uuid" = ${file_uuid};`
     if (result && result.rowCount) {
         return result.rows[0]
@@ -92,16 +92,22 @@ export async function getFileInfo(usernameOrEmail, file_uuid) {
 }
 
 export async function updateFile(
-    usernameOrEmail,
+    nameOrEmail,
     file_uuid,
-    { new_name, new_directory_uuid, new_clamav_status }
+    { new_directory_uuid, new_name, new_local_name, new_size, new_clamav_status }
 ) {
     let updates = []
+    if (new_directory_uuid !== undefined) {
+        updates.push(lb`"directory_uuid" = ${new_directory_uuid}`)
+    }
     if (new_name !== undefined) {
         updates.push(lb`"name" = ${new_name}`)
     }
-    if (new_directory_uuid !== undefined) {
-        updates.push(lb`"directory_uuid" = ${new_directory_uuid}`)
+    if (new_local_name !== undefined) {
+        updates.push(lb`"local_name" = ${new_local_name}`)
+    }
+    if (new_local_name !== undefined) {
+        updates.push(lb`"size" = ${new_size}`)
     }
     if (new_clamav_status !== undefined) {
         updates.push(lb`"clamav_status" = ${new_clamav_status}`)
@@ -114,9 +120,38 @@ export async function updateFile(
         SET ${lbjoin(...updates)}
         FROM private."user" u
         WHERE u."uuid" = f."user_uuid"
-              AND (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
-              AND f."uuid" = ${file_uuid};`
-    return result && result.rowCount
+              AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+              AND f."uuid" = ${file_uuid}
+        RETURNING "uuid", "name", "extension", "mimetype", "size", "timestamp";`
+    if (result && result.rowCount) {
+        return result.rows[0]
+    }
+    return false
+}
+
+export async function replaceFile(
+    nameOrEmail,
+    directory_uuid,
+    name,
+    extension,
+    new_local_name,
+    new_mimetype,
+    new_size
+) {
+    const result = await query`
+        UPDATE private."file" f
+        SET "local_name" = ${new_local_name}, "size" = ${new_size}, "new_mimetype" = ${new_mimetype}
+        FROM private."user" u
+        WHERE u."uuid" = f."user_uuid"
+              AND (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
+              AND f."directory_uuid" ${directory_uuid ? lb`= ${directory_uuid}` : e`IS NULL`}
+              AND f."name" = ${name}
+              AND f."extension" = ${extension}
+        RETURNING "uuid", "name", "extension", "mimetype", "size", "timestamp";`
+    if (result && result.rowCount) {
+        return result.rows[0]
+    }
+    return false
 }
 
 export async function increaseDownloadFileCount(file_uuid) {

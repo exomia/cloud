@@ -1,9 +1,9 @@
 import { query } from '../'
 
-export async function checkLoginData(usernameOrEmail, password) {
+export async function checkLoginData(nameOrEmail, password) {
     const result = await query`
         SELECT
-          u."username",
+          u."name",
           u."email",
           u."password",
           u."timestamp",
@@ -12,7 +12,7 @@ export async function checkLoginData(usernameOrEmail, password) {
           COALESCE(SUM(f."size"), 0) AS "used_volume"
         FROM private."user" u
           LEFT JOIN private."file" f ON (u."uuid" = f."user_uuid")
-        WHERE (u."username" = ${usernameOrEmail} OR u."email" = ${usernameOrEmail})
+        WHERE (u."email" = ${nameOrEmail} OR u."name" = ${nameOrEmail})
               AND u."password" = crypt(${password}, u."password")
         GROUP BY u."uuid";`
     if (!result && !result.rowCount) {
@@ -21,11 +21,11 @@ export async function checkLoginData(usernameOrEmail, password) {
     return result.rows[0]
 }
 
-export async function getUserPassword(usernameOrEmail) {
+export async function getUserPassword(nameOrEmail) {
     const result = await query`
         SELECT password
         FROM private."user"
-        WHERE ("username" = ${usernameOrEmail} OR "email" = ${usernameOrEmail});`
+        WHERE ("email" = ${nameOrEmail} OR "name" = ${nameOrEmail});`
     if (!result && !result.rowCount) {
         return false
     }

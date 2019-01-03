@@ -1,9 +1,10 @@
 import Router from 'koa-router'
-import { addFile } from '../../../lib/pg/file'
-import { /*JERROR_INTERNAL_SERVER_ERROR,*/ JERROR_BAD_REQUEST } from '../../../lib/error'
+import { addFile, replaceFile } from '../../../lib/pg/file'
+import { JERROR_INTERNAL_SERVER_ERROR, JERROR_BAD_REQUEST } from '../../../lib/error'
 import { STATUS_QUEUED } from '../../../lib/clamav'
 
 import path from 'path'
+import fs from 'fs'
 
 import multer from 'koa-multer'
 const upload = multer({
@@ -13,25 +14,42 @@ const upload = multer({
 const router = new Router()
 
 router.put('/:directory_uuid?', upload.single('upload-file'), async ctx => {
-    // if (ctx.req.body.replace) {
     const file = ctx.req.file
     const origFile = path.parse(file.originalname)
-    const result = await addFile(
-        ctx.jwt.payload.email,
-        ctx.params.directory_uuid,
-        origFile.name,
-        origFile.ext,
-        file.filename,
-        file.mimetype,
-        file.size
-    )
+
+    const result = !ctx.req.body.replace
+        ? await addFile(
+              ctx.jwt.payload.email,
+              ctx.params.directory_uuid,
+              origFile.name,
+              origFile.ext,
+              file.filename,
+              file.mimetype,
+              file.size
+          )
+        : await replaceFile(
+              ctx.jwt.payload.email,
+              ctx.params.directory_uuid,
+              origFile.name,
+              origFile.ext,
+              file.filename,
+              file.mimetype,
+              file.size
+          )
     if (!result) {
-        // TODO: CLEAR/REMOVE LOCAL FILE
-        return JERROR_BAD_REQUEST(
-            ctx,
-            "the file already exists! Set the 'replace' option in the payload to true to override it!"
-        )
+        return fs.unlink(file.path, err => {
+            return err
+                ? JERROR_INTERNAL_SERVER_ERROR(
+                      ctx,
+                      `an error occured while deleting the local file '${file.path}' (${err})!`
+                  )
+                : JERROR_BAD_REQUEST(
+                      ctx,
+                      "the file already exists! Set the 'replace' option in the payload to true to override it!"
+                  )
+        })
     }
+
     ctx.status = 200
     ctx.body = {
         file: {
@@ -45,9 +63,6 @@ router.put('/:directory_uuid?', upload.single('upload-file'), async ctx => {
         },
         error: false
     }
-    // }
-    // REPLACE FILE AND UPDATE
-    // return JERROR_INTERNAL_SERVER_ERROR(ctx, "currently not supported. ('replace': true)")
 })
 
 export default {
