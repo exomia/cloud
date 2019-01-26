@@ -25,7 +25,7 @@
     "dependencies": {
         "@uvue/core": "0.1.0-alpha.14",
         "@uvue/server": "0.1.0-alpha.14",
-        "@uvue/vue-cli-plugin-ssr": "0.1.0-alpha.14",
+        "@uvue/vue-cli-plugin-ssr": "0.1.0-alpha.15",
         "@vue/cli-plugin-babel": "^3.3.0",
         "@vue/cli-plugin-e2e-cypress": "^3.3.0",
         "@vue/cli-plugin-eslint": "^3.3.0",
