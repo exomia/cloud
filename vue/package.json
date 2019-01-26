@@ -10,7 +10,6 @@
         "install:prod": "npm i --only=prod --no-optional",
         "start": "vue-cli-service ssr:start",
         "static": "vue-cli-service ssr:static",
-        "test:e2e": "vue-cli-service test:e2e",
         "test:headless": "vue-cli-service test:e2e --headless",
         "update": "npm prune && npm-check -u"
     },
