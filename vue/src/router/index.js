@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import RouterPrefetch from 'vue-router-prefetch'
 
 /* Middleware */
 import checkAuth from '@/middlewares/checkAuth'
 import authRedirect from '@/middlewares/authRedirect'
 
 Vue.use(Router)
+Vue.use(RouterPrefetch)
 
 export default () => {
     return new Router({

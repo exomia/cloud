@@ -2,7 +2,7 @@ import Router from 'koa-router'
 import { JERROR_BAD_REQUEST } from '../../../lib/error'
 import { getUserInformation } from '../../../lib/pg/user'
 import { addPasswordRecovery } from '../../../lib/pg/user/forgotpassword'
-import { sendMail, forgotPasswordMail } from '../../../lib/mail'
+import { sendForgotPasswordMail } from '../../../lib/mail'
 
 const router = new Router()
 
@@ -17,7 +17,7 @@ router.post('/', async ctx => {
         //send only an email if the password recovery was successfull
         const pr = await addPasswordRecovery(ui.uuid)
         if (pr) {
-            sendMail(forgotPasswordMail(ctx.request.origin, ui, pr.uuid))
+            sendForgotPasswordMail(ctx.request.origin, ui, pr.uuid)
         }
     }
 

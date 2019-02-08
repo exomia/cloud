@@ -10,7 +10,7 @@ transporter.verify(error => {
     console.log('Server is ready to take our messages')
 })
 
-function sendMail(mailOptions) {
+export function sendMail(mailOptions) {
     transporter.sendMail(
         {
             from: `${settings['from-host']} <${settings['from-sender']}>`,
