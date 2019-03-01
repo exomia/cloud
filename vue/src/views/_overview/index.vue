@@ -57,17 +57,6 @@ import TheOverviewNavigation from '@/views/_overview/components/TheOverviewNavig
 import TheOverviewSidebar from '@/views/_overview/components/TheOverviewSidebar'
 
 export default {
-    async asyncData({ store, http, route }) {
-        const { data } = await http.get(`/v1/directory/${route.params.dir || ''}`)
-        if (data) {
-            await store.commit('setDirectoryData', data)
-        }
-    },
-    metaInfo() {
-        return {
-            title: this.$t('title.overview')
-        }
-    },
     components: {
         ListRow,
         ListRowInfo,
@@ -91,6 +80,17 @@ export default {
             'sizeSum',
             'uploadActive'
         ])
+    },
+    async asyncData({ store, http, route }) {
+        const { data } = await http.get(`/v1/directory/${route.params.dir || ''}`)
+        if (data) {
+            await store.commit('setDirectoryData', data)
+        }
+    },
+    metaInfo() {
+        return {
+            title: this.$t('title.overview')
+        }
     },
     methods: {
         openInfo: function(data) {
